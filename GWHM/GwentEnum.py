@@ -10,3 +10,11 @@ class Location(Enum):
     GRAVEYARD     = 32  # 墓地
     VOID          = 512 # 放逐
     MULLIGAN_STACK = 1024# 调度替换栈
+
+# 继承枚举类
+class TipsType(Enum):
+    ADD     = 0 
+    REMOVE  = 2 
+    MOVE    = 4 
+    WHITE   = 8  
+   

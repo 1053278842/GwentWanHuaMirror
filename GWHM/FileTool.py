@@ -259,25 +259,32 @@ def get_img_resized(path,scale_factor):
 
 # 创建卡组缩略图的临时存放文件，并生成
 def create_deck_preview_temp_file(curr_memo_cards,scale_factor):
+
     path = "deck_preview_temp"
     img_file_path="deck_preview_temp"
+    file_has_template_id_list = []
+    for fileName in os.listdir(img_file_path):
+        file_has_template_id_list.append(int(fileName[0:5]))
     if not os.path.exists(img_file_path):
         os.makedirs(img_file_path)
     for key in curr_memo_cards:
-        template_id = curr_memo_cards[key]["Id"]
-        template_provision =curr_memo_cards[key]["Provision"]
-        template_name = curr_memo_cards[key]["Name"]
-        scale_factor = scale_factor
-        imgTk = get_deck_preview_img(template_id,template_provision,template_name,scale_factor)
-        img = ImageTk.getimage(imgTk)
-        save_path = path+"/"+str(template_id)+".png"
-        img.save(save_path)
+        template_id = int(curr_memo_cards[key]["Id"])
+        if template_id not in file_has_template_id_list:
+            template_provision =curr_memo_cards[key]["Provision"]
+            template_name = curr_memo_cards[key]["Name"]
+            scale_factor = scale_factor
+            imgTk = get_deck_preview_img(template_id,template_provision,template_name,scale_factor)
+            img = ImageTk.getimage(imgTk)
+            save_path = path+"/"+str(template_id)+".png"
+            img.save(save_path)
 
 # 获取暗淡效果的卡牌缩略图
 def get_img_hidden_effect(path,effect_factor = 0.7):
     img = Image.open(path)
     img = img.point(lambda p:p * effect_factor)
     return img
+def get_img(path):
+    return Image.open(path)
 def get_img(path):
     return Image.open(path)
 

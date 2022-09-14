@@ -96,16 +96,17 @@ def pack_cardTemplate(cts):
         count += 1
         if ct.id != 0 and ct.card.id !=0 : 
             temp_dict = {}
-            temp_dict["Id"]=ct.id
-            temp_dict["Name"]=cardDict[str(ct.id)]['name']
-            temp_dict["FactionId"]=ct.factionId
-            temp_dict["Rarity"]=ct.rarity
-            temp_dict["Provision"]=ct.provision
-            temp_dict["PlayId"]=hex(ct.card.position_playerId)
-            temp_dict["Location"]=hex(ct.card.position_location)
-            temp_dict["Index"]=hex(ct.card.position_index)
-            temp_dict["Address"]=hex(ct.card._baseAddress)
-            result_dict[ct.card.id]=temp_dict
+            key                     = ct.card.id
+            temp_dict["Id"]         =ct.id
+            temp_dict["Name"]       =cardDict[str(ct.id)]['name']
+            temp_dict["FactionId"]  =ct.factionId
+            temp_dict["Rarity"]     =ct.rarity
+            temp_dict["Provision"]  =ct.provision
+            temp_dict["PlayId"]     =hex(ct.card.position_playerId)
+            temp_dict["Location"]   =hex(ct.card.position_location)
+            temp_dict["Index"]      =hex(ct.card.position_index)
+            temp_dict["Address"]    =hex(ct.card._baseAddress)
+            result_dict[key]=temp_dict
     return result_dict
 
 def initCardTemplate(cardTemplateAdd):

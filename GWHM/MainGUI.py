@@ -12,7 +12,7 @@ class GwentGUI:
     def __init__(self,root):
         self.root = root
         self.root.title = "Gwent Card View"
-        self.root.geometry('338x700+50+50')
+        self.root.geometry('338x800+50+50')
         self.root.wm_attributes('-topmost',1)
         # root.overrideredirect(True)
         self.root.resizable(width=False,height=True)
@@ -40,10 +40,6 @@ class GwentGUI:
         self.root['menu'] = menubar
     
     def show_deck_img(self):
-        # self.my_deck_img_page = tk.Frame(self.root)
-
-        # self.my_deck_img_page["bd"] = 0
-        # self.my_deck_img_page["relief"] ='flat'
         self.my_deck_img_page["bg"] = "#000000"
         # 透明化Frame
         hwnd = self.my_deck_img_page.winfo_id()
@@ -55,11 +51,6 @@ class GwentGUI:
 
         self.my_deck_img_page.place(x=0, y=50, anchor='nw')
         
-        # self.my_deck_img_page.
-        pass
-        # self.deck_preview_bg_page.pack(fill=tk.BOTH,expand=True)
-        # self.my_deck_img_page.pack(fill=tk.BOTH,expand=True)
-        # self.my_deck_img_page.tree_view.pack(fill=tk.BOTH,expand=True,padx=0,pady=0,side=tk.LEFT)
 
     def show_deck_data(self):
         pass
@@ -70,7 +61,7 @@ class GwentGUI:
 
 if __name__ == '__main__':
     root = tk.Tk()
-
+    
     memory_thread = Thread(target=service.start)
     memory_thread.start()
     memory_thread.join()

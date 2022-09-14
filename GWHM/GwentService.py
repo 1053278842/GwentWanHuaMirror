@@ -17,7 +17,7 @@ def get_my_all_cards(playerId):
 
 def get_deck_remove_cards(curr_memo_cards,deck_component_card_id_list,scale_factor):
     # 实例化图片池，存储到temp中
-    create_deck_preview_temp_file(curr_memo_cards,scale_factor)
+    # create_deck_preview_temp_file(curr_memo_cards,scale_factor)
     # 存放本次扫描结果内内存中的 card_id 列表
     curr_memory_card_id_list= []
     for card_instance_id in curr_memo_cards:
@@ -32,7 +32,7 @@ def get_deck_remove_cards(curr_memo_cards,deck_component_card_id_list,scale_fact
 
 def get_deck_add_cards(curr_memo_cards,deck_component_card_id_list,scale_factor):
     # 实例化图片池，存储到temp中
-    create_deck_preview_temp_file(curr_memo_cards,scale_factor)
+    # create_deck_preview_temp_file(curr_memo_cards,scale_factor)
     # 存放本次扫描结果内内存中的 card_id 列表
     # 过滤出指定Location的卡牌
     curr_memory_card_id_list= []
