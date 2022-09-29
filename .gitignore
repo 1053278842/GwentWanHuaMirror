@@ -1,3 +1,5 @@
-# 屏蔽處理的資源圖片,主要是因爲太大了，且會變動。導致我push失敗
-
-main/resources/images/*
+# 忽略資源占用多的
+.gitignore
+main\resources\images\Card_Img_Small\
+main\resources\images\GwentImg_preview\
+main\resources\images\GwentImg原图\
