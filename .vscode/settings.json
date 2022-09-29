@@ -2,11 +2,26 @@
     "cSpell.words": [
         "COLORKEY",
         "EXSTYLE",
+        "getimage",
         "GWHM",
         "highlightcolor",
         "highlightthickness",
         "JZJDCYJF",
+        "LANCZOS",
+        "longlong",
         "NEOESPORT-2",
-        "NEOESPORT-3"
+        "NEOESPORT-3",
+        "pymem",
+        "qualname",
+        "unhexlify"
+    ],
+    "code-runner.executorMap": {
+        "python": "g:/GwentWanHuaMirror -u",
+    },
+    "python.analysis.extraPaths": [
+        "C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages",
+        "./main/tools"
     ]
+
+
 }

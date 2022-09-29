@@ -1,0 +1,424 @@
+import tkinter as tk
+from tkinter import ttk, ALL, EventType
+import tools.FileTool as ft
+from tools.decorators import *
+import services.GwentService as service
+from enums.GwentEnum import *
+from tkinter import PhotoImage
+from PIL import Image, ImageTk, ImageFont
+import copy
+import tkinter.font as tkFont
+
+## 图片列表卡组
+class card_preview_list_board(tk.Frame):
+
+    def __init__(self, root):
+        super().__init__(master = root)
+        self.root = root
+
+        # label list padding
+        self.canvas_padding = [int(self.root.WIN_WIDTH*0.07),20]
+        # row_padding
+        # BUG: 修改为卡片高度的比例
+        self.canvas_row_padding = 38
+        # 存储当前行信息
+        self.orig_rows_infos = []
+        # 显示类型
+        self.CARD_DECK_INFO = self.root.responseManager.DEFAULT_CARD_DECK_INFO
+
+        self.can_size = [self.root.WIN_WIDTH,self.root.MID_HEIGHT + (self.root.TOP_HEIGHT+self.root.MID_HEIGHT+self.root.BOTTOM_HEIGHT)*0.04]
+
+
+        self.create_page()
+    
+    def getHeight(self):
+        return self.can_size[1]     
+
+    def create_page(self):
+        self.can_bg = tk.Canvas(self,bg='#000000',width = self.can_size[0], height = self.can_size[1] ,highlightthickness=0,highlightcolor="green")
+        self.can_bg.pack()
+        # 绑定事件
+        self.can_bg.bind('<MouseWheel>',self.ScrollEvent)
+
+        # self.show_data_frame()
+
+    def printInfo(self):
+        print("# 输出 orig_rows_infos  #######################################")
+        for i in self.orig_rows_infos :
+            print(i,self.curr_memo_cards[i["instanceId"]]["Name"])  
+        for i in self.can_bg.find_all():
+            print(f'id:{i} tags:{self.can_bg.itemcget(i, "tags")}')
+
+    # 设置卡组状态组[卡牌总数,单位数量,粮食]
+    # 该函数通过调用root的固定变量名操作函数,有一定程度的耦合
+    def set_deck_status(self):
+        total = 0
+        unit = 0
+        provision = 0
+        cards = self.curr_memo_cards
+        for iId in cards:
+            location = cards[iId]["Location"]
+            if location == hex(self.CARD_DECK_INFO.location.value) or location == hex(self.CARD_DECK_INFO.secLocation.value) or self.CARD_DECK_INFO.isMain:
+                total += 1
+                temp_prov = cards[iId]["Provision"]
+                provision += temp_prov
+                cardType = cards[iId]["Type"]
+                if cardType == CardType.UNIT.value :
+                    unit += 1
+        self.root.responseManager.updateStatusBoard(total,unit,provision)
+
+    def delay_delete_data(self,delete_row_info,row_info_dict):
+        if len(self.can_bg.find_withtag(str(row_info_dict["row"])+"effect_tips")) == 0:
+            if delete_row_info in self.orig_rows_infos:
+                self.orig_rows_infos.remove(delete_row_info)
+                self.can_bg.itemconfig(row_info_dict["row"],state="hidden")
+
+     
+    def remove_component(self,remove_card_id_list):
+        will_delete_row_infos = []
+        for row_info in self.orig_rows_infos:
+            instanceId = row_info["instanceId"]
+            if instanceId in remove_card_id_list:
+                will_delete_row_infos.append(row_info)
+                
+        # 不影响遍历的情况下删除
+        for delete_row_info in will_delete_row_infos:
+            anim_time = 1000
+            if len(self.can_bg.find_withtag(str(delete_row_info["row"])+"effect_tips")) == 0:
+                row        = delete_row_info["row"]
+                instanceId = delete_row_info["instanceId"]
+                self.can_bg.after(anim_time,self.delay_delete_data,delete_row_info,delete_row_info)
+                print("删除行:",row,self.curr_memo_cards[instanceId]["Name"],delete_row_info)
+                # 隐藏行
+                
+                self.remove_tips_item(row,anim_time)
+
+    def add_component(self,add_card_id_list):
+        for iId in add_card_id_list:
+            template_id = self.curr_memo_cards[iId]["Id"]
+            card_index = int(self.curr_memo_cards[iId]["Index"],16)
+            array_index = add_card_id_list.index(iId)
+            tagName = str(iId) + "card"
+            temp_list = self.can_bg.find_withtag(tagName)
+            if len(temp_list) == 0:
+                print("【ERROR ERROR ERROR ERROR】 add 失败!")
+                return 0
+            row = temp_list[0]
+            # 激活
+            self.can_bg.itemconfig(row, state = "normal")
+            self.can_bg.moveto(row,self.canvas_padding[0],self.canvas_padding[1]+self.canvas_row_padding*array_index)
+            # 数据存储更新..
+            temp_row_dict = {"row":row,"instanceId":iId,"templateId":template_id,"isFlashing":False,"rowId":row}
+            self.orig_rows_infos.insert(array_index,temp_row_dict)
+            print("添加行:",array_index,self.curr_memo_cards[iId]["Name"],temp_row_dict,self.curr_memo_cards[iId]["Location"])
+            self.add_tips_item(row)
+
+    def get_orig_deck_iIds(self):
+        temp_list = []
+        for row_info in self.orig_rows_infos:
+            temp_list.append(row_info["instanceId"])
+        return temp_list
+
+     
+    def init_img_pool(self,curr_memo_cards,scale_factor):
+        for key in curr_memo_cards:
+            if len(self.can_bg.find_withtag(str(key)+"card")) == 0:
+                # 不存在池中则实例化一个进入池
+                curr_card = curr_memo_cards[key]
+                imgTk = ft.get_deck_preview_img(curr_card,scale_factor)
+                self.panel = tk.Label(master = self.root)
+                self.panel.temp_img = imgTk
+                self.can_bg.create_image(0,0,anchor='nw',image=self.panel.temp_img, tags = str(key)+"card",state = "hidden")
+
+    def show_data_frame(self):
+        if self.CARD_DECK_INFO.isMain:
+            self.show_main_deck()
+            return 0 
+
+        scale_factor = self.root.DECK_IMG_SCALE_FACTOR * self.root.DECK_IMG_SCALE_COMPENSATE_FACTOR
+        # 分别获取当前软件中row的instanceId集，以及游戏内存中的instanceId
+        curr_deck_iIds = self.get_orig_deck_iIds()
+        self.curr_memo_cards = service.get_my_all_cards(self.CARD_DECK_INFO)
+        # 从这开始
+        self.init_img_pool(self.curr_memo_cards,scale_factor)
+        # 过滤出需要增加或删除的数据
+        remove_card_id_list  = service.get_deck_remove_cards(self.curr_memo_cards,curr_deck_iIds,self.CARD_DECK_INFO)
+        add_card_id_list     = service.get_deck_add_cards(self.curr_memo_cards,curr_deck_iIds,self.CARD_DECK_INFO)        
+        if len(remove_card_id_list) == 0 and len(add_card_id_list) == len(remove_card_id_list) and not self.CARD_DECK_INFO.isMain:
+            self.move_component()
+        else:
+            # 更新卡组状态
+            self.set_deck_status()
+        # 删除多余的图片
+        self.remove_component(remove_card_id_list)
+        # 增加新加入的图片
+        self.add_component(add_card_id_list)
+        # 获取需要移动位置的图片
+        self.update_deck_sort()
+        # 循环收集curr_memo_cards并00
+        # 处理add和remove
+       
+        self.after(400,self.show_data_frame)
+    
+    # TODO BUG 海鸥的增值会导致记录出错，建议记录卡牌的时间点
+    def show_main_deck(self):
+        if not self.CARD_DECK_INFO.isMain:
+            for row_info in self.main_deck_row_infos:
+                self.can_bg.itemconfig(row_info["row"], state = "hidden")
+            self.show_data_frame()
+            return 0 
+        # 从这开始
+        scale_factor = self.root.DECK_IMG_SCALE_FACTOR * self.root.DECK_IMG_SCALE_COMPENSATE_FACTOR
+        self.init_img_pool(self.curr_memo_cards,scale_factor)
+        
+        # 分别获取当前软件中row的instanceId集，以及游戏内存中的instanceId
+        self.main_deck_row_infos = []
+        self.curr_memo_cards = service.get_my_all_cards(self.CARD_DECK_INFO)
+        index = 0
+        for iId in self.curr_memo_cards:
+            # TODO BUG 策略卡的变形无法记录！！比如瓶中灵策略卡会直接变身为瓶中灵
+            # 过滤开局后产生的卡
+            if iId > 53 and iId < 999:
+                continue
+            temp_dict = self.curr_memo_cards[iId]
+            template_id = temp_dict["Id"]
+            temp_location = temp_dict["Location"]
+            # 甄别已经打出的卡
+            temp_isExist = True
+            if temp_location != hex(Location.DECK.value) and temp_location != hex(Location.HAND.value) and temp_location != hex(Location.LEADER.value):
+                temp_isExist = False
+            card_type = temp_dict["Type"]
+            tagName = str(iId) + "card"
+            temp_list = self.can_bg.find_withtag(tagName)
+            if len(temp_list) > 0:
+                row = temp_list[0]
+            else:
+                break
+            temp_row_dict = {"row":row,"instanceId":iId,"templateId":template_id,"isFlashing":False,"type":card_type,"isExist":temp_isExist}
+
+            self.main_deck_row_infos.insert(index,temp_row_dict)
+            index += 1
+
+        # 优化策略卡的位置
+        for row in self.main_deck_row_infos:
+            if row["type"] == CardType.STRATAGEM.value:
+                stratagem_row_info = row
+                stratagem_row_info["isExist"]=True
+                self.main_deck_row_infos.remove(row)
+                self.main_deck_row_infos.insert(1,stratagem_row_info)
+                break
+        # 显示
+        self.isMain_update_deck_sort()
+
+        # 更新状态
+        total = 0
+        unit = 0
+        provision = 0
+        cards = self.curr_memo_cards
+        for iId in cards:
+            location = cards[iId]["Location"]
+            if location == hex(Location.DECK.value) or location == hex(Location.HAND.value) :
+                total += 1
+                temp_prov = cards[iId]["Provision"]
+                provision += temp_prov
+                cardType = cards[iId]["Type"]
+                if cardType == CardType.UNIT.value :
+                    unit += 1
+        self.root.responseManager.updateStatusBoard(total,unit,provision)
+        self.after(400,self.show_main_deck)
+
+    def isMain_update_deck_sort(self):
+        count  = 0
+        yOffset = 0
+        for row_info in self.main_deck_row_infos:
+            self.can_bg.itemconfig(row_info["row"], state = "normal")
+            if not row_info["isExist"]:
+                temp_list = self.can_bg.find_withtag(str(row_info["instanceId"])+"hiddenCard")
+                if len(temp_list) < 1:
+                    img = Image.new("RGBA", (290,37),(14, 10, 6, 180))
+                    imgTk = ImageTk.PhotoImage(img)
+                    self.panel = tk.Label(master = self.root)
+                    self.panel.temp_img = imgTk
+                    self.can_bg.create_image(self.canvas_padding[0],self.canvas_padding[1]+self.canvas_row_padding*count+yOffset,
+                    anchor='nw',image=self.panel.temp_img, tags = (str(row_info["instanceId"])+"hiddenCard"))
+            else:
+                temp_list = self.can_bg.find_withtag(str(row_info["instanceId"])+"hiddenCard")
+                if len(temp_list) >0:
+                    self.can_bg.delete(temp_list[0])
+
+            iId = row_info["instanceId"]
+            if len(self.can_bg.find_withtag(str(iId)+"hiddenCard")) > 0:
+                row = self.can_bg.find_withtag(str(iId)+"hiddenCard")[0]
+                self.can_bg.moveto(row,x=self.canvas_padding[0],y=self.canvas_padding[1]+self.canvas_row_padding*count+yOffset)
+            self.can_bg.moveto(row_info["row"],x=self.canvas_padding[0],y=self.canvas_padding[1]+self.canvas_row_padding*count+yOffset)
+
+            # 特殊格式
+            if row_info["type"] == CardType.LEADER.value:
+                yOffset += 50
+            if row_info["type"] == CardType.STRATAGEM.value:
+                yOffset += 7
+
+            count += 1
+
+    def ScrollEvent(self,event):
+        MOVE_DELTA = 32
+        yOffset = 0
+        if self.CARD_DECK_INFO.isMain:
+            yOffset = 4
+        total = 0
+        cards = self.curr_memo_cards
+        for iId in cards:
+            location = cards[iId]["Location"]
+            if location == hex(self.CARD_DECK_INFO.location.value) or location == hex(self.CARD_DECK_INFO.secLocation.value) or self.CARD_DECK_INFO.isMain:
+                total += 1
+        maxNum = int(self.can_size[1]/self.canvas_row_padding)
+        if event.delta > 0 :
+            # M-up
+            if self.canvas_padding[1] < int((1.5) * self.canvas_row_padding):
+                rate = self.canvas_padding[1]/int((1.5) * self.canvas_row_padding)
+                elasticityFactor = 1
+                if rate > 0 and rate < 1: 
+                    elasticityFactor = 1-rate
+                self.canvas_padding[1] += MOVE_DELTA*elasticityFactor
+                self.isMain_update_deck_sort() if self.CARD_DECK_INFO.isMain else self.update_deck_sort()
+        else:
+            # M-down
+            if self.canvas_padding[1] > int(-self.canvas_row_padding * (total-maxNum+yOffset if total > maxNum else self.canvas_padding[1]/self.canvas_row_padding+yOffset)):
+                rate = self.canvas_padding[1]/int(-self.canvas_row_padding * (total-maxNum+yOffset if total > maxNum else self.canvas_padding[1]/self.canvas_row_padding+yOffset))
+                elasticityFactor = 1
+                if rate > 0 and rate < 1: 
+                    elasticityFactor = 1-rate
+                self.canvas_padding[1] -= MOVE_DELTA * elasticityFactor
+                self.isMain_update_deck_sort() if self.CARD_DECK_INFO.isMain else self.update_deck_sort()
+        self.canvas_padding[1] = int(self.canvas_padding[1])
+    
+
+    def move_component(self):
+        original_iId_list = self.get_orig_deck_iIds()
+        new_iId_list = []
+        for card_instance_id in self.curr_memo_cards:
+            if (self.curr_memo_cards[card_instance_id]["Location"] == hex(self.CARD_DECK_INFO.location.value) or
+             self.curr_memo_cards[card_instance_id]["Location"] == hex(self.CARD_DECK_INFO.secLocation.value)):
+                new_iId_list.append(int(card_instance_id))
+
+        is_reload_param = False
+        for i in range(0,len(original_iId_list)):
+            if original_iId_list[i] != new_iId_list[i]:
+                is_reload_param = True
+                print("重置触发条件:",i,original_iId_list[i],self.curr_memo_cards[original_iId_list[i]])
+
+        if not is_reload_param:
+            return 0
+        print("重设！","new:",len(new_iId_list),"orig:",len(self.orig_rows_infos))
+        self.reorder_data_and_anim(new_iId_list)
+
+    def reorder_data_and_anim(self,new_iId_list):
+        orig_list = copy.copy(self.orig_rows_infos)
+        temp_list = []
+        for new_iId in new_iId_list:
+            # 顺带执行动画
+            for orig_row_info in self.orig_rows_infos:
+                if orig_row_info["instanceId"] == new_iId:
+                    temp_list.append(orig_row_info)
+                    self.orig_rows_infos.remove(orig_row_info)
+                    break
+        self.orig_rows_infos = temp_list
+
+        new_list = copy.copy(self.orig_rows_infos)
+        moved_row_id = self.get_moved_row(orig_list,new_list)
+        self.anim_img_tips(moved_row_id,TipsType.WHITE)
+
+        # 更新卡组状态
+        self.set_deck_status()
+
+    def get_moved_row(self,orig_list,new_list):
+        moved_row_id = 0
+        for i in range(0,len(orig_list)):
+            if i+1 < len(orig_list):
+                if orig_list[i+1]["row"] == new_list[i]["row"]:
+                    moved_row_id = orig_list[i]["row"]
+                    break
+                else:
+                    moved_row_id = new_list[i]["row"]
+                    break
+        return moved_row_id
+    
+
+    def add_tips_item(self,row):
+        self.anim_img_tips(row,TipsType.ADD)
+
+    def remove_tips_item(self,row,anim_time):
+        self.anim_img_tips(row,TipsType.REMOVE,anim_time)
+
+
+    def anim_img_tips(self,row,tipsType,anim_time=2500):
+        count = 0
+        iId = 0
+        for row_info in self.orig_rows_infos:
+            if row_info["row"] == row:
+                iId = row_info["instanceId"]
+                break
+            count += 1
+        if tipsType == TipsType.ADD:
+            path = r"main/resources/images/deck_preview/BLUE_FRAME.png"
+        elif tipsType == TipsType.REMOVE:
+            path = r"main/resources/images/deck_preview/PURPLE_FRAME.png"
+        elif tipsType == TipsType.MOVE:
+            path = r"main/resources/images/deck_preview/BLUE_FRAME.png"
+        elif tipsType == TipsType.WHITE:
+            path = r"main/resources/images/deck_preview/WHITE_FRAME.png"
+
+        img = ft.get_img(path)
+        imgTk = ImageTk.PhotoImage(img)
+        self.panel = tk.Label(master = self.root)
+        self.panel.temp_img = imgTk
+        row_id = self.can_bg.create_image(self.canvas_padding[0],self.canvas_padding[1]+self.canvas_row_padding*count,
+        anchor='nw',image=self.panel.temp_img,tags = (str(iId)+"effect_tips","effect_tips"))
+        self.root.after(anim_time,self.anim_img_tips_hidden,row_id)
+        
+    def anim_img_tips_hidden(self,img_id):
+        self.can_bg.delete(img_id)
+
+     
+    def update_deck_sort(self):
+        count  = 0
+        for row_info in self.orig_rows_infos:
+            iId = row_info["instanceId"]
+            if len(self.can_bg.find_withtag(str(iId)+"effect_tips")) > 0:
+                row = self.can_bg.find_withtag(str(iId)+"effect_tips")[0]
+                self.can_bg.moveto(row,x=self.canvas_padding[0],y=self.canvas_padding[1]+self.canvas_row_padding*count)
+            self.can_bg.moveto(row_info["row"],x=self.canvas_padding[0],y=self.canvas_padding[1]+self.canvas_row_padding*count)
+            count += 1
+
+    def clear_deck_img(self):
+        for img_id in self.can_bg.find_all():
+            self.can_bg.delete(img_id)
+
+    # @moved_element: 要移动的row对象中card的instanceId
+    # @moved_to_index: 要移动到的新下标位置      
+    # @row_dict: 行信息字典，包含row对象id,template_id,instanceId，Name       
+    def anim_move_one_row(self,moved_element,moved_to_index):
+        orig_index = 0
+        orig_row = 0
+        for row_dict in self.orig_rows_infos:
+            if row_dict["instanceId"] == moved_element:
+                orig_index = self.orig_rows_infos.index(row_dict)
+                orig_row = row_dict["row"]
+                break
+        # 目标row移至下标处
+        times = moved_to_index-orig_index
+        self.can_bg.move(orig_row,0,self.canvas_row_padding * times)
+
+    def resetType(self,CardDeckInfo):
+        self.CARD_DECK_INFO = CardDeckInfo
+        self.orig_rows_infos.clear()
+        self.curr_memo_cards.clear()
+        self.clear_deck_img()
+
+        # 重置因为滚轮事件导致的img偏移
+        self.canvas_padding[1] = 0
+    
+    def setCardDeckInfo(self,CardDeckInfo):
+        self.CARD_DECK_INFO = CardDeckInfo
+####################################################################################################################
+####################################################################################################################
