@@ -4,3 +4,4 @@ class BattleInfo(object):
         self.currPlayerId = None
         self.bottomPlayerId = None
         self.topPlayerId = None
+        self.localPlayerId = None

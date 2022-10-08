@@ -46,19 +46,50 @@ class ResponseManager(object):
         self.battInfo = cs.getCurrBattleInfo()
         return 0
 
+    # 获取当前用户的操作状态
+    def getPlayerActionsCode(self):
+        # 只由敌方玩家响应管理器响应
+        # 只捕捉底部玩家的操作
+        if self.battInfo.localPlayerId != self.playerId:
+            statusCode = cs.getPlayerEnableActionsStatus(self.battInfo.localPlayerId)
+            return statusCode
+        else:
+            return 0
+
     def setPlayerId(self):
         card_deck_info = self.cardList.CARD_DECK_INFO
         playerId = self.battInfo.topPlayerId
+        # 响应管理器也暂存一个用户id方便标识
         if card_deck_info.isEnemy:
             playerId = self.battInfo.topPlayerId
+            self.playerId = self.battInfo.topPlayerId
+            self.enemyPlayerId = self.battInfo.bottomPlayerId
         else:
             playerId = self.battInfo.bottomPlayerId
+            self.playerId = self.battInfo.bottomPlayerId
+            self.enemyPlayerId = self.battInfo.topPlayerId
+
         # 批量该玩家，防止按钮一点又跑到p1。
         for cdi in self.CARD_DECK_INFO:
             cdi.playerId = playerId
 
-        print(card_deck_info.playerId,card_deck_info.isEnemy)
+        # print(card_deck_info.playerId,card_deck_info.isEnemy)
         self.cardList.setCardDeckInfo(card_deck_info)
+    
+    def setDeckInfo(self,playerId):
+        temp_dict = cs.getDeckInfo(playerId)
+        m_playerCardNums = temp_dict["totalCardNums"]
+        m_isDefensive = temp_dict["isDefensive"]
+        if playerId == 1:
+            playerId =2 
+        elif playerId == 2:
+            playerId = 1
+        temp_dict = cs.getDeckInfo(playerId)
+        e_playerCardNums = temp_dict["totalCardNums"]
+        e_isDefensive = temp_dict["isDefensive"]   
+
+        self.allCardNums = m_playerCardNums+e_playerCardNums
+
 
 ########################################################################
 ## 响应事件
@@ -68,6 +99,7 @@ class ResponseManager(object):
     def startDataLoop(self):
         self.getCurrBattleInfo()
         self.setPlayerId()
+        self.setDeckInfo(self.playerId)
         self.cardList.show_data_frame()
 
     # 更新status

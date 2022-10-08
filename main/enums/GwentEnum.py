@@ -10,7 +10,8 @@ class Location(Enum):
     DECK    = 16                # 卡组          0x10
     GRAVEYARD     = 32          # 墓地          0x20
     LEADER        = 64          # 领队          0x40
-    PayStack      = 256         # 待打出        0x100
+    SPAWNING_POOL = 128         # 孵化          0x80
+    PAY_STACK      = 256        # 待打出        0x100
     VOID          = 512         # 放逐          0x200
     MULLIGAN_STACK = 1024       # 调度替换栈    0x400
 

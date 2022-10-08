@@ -18,6 +18,7 @@ def initCtData(pm,ctAdd,cardAdd):
     result["Index"]      = read_memory_bytes(pm,cardAdd+0x64,0x4)
     result["Address"]    = cardAdd
     result["CardId"]     = read_memory_bytes(pm,cardAdd+0x58,0x4)
+    result["FromPlayerId"] = read_memory_bytes(pm,cardAdd+0x78,0x1)
     # CardData
     result["BasePower"]  = read_multi_bytes(pm,cardAdd+0xA0,[0x20,0x18],0x4)
     result["CurrPower"]  = read_multi_bytes(pm,cardAdd+0xA0,[0x20,0x1C],0x4)
@@ -64,7 +65,11 @@ def pack_cardTemplate(cts):
         temp_dict["Id"]         = ct["Id"]
         temp_dict["Name"]       = "未知"
         if ct["Id"] != 0 and ct["CardId"] !=0 : 
-            temp_dict["Name"]       = cardDict[str(ct["Id"])]['name']
+            try:
+                temp_dict["Name"]       = cardDict[str(ct["Id"])]['name']
+            except Exception:
+                temp_dict["Id"] = 0
+                temp_dict["Name"]       = "【未更新该卡牌卡画!】"
         temp_dict["FactionId"]  = ct["FactionId"]
         temp_dict["Rarity"]     = ct["Rarity"]
         temp_dict["Provision"]  = ct["Provision"]
@@ -73,6 +78,7 @@ def pack_cardTemplate(cts):
         temp_dict["Location"]   = hex(ct["Location"])
         temp_dict["Index"]      = hex(ct["Index"])
         temp_dict["Address"]    = hex(ct["Address"])
+        temp_dict["FromPlayerId"]    = ct["FromPlayerId"]
         temp_dict["BasePower"]      = ct["BasePower"] 
         temp_dict["CurrPower"]      = ct["CurrPower"] 
 
@@ -84,9 +90,9 @@ def pack_cardTemplate(cts):
     return result_dict
 
 def printList(list):
-    print(list["InstanceId"],list["PlayId"],list["Name"],list["Type"],list["Location"],list["Address"],list["Index"])
+    print(list["InstanceId"],list["PlayId"],list["Name"],list["Type"],list["Location"],list["Address"],list["Index"],list["Id"],list["FromPlayerId"])
 
-def cardListToString(cardListAdd):
+def cardListToString(cardListAdd,tipsName):
     listStructAdd = read_int64(pm,cardListAdd+0x10,[])
     num = read_memory_bytes(pm,listStructAdd+0x18,0x8)
     cts = []
@@ -107,16 +113,15 @@ def cardListToString(cardListAdd):
             p1_d.append(result_dict[key])
         else:
             p2_d.append(result_dict[key])
-    print("#####################################")
-    print("P111111")
+    print("######################################################################")
+    print(tipsName,"P1")
     for list in p1_d:
         printList(list)
     print("#####################################")
-    print("P2222222")
+    print(tipsName,"P2")
     for list in p2_d:
         printList(list)
     print(len(p2_d))
-    print("#####################################")
 
 if __name__ == "__main__":
     get_baseAddress()
@@ -135,7 +140,8 @@ if __name__ == "__main__":
     p1_d =[]
     p2_d =[]
     for key in result_dict:
-        if int(result_dict[key]["PlayId"],16) == 1:
+        # if int(result_dict[key]["PlayId"],16) == 1:
+        if result_dict[key]["FromPlayerId"] == 1:
             p1_d.append(result_dict[key])
         else:
             p2_d.append(result_dict[key])
@@ -233,7 +239,9 @@ if __name__ == "__main__":
             # 0x4c(1) proceedWithZeroChoice # 暂时无用
             # 0x4d(1) revealChoices # 暂时无用
             # 0x50(8) originalValidChoices #多人没用
-            # 0x58(8) validChoices
+            # 0x58(8) validChoices  # 没法区分敌我牌，创造关键词等情况
+            # 0x60(8) disabledChoices # 暂时无用
+            # 0x68(8) selectedChoices # 暂时无用
             requestId = read_memory_bytes(pm,actionObjAdd+0x40,0x2)
             eRequestChoiceType = read_memory_bytes(pm,actionObjAdd+0x42,0x1)
             minChoice = read_memory_bytes(pm,actionObjAdd+0x44,0x4)
@@ -241,13 +249,44 @@ if __name__ == "__main__":
             proceedWithZeroChoice = read_memory_bytes(pm,actionObjAdd+0x4c,0x1)
             revealChoices = read_memory_bytes(pm,actionObjAdd+0x4d,0x1)
             print(ChoiceType(eRequestChoiceType))
-            # print("requestId:{0},minChoice:{2},maxChoice:{3},canZeroChoice:{4},revealChoices:{5}".
-            # format(id,ChoiceType(eRequestChoiceType),minChoice,maxChoice,proceedWithZeroChoice,revealChoices))
-            originalValidChoices = read_memory_bytes(pm,actionObjAdd+0x50,0x8)
+            print("requestId:{0},minChoice:{2},maxChoice:{3},canZeroChoice:{4},revealChoices:{5}".
+            format(id,ChoiceType(eRequestChoiceType),minChoice,maxChoice,proceedWithZeroChoice,revealChoices))
+            # originalValidChoices = read_memory_bytes(pm,actionObjAdd+0x50,0x8)
+            # print("originalValidChoices:",hex(originalValidChoices))
             validChoices = read_memory_bytes(pm,actionObjAdd+0x58,0x8)
-            print("validChoices",hex(validChoices))
-            cardListToString(validChoices)
+            cardListToString(validChoices,"validChoices")
+            # disabledChoices = read_memory_bytes(pm,actionObjAdd+0x60,0x8)
+            # cardListToString(disabledChoices,"disabledChoices")
+            # selectedChoices = read_memory_bytes(pm,actionObjAdd+0x68,0x8)
+            # print("selectChoices:",hex(selectedChoices))
 
- 
-    
+    # print("######TTTTTTEEEEEEEEESSSSSSSSSTTTTTTTTT")
+    # cardAdd = 0x1a9fa0ad6c0
+    # if cardAdd != 0:
+        
+    #     cardTemplate = cardDao.getCardTemplateByCard(cardAdd)
+    #     ct_dict = initCtData(pm,cardTemplate,cardAdd)
+    #     cts.append(ct_dict)
+
+    # # sort_cardTemplate_by_provision(cts)
+    # result_dict = pack_cardTemplate(cts)
+    # p1_d =[]
+    # p2_d =[]
+    # for key in result_dict:
+    #     if int(result_dict[key]["PlayId"],16) == 1:
+    #         p1_d.append(result_dict[key])
+    #     else:
+    #         p2_d.append(result_dict[key])
+    # print("######################################################################")
+    # print("P1")
+    # for list in p1_d:
+    #     printList(list)
+    # print("#####################################")
+    # print("P2")
+    # for list in p2_d:
+    #     printList(list)
+    print("GI:",hex(gi))
+    print("Top-BattleSetting:",hex(read_int64(pm,gi+0x20,[0x78,0x18])))
+    # print("Bot-BattleSetting:",hex(read_int64(pm,gi+0x20,[0x38])))
+            
     

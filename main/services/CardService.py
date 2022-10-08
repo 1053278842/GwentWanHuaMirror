@@ -1,3 +1,4 @@
+import ctypes
 import tools.MemoryTool as mt
 import dao.CardDao as cd
 from tools.decorators import get_time_consume
@@ -18,8 +19,33 @@ def getCurrBattleInfo():
     battleInfo.currPlayerId = cardDao.getCurrPlayerId(pm,gi)
     battleInfo.bottomPlayerId = cardDao.getBottomPlayerId(pm,gi)
     battleInfo.topPlayerId = cardDao.getTopPlayerId(pm,gi)
+    battleInfo.localPlayerId = cardDao.getLocalPlayerId(pm,gi)
     return battleInfo
 
+def getPlayerEnableActionsStatus(playerId):
+    return cardDao.getPlayerEnableActionsStatus(pm,gi,playerId)
+
+def getViewingCards():
+    validChoiceCardListAdd = cardDao.getViewingCards(pm,gi)
+    cts = []
+    if validChoiceCardListAdd != 0:
+        cts = cardDao.cardListAddToDict(pm,gi,validChoiceCardListAdd)
+    result_dict = pack_cardTemplate(cts)
+    return result_dict
+
+def getDeckInfo(playerId):
+    count=0
+    isDefensive = False
+    cts = get_all_cardTemplates()
+    for cardInfoDict in cts:
+        if cardInfoDict["PlayId"] == playerId:
+            count+=1
+        if cardInfoDict["Type"] == CardType.STRATAGEM.value:
+            isDefensive = True
+    totalCardNums = count+1
+    if isDefensive:
+        totalCardNums+=1
+    return {"totalCardNums": totalCardNums, "isDefensive": isDefensive}
 
 def get_all_cardTemplates():
     
@@ -29,7 +55,7 @@ def get_all_cardTemplates():
     # 实例化CardTemplate和Card,并建立关系
     for cardAdd in cardsAdd:
         cardTemplate = cardDao.getCardTemplateByCard(cardAdd)
-        ct_dict = initCtData(cardTemplate,cardAdd)
+        ct_dict = cardDao.initCtData(pm,cardTemplate,cardAdd)
         cts.append(ct_dict)
 
     return cts
@@ -95,53 +121,40 @@ def filterCards(cardDeckInfo,cts):
     return results
 
 # 将ct对象集封装为dict格式的对象,主键为card实例化的id
+# TODO cardDict的获取是IO密集型，需要改为全局变量
 def pack_cardTemplate(cts):
     cardDict = getCardDataJsonDict()
     # 装载结果
     count = 0 
     result_dict = {}
-    # result_card_list = []
     for ct in cts:
         count += 1
+        temp_dict = {}
+        key                     = ct["CardId"]
+        temp_dict["Id"]         = ct["Id"]              # 视为templateId
+        temp_dict["Name"]       = "【未知!】"
         if ct["Id"] != 0 and ct["CardId"] !=0 : 
-            temp_dict = {}
-            key                     = ct["CardId"]
-            temp_dict["Id"]         = ct["Id"]              # 视为templateId
-            temp_dict["Name"]       = cardDict[str(ct["Id"])]['name']
-            temp_dict["FactionId"]  = ct["FactionId"]
-            temp_dict["Rarity"]     = ct["Rarity"]
-            temp_dict["Provision"]  = ct["Provision"]
-            temp_dict["Type"]       = ct["Type"]  
-            temp_dict["PlayId"]     = hex(ct["PlayId"])
-            temp_dict["Location"]   = hex(ct["Location"])
-            temp_dict["Index"]      = hex(ct["Index"])
-            temp_dict["Address"]    = hex(ct["Address"])
-            temp_dict["BasePower"]  = ct["BasePower"] 
-            temp_dict["CurrPower"]  = ct["CurrPower"] 
+            try:
+                temp_dict["Name"]       = cardDict[str(ct["Id"])]['name']
+            except Exception:
+                temp_dict["Id"] = 0
+                temp_dict["Name"]       = "【未更新该卡牌卡画!】"
+        temp_dict["FactionId"]  = ct["FactionId"]
+        temp_dict["Rarity"]     = ct["Rarity"]
+        temp_dict["Provision"]  = ct["Provision"]
+        temp_dict["Type"]       = ct["Type"]  
+        temp_dict["PlayId"]     = hex(ct["PlayId"])
+        temp_dict["Location"]   = hex(ct["Location"])
+        temp_dict["Index"]      = hex(ct["Index"])
+        temp_dict["Address"]    = hex(ct["Address"])
+        temp_dict["FromPlayerId"]    = ct["FromPlayerId"]
+        temp_dict["BasePower"]  = ct["BasePower"] 
+        temp_dict["CurrPower"]  = ct["CurrPower"] 
 
-            result_dict[key]=temp_dict
+        result_dict[key]=temp_dict
     return result_dict
 
-# 高耦合
 
-def initCtData(ctAdd,cardAdd):
-    result = {}
-    result["Id"]         = mt.read_memory_bytes(pm,ctAdd+0x10,0x8)
-    # result["Name"]       =cardDict[str(ct.id)]['name']
-    result["FactionId"]  = mt.read_memory_bytes(pm,ctAdd+0x40,0x4)
-    result["Rarity"]     = mt.read_memory_bytes(pm,ctAdd+0x21,0x3)
-    result["Provision"]  = mt.read_memory_bytes(pm,ctAdd+0x5c,0x4)
-    result["Type"]       = mt.read_memory_bytes(pm,ctAdd+0x49,0x3)
-    result["PlayId"]     = mt.read_memory_bytes(pm,cardAdd+0x5c,0x4)
-    result["Location"]   = mt.read_memory_bytes(pm,cardAdd+0x60,0x4)
-    result["Index"]      = mt.read_memory_bytes(pm,cardAdd+0x64,0x4)
-    result["Address"]    = cardAdd
-    result["CardId"]     = mt.read_memory_bytes(pm,cardAdd+0x58,0x4)
-    # CardData
-    result["BasePower"]  = mt.read_multi_bytes(pm,cardAdd+0xA0,[0x20,0x18],0x4)
-    result["CurrPower"]  = mt.read_multi_bytes(pm,cardAdd+0xA0,[0x20,0x1C],0x4)
-
-    return result
 
 # 获取程式模块基址
 def get_baseAddress():
@@ -158,22 +171,6 @@ def main():
     cardDao = cd.CardDao(pm,baseAddress)
     global gi
     gi = cardDao.getGameInstance()
-    
-def fillObjAttr(obj,base):
-    attrList = list(obj.__dict__.keys())
-    attrValueList = list(obj.__dict__.values())
-    for i in range(0,len(attrList)):
-        attr = attrList[i]
-        value = attrValueList[i]
-        if i == 0 :
-            will_set_value = mt.read_memory_bytes(pm,base+value,0x8)
-            setattr(obj,attr,will_set_value)
-        else :
-            length = value-attrValueList[i-1]
-            will_set_value = mt.read_memory_bytes(pm,base+value,length)
-            setattr(obj,attr,will_set_value)
-        # print(attr[1:],":",hex(will_set_value))
-        # break
 
 if __name__ =='__main__':
     main()

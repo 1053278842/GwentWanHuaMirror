@@ -1,8 +1,10 @@
+from itertools import count
 import tkinter as tk
 from tkinter import ttk, ALL, EventType
 import tools.FileTool as ft
 from tools.decorators import *
 import services.GwentService as service
+import services.CardService as cService
 from enums.GwentEnum import *
 from tkinter import PhotoImage
 from PIL import Image, ImageTk, ImageFont
@@ -23,6 +25,8 @@ class card_preview_list_board(tk.Frame):
         self.canvas_row_padding = 38
         # 存储当前行信息
         self.orig_rows_infos = []
+        # 存储发现的卡牌，映射信息
+        self.discoveryMap = {}
         # 显示类型
         self.CARD_DECK_INFO = self.root.responseManager.DEFAULT_CARD_DECK_INFO
 
@@ -50,7 +54,6 @@ class card_preview_list_board(tk.Frame):
             print(f'id:{i} tags:{self.can_bg.itemcget(i, "tags")}')
 
     # 设置卡组状态组[卡牌总数,单位数量,粮食]
-    # 该函数通过调用root的固定变量名操作函数,有一定程度的耦合
     def set_deck_status(self):
         total = 0
         unit = 0
@@ -80,7 +83,6 @@ class card_preview_list_board(tk.Frame):
             instanceId = row_info["instanceId"]
             if instanceId in remove_card_id_list:
                 will_delete_row_infos.append(row_info)
-                
         # 不影响遍历的情况下删除
         for delete_row_info in will_delete_row_infos:
             anim_time = 1000
@@ -122,14 +124,72 @@ class card_preview_list_board(tk.Frame):
      
     def init_img_pool(self,curr_memo_cards,scale_factor):
         for key in curr_memo_cards:
+            curr_card = curr_memo_cards[key]
             if len(self.can_bg.find_withtag(str(key)+"card")) == 0:
                 # 不存在池中则实例化一个进入池
-                curr_card = curr_memo_cards[key]
                 imgTk = ft.get_deck_preview_img(curr_card,scale_factor)
                 self.panel = tk.Label(master = self.root)
                 self.panel.temp_img = imgTk
-                self.can_bg.create_image(0,0,anchor='nw',image=self.panel.temp_img, tags = str(key)+"card",state = "hidden")
+                # 未知卡，此时该卡需要更新
+                self.can_bg.create_image(0,0,anchor='nw',image=self.panel.temp_img, 
+                tags = (str(key)+"card",str(curr_card["Id"])+"ctId"),state = "hidden")
 
+            insIdTags = self.can_bg.find_withtag(str(key)+"card")
+            ctIdTags  = self.can_bg.find_withtag(str(curr_card["Id"])+"ctId")
+            # 还未从【未知】生成新的
+            if len(insIdTags) !=0 and len(ctIdTags) ==0:
+                imgTk = ft.get_deck_preview_img(curr_card,scale_factor)
+                self.panel = tk.Label(master = self.root)
+                self.panel.temp_img = imgTk
+                imageIds = insIdTags
+                if len(imageIds) != 0:
+                    self.can_bg.itemconfig(imageIds[0],image=self.panel.temp_img,tags =(str(key)+"card",str(curr_card["Id"])+"ctId"))
+                    self.discoveryMap[key] = curr_card
+
+    def fillDiscoveredCardOfBottomPlayerViewingAction(self):
+        # 捕获用户操作想吃什么？
+        statusCode = self.root.responseManager.getPlayerActionsCode()
+        if statusCode != 0:
+            # check检视动作
+            MAX_STATUS_CODE = int(0x100)
+            MIN_STATUS_CODE = int(0x80)
+            if statusCode < MAX_STATUS_CODE and statusCode >= MIN_STATUS_CODE:
+                # 获取检视敌方的卡牌list
+                cardsDict = cService.getViewingCards()
+
+                if len(cardsDict.keys()) > 0:
+                    ctIds = []
+                    sortByIndexDict = {}
+                    for key,value in self.curr_memo_cards.items():
+                        ctIds.append(value["Id"])
+                        if value["Location"] == hex(Location.DECK.value):
+                            sortByIndexDict[int(value["Index"],16)] = key
+
+                    deckNums = len(sortByIndexDict.keys())-1
+
+                    count = 0
+                    for key,value in cardsDict.items():
+                        # 过滤到敌方卡牌
+                        if int(value["PlayId"],16) == self.root.responseManager.battInfo.topPlayerId:
+                            # 和墓地卡、放逐池、场上卡进行cardTemplateId比对。
+                            # 不在其内的过滤出来，即为对方卡组的卡
+                            if value["Id"] in ctIds:
+                                print("发现中已存在：",key,value["Id"],value["Name"])
+                                continue
+                            print("检测到发现！",key,value["Id"],value["Name"])
+                            temp_key = sortByIndexDict[deckNums-count]
+                            self.discoveryMap[temp_key] = value
+                            count += 1
+        
+        for key,value in self.discoveryMap.items():
+            if key in  self.curr_memo_cards.keys():
+                curr_value = self.curr_memo_cards[key]
+                # TODO 收到完整的数据时，直接加入一个映射到所有模式。该映射优先级在这之下。
+                value["Location"] = curr_value["Location"]
+                value["Index"]  = curr_value["Index"]
+                value["CurrPower"]  = curr_value["CurrPower"]
+                self.curr_memo_cards[key] = value
+        
     def show_data_frame(self):
         if self.CARD_DECK_INFO.isMain:
             self.show_main_deck()
@@ -140,6 +200,7 @@ class card_preview_list_board(tk.Frame):
         curr_deck_iIds = self.get_orig_deck_iIds()
         self.curr_memo_cards = service.get_my_all_cards(self.CARD_DECK_INFO)
         # 从这开始
+        self.fillDiscoveredCardOfBottomPlayerViewingAction()
         self.init_img_pool(self.curr_memo_cards,scale_factor)
         # 过滤出需要增加或删除的数据
         remove_card_id_list  = service.get_deck_remove_cards(self.curr_memo_cards,curr_deck_iIds,self.CARD_DECK_INFO)
@@ -160,7 +221,6 @@ class card_preview_list_board(tk.Frame):
        
         self.after(400,self.show_data_frame)
     
-    # TODO BUG 海鸥的增值会导致记录出错，建议记录卡牌的时间点
     def show_main_deck(self):
         if not self.CARD_DECK_INFO.isMain:
             for row_info in self.main_deck_row_infos:
@@ -169,18 +229,23 @@ class card_preview_list_board(tk.Frame):
             return 0 
         # 从这开始
         scale_factor = self.root.DECK_IMG_SCALE_FACTOR * self.root.DECK_IMG_SCALE_COMPENSATE_FACTOR
-        self.init_img_pool(self.curr_memo_cards,scale_factor)
-        
         # 分别获取当前软件中row的instanceId集，以及游戏内存中的instanceId
         self.main_deck_row_infos = []
         self.curr_memo_cards = service.get_my_all_cards(self.CARD_DECK_INFO)
+        self.fillDiscoveredCardOfBottomPlayerViewingAction()
+        self.init_img_pool(self.curr_memo_cards,scale_factor)
+
         index = 0
         for iId in self.curr_memo_cards:
             # TODO BUG 策略卡的变形无法记录！！比如瓶中灵策略卡会直接变身为瓶中灵
             # 过滤开局后产生的卡
+            temp_dict = self.curr_memo_cards[iId]
             if iId > 53 and iId < 999:
                 continue
-            temp_dict = self.curr_memo_cards[iId]
+            if temp_dict["FromPlayerId"] == self.root.responseManager.enemyPlayerId:
+                continue
+            if temp_dict["Id"] == 0:
+                continue
             template_id = temp_dict["Id"]
             temp_location = temp_dict["Location"]
             # 甄别已经打出的卡
