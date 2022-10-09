@@ -306,10 +306,11 @@ class card_preview_list_board(tk.Frame):
             if not self.CARD_DECK_INFO.isEnemy:
                 if not row_info["isExist"]:
                     continue
-            if row_info["type"] != CardType.LEADER.value and row_info["type"] != CardType.STRATAGEM.value:
-                total += 1
-            temp_prov = self.curr_memo_cards[row_info["instanceId"]]["Provision"]
-            provision += temp_prov
+            if row_info["type"] != CardType.LEADER.value:
+                temp_prov = self.curr_memo_cards[row_info["instanceId"]]["Provision"]
+                provision += temp_prov
+                if row_info["type"] != CardType.LEADER.value and row_info["type"] != CardType.STRATAGEM.value:
+                    total += 1
             cardType = self.curr_memo_cards[row_info["instanceId"]]["Type"]
             if cardType == CardType.UNIT.value :
                 unit += 1
