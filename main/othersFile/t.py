@@ -1,1 +1,2 @@
-print(chr(0xe3))
+s= "202571_name"
+print(s[7:9])

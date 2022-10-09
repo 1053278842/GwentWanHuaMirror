@@ -116,9 +116,11 @@ def composite_deck_info(in_path,info_dict):
     rarity    =   info_dict["Rarity"]
     location  =   info_dict["Location"]
     currPower =   info_dict["CurrPower"]
+    factionId =   info_dict["FactionId"]
+    abilityCardTemplateId = info_dict["Id"]
     # 如果是Leader卡
     if location == hex(Location.LEADER.value):
-        return composite_leader_card(provision,name)
+        return composite_leader_card(provision,name,factionId,abilityCardTemplateId)
     ##############################################################################################################################
    
     layer_core = Image.open(in_path).convert('RGBA')   # 底图背景
@@ -188,16 +190,16 @@ def composite_deck_info(in_path,info_dict):
     # layer_bg.save("2.jpg")
     return layer_bg
 
-def composite_leader_card(provision,name):
+def composite_leader_card(provision,name,factionId,abilityCardTemplateId):
     # 框架
     layer_frame = Image.open(r"main/resources/images/deck_preview/leader-frame.png").convert('RGBA')
     # 遮罩
     layer_mask = Image.open(r"main/resources/images/deck_preview/deck_preview_mask.png").convert('RGBA')    # mask
     scale_factor = layer_frame.size[1]/layer_mask.size[1]
-    xOffset = -int(layer_frame.size[0]*0.2)
+    xOffset = -int(layer_frame.size[0]*0.25)
     layer_mask = layer_mask.resize((layer_frame.size[0]+xOffset,layer_frame.size[1]), Image.Resampling.LANCZOS)
     # 技能标志
-    layer_start = Image.open(r"main/resources/images/deck_preview/pmbm.png").convert('RGBA')
+    layer_start = Image.open(r"main/resources/images/deck_preview/LeaderAbilityIco/{0}.png".format(abilityCardTemplateId)).convert('RGBA')
     scale_factor = layer_frame.size[0]/layer_start.size[0]*0.27
     layer_start = layer_start.resize((int(layer_start.size[0]*scale_factor), int(layer_start.size[1]*scale_factor)), Image.Resampling.LANCZOS)
 
@@ -206,7 +208,7 @@ def composite_leader_card(provision,name):
     scale_factor = layer_frame.size[0]/layer_prov.size[0]*0.25
     layer_prov = layer_prov.resize((int(layer_prov.size[0]*scale_factor), int(layer_prov.size[1]*scale_factor)), Image.Resampling.LANCZOS)
     # 填充背景
-    layer_core = Image.open(r"main/resources/images/deck_preview/NR_full.png").convert('RGBA')
+    layer_core = Image.open("main/resources/images/deck_preview/LeaderFactionBg/{0}.png".format(factionId)).convert('RGBA')
     scale_factor = layer_frame.size[1]/layer_core.size[1]
     layer_core = layer_core.resize((int(layer_core.size[0]*scale_factor), int(layer_core.size[1]*scale_factor)), Image.Resampling.LANCZOS)
     # layer_core = Image.new('RGBA', layer_frame.size, (0, 0, 0, 0))

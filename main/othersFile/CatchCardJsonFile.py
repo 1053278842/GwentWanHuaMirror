@@ -34,14 +34,13 @@ def CardDataFileToJson():
             data_line = line.strip("\n")  # 去除首尾换行符，并按空格划分
             # 只转换cardTemplate开头的
             if line[:5].isdigit():
-                count += 1
-                if count == 1:
-                    id = data_line[0:6]
+                id = data_line[0:6]
+                rowStatus = line[7:9]
+                if rowStatus == "fl":
                     description = data_line[14:-1]
-                elif count == 2:
+                if rowStatus == "na":
                     name = data_line[12:]
-                elif count == 3:
-                    count = 0
+                if rowStatus == "to":
                     tip = data_line[15:]
                     data[str(id)] = {'name':name,"description":description,"tip":tip}
                 # print(tip)
@@ -68,5 +67,5 @@ def main():
 if __name__ =='__main__':
     main()
     # writeCardDataJsonBaseFile()
-    # CardDataFileToJson()
+    CardDataFileToJson()
     # 还需要使用爬虫文件！爬取新卡各种类型的图
