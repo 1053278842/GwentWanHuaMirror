@@ -240,9 +240,7 @@ class module_board(tk.Frame):
                 self.can_bg.itemconfig(bg_id,fill=self.c_open)
                 self.can_bg.itemconfig(text_id,fill=self.c_default)
                 self.root.responseManager.CARD_DECK_INFO[type_id].isActive = True
-                print(self.root.responseManager.CARD_DECK_INFO[type_id].toString())
                 # 更新数据
-                print("更新数据1",self.root.responseManager.CARD_DECK_INFO[type_id].playerId,self.root.responseManager.CARD_DECK_INFO[type_id].isEnemy)
                 self.root.responseManager.resetShowListCondition(self.root.responseManager.CARD_DECK_INFO[type_id])
 
                 # 更新 filter 
@@ -274,7 +272,6 @@ class module_board(tk.Frame):
                                 # 更新数据
                                 conditionObj = copy.copy(cardTypeInfo)
                                 conditionObj.titleName = cardTypeInfo.titleName + " *"
-                                print("更新数据2",conditionObj.playerId,conditionObj.isEnemy)
                                 self.root.responseManager.resetShowListCondition(conditionObj)
                                 break
                     else:

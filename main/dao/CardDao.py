@@ -148,15 +148,3 @@ class CardDao():
         cm = read_int64(self.pm,gi+0x20,[0x60,0x18,0x20])
         # AddressToString(cm)
         return cm
-
-    # def text(self,bsAdd):
-    #     print("################################################################################")
-    #     startingPlayer = read_memory_bytes(self.pm,bsAdd+0x10,0x1)
-    #     print("startingPlayer:",startingPlayer)
-    #     ShowIntro = read_memory_bytes(self.pm,bsAdd+0x11,0x7)
-    #     print("ShowIntro:",ShowIntro)
-
-    #     p2_LeaderEnabled = read_memory_bytes(self.pm,bsAdd+0x20,0x7)
-    #     print("p2_LeaderEnabled:",p2_LeaderEnabled)
-    #     p2 = read_memory_bytes(self.pm,bsAdd+0x11,0x7)
-    #     print("p2:",p2)

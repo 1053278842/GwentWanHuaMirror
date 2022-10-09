@@ -1,3 +1,4 @@
+import sys
 import json
 from time import sleep
 from urllib import request
@@ -6,12 +7,16 @@ import requests
 import os
 from multiprocessing import Process
 
+os.path.join(os.path.dirname(__file__), '../')
+sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
+from tools import FileTool  as ft
+
 def process():
     wait_time = 180
     runtime = 300
-
+    
     # 1.打开浏览器，输入网址
-    cardDict = open("card_json.json", "r",encoding="utf-16")
+    cardDict = open("main/resources/config/card_json.json", "r",encoding="utf-16")
     card_list = json.loads(cardDict.read())
     
     chrome_options = webdriver.ChromeOptions()
@@ -22,9 +27,14 @@ def process():
     # browser.maximize_window() # 浏览器最大化
     # browser.get('https://www.playgwent.com/en/decks/builder/card/details/202140')
     browser.implicitly_wait(30) # 加入隐式等待，防止崩溃
-    start_id_str = "202156"
+    start_id_str = "203140"
     # 202093 - 202097 无图片
     # 202123 sd
+
+    fileNameIdList = []
+    for fileName in os.listdir("main/resources/images/GwentImg原图"):
+        fileNameIdList.append(fileName[:6])
+
     for keys in card_list:
         
 
@@ -32,17 +42,20 @@ def process():
         if not keys.isdigit():
             print("检测到key不是纯数字作为唯一ID",keys)
             continue
-
+        
         if keys < start_id_str:
             print(keys,keys < start_id_str)
             continue
+
+        # 已经有该图片
+        if keys in fileNameIdList:
+            continue
         
-        print("图片爬取已从ID:"+keys+"处开始!")
 
         url_str = 'https://www.playgwent.com/en/decks/builder/card/details/'
         url_str += keys
         browser.get(url_str)
-        browser.implicitly_wait(30) # 加入隐式等待，防止崩溃
+        browser.implicitly_wait(0.1) # 加入隐式等待，防止崩溃
 
         img_url = get_img_url(browser)
         if img_url != "" and img_url != None:
@@ -63,7 +76,7 @@ def get_img_url(browser):
             return bg_url
 
 def writeImg(url,fileName):
-    path="./GwentImg/"
+    path="main/resources/images/GwentImg原图/"
     requests.adapters.DEFAULT_RETRIES = 5
     s = requests.session()
     s.keep_alive = False
@@ -78,10 +91,15 @@ def writeImg(url,fileName):
     except IOError:
         print("IO异常")
 
-if __name__=='__main__':
+    # 制作缩略图
+    ft.compress_image_by_resize(path+fileName+".jpg",r'main/resources/images/Card_Img_Small/'+fileName+".jpg",50)
+    # 制作卡组扁图
+    ft.crop_img_to_deck(r'main/resources/images/Card_Img_Small/'+fileName+".jpg",r'main/resources/images/GwentImg_preview/'+fileName+".jpg",0.25)
+    print(fileName,"原图、缩略图、卡组扁图制作完成!")
 
+if __name__=='__main__':
     #OS创建文件夹
-    img_file_path="./GwentImg"
+    img_file_path="main/resources/images/GwentImg原图/"
     if not os.path.exists(img_file_path):
         os.makedirs(img_file_path)
 

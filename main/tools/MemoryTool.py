@@ -46,7 +46,6 @@ def read_multi_bytes(pm, base, offsets,count):
 # return 函数类型
 def read_Type_Name(pm,address):
     asciiHeadAdd = read_int64(pm,address+0x10,[])
-    print(hex(asciiHeadAdd))
     result_name = ""
     count = 0
     while True:

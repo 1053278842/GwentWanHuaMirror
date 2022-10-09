@@ -80,13 +80,31 @@ class ResponseManager(object):
         temp_dict = cs.getDeckInfo(playerId)
         m_playerCardNums = temp_dict["totalCardNums"]
         m_isDefensive = temp_dict["isDefensive"]
+        m_leaderIndex = temp_dict["leaderIndex"]
         if playerId == 1:
             playerId =2 
         elif playerId == 2:
             playerId = 1
+
         temp_dict = cs.getDeckInfo(playerId)
         e_playerCardNums = temp_dict["totalCardNums"]
-        e_isDefensive = temp_dict["isDefensive"]   
+        e_isDefensive = temp_dict["isDefensive"]  
+        e_leaderIndex = temp_dict["leaderIndex"]
+
+        print("leaderIndex",m_leaderIndex,e_leaderIndex)
+        # 范围
+        if m_leaderIndex > e_leaderIndex:
+            self.maxCardNums = m_playerCardNums + e_playerCardNums
+            self.minCardNums = m_leaderIndex
+        else:
+            self.maxCardNums = e_leaderIndex - 1
+            self.minCardNums = 1
+        
+        for cdi in self.CARD_DECK_INFO:
+            cdi.maxCardNums = self.maxCardNums
+            cdi.minCardNums = self.minCardNums
+
+        m_MaxCardNums = m_playerCardNums
 
         self.allCardNums = m_playerCardNums+e_playerCardNums
 

@@ -36,22 +36,24 @@ def getViewingCards():
 def getDeckInfo(playerId):
     count=0
     isDefensive = False
+    leaderIndex = 0
     cts = get_all_cardTemplates()
     for cardInfoDict in cts:
         if cardInfoDict["PlayId"] == playerId:
             count+=1
+            if cardInfoDict["Type"] == CardType.LEADER.value:
+                leaderIndex = cardInfoDict["CardId"]
         if cardInfoDict["Type"] == CardType.STRATAGEM.value:
             isDefensive = True
-    totalCardNums = count+1
-    if isDefensive:
-        totalCardNums+=1
-    return {"totalCardNums": totalCardNums, "isDefensive": isDefensive}
+
+    totalCardNums = count
+    return {"totalCardNums": totalCardNums, "isDefensive": isDefensive,"leaderIndex":leaderIndex}
 
 def get_all_cardTemplates():
     
     cardsAdd = cardDao.getAllCardsByGI(gi)
     cts = []
-    cardDict = getCardDataJsonDict()
+    # cardDict = getCardDataJsonDict()
     # 实例化CardTemplate和Card,并建立关系
     for cardAdd in cardsAdd:
         cardTemplate = cardDao.getCardTemplateByCard(cardAdd)
@@ -77,10 +79,10 @@ def sort_cardTemplate_by_index(cts):
             if cts[j]["Index"] > cts[j + 1]["Index"]:
                 cts[j],cts[j+1] = cts[j+1],cts[j]
 
-def remove_card_by_playerId(playerId,cts):
+def remove_card_by_playerId(cardDeckInfo,cts):
     results = []
     for ct in cts:
-        if ct["PlayId"] == playerId:
+        if ct["CardId"] <= cardDeckInfo.maxCardNums and ct["CardId"] >= cardDeckInfo.minCardNums:
             results.append(ct)
     return results
 
@@ -98,7 +100,7 @@ def get_my_all_cards(cardDeckInfo):
     #按照provision,id降序排序卡组
     sort_cardTemplate_by_provision(cts)
     # 去除AI的卡组
-    cts = remove_card_by_playerId(cardDeckInfo.playerId,cts)
+    cts = remove_card_by_playerId(cardDeckInfo,cts)
     #按照index升序排序卡组
     if cardDeckInfo.isSortByIndex:
         sort_cardTemplate_by_index(cts)
@@ -123,7 +125,7 @@ def filterCards(cardDeckInfo,cts):
 # 将ct对象集封装为dict格式的对象,主键为card实例化的id
 # TODO cardDict的获取是IO密集型，需要改为全局变量
 def pack_cardTemplate(cts):
-    cardDict = getCardDataJsonDict()
+    
     # 装载结果
     count = 0 
     result_dict = {}
@@ -150,6 +152,7 @@ def pack_cardTemplate(cts):
         temp_dict["FromPlayerId"]    = ct["FromPlayerId"]
         temp_dict["BasePower"]  = ct["BasePower"] 
         temp_dict["CurrPower"]  = ct["CurrPower"] 
+        temp_dict["InstanceId"]  = key
 
         result_dict[key]=temp_dict
     return result_dict
@@ -171,6 +174,8 @@ def main():
     cardDao = cd.CardDao(pm,baseAddress)
     global gi
     gi = cardDao.getGameInstance()
+    global cardDict
+    cardDict = getCardDataJsonDict()
 
 if __name__ =='__main__':
     main()

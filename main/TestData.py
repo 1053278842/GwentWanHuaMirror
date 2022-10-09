@@ -13,15 +13,24 @@ def initCtData(pm,ctAdd,cardAdd):
     result["Rarity"]     = read_memory_bytes(pm,ctAdd+0x21,0x3)
     result["Provision"]  = read_memory_bytes(pm,ctAdd+0x5c,0x4)
     result["Type"]       = read_memory_bytes(pm,ctAdd+0x49,0x3)
+    result["LinkedTemplateId"] = hex(read_memory_bytes(pm,ctAdd+0x90,0x4))
+    result["LinkedTemplateOrder"] = hex(read_multi_bytes(pm,app+0x58,[0x10,0x30,0x20],0x8))
+
+
     result["PlayId"]     = read_memory_bytes(pm,cardAdd+0x5c,0x4)
     result["Location"]   = read_memory_bytes(pm,cardAdd+0x60,0x4)
     result["Index"]      = read_memory_bytes(pm,cardAdd+0x64,0x4)
     result["Address"]    = cardAdd
     result["CardId"]     = read_memory_bytes(pm,cardAdd+0x58,0x4)
-    result["FromPlayerId"] = read_memory_bytes(pm,cardAdd+0x78,0x1)
+    result["IsBeingPlayedBy"] = hex(read_memory_bytes(pm,cardAdd+0x74,0x1))
+    result["FromPlayerId"] = hex(read_memory_bytes(pm,cardAdd+0x78,0x8))
+    result["PlayedFrom"] = hex(read_memory_bytes(pm,cardAdd+0x84,0x8))
+    result["LastActivePosition"] = hex(read_memory_bytes(pm,cardAdd+0x90,0x8))
+    result["PlayedBy"] = hex(read_memory_bytes(pm,cardAdd+0x1D8,0x1))
     # CardData
     result["BasePower"]  = read_multi_bytes(pm,cardAdd+0xA0,[0x20,0x18],0x4)
     result["CurrPower"]  = read_multi_bytes(pm,cardAdd+0xA0,[0x20,0x1C],0x4)
+    result["CurrentEnergy"]  = read_multi_bytes(pm,cardAdd+0xA0,[0x70,0x18],0x4)
 
     return result
         # return value
@@ -35,6 +44,8 @@ def get_baseAddress():
     ).lpBaseOfDll
     global cardDao
     cardDao = CardDao(pm,baseAddress)
+    global app
+    app = read_int64(pm,baseAddress+0x32b53e0,[0xb8,0x0])
     global gi
     gi = cardDao.getGameInstance()
     global gc
@@ -81,7 +92,13 @@ def pack_cardTemplate(cts):
         temp_dict["FromPlayerId"]    = ct["FromPlayerId"]
         temp_dict["BasePower"]      = ct["BasePower"] 
         temp_dict["CurrPower"]      = ct["CurrPower"] 
-
+        temp_dict["PlayedFrom"] = ct["PlayedFrom"] 
+        temp_dict["LastActivePosition"] = ct["LastActivePosition"] 
+        temp_dict["IsBeingPlayedBy"] = ct["IsBeingPlayedBy"] 
+        temp_dict["PlayedBy"] = ct["PlayedBy"] 
+        temp_dict["CurrentEnergy"] = ct["CurrentEnergy"] 
+        temp_dict["LinkedTemplateId"] = ct["LinkedTemplateId"] 
+        temp_dict["LinkedTemplateOrder"] = ct["LinkedTemplateOrder"] 
         result_dict[key]=temp_dict
             # print(temp_dict["Name"],temp_dict["Location"],temp_dict["Type"],temp_dict["Rarity"])
                 # Test
@@ -90,7 +107,8 @@ def pack_cardTemplate(cts):
     return result_dict
 
 def printList(list):
-    print(list["InstanceId"],list["PlayId"],list["Name"],list["Type"],list["Location"],list["Address"],list["Index"],list["Id"],list["FromPlayerId"])
+    print(list["InstanceId"],list["PlayId"],list["Name"],list["Location"],list["Index"],list["Address"],list["Id"],list["FromPlayerId"])
+    # print("\t",list["FromPlayerId"],list["LastActivePosition"],list["PlayedFrom"])
 
 def cardListToString(cardListAdd,tipsName):
     listStructAdd = read_int64(pm,cardListAdd+0x10,[])
