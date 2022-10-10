@@ -25,7 +25,7 @@ class GwentGUI:
         if isEnemy:
             self.root.geometry('338x1000+400+0')
         self.root.wm_attributes('-topmost',1)
-        root.overrideredirect(True)
+        # root.overrideredirect(True)
         # self.root.resizable(width=False,height=True)
         
         self.root.DECK_IMG_SCALE_FACTOR = 0.6
