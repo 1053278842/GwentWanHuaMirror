@@ -23,6 +23,7 @@ class title_board(tk.Frame):
     def create_page(self):
         self.can_bg = tk.Canvas(self,bg='#000000',width = self.can_size[0],height = self.can_size[1],highlightthickness=0,highlightcolor="green")
         # 绘制字符
+        # TODO RESIZE 了解字体大小和像素的关系后再定夺
         font = tkFont.Font(family='微软雅黑', size=21, weight=tkFont.BOLD)
         self.t_all_deck_bg = self.can_bg.create_text(self.can_size[0]/2,self.can_size[1]/2,
         text=self.root.responseManager.DEFAULT_CARD_DECK_INFO.titleName,font=font,fill=self.c_default,anchor="center")

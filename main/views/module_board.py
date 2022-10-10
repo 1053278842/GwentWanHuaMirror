@@ -11,6 +11,10 @@ class module_board(tk.Frame):
     def __init__(self, root):
         super().__init__(root)
         self.root =root
+
+        # 图片源大小
+        self.FILTER_BUTTON_ICO = (38,37)
+
         # 宽高
         self.can_size = [self.root.WIN_WIDTH,self.root.TOP_HEIGHT * 0.55]
         self.to_frame_pad  = [self.can_size[0] * 0.04 , self.can_size[1] * 0.11]
@@ -120,7 +124,7 @@ class module_board(tk.Frame):
 
     def create_filter_page(self):
         ## 默认位置
-        self.ico_scale = 1.1
+        self.ico_scale = (self.root.WIN_WIDTH/self.FILTER_BUTTON_ICO[0]) * 0.12
  
         self.ico_size = ImageTk.getimage(ft.get_img_resized(r"main/resources/images/deck_preview/filter-ico/filter-rarity-rare.png",self.ico_scale)).size
         self.filter_ico_pad = [self.ico_size[0]*0.1,self.ico_size[1]*0.01]

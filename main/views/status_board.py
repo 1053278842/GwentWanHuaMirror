@@ -20,9 +20,12 @@ class status_board(tk.Frame):
         self.bg_size  = [self.can_size[0]*0.86,self.can_size[1]*0.85]
         self.bg_pad   = [self.can_size[0]*0.07,self.can_size[1]*0.1]
 
+        # TODO RESIZE 20要和高度关联
         self.canvas_padding = [ self.can_size[0]*0.07,20]
-        self.icon_x_padding = ( self.root.WIN_WIDTH - self.canvas_padding[0] * 2 ) / 2 - 40
-        self.scale_factor = 1.214
+        self.icon_x_padding = ( self.root.WIN_WIDTH - self.canvas_padding[0] * 2 ) /2 - round(self.root.WIN_WIDTH*0.12)
+
+        self.ICO_SIZE = (33,36)
+        self.scale_factor = self.root.WIN_WIDTH/8.2/self.ICO_SIZE[0]
         self.create_page()
 
     def getHeight(self):
@@ -39,25 +42,28 @@ class status_board(tk.Frame):
         self.i_unit      = ft.get_img_resized(r"main/resources/images/deck_preview/helmet-icon.png",   self.scale_factor)
         self.i_provision = ft.get_img_resized(r"main/resources/images/deck_preview/provision-icon.png",self.scale_factor)
 
-        leftPad = self.canvas_padding[0] + 7
-        self.topPad  = self.canvas_padding[1]+Image.open(r"main/resources/images/deck_preview/cards-icon.png").size[1]
-        xOffset = self.icon_x_padding
+        leftPad = self.canvas_padding[0] + self.bg_size[0]*0.03
+        # top偏移 = + 缩放后图片高
+        # self.topPad  = self.canvas_padding[1]+self.ICO_SIZE[1]*self.scale_factor
+        self.topPad  = self.bg_size[1]/2+self.bg_pad[1]
+        xOffset = self.bg_size[0]*0.34
 
-        aver_x_offset = 10
-        self.iCoordDict = {"total":leftPad + xOffset * 0,"unit":leftPad + xOffset * 1 + aver_x_offset,"provision":leftPad + xOffset * 2 -aver_x_offset}
-        self.can_bg.create_image(self.iCoordDict["total"]     , self.topPad , anchor='sw' , image = self.i_total)
-        self.can_bg.create_image(self.iCoordDict["unit"]      , self.topPad , anchor='sw' , image = self.i_unit)
-        self.can_bg.create_image(self.iCoordDict["provision"] , self.topPad , anchor='sw' , image = self.i_provision)
 
-        self.offset = (Image.open(r"main/resources/images/deck_preview/cards-icon.png").size[0]+10
+        self.iCoordDict = {"total":leftPad + xOffset * 0,"unit":leftPad + xOffset * 1 ,"provision":leftPad + xOffset * 2 }
+        self.can_bg.create_image(self.iCoordDict["total"]     , self.topPad , anchor='w' , image = self.i_total)
+        self.can_bg.create_image(self.iCoordDict["unit"]      , self.topPad , anchor='w' , image = self.i_unit)
+        self.can_bg.create_image(self.iCoordDict["provision"] , self.topPad , anchor='w' , image = self.i_provision)
+        
+        # 图片实际宽度+图片实际宽度的百分比
+        self.offset = (self.ICO_SIZE[0]*self.scale_factor+self.ICO_SIZE[0]*self.scale_factor*0.05
         ,Image.open(r"main/resources/images/deck_preview/cards-icon.png").size[1])
         # 数字
         self.t_total =      self.get_text_img(size=(25,30),color=(213,215,213),name="25")
         self.t_unit =       self.get_text_img(size=(25,30),color=(213,215,213),name="13")
         self.t_provision =  self.get_text_img(size=(45,30),color=(213,215,213),name="166")
-        self.t_total_id = self.can_bg.create_image(self.iCoordDict["total"]    +self.offset[0], self.topPad-3,anchor='sw',image=self.t_total)
-        self.t_unit_id = self.can_bg.create_image(self.iCoordDict["unit"]     +self.offset[0] - 10, self.topPad-3,anchor='sw',image=self.t_unit)
-        self.t_provision_id = self.can_bg.create_image(self.iCoordDict["provision"]+self.offset[0] - 5, self.topPad-3,anchor='sw',image=self.t_provision)
+        self.t_total_id = self.can_bg.create_image(self.iCoordDict["total"]    +self.offset[0], self.topPad,anchor='w',image=self.t_total)
+        self.t_unit_id = self.can_bg.create_image(self.iCoordDict["unit"]     +self.offset[0] , self.topPad,anchor='w',image=self.t_unit)
+        self.t_provision_id = self.can_bg.create_image(self.iCoordDict["provision"]+self.offset[0], self.topPad,anchor='w',image=self.t_provision)
         # 线
         
         # self.can_bg.create_line(self.canvas_padding[0], self.can_size[1]*0.05,
@@ -65,35 +71,34 @@ class status_board(tk.Frame):
         # self.can_bg.create_line(self.canvas_padding[0], self.can_size[1]*0.08,
         # self.can_size[0]-self.canvas_padding[0], self.can_size[1]*0.08,fill = "#5e4637",width=1)
 
-        self.can_bg.create_line(self.iCoordDict["total"]    +self.offset[0] * 2.1, self.canvas_padding[0],
-        self.iCoordDict["total"]    +self.offset[0] * 2.1, self.canvas_padding[0]*2,fill = "#d9d8cb",width=2)
-        self.can_bg.create_line(self.iCoordDict["unit"]    +self.offset[0] * 1.7, self.canvas_padding[0],
-        self.iCoordDict["unit"]    +self.offset[0] * 1.7, self.canvas_padding[0]*2,fill = "#d9d8cb",width=2)
+        self.can_bg.create_line(self.bg_size[0]*0.4, self.bg_size[1]*0.4,
+        self.bg_size[0]*0.4, self.bg_size[1]*0.8,fill = "#d9d8cb",width=round(self.root.WIN_WIDTH/150))
+        self.can_bg.create_line(self.bg_size[0]*0.74, self.bg_size[1]*0.4,
+        self.bg_size[0]*0.74, self.bg_size[1]*0.8,fill = "#d9d8cb",width=round(self.root.WIN_WIDTH/150))
 
-        self.can_bg.create_line(self.canvas_padding[0], self.can_size[1]*0.95,
-        self.can_size[0]-self.canvas_padding[0], self.can_size[1]*0.95,fill = "#5e4637",width=1)
-        self.can_bg.create_line(self.canvas_padding[0], self.can_size[1]*0.98,
-        self.can_size[0]-self.canvas_padding[0], self.can_size[1]*0.98,fill = "#261a13",width=2)
 
         self.can_bg.pack()
     
     def get_text_img(self,size,color,name):
         img = ft.get_num_img(size,color,name)
-        imgTk = ImageTk.PhotoImage(img)
+        x,y = img.size
+        scale_factor = self.bg_size[1]/y*0.50
+        out = img.resize((int(x*scale_factor),int(y*scale_factor)),Image.Resampling.LANCZOS) 
+        imgTk = ImageTk.PhotoImage(out)
         return imgTk
 
     def update_data(self,total,unit,provision):
         # 数字
         self.can_bg.delete(self.t_total_id)
-        self.t_total =      self.get_text_img(size=(25,30),color=(213,215,213),name=str(total))
-        self.t_total_id = self.can_bg.create_image(self.iCoordDict["total"]    +self.offset[0], self.topPad-8,anchor='sw',image=self.t_total)
+        self.t_total =      self.get_text_img(size=(22,27),color=(213,215,213),name=str(total))
+        self.t_total_id = self.can_bg.create_image(self.iCoordDict["total"]    +self.offset[0], self.topPad,anchor='w',image=self.t_total)
 
         self.can_bg.delete(self.t_unit_id)
-        self.t_unit =       self.get_text_img(size=(25,30),color=(213,215,213),name=str(unit))
-        self.t_unit_id = self.can_bg.create_image(self.iCoordDict["unit"]     +self.offset[0] - 10, self.topPad-8,anchor='sw',image=self.t_unit)
+        self.t_unit =       self.get_text_img(size=(22,27),color=(213,215,213),name=str(unit))
+        self.t_unit_id = self.can_bg.create_image(self.iCoordDict["unit"]     +self.offset[0], self.topPad,anchor='w',image=self.t_unit)
 
         self.can_bg.delete(self.t_provision_id)
-        self.t_provision =  self.get_text_img(size=(35,30),color=(213,215,213),name=str(provision))
-        self.t_provision_id = self.can_bg.create_image(self.iCoordDict["provision"]+self.offset[0] - 5, self.topPad-8,anchor='sw',image=self.t_provision)
+        self.t_provision =  self.get_text_img(size=(33,27),color=(213,215,213),name=str(provision))
+        self.t_provision_id = self.can_bg.create_image(self.iCoordDict["provision"]+self.offset[0], self.topPad,anchor='w',image=self.t_provision)
 
 ####################################################################################################################

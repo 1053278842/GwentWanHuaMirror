@@ -245,10 +245,10 @@ def get_num_img(size,color,name):
 
     layer_bg = Image.new('RGBA', (size[0], size[1]), (0, 0, 0, 0))
     draw = ImageDraw.Draw(layer_bg)
-    font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",26)
-    draw.text((size[0]/2,size[1]),str(name),(40,40,40,50),font=font,anchor="mb",align="center")
-    font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",25)
-    draw.text((size[0]/2,size[1]),str(name),(20,20,20),font=font,anchor="mb",align="center")
+    # font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",26)
+    # draw.text((size[0]/2,size[1]),str(name),(40,40,40,50),font=font,anchor="mb",align="center")
+    # font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",25)
+    # draw.text((size[0]/2,size[1]),str(name),(20,20,20),font=font,anchor="mb",align="center")
     font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",24)
     draw.text((size[0]/2,size[1]),str(name),color,font=font,anchor="mb",align="center")
 
@@ -256,7 +256,7 @@ def get_num_img(size,color,name):
     return layer_bg
 
 def get_text_img(size,color,name):
-    layer_bg = Image.new('RGBA', (size[0], size[1]), (0, 0, 0, 0))
+    layer_bg = Image.new('RGBA', (size[0], size[1]), (0, 255, 0, 0))
     draw = ImageDraw.Draw(layer_bg)
     # font = ImageFont.truetype(r"main/resources/fonts/JZJDCYJF.ttf",26)
     # draw.text((size[0]/2,size[1]/2),str(name),(40,40,40,50),font=font,anchor="ma",align="center")
@@ -277,6 +277,7 @@ def get_deck_preview_img(info_dict,scale_factor):
     x, y = img.size
     out = img.resize((int(x*scale_factor), int(y*scale_factor)), Image.Resampling.LANCZOS)
     return ImageTk.PhotoImage(out)
+
 
 
 # 生成ImageTk调整调整大小

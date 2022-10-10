@@ -18,11 +18,19 @@ class card_preview_list_board(tk.Frame):
         super().__init__(master = root)
         self.root = root
 
+        self.CARD_IMG_SIZE = (400,50)
+        self.CARD_IMG_EFFECT_SIZE = (291,38)
+
         # label list padding
+        # TODO RESIZE 20和高度关联
         self.canvas_padding = [int(self.root.WIN_WIDTH*0.07),20]
-        # row_padding
-        # BUG: 修改为卡片高度的比例
-        self.canvas_row_padding = 38
+        
+        # img scale  指定宽度/图片宽度 400
+        self.cardImgWidth = self.root.WIN_WIDTH-self.canvas_padding[0]*2
+        self.imgScale = (self.cardImgWidth) / self.CARD_IMG_SIZE[0]
+        self.imgEffectScale = (self.cardImgWidth) / self.CARD_IMG_EFFECT_SIZE[0]
+        # row_padding  图片高（50）+图片自身的一定比率 * 自适应压缩比率
+        self.canvas_row_padding = round((self.CARD_IMG_SIZE[1]*1.08)*self.imgScale)
         # 存储当前行信息
         self.orig_rows_infos = []
         # 存储发现的卡牌，映射信息
@@ -195,7 +203,8 @@ class card_preview_list_board(tk.Frame):
             self.show_main_deck()
             return 0 
 
-        scale_factor = self.root.DECK_IMG_SCALE_FACTOR * self.root.DECK_IMG_SCALE_COMPENSATE_FACTOR
+        scale_factor = self.imgScale
+        # print(scale_factor)
         # 分别获取当前软件中row的instanceId集，以及游戏内存中的instanceId
         curr_deck_iIds = self.get_orig_deck_iIds()
         self.curr_memo_cards = service.get_my_all_cards(self.CARD_DECK_INFO)
@@ -228,7 +237,7 @@ class card_preview_list_board(tk.Frame):
             self.show_data_frame()
             return 0 
         # 从这开始
-        scale_factor = self.root.DECK_IMG_SCALE_FACTOR * self.root.DECK_IMG_SCALE_COMPENSATE_FACTOR
+        scale_factor = self.imgScale
         # 分别获取当前软件中row的instanceId集，以及游戏内存中的instanceId
         self.main_deck_row_infos = []
         self.curr_memo_cards = service.get_my_all_cards(self.CARD_DECK_INFO)
@@ -457,9 +466,8 @@ class card_preview_list_board(tk.Frame):
             path = r"main/resources/images/deck_preview/BLUE_FRAME.png"
         elif tipsType == TipsType.WHITE:
             path = r"main/resources/images/deck_preview/WHITE_FRAME.png"
-
-        img = ft.get_img(path)
-        imgTk = ImageTk.PhotoImage(img)
+       
+        imgTk = ft.get_img_resized(path,self.imgEffectScale)
         self.panel = tk.Label(master = self.root)
         self.panel.temp_img = imgTk
         row_id = self.can_bg.create_image(self.canvas_padding[0],self.canvas_padding[1]+self.canvas_row_padding*count,

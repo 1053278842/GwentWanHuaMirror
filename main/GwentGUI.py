@@ -18,23 +18,25 @@ class GwentGUI:
 
     def __init__(self,root,isEnemy=False):
         self.root = root
-        # self.root.destroy()
-        # self.root = Tk.tk()
+        # 338*1000 最好比率
+        self.root.WIN_WIDTH = 338
         self.root.title = "Gwent Card View"
-        self.root.geometry('338x1000+0+0')
+        self.root.geometry('{0}x1000+0+0'.format(self.root.WIN_WIDTH))
         if isEnemy:
-            self.root.geometry('338x1000+400+0')
+            self.root.WIN_WIDTH = 600
+            self.root.geometry('{0}x1000+400+0'.format(self.root.WIN_WIDTH))
         self.root.wm_attributes('-topmost',1)
         # root.overrideredirect(True)
         # self.root.resizable(width=False,height=True)
         
         self.root.DECK_IMG_SCALE_FACTOR = 0.6
         self.root.DECK_IMG_SCALE_COMPENSATE_FACTOR = 1.214
+        print("倍率：",self.root.DECK_IMG_SCALE_FACTOR*self.root.DECK_IMG_SCALE_COMPENSATE_FACTOR)
 
         self.root.TOP_HEIGHT = 0
         self.root.MID_HEIGHT = 0
         self.root.BOTTOM_HEIGHT = 0
-        self.root.WIN_WIDTH = 0
+
 
         self.create_page(isEnemy)
 
