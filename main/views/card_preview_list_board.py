@@ -353,6 +353,7 @@ class card_preview_list_board(tk.Frame):
 
             # 特殊格式
             if row_info["type"] == CardType.LEADER.value:
+                # TODO BUG 这里的50和7要和高度相关联
                 yOffset += 50
             if row_info["type"] == CardType.STRATAGEM.value:
                 yOffset += 7

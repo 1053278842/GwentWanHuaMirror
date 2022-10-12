@@ -31,6 +31,8 @@ class module_board(tk.Frame):
         self.sec_page_xPad = self.can_size[0]
         # 数据
         self.bg_page_data = {}
+        # 字体大小(自适应)
+        self.font_size = round(self.root.WIN_WIDTH*0.0236)
         self.create_page()
     
     def getHeight(self):
@@ -103,7 +105,7 @@ class module_board(tk.Frame):
             self.iCoordDict[i][0]+self.curr_img_size[0]+ y_offset , self.curr_img_size[1]+self.iCoordDict[i][1]-3,fill=bg_color)
             self.can_bg.comp_relation_d[str(i)]["button_bg"] = id
         # 绘制字符
-        font = tkFont.Font(family='微软雅黑', size=8, weight=tkFont.BOLD)
+        font = tkFont.Font(family='微软雅黑', size=self.font_size, weight=tkFont.BOLD)
         for i in range(0,len(self.root.responseManager.CARD_DECK_INFO)):
             buttonName = self.root.responseManager.CARD_DECK_INFO[i].buttonName
             id = self.can_bg.create_text(self.iCoordDict[i][0]+self.curr_img_size[0]/2,self.iCoordDict[i][1]+self.curr_img_size[1]/2,text=buttonName,font=font,fill=self.c_open)

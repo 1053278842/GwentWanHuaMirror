@@ -16,18 +16,19 @@ import os
 
 class GwentGUI:
 
-    def __init__(self,root,isEnemy=False):
+    def __init__(self,root,coords,isEnemy=False):
         self.root = root
         # 338*1000 最好比率
-        self.root.WIN_WIDTH = 338
+        self.root.WIN_WIDTH = coords[0]
+        self.root.WIN_HEIGHT = coords[1]
         self.root.title = "Gwent Card View"
-        self.root.geometry('{0}x1000+0+0'.format(self.root.WIN_WIDTH))
+        self.root.geometry('{0}x{1}+0+0'.format(self.root.WIN_WIDTH,self.root.WIN_HEIGHT))
         if isEnemy:
-            self.root.WIN_WIDTH = 600
-            self.root.geometry('{0}x1000+400+0'.format(self.root.WIN_WIDTH))
-        self.root.wm_attributes('-topmost',1)
+            self.root.WIN_WIDTH = coords[0]
+            self.root.WIN_HEIGHT = coords[1]
+            self.root.geometry('{0}x{1}+400+0'.format(self.root.WIN_WIDTH,self.root.WIN_HEIGHT))
+        # self.root.wm_attributes('-topmost',1)
         # root.overrideredirect(True)
-        # self.root.resizable(width=False,height=True)
         
         self.root.DECK_IMG_SCALE_FACTOR = 0.6
         self.root.DECK_IMG_SCALE_COMPENSATE_FACTOR = 1.214
@@ -87,10 +88,8 @@ class GwentGUI:
         self.set_frame_coordinate(self.root.card_list_board,0,height,"red")
     
     def set_frame_coordinate(self,frame_page,x,y,color):
-        # frame_page["bg"] = color
-        # frame_page["bd"] = 1
         hwnd = frame_page.winfo_id()
-        colorkey = win32api.RGB(0,0,0) #full black in COLORREF structure
+        colorkey = win32api.RGB(43,62,80) #full black in COLORREF structure
         wnd_exstyle = win32gui.GetWindowLong(hwnd, win32con.GWL_EXSTYLE)
         new_exstyle = wnd_exstyle | win32con.WS_EX_LAYERED
         win32gui.SetWindowLong(hwnd,win32con.GWL_EXSTYLE,new_exstyle)

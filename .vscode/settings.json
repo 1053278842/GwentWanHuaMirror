@@ -11,8 +11,10 @@
         "longlong",
         "NEOESPORT-2",
         "NEOESPORT-3",
+        "padx",
         "pymem",
         "qualname",
+        "ttkbootstrap",
         "unhexlify"
     ],
     "code-runner.executorMap": {

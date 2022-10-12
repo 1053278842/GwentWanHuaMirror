@@ -1,17 +1,9 @@
-import ctypes
 import tools.MemoryTool as mt
 import dao.CardDao as cd
 from tools.decorators import get_time_consume
 import pymem
 from tools.FileTool import *
 from tools.decorators import *
-from bean.Bs import Bs
-from bean.PS import Ps
-from bean.Pi import Pi
-from bean.Bd import Bd
-from bean.Bss import Bss
-from bean.Card import Card
-from bean.Cd import Cd
 from bean.BattleInfo import BattleInfo
 
 def getCurrBattleInfo():
@@ -176,6 +168,19 @@ def main():
     gi = cardDao.getGameInstance()
     global cardDict
     cardDict = getCardDataJsonDict()
+
+# 该语句会有三种情况
+# True/False/报错
+def isExistGameInstance():
+    # try:
+    giAdd = cardDao.getGameInstance()
+    typeName = cardDao.getAddTypeName(giAdd,2)
+    if("GameInstance" in typeName):
+        return True
+    # except Exception as e:
+    #     return e
+        return False
+    return False
 
 if __name__ =='__main__':
     main()

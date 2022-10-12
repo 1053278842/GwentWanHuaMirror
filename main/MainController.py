@@ -1,6 +1,4 @@
-from email.charset import add_charset
-from email.utils import getaddresses
-from pickle import GLOBAL
+import threading
 import pymem
 from others.Banner import *
 from tools.FileTool import *
@@ -16,7 +14,9 @@ def main():
         print("启动失败，请检查启动游戏是否启动!")
         return 0
     # -----------------测试用行----------------- 
-    SearchingGameInstance()
+    thread_getGameInstanceAdd = threading.Thread(target=SearchingGameInstance)
+    thread_getGameInstanceAdd.start()
+    thread_getGameInstanceAdd.join()
     banner()
     print("Get GameInstance Success! Address is:",hex(GI))
     return 1
@@ -41,12 +41,6 @@ def SearchingGameInstance():
             break
         sleep(2)
 
-
-# 根据地址打印其基本信息
-def AddressToString(address,nameLen=2):
-    print("地址:",hex(address)," 指向对象类型:",cardDao.getAddTypeName(address,nameLen))
-
-
 # 获取程式模块基址
 def get_baseAddress():
     global pm
@@ -55,7 +49,6 @@ def get_baseAddress():
     baseAddress = pymem.process.module_from_name(
         pm.process_handle,"GameAssembly.dll"
     ).lpBaseOfDll
-
 
 if __name__ == "__main__":
     main()

@@ -243,7 +243,7 @@ def composite_leader_card(provision,name,factionId,abilityCardTemplateId):
 # 返回一个数组图片  
 def get_num_img(size,color,name):
 
-    layer_bg = Image.new('RGBA', (size[0], size[1]), (0, 0, 0, 0))
+    layer_bg = Image.new('RGBA', (size[0], size[1]), (43, 62, 80, 0))
     draw = ImageDraw.Draw(layer_bg)
     # font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",26)
     # draw.text((size[0]/2,size[1]),str(name),(40,40,40,50),font=font,anchor="mb",align="center")

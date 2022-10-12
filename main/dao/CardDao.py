@@ -18,7 +18,8 @@ class CardDao():
         # 10.9 32af668
         # 10.10 32e7390
         # 10.10 热修1 32b53e0
-        gameInstanceAdd = read_int64(self.pm,self.baseAddress+0x32b53e0,[0xb8,0x0,0x38])
+        # 10.10 热修2 32bda60
+        gameInstanceAdd = read_int64(self.pm,self.baseAddress+0x32bda60,[0xb8,0x0,0x38])
         return gameInstanceAdd
     
     def getLocalPlayerId(self,pm,giAdd):
@@ -33,9 +34,6 @@ class CardDao():
     def getCurrPlayerId(self,pm,giAdd):
         return read_multi_bytes(pm,giAdd+0x20,[0x60,0x2c],0x1)
 
-    def getBattleSettingsByGI(self,giAdd):
-        battleSettings = read_int64(self.pm,giAdd+0x28,[])
-        return battleSettings
 
     def getPlayerEnableActionsStatus(self,pm,giAdd,playerId):
         playersArrayAdd =read_multi_bytes(self.pm,giAdd+0x20,[0x60,0x18],0x8)
@@ -124,8 +122,6 @@ class CardDao():
             except Exception:
                 print("【异常】终止导出allCards")
                 break
-            # AddressToString(card,1)
-        # print("成功获取",len(cards),"个Card对象地址",)
         return cards
 
     # 获取到对象的类型名
@@ -146,5 +142,5 @@ class CardDao():
     
     def getPlayerManagerByGi(self,gi):
         cm = read_int64(self.pm,gi+0x20,[0x60,0x18,0x20])
-        # AddressToString(cm)
         return cm
+

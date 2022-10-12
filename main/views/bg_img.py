@@ -19,18 +19,18 @@ class bg_img(tk.Frame):
         BG_WIDTH = 564
 
         # 背景缩放比
-        self.scale_factor = self.window.WIN_WIDTH/BG_WIDTH
+        self.scale_factor = int(self.window.WIN_WIDTH)/BG_WIDTH
 
         self.create_page()
 
     
     def create_page(self):
-        self.can_bg = tk.Canvas(self.window,bg="blue",highlightthickness=0,cursor="fleur")
+        self.can_bg = tk.Canvas(self.window,bg="#000000",highlightthickness=0,cursor="fleur")
         self.window.update()
         self.window_width = self.window.winfo_width()
         self.window_height = self.window.winfo_height()
         
-
+        
         self.p_top = ft.get_img_resized(r"main/resources/images/deck_preview/deck_bg_top_j.png",self.scale_factor)
         self.p_mid = ft.get_img_resized(r"main/resources/images/deck_preview/deck_bg_mid_j.png",self.scale_factor)
         self.p_end = ft.get_img_resized(r"main/resources/images/deck_preview/deck_bg_end_j.png",self.scale_factor)
