@@ -2,11 +2,9 @@ import time
 import tkinter as tk
 
 import bean.global_var as global_var
-import MainController as mc
 import PanelGUI
 import pymem
 import services.CardService as cs
-# from tkinter.ttk import *
 import services.GwentService as service
 from GwentGUI import GwentGUI
 from LoadingAnimGUI import AnimatedGif

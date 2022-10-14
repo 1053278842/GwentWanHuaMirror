@@ -8,9 +8,16 @@ from PIL import Image, ImageDraw, ImageFile, ImageFont, ImageTk
 
 
 def getCardDataJsonDict():
-    cardDict = open(r"main/resources/config/card_json.json", "r",encoding="utf-16")
+    cardDict = open(r"main/resources/config/card_json.json", "r",encoding="utf-8")
     return json.loads(cardDict.read())
 
+def getLeaderCardDataJsonDict():
+    cardDict = open(r"main/resources/data/LeaderCardData.json", "r",encoding="utf-8")
+    return json.loads(cardDict.read())
+
+def getDeckDataJsonDict():
+    cardDict = open(r"main/resources/data/decks.json", "r",encoding="utf-8")
+    return json.loads(cardDict.read())
 # 图片相关
 # 图片爬取在其他文件
 ############################## ############################### ############################### ############################### #

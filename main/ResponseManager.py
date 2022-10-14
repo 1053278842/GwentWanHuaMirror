@@ -132,4 +132,6 @@ class ResponseManager(object):
 
     # 点击箭头时，卡牌列表转为显示相关卡组
     def setCardListShowRelatedDeck(self):
+        # for widget in self.cardList.winfo_children():
+        #     widget.destroy()
         self.cardList.setShowRelateDeck()

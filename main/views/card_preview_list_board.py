@@ -4,6 +4,7 @@ import tkinter.font as tkFont
 from itertools import count
 from tkinter import ALL, EventType, PhotoImage, ttk
 
+import bean.global_var as global_var
 import services.CardService as cService
 import services.GwentService as service
 import tools.FileTool as ft
@@ -189,7 +190,9 @@ class card_preview_list_board(tk.Frame):
                                 temp_key = sortByIndexDict[deckNums-count]
                                 self.discoveryMap[temp_key] = value
                                 count += 1
-        
+        self.setCurrMemoAfterDiscovery()
+                                
+    def setCurrMemoAfterDiscovery(self):
         for key,value in self.discoveryMap.items():
             if key in  self.curr_memo_cards.keys():
                 curr_value = self.curr_memo_cards[key]
@@ -198,7 +201,13 @@ class card_preview_list_board(tk.Frame):
                 value["CurrPower"]  = curr_value["CurrPower"]
                 value["BasePower"]  = curr_value["BasePower"]
                 self.curr_memo_cards[key] = value
+    
+    def getCIdsForDeckModule(self):
+
+        self.isMain_update_deck_sort()
+
         
+            
     def show_data_frame(self):
         if self.CARD_DECK_INFO.isMain:
             self.show_main_deck()
@@ -523,12 +532,24 @@ class card_preview_list_board(tk.Frame):
 # ----------------------------------------------------------------
 # 相关:【推荐卡组】
     def setShowRelateDeck(self):
+        # BUG 不做分离的话，如果没有进入卡组模式，会缺少deck_module的数据...
         # TODO 卡组数据函数分离
         # 获取卡组数据
         # 分析卡组数据，提交数据
         # 获取数据库返回的数据 cts
         # 根据整理好的cts显示卡牌
         # 更新状态和临时数据存储
-        print("显示个屁")
+        playerDeckCtIds = []
+        leaderCard = 0
+        stratagemCard = 0
+        allCardDict = global_var.get_value("AllCardDict")
+        decks = global_var.get_value("decks")
+        leaderCardDict = global_var.get_value("LeaderCardDict")
+        for key,value in self.deck_module_all_deck.items():
+            if value["type"] == CardType.LEADER.value:
+                print(leaderCardDict[value["templateId"]]["factionId"])
+            if value["type"] == CardType.STRATAGEM.value:
+                pass
+            playerDeckCtIds.append(value["templateId"])
 ####################################################################################################################
 ####################################################################################################################

@@ -1,3 +1,4 @@
+import bean.global_var as global_var
 import dao.CardDao as cd
 import pymem
 import tools.MemoryTool as mt
@@ -168,7 +169,13 @@ def main():
     global gi
     gi = cardDao.getGameInstance()
     global cardDict
-    cardDict = getCardDataJsonDict()
+    # cardDict = getCardDataJsonDict()
+    global_var.set_value("AllCardDict",getCardDataJsonDict())
+    cardDict =  global_var.get_value("AllCardDict")
+
+    global_var.set_value("LeaderCardDict",getLeaderCardDataJsonDict())
+    global_var.set_value("decks",getDeckDataJsonDict())
+    # cardDict =  global_var.get_value("LeaderCardDict")
 
 # 该语句会有三种情况
 # True/False/报错

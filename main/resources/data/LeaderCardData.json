@@ -1,0 +1,471 @@
+{
+    "122105": {
+        "name": "盆满钵满",
+        "description": "你真以为这种下三滥的谎话能糊弄我？",
+        "tip": "<keyword=order>指令：</keyword>获得 {Coins} 枚<keyword=coin>金币</keyword>。<keyword=charge>充能：</keyword>{Charges}。\\n己方每打出 1 张“罪行”牌，便获得 {Coins2} 个<keyword=coin>金币</keyword>。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 6 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "131101": {
+        "name": "坚硬甲壳",
+        "description": "留点尊严吧，你的结局已然注定。",
+        "tip": "<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益。若它为“怪兽”阵营单位，便还使其获得<keyword=veil>遮蔽</keyword>。<keyword=charge>充能：</keyword>{Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 6 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "132103": {
+        "name": "自然之力",
+        "description": "便全村人都饿肚子，我们也绝不去这片树林打猎",
+        "tip": "<keyword=order>指令：</keyword> <keyword=spawn>生成</keyword> 并打出“林妖”。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 4 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "200055": {
+        "name": "白霜降临",
+        "description": "有谁知道暗影长者的真实年龄，连高阶吸血鬼们也不知情。他们唯一清楚的是，无论如何也不能违背他的意愿",
+        "tip": "<keyword=order>指令：</keyword>将 1 个敌军单位移至所在半场的另一排，并在其上<keyword=spawn>生成</keyword><keyword=frost>霜</keyword>，持续 {counter} 回合。<keyword=charge>充能：</keyword>{Charge}\\n己方每打出 1 个“狂猎”单位，若敌方同排有<keyword=frost>霜</keyword>存在，则使其获得 {boost} 点增益。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 1 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "200159": {
+        "name": "战斗狂热",
+        "description": "人能取代布兰王，但后世定会努力尝试",
+        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword>并打出“致幻菌菇”。\\n己方每打出 1 张“炼金”牌，便<keyword=heal>治疗</keyword> 1 个随机友军单位 {boost} 点。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 5 ,
+        "rarity" : 8 ,
+        "provision" : 16 ,
+        "cardType" : 1
+	},
+    "200160": {
+        "name": "野猪冲锋",
+        "description": "尼弗迦德人叫我‘蒂斯·伊斯·穆瑞’，也就是海上野猪。他们还用我的名号来吓唬小孩！",
+        "tip": "<keyword=order>指令：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。\\n<keyword=charge>充能：</keyword>{Charge}。\\n每有 1 个敌军单位成为受伤状态，便使己方手牌中所有“水手”和“船只”牌获得 {Armor} 点<keyword=armor>护甲</keyword>。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 5 ,
+        "rarity" : 8 ,
+        "provision" : 16 ,
+        "cardType" : 1
+	},
+    "200161": {
+        "name": "鲁莽乱舞",
+        "description": "人知道他的绰号从何而来，更没人敢问",
+        "tip": "<keyword=order>指令：</keyword>对所有敌军单位造成 {Damage} 点伤害，由他们随机分摊，无视其<keyword=armor>护甲</keyword>。\\n<keyword=charge>充能：</keyword>{charge}\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 5 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "200162": {
+        "name": "牢狱之灾",
+        "description": "我没什么耐心。把我惹毛了，小心小命不保。",
+        "tip": "<keyword=order>指令：</keyword><keyword=lock>锁定</keyword> 1 个敌军单位，并对其造成 {Damage} 点伤害。<keyword=charge>充能：</keyword>{Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 2 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "200163": {
+        "name": "帝国列阵",
+        "description": "夏日阳光在阿尔巴河平静的水面上熠熠生辉——我印象中的尼弗迦德就是这样啊。",
+        "tip": "<keyword=order>指令：</keyword>使 {MaxTargets} 个友军单位获得 {Boost} 点增益，并互换位置，然后使目标中的“士兵”单位获得 {Armor} 点<keyword=armor>护甲</keyword>。\\n<keyword=charge>充能：</keyword>{Charges}\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 2 ,
+        "rarity" : 8 ,
+        "provision" : 16 ,
+        "cardType" : 1
+	},
+    "200164": {
+        "name": "战术决策",
+        "description": "剑只是统治者的工具之一。王权之器，不一而足。",
+        "tip": "<keyword=order>指令：</keyword> <keyword=spawn>生成</keyword> 并打出“莫尔凡·符里斯”。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 2 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "200165": {
+        "name": "自然馈赠",
+        "description": "世上没有轻而易举的和平，人类的压迫终将画下悲痛的句点。",
+        "tip": "<keyword=symbiosis>共生</keyword>。\\n<keyword=order>指令：</keyword>使 1 个友军单位获得<keyword=vitality>活力</keyword>（{Vitality}）回合。<keyword=charge>充能：</keyword>{Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 4 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "200166": {
+        "name": "精准之击",
+        "description": "精女王眼似融银，心如冷钢",
+        "tip": "<keyword=order>指令：</keyword>对 1 个单位造成 {damage} 点伤害。<keyword=charge>充能：</keyword>{Charges}。\\n当所有<keyword=charge>充能</keyword>耗尽，<keyword=spawn>生成</keyword>并打出“布洛克莱昂哨兵”。\\n\\n该能力可以为己方牌组附加 {Template.Provision} 人口上限 。"
+    	,"factionId" : 4 ,
+        "rarity" : 8 ,
+        "provision" : 14 ,
+        "cardType" : 1
+	},
+    "200167": {
+        "name": "游击战术",
+        "description": "那个老糊涂？你甚至分不清他是活人还是木偶！",
+        "tip": "<keyword=order>指令：</keyword>将 1 个单位移至其他排，若为敌军单位，则对其造成 {Damage} 伤害；若为友军单位，则使其获得 {Boost} 点增益。<keyword=charge>充能：</keyword>{Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 4 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "200168": {
+        "name": "灼心狂热",
+        "description": "我不需要谋臣和他们的诡计，我相信士兵的利刃。",
+        "tip": "<keyword=order>指令：</keyword>使 1 个“北方领域”友军单位获得 {Boost} 点增益和<keyword=zeal>狂热</keyword>。 <keyword=charge>充能：</keyword>{Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 3 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "200170": {
+        "name": "战场动员",
+        "description": "恕我直言，亨赛特国王不是看起来像贼，他本就是贼。",
+        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword> 1 个铜色友军“士兵”单位的 1 张基础同名牌至同排，并使两者都获得 {Boost} 点增益。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 3 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "201580": {
+        "name": "陶森特式好客",
+        "description": "王权怎能单凭出身的贵贱来随便决定？",
+        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword>并打出“比武大赛”。\\n己方回合中，己方每使 1 个或更多敌军单位获得增益，便使 1 个随机友军单位获得 {Boost} 点增益。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 2 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "201589": {
+        "name": "活力回春",
+        "description": "虽然我们人数不多、四散分离，但我们的内心燃烧得比任何时候都要炽热。",
+        "tip": "<keyword=order>指令：</keyword>使手牌中的 {maxtargets} 个单位获得 {Boost} 点增益。\\n<keyword=charge>充能：</keyword>{charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 4 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "201595": {
+        "name": "钢铁盾墙",
+        "description": "的诅咒被解除了……但是喜欢吃生肉的习惯却没改掉",
+        "tip": "<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益和<keyword=shield>护盾</keyword>。\\n<keyword=charge>充能：</keyword>{Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 3 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "201597": {
+        "name": "怒海汹涛",
+        "description": "斯特来到辛特拉，本想帮助克拉茨·奎特参加帕薇塔公主的选亲宴，结果自己却赢走了王后的芳心",
+        "tip": "<keyword=order>指令：</keyword>在敌方单排<keyword=spawn>生成</keyword><keyword=rain>雨</keyword>，持续 {Counter} 回合，同时在己方同排<keyword=spawn>生成</keyword> 1 只“尖啸女海妖”。<keyword=charge>充能：</keyword>{Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 5 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "201743": {
+        "name": "不息虫群",
+        "description": "的孩子们完美继承了她的美貌",
+        "tip": "<keyword=order>指令：</keyword>在己方单排<keyword=spawn>生成</keyword> 1 只“雄蛛”。<keyword=charge>充能：</keyword>{Charges}。\\n己方每打出 1 张“生物”牌，便在己方随机单排<keyword=spawn>生成</keyword> 1 只“雄蛛”。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 1 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202115": {
+        "name": "十面埋伏",
+        "description": "有一次，国王派了名特使去跟艾尔丹恩交涉……我怎么劝都没劝住。第二天，我们找到了使者的遗体。他被丢在林子里，身上插了面白旗。",
+        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword> 1 名“精灵暗箭手”至己方单排。\\n<keyword=charge>充能：</keyword>{Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 4 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202116": {
+        "name": "皇家激励",
+        "description": "战事连天，统治者不存在尽量，也无法选择。而应当即拔剑上马，保卫他的子民。",
+        "tip": "<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益。\\n若触发友军单位的<keyword=grace>神赐</keyword>能力，则刷新<keyword=order>指令</keyword>能力，且获得的增益 -{Boost2}。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 3 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202117": {
+        "name": "沼泽果实",
+        "description": "墓墙上的壁画描绘了安格林的沼泽，还有徘徊其间的各种野兽。其中最大最可怕的生物头上，刻着这样几个字：猩红夫人",
+        "tip": "<keyword=order>指令：</keyword>在己方单排<keyword=spawn>生成</keyword> 1 个“格尼阔拉的果实”。\\n若己方回合开始时，本方没有控制“格尼阔拉的果实”，则刷新此能力。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 1 ,
+        "rarity" : 8 ,
+        "provision" : 12 ,
+        "cardType" : 1
+	},
+    "202118": {
+        "name": "奴役蛮夷",
+        "description": "在我的故乡，在文明世界里，将领的职责是指挥部队，而不是像条疯狗一样横冲直撞，见人就咬。",
+        "tip": "<keyword=order>指令：</keyword><keyword=seize>抓捕</keyword> 1 个战力不高于 {power} 点的敌军单位。\\n己方起始牌组每有 {Counter} 张“谋略”牌，则抓捕对应战力提高 {Counter2} 点。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 2 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202119": {
+        "name": "鸣镝动怒",
+        "description": "我们是来打架的。尼弗迦德人、莱里亚人……都一样。我们只想用战斗来洗刷我们的耻辱。",
+        "tip": "<keyword=order>指令：</keyword> <keyword=spawn>生成</keyword> 并打出“背亲者恩约夫”。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 5 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202148": {
+        "name": "军需储备",
+        "description": "我的国王喜欢……享受生活。好在沉溺享乐并没有影响他统治王国的能力。",
+        "tip": "<keyword=order>指令：</keyword>在己方单排<keyword=spawn>生成</keyword> 1 个“志愿军”，随后使同排所有“北方领域”单位的<keyword=cooldown>冷却</keyword> -{Cooldown}。\\n<keyword=charge>充能：</keyword>{Charge}\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 3 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202182": {
+        "name": "背亲者恩约夫",
+        "description": "只有毁灭可以洗刷我的耻辱。",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n在敌方同排<keyword=spawn>生成</keyword> {MaxTargets} 只“尖啸女海妖”，并对其造成 {Damage} 点伤害。"
+    	,"factionId" : 5 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202183": {
+        "name": "格尼阔拉的果实",
+        "description": "格尼阔拉有点像吸血鬼，这两种生物同宗同源。只是格尼阔拉并不依赖血液，反而会用自己的血去喂养。",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=thrive>成长</keyword>。"
+    	,"factionId" : 1 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202185": {
+        "name": "腥膻之味",
+        "description": "狄拉夫不擅长用人类的方式表达爱意。他会像野兽一样去爱：狂野、炽烈……毫无保留。",
+        "tip": "<keyword=order>指令：</keyword>使 1 个敌军单位<keyword=bleeding>重伤</keyword> {Bleed} 回合。<keyword=charge>充能：</keyword>{Charges}。\\n当所有<keyword=charge>充能</keyword>均已使用，在己方随机单排<keyword=spawn>生成</keyword> 1 只“蝙魔”。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 1 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202186": {
+        "name": "怀柔兼济",
+        "description": "身为一国之首，我必须公正审判她的罪行。但她是我姐姐，我的心在为她淌血……",
+        "tip": "<keyword=order>指令：</keyword><keyword=create>创造</keyword>对方的 1 张手牌，随后打出。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 2 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202187": {
+        "name": "四面夹击",
+        "description": "们叫她“辛特拉的母狮”。这可不是毫无根据的",
+        "tip": "<keyword=order>指令：</keyword>选择并抽 1 张“北方领域”牌，随后将 1 张手牌洗回牌组，然后<keyword=spawn>生成</keyword> 1 名“志愿军”至<keyword=melee>近战</keyword>排。\\n<keyword=charge>充能：</keyword>{charges}\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 3 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202188": {
+        "name": "和谐之唤",
+        "description": "紫千红百花香，窈窕淑女现身姿，世间生灵常相随，草木鸟兽无不从",
+        "tip": "<keyword=order>指令：</keyword> <keyword=spawn>生成</keyword> 并打出“达娜·梅碧”。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 4 ,
+        "rarity" : 8 ,
+        "provision" : 16 ,
+        "cardType" : 1
+	},
+    "202189": {
+        "name": "巨熊仪式",
+        "description": "瓦勃洛唯一的戒律：杀伐",
+        "tip": "<keyword=order>指令：</keyword>对 1 个友军单位造成 {Damage} 点伤害。<keyword=charge>充能：</keyword>{Charges}。\\n当所有<keyword=charge>充能</keyword>耗尽，在己方随机单排<keyword=spawn>生成</keyword> 1 头“异变巨熊”。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 5 ,
+        "rarity" : 8 ,
+        "provision" : 16 ,
+        "cardType" : 1
+	},
+    "202303": {
+        "name": "街头赏金",
+        "description": "与我们开战就意味着诺维格瑞即将血流成渠。",
+        "tip": "<keyword=order>指令：</keyword>对 1 个敌军单位造成 {damage} 点伤害，并根据溢出伤害的数量获得相等的<keyword=coin>金币</keyword>。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 6 ,
+        "rarity" : 8 ,
+        "provision" : 16 ,
+        "cardType" : 1
+	},
+    "202328": {
+        "name": "黑市买卖",
+        "description": "我只对真正的权力感兴趣。",
+        "tip": "<keyword=order>指令：</keyword>获得 {Coins} 枚<keyword=coin>金币</keyword>。<keyword=charge>充能：</keyword>{Charges}。\\n己方的<keyword=tribute>献金</keyword>花费减少 {Tribute} 枚<keyword=coin>金币</keyword>。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。"
+    	,"factionId" : 6 ,
+        "rarity" : 8 ,
+        "provision" : 14 ,
+        "cardType" : 1
+	},
+    "202347": {
+        "name": "集会布道",
+        "description": "恒之火的大主教、角斗场的狂热爱好者、饕餮口欲之人、欢场常客",
+        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword> 1 名“火誓狂热者”至己方单排，然后获得 {Coins} 枚<keyword=coin>金币</keyword>。<keyword=charge>充能：</keyword>{Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 6 ,
+        "rarity" : 8 ,
+        "provision" : 16 ,
+        "cardType" : 1
+	},
+    "202359": {
+        "name": "火誓狂热者",
+        "description": "我的信仰无人能敌，亦如我的怒火！",
+        "tip": "<keyword=doomed>佚亡</keyword>。"
+    	,"factionId" : 6 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202373": {
+        "name": "头号大奖",
+        "description": "是有谁认为一个女人的入局，会让这城市的地下势力变得心软，那可就大错特错了",
+        "tip": "<keyword=order>指令：</keyword>获得 {Coins} 枚<keyword=coin>金币</keyword>，若数量溢出，则使 1 个友军单位获得等于溢出值的增益。\\n每当有 1 个己方单位提供<keyword=coin>金币</keyword>，则使其获得溢出值的增益。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 6 ,
+        "rarity" : 8 ,
+        "provision" : 12 ,
+        "cardType" : 1
+	},
+    "202390": {
+        "name": "水手海湾",
+        "description": "多亏有你，我的狗今晚不会饿着了。",
+        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword> 1 名“海狼”至己方单排。\\n<keyword=charge>充能：</keyword>{charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 6 ,
+        "rarity" : 8 ,
+        "provision" : 14 ,
+        "cardType" : 1
+	},
+    "202572": {
+        "name": "无尽渴望",
+        "description": "gnore",
+        "tip": "<keyword=order>指令：</keyword>摧毁 1 个友军单位，随后在同排<keyword=spawn>生成</keyword>1 只“蝙魔”，并使其获得被摧毁单位战力的增益。\\n<keyword=charge>充能：</keyword> {Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 1 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202573": {
+        "name": "偷梁换柱",
+        "description": "gnore",
+        "tip": "<keyword=order>指令：</keyword><keyword=lock>锁定</keyword> 1 个敌军单位，随后在己方同排<keyword=spawn>生成</keyword> 1 个他的基础同名牌，并使其获得被<keyword=lock>锁定</keyword>单位同排带有状态的敌军数量的增益。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 2 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202574": {
+        "name": "揭竿而起",
+        "description": "gnore",
+        "tip": "<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益。<keyword=charge>充能：</keyword> {Charges}\\n当所有<keyword=charge>充能</keyword>耗尽，<keyword=spawn>生成</keyword>并打出“莱瑞亚镰刀手”。一场对局仅限一次。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 3 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "202575": {
+        "name": "百炼精刚",
+        "description": "gnore",
+        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword>并打出淬火。\\n所有己方起始牌组中的矮人获得 {Armor} 点<keyword=armor>护甲</keyword>。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 4 ,
+        "rarity" : 8 ,
+        "provision" : 16 ,
+        "cardType" : 1
+	},
+    "202576": {
+        "name": "荣耀圣焰",
+        "description": "gnore",
+        "tip": "<keyword=order>指令：</keyword>将 1 个“史凯利格”单位从己方牌组移至己方墓场，随后对 1 个敌军单位造成该“史凯利格”单位战力值的伤害。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 5 ,
+        "rarity" : 8 ,
+        "provision" : 16 ,
+        "cardType" : 1
+	},
+    "202577": {
+        "name": "军备宝箱",
+        "description": "gnore",
+        "tip": "<keyword=order>指令：</keyword>获得 {Coins} 个<keyword=coin>金币</keyword>。\\n在小局开始时，刷新此能力。\\n己方的<keyword=hoard>囤积</keyword>能力需要的<keyword=coin>金币</keyword>减少 {Hoard} 个。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。"
+    	,"factionId" : 3 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+
+    "203172": {
+        "name": "色欲之诅咒",
+        "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
+        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword> 1 个敌军单位的 1 张基础同名牌至己方同排。"
+    	,"factionId" : 0 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "203173": {
+        "name": "暴食之诅咒",
+        "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
+        "tip": "<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益。该增益会随目标的基础战力而增加。"
+    	,"factionId" : 0 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "203174": {
+        "name": "贪婪之诅咒",
+        "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
+        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword>己方“战术牌”至己方<keyword=melee>近战</keyword>排，随后<keyword=create>创造</keyword> 1 张“中立战术牌”，<keyword=spawn>生成</keyword>至己方<keyword=ranged>远程</keyword>排。"
+    	,"factionId" : 0 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "203175": {
+        "name": "怠惰之诅咒",
+        "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
+        "tip": "<keyword=order>指令：</keyword>从手牌中打出 1 张铜色单位牌，随后选择并抽 1 张单位牌。"
+    	,"factionId" : 0 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "203176": {
+        "name": "嫉妒之诅咒",
+        "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
+        "tip": "<keyword=order>指令：</keyword>对所有敌军单位造成 {Damage} 点伤害。"
+    	,"factionId" : 0 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "203177": {
+        "name": "愤怒之诅咒",
+        "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
+        "tip": "<keyword=order>指令：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。\\n<keyword=deathblow>致死：</keyword>将溢出的伤害施加给相邻单位。"
+    	,"factionId" : 0 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+	},
+    "203178": {
+        "name": "傲慢之诅咒",
+        "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
+        "tip": "<keyword=order>指令：</keyword>摧毁 1 个战力不高于 {Power} 点的敌军单位。"
+        ,"factionId" : 0 ,
+        "rarity" : 8 ,
+        "provision" : 15 ,
+        "cardType" : 1
+    }
+}

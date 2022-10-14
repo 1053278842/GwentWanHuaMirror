@@ -1,6 +1,5 @@
 from threading import Thread
 
-import MainController as mc
 import services.CardService as cs
 from enums.GwentEnum import *
 from tools.decorators import *
