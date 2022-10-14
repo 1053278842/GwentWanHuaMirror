@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter.ttk import *
+# from tkinter.ttk import *
 import services.GwentService as service
 from GwentGUI import GwentGUI
 import pymem
@@ -13,12 +13,15 @@ import PanelGUI
 class PanelManager():
     def __init__(self,root):
         self.root = root
+        self.opponentPanel = None
+        self.ourPanel = None
         global_var.set_value("isActive",False)
 
     
     def isExistCheck(self,root,coords,fuc):
         isRunning = self.checkProgramIsRunning()
         if not isRunning:
+            PanelGUI.tips_no_gwent()
             return False
         cs.main()
         result = True
@@ -57,7 +60,9 @@ class PanelManager():
         self.ourPanel.after(100,self.asyncOurPanel,self.ourPanel,coords)
 
     def closeOurPanel(self):
-        if self.ourPanel != self.root:
+        if self.ourPanel == None:
+            return 0
+        if self.ourPanel != self.root :
             global_var.get_value("panel_root").ourCbTextVar.set("开  启")
             self.ourPanel.destroy()
         self.ourPanel.after_cancel(self.asyncOurPanel)
@@ -80,7 +85,9 @@ class PanelManager():
         self.opponentPanel.after(100,self.asyncOppPanel,self.opponentPanel,coords)
         
     def closeOpponentPanel(self):
-        if self.opponentPanel != self.root:
+        if self.opponentPanel == None:
+            return 0
+        if self.opponentPanel != self.root :
             global_var.get_value("panel_root").oppCbTextVar.set("开  启")
             self.opponentPanel.destroy()
         self.opponentPanel.after_cancel(self.asyncOurPanel)

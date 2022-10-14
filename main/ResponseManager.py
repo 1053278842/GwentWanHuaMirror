@@ -130,3 +130,6 @@ class ResponseManager(object):
         self.title.updateText(card_deck_info)
         self.status.update_data(0,0,0)
 
+    # 点击箭头时，卡牌列表转为显示相关卡组
+    def setCardListShowRelatedDeck(self):
+        self.cardList.setShowRelateDeck()

@@ -10,7 +10,7 @@ import copy
 import tkinter.font as tkFont
 
 # 图片背景 #
-class bg_img(tk.Frame):
+class bg_img(tk.Canvas):
     def __init__(self, root):
         super().__init__(root)
         self.window =root

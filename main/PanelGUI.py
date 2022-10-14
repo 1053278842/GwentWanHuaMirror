@@ -1,5 +1,3 @@
-from email import message
-from time import sleep
 import tkinter as tk
 from tkinter import messagebox
 from tkinter.ttk import *
@@ -22,16 +20,10 @@ def toggleOurCardPanel():
         var_w = int(root.cardsPanelWidth.get())
         var_h = int(root.cardsPanelHeight.get())
         coords = (var_w,var_h)
-        pgStatus = root.panelManager.openOurPanel(root,coords)
-        if pgStatus == "No Gwent!":
-            root.ourPlayerCBVar.set(0)
-            root.panelManager.closeOurPanel()
-            messagebox.showinfo("提示","未检测到'Gwent.exe',请检查游戏否与启动!")
-        pass
+        root.panelManager.openOurPanel(root,coords)
     elif status_var == 0:
         # 关闭我方记牌器
         root.panelManager.closeOurPanel()
-        pass
 
 def toggleOpponentCardPanel():
     root = global_var.get_value('panel_root')
@@ -41,14 +33,21 @@ def toggleOpponentCardPanel():
         var_w = int(root.cardsPanelWidth.get())
         var_h = int(root.cardsPanelHeight.get())
         coords = (var_w,var_h)
-        pgStatus = root.panelManager.openOpponentPanel(root,coords)
-        if pgStatus == False:
-            root.opponentPlayerCBVar.set(0)
-            root.panelManager.closeOpponentPanel()
-            messagebox.showinfo("提示","未检测到'Gwent.exe',请检查游戏否与启动!")
+        root.panelManager.openOpponentPanel(root,coords)
     elif status_var == 0:
         # 关闭我方记牌器
         root.panelManager.closeOpponentPanel()
+
+def tips_no_gwent():
+    root = global_var.get_value('panel_root')
+    root.opponentPlayerCBVar.set(0)
+    root.panelManager.closeOpponentPanel()
+    root.ourPlayerCBVar.set(0)
+    root.panelManager.closeOurPanel()
+    root.ourCbTextVar.set("开  启")
+    root.oppCbTextVar.set("开  启")
+    messagebox.showinfo("提示","未检测到'Gwent.exe',请检查游戏否与启动!")
+
 
 def UpdateCoordsJson():
     var_w = root.cardsPanelWidth.get()
@@ -187,12 +186,12 @@ if __name__ == '__main__':
     global_var._init()
 
     root = tk.Tk()
-    style = Style(theme="superhero")
-    # root = Window(title="wqe",themename="superhero")
+    style = Style(theme="darkly")
     # 338*1000 最好比率
-    # root.title = "ttkbootstrap"
+    
+    root.title("Gwent Mirror")
     root.geometry('{0}x{1}+0+0'.format(230,280))
-    root.resizable(height=True, width=False)
+    root.resizable(0, 0)
     global_var.set_value("panel_root",root)
     create_page(root)
 

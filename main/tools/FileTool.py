@@ -213,7 +213,7 @@ def composite_leader_card(provision,name,factionId,abilityCardTemplateId):
     layer_core = layer_core.resize((int(layer_core.size[0]*scale_factor), int(layer_core.size[1]*scale_factor)), Image.Resampling.LANCZOS)
     # layer_core = Image.new('RGBA', layer_frame.size, (0, 0, 0, 0))
     # 合成
-    final = Image.new("RGBA", (layer_frame.size[0],layer_prov.size[1]))
+    final = Image.new("RGBA", (layer_frame.size[0],layer_prov.size[1]),(34,34,34))
     yOffset = int(abs(layer_prov.size[1] - layer_frame.size[1])/2)
     prov_xOffset = int(layer_frame.size[0]*0.02)
     final.paste(layer_core, (0,2+yOffset) , layer_core)
@@ -243,7 +243,7 @@ def composite_leader_card(provision,name,factionId,abilityCardTemplateId):
 # 返回一个数组图片  
 def get_num_img(size,color,name):
 
-    layer_bg = Image.new('RGBA', (size[0], size[1]), (43, 62, 80, 0))
+    layer_bg = Image.new('RGBA', (size[0], size[1]), (34, 34, 34, 0))
     draw = ImageDraw.Draw(layer_bg)
     # font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",26)
     # draw.text((size[0]/2,size[1]),str(name),(40,40,40,50),font=font,anchor="mb",align="center")
@@ -255,18 +255,6 @@ def get_num_img(size,color,name):
     layer_bg = layer_bg.convert('RGB')
     return layer_bg
 
-def get_text_img(size,color,name):
-    layer_bg = Image.new('RGBA', (size[0], size[1]), (0, 255, 0, 0))
-    draw = ImageDraw.Draw(layer_bg)
-    # font = ImageFont.truetype(r"main/resources/fonts/JZJDCYJF.ttf",26)
-    # draw.text((size[0]/2,size[1]/2),str(name),(40,40,40,50),font=font,anchor="ma",align="center")
-    # font = ImageFont.truetype(r"main/resources/fonts/JZJDCYJF.ttf",25)
-    # draw.text((size[0]/2,size[1]/2),str(name),(20,20,20),font=font,anchor="ma",align="center")
-    font = ImageFont.truetype(r"main/resources/fonts/JZJDCYJF.ttf",12)
-    draw.text((size[0]/2,size[1]/2),str(name),color,font=font,anchor="ma",align="center")
-
-    layer_bg = layer_bg.convert('RGB')
-    return layer_bg
 
 # 根据卡牌参数返回deck预览缩略图，并调整大小
 def get_deck_preview_img(info_dict,scale_factor):
