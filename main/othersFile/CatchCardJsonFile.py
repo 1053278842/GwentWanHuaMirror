@@ -1,7 +1,9 @@
 import binascii
 import json
 import os
+
 import pymem
+
 
 # 写入卡片json源文件
 def writeCardDataJsonBaseFile():

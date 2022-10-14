@@ -1,12 +1,14 @@
 import tkinter as tk
-from tkinter import ttk, ALL, EventType
-import tools.FileTool as ft
-from tools.decorators import *
-import services.GwentService as service
-from enums.GwentEnum import *
-from tkinter import PhotoImage
 import tkinter.font as tkFont
-from PIL import Image, ImageTk, ImageFont
+from tkinter import ALL, EventType, PhotoImage, ttk
+
+import services.GwentService as service
+import tools.FileTool as ft
+from enums.GwentEnum import *
+from PIL import Image, ImageFont, ImageTk
+from tools.decorators import *
+
+
 ### 卡组状态区域 ########
 class status_board(tk.Frame):
     def __init__(self, root):

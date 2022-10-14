@@ -1,11 +1,13 @@
-import tkinter as tk
-from tkinter import ttk, ALL, EventType
-import tools.FileTool as ft
-from tools.decorators import *
-from enums.GwentEnum import *
-from PIL import Image, ImageTk, ImageFont
-import tkinter.font as tkFont
 import copy
+import tkinter as tk
+import tkinter.font as tkFont
+from tkinter import ALL, EventType, ttk
+
+import tools.FileTool as ft
+from enums.GwentEnum import *
+from PIL import Image, ImageFont, ImageTk
+from tools.decorators import *
+
 
 class module_board(tk.Frame):
     def __init__(self, root):

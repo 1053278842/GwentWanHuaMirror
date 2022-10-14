@@ -1,15 +1,16 @@
-from itertools import count
-import tkinter as tk
-from tkinter import ttk, ALL, EventType
-import tools.FileTool as ft
-from tools.decorators import *
-import services.GwentService as service
-import services.CardService as cService
-from enums.GwentEnum import *
-from tkinter import PhotoImage
-from PIL import Image, ImageTk, ImageFont
 import copy
+import tkinter as tk
 import tkinter.font as tkFont
+from itertools import count
+from tkinter import ALL, EventType, PhotoImage, ttk
+
+import services.CardService as cService
+import services.GwentService as service
+import tools.FileTool as ft
+from enums.GwentEnum import *
+from PIL import Image, ImageFont, ImageTk
+from tools.decorators import *
+
 
 ## 图片列表卡组
 class card_preview_list_board(tk.Frame):

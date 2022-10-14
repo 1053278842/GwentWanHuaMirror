@@ -1,13 +1,14 @@
-import tkinter as tk
-from tkinter import ttk, ALL, EventType
-import tools.FileTool as ft
-from tools.decorators import *
-import services.GwentService as service
-from enums.GwentEnum import *
-from tkinter import PhotoImage
-from PIL import Image, ImageTk, ImageFont
 import copy
+import tkinter as tk
 import tkinter.font as tkFont
+from tkinter import ALL, EventType, PhotoImage, ttk
+
+import services.GwentService as service
+import tools.FileTool as ft
+from enums.GwentEnum import *
+from PIL import Image, ImageFont, ImageTk
+from tools.decorators import *
+
 
 # 图片背景 #
 class bg_img(tk.Canvas):

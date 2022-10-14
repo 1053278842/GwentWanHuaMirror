@@ -1,8 +1,10 @@
-from pathlib import Path
 from itertools import cycle
+from pathlib import Path
+
 import ttkbootstrap as ttk
+from PIL import Image, ImageSequence, ImageTk
 from ttkbootstrap.constants import *
-from PIL import Image, ImageTk, ImageSequence
+
 
 class AnimatedGif(ttk.Frame):
     def __init__(self, master):

@@ -1,5 +1,6 @@
 from enum import Enum
- 
+
+
 # 卡牌位置类型
 class ChoiceType(Enum):
     CHOOSE_CARD                 = 0 # 选择              

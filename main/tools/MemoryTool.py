@@ -1,7 +1,9 @@
-import pymem
-import PanelGUI as mainGui
-import sys
 import os
+import sys
+
+import PanelGUI as mainGui
+import pymem
+
 
 # 偏移寻址
 # offsets为空时，会把base视为指针并进入一次

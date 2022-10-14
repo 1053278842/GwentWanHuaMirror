@@ -1,5 +1,6 @@
 from enum import Enum
- 
+
+
 # 卡牌位置类型
 class Location(Enum):
     INVALID  = 0                # 无效          0x0

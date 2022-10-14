@@ -1,14 +1,16 @@
+import time
 import tkinter as tk
+
+import bean.global_var as global_var
+import MainController as mc
+import PanelGUI
+import pymem
+import services.CardService as cs
 # from tkinter.ttk import *
 import services.GwentService as service
 from GwentGUI import GwentGUI
-import pymem
-import MainController as mc
-import services.CardService as cs
-import time
 from LoadingAnimGUI import AnimatedGif
-import bean.global_var as global_var
-import PanelGUI
+
 
 class PanelManager():
     def __init__(self,root):

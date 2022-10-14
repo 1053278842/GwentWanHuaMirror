@@ -1,15 +1,17 @@
-import sys
 import json
+import os
+import sys
+from multiprocessing import Process
 from time import sleep
 from urllib import request
+
+import requests
 from selenium import webdriver
-import requests 
-import os
-from multiprocessing import Process
 
 os.path.join(os.path.dirname(__file__), '../')
 sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
-from tools import FileTool  as ft
+from tools import FileTool as ft
+
 
 def process():
     wait_time = 180

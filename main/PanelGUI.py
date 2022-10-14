@@ -1,15 +1,16 @@
+import json
+import os
+import sys
 import tkinter as tk
 from tkinter import messagebox
 from tkinter.ttk import *
+
+import bean.global_var as global_var
+import PanelManager as PM
 from ttkbootstrap import Style
 from ttkbootstrap.constants import *
-from ttkbootstrap.scrolled import ScrolledText
-import sys
-import os
-import json
-import PanelManager as PM
 from ttkbootstrap.dialogs import *
-import bean.global_var as global_var
+from ttkbootstrap.scrolled import ScrolledText
 
 
 def toggleOurCardPanel():

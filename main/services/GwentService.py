@@ -1,13 +1,11 @@
+from threading import Thread
+
 import MainController as mc
 import services.CardService as cs
-from threading import Thread
-from tools.FileTool import *
 from enums.GwentEnum import *
 from tools.decorators import *
+from tools.FileTool import *
 
-def start():
-    mc.main()
-    cs.main()
 
 def get_my_all_cards(cardDeckInfo):
     return cs.get_my_all_cards(cardDeckInfo)

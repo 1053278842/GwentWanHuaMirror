@@ -1,18 +1,16 @@
-import tkinter as tk
-from bean.CardDeckTypeInfo import CardDeckTypeInfo
-from ResponseManager import *
 import services.GwentService as service
+import win32api
+import win32con
+import win32gui
+from bean.CardDeckTypeInfo import CardDeckTypeInfo
 from enums.GwentEnum import *
+from ResponseManager import *
 from views.bg_img import bg_img
 from views.card_preview_list_board import card_preview_list_board
 from views.module_board import module_board
 from views.status_board import status_board
 from views.title_board import title_board
-import win32gui
-import win32con
-import win32api
-import sys
-import os
+
 
 class GwentGUI:
 
