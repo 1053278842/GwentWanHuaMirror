@@ -3,7 +3,8 @@ from enums.GwentEnum import CardType, Rarity
 
 
 class CardDeckTypeInfo():
-    def __init__(self,titleName,location,playerId = 1,isSortByIndex=True,isActive = False,isMain = False,buttonName = "NONE",secLocation = None,isEnemy=False) -> None:
+    def __init__(self,titleName,location,playerId = 1,isSortByIndex=True,isActive = False,
+        isMain = False,buttonName = "NONE",secLocation = None,isEnemy=False,dataModule = 0) -> None:
         self.titleName = titleName
         self.location = location
         self.isActive = isActive
@@ -13,6 +14,7 @@ class CardDeckTypeInfo():
         self.anim_type = None   # 不同类型的动画有一定区别
         self.isDefensive = None # 先手
         self.buttonName = buttonName
+        self.dataModule = dataModule
 
         # 敌我
         self.isEnemy = isEnemy

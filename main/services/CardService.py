@@ -8,6 +8,21 @@ from tools.decorators import get_time_consume
 from tools.FileTool import *
 
 
+def getLeaderCardCtId(data):
+    for key,value in data.items():
+        if value["Type"] == CardType.LEADER.value:
+            return value["Id"]
+    return 0
+
+def getStratagemCardCtId(data):
+    for key,value in data.items():
+        if value["Type"] == CardType.STRATAGEM.value:
+            return value["Id"]
+    return 0
+
+def getFactionId(leaderCtId):
+    return global_var.get_value("AllCardDict")[str(leaderCtId)]["factionId"]
+
 def addStratagemCard(lackOfCards,origCards,playerId):
     stratagemCardData = {}
     for key,value in origCards.items():

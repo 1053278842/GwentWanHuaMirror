@@ -42,7 +42,7 @@ class card_preview_list_board(tk.Frame):
         self.onceExistInCarriedCards = {}
         # module
         self.MODULE_PAGE_MAX = 2
-        self.MODULE_PAGE_MAX = 0
+        self.MODULE_PAGE_MIN = 0
         self.MODULE_PAGE_NORMAL = 0
         self.modulePage = self.MODULE_PAGE_NORMAL
         # 显示类型
@@ -111,7 +111,6 @@ class card_preview_list_board(tk.Frame):
     
     def getCIdsForDeckModule(self):
         pass
-        # self.isMain_update_deck_sort()
     
     def discoverCardMapCurrDeckData(self):
         for key,value in self.discoveryMap.items():
@@ -145,8 +144,8 @@ class card_preview_list_board(tk.Frame):
         self.carriedCards = cService.addStratagemCard(self.carriedCards,self.curr_memo_cards,self.root.responseManager.playerId)
         self.onceExistInCarriedCards = self.carriedCards
 
-        self.currDeckData = {}
-        if not self.CARD_DECK_INFO.isMain:
+        if self.CARD_DECK_INFO.dataModule == 0:
+            self.currDeckData = {}
             self.cardsSource = self.battleCards
             for key,value in self.cardsSource.items():
                 temp_dict = {}
@@ -154,7 +153,8 @@ class card_preview_list_board(tk.Frame):
                 temp_dict["ctId"] = value["Id"]
                 temp_dict["isNotExist"] = False
                 self.currDeckData[key] = temp_dict
-        if self.CARD_DECK_INFO.isMain:
+        if self.CARD_DECK_INFO.dataModule == 1:
+            self.currDeckData = {}
             self.cardsSource = self.carriedCards
             for key,value in self.cardsSource.items():
                 temp_dict = {}
@@ -303,14 +303,14 @@ class card_preview_list_board(tk.Frame):
     def ScrollEvent(self,event):
         MOVE_DELTA = 32
         yOffset = 0
-        if self.CARD_DECK_INFO.isMain:
+        if self.CARD_DECK_INFO.dataModule == 1:
             yOffset = 4
         total = 0
         cards = self.currDeckData
         # cards = self.curr_memo_cards
         for key,value in cards.items():
             location = self.curr_memo_cards[key]["Location"]
-            if location == hex(self.CARD_DECK_INFO.location.value) or location == hex(self.CARD_DECK_INFO.secLocation.value) or self.CARD_DECK_INFO.isMain:
+            if location == hex(self.CARD_DECK_INFO.location.value) or location == hex(self.CARD_DECK_INFO.secLocation.value) or self.CARD_DECK_INFO.dataModule ==1:
                 total += 1
         maxNum = int(self.can_size[1]/self.canvas_row_padding)
         if event.delta > 0 :
@@ -321,7 +321,6 @@ class card_preview_list_board(tk.Frame):
                 if rate > 0 and rate < 1: 
                     elasticityFactor = 1-rate
                 self.canvas_padding[1] += MOVE_DELTA*elasticityFactor
-                # self.isMain_update_deck_sort() if self.CARD_DECK_INFO.isMain else self.update_deck_sort()
                 self.updateCardUI(self.currDeckData)
         else:
             # M-down
@@ -331,7 +330,6 @@ class card_preview_list_board(tk.Frame):
                 if rate > 0 and rate < 1: 
                     elasticityFactor = 1-rate
                 self.canvas_padding[1] -= MOVE_DELTA * elasticityFactor
-                # self.isMain_update_deck_sort() if self.CARD_DECK_INFO.isMain else self.update_deck_sort()
                 self.updateCardUI(self.currDeckData)
         self.canvas_padding[1] = int(self.canvas_padding[1])
     
@@ -352,6 +350,52 @@ class card_preview_list_board(tk.Frame):
         self.CARD_DECK_INFO = CardDeckInfo
 # ----------------------------------------------------------------
 # 相关:【推荐卡组】
+    def setArrowModule(self,direct):
+        self.CARD_DECK_INFO.dataModule = 3
+        if direct < 0:
+            #left
+            self.modulePage -= 1 if self.modulePage < self.MODULE_PAGE_MAX else 0
+        else:
+            # right
+            self.modulePage += 1 if self.modulePage < self.MODULE_PAGE_MAX else 0
+        # 获取卡组数据
+        self.currDeck = self.carriedCards
+        leaderCtId = cService.getLeaderCardCtId(self.currDeck)
+        stratagemCtId = cService.getStratagemCardCtId(self.currDeck)
+        # 卡组CtIds
+        currDeckCtIds = []
+        for key,value in self.carriedCards.items():
+            currDeckCtIds.append(value["Id"])
+        # TODO：改为内存 "BattleDeck"
+        factionId = cService.getFactionId(leaderCtId)
+        filterFactionDeck = []
+        for deckInfo in global_var.get_value("decks"):
+            if deckInfo["factionId"] == factionId:
+                filterFactionDeck.append(deckInfo)
+
+        
+        for deckInfo in filterFactionDeck:
+            deckCards = list(deckInfo["sortedCtIds"])
+            count = 0
+            for ctId in currDeckCtIds:
+                if ctId in deckCards:
+                    count += 1
+            repeatRate = round(count / len(currDeckCtIds),5)
+            deckInfo["repeatRate"] = repeatRate
+        
+        temp_sort_list = sorted(filterFactionDeck,key=lambda x: (-x["repeatRate"]))
+
+        count = 0
+        showData = {}
+        for ctId in temp_sort_list[0]["sortedCtIds"]:
+            count += 1
+            key = count
+            showData[key] = {"ctId":ctId,"name":global_var.get_value("AllCardDict")[str(ctId)]["name"], "isNotExist":False}
+        self.currDeckData = showData
+        pass
+    
+
+    
     def setShowRelateDeck(self):
         # BUG 不做分离的话，如果没有进入卡组模式，会缺少deck_module的数据...
         # TODO 卡组数据函数分离

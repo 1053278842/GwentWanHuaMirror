@@ -14,7 +14,7 @@ class ResponseManager(object):
     def set_card_deck_info(self,isEnemy):
         result_list = []
         if not isEnemy:
-            result_list.append(CardDeckTypeInfo("我  ·  卡  组",Location.DECK,isSortByIndex=False,isMain=True,buttonName="卡组")) 
+            result_list.append(CardDeckTypeInfo("我  ·  卡  组",Location.DECK,isSortByIndex=False,dataModule=1,isMain=True,buttonName="卡组")) 
             result_list.append(CardDeckTypeInfo("我  ·  牌  库",Location.DECK,buttonName="牌库"))
             result_list.append(CardDeckTypeInfo("我  ·  墓  场",Location.GRAVEYARD,buttonName="墓场"))
             result_list.append(CardDeckTypeInfo("我  ·  放  逐",Location.VOID,buttonName="放逐"))
@@ -22,7 +22,7 @@ class ResponseManager(object):
             result_list.append(CardDeckTypeInfo("我  ·  手  卡",Location.HAND,buttonName="手牌"))
             result_list.append(CardDeckTypeInfo("我  ·  战  场  卡",Location.RANGED,buttonName="场地",secLocation=Location.MELEE))
         else:
-            result_list.append(CardDeckTypeInfo("敌  ·  卡  组",Location.DECK,isSortByIndex=False,isMain=True,buttonName="卡组",isEnemy = True)) 
+            result_list.append(CardDeckTypeInfo("敌  ·  卡  组",Location.DECK,isSortByIndex=False,dataModule=1,isMain=True,buttonName="卡组",isEnemy = True)) 
             result_list.append(CardDeckTypeInfo("敌  ·  牌  库",Location.DECK,buttonName="牌库",isEnemy = True))
             result_list.append(CardDeckTypeInfo("敌  ·  墓  场",Location.GRAVEYARD,buttonName="墓场",isEnemy = True))
             result_list.append(CardDeckTypeInfo("敌  ·  放  逐",Location.VOID,buttonName="放逐",isEnemy = True))
@@ -135,7 +135,8 @@ class ResponseManager(object):
         self.status.update_data(0,0,0)
 
     # 点击箭头时，卡牌列表转为显示相关卡组
-    def setCardListShowRelatedDeck(self):
+    def setCardListShowRelatedDeck(self,direct):
         # for widget in self.cardList.winfo_children():
         #     widget.destroy()
-        self.cardList.setShowRelateDeck()
+        self.cardList.setArrowModule(direct)
+        # self.cardList.setShowRelateDeck(direct)

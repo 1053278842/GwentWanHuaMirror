@@ -53,6 +53,6 @@ class title_board(tk.Frame):
     def click_arrow(self,event):
         if event.x < self.root.WIN_WIDTH / 2:
             #left
-            self.root.responseManager.setCardListShowRelatedDeck()
+            self.root.responseManager.setCardListShowRelatedDeck(-1)
         else:
-            pass
+            self.root.responseManager.setCardListShowRelatedDeck(1)
