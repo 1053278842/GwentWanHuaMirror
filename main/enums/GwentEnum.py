@@ -39,3 +39,12 @@ class CardType(Enum):
     UNIT        = 4     # 单位卡    0x 04
     ARTIFACT    = 8     # 神器卡    0x 08
     STRATAGEM   = 16    # 战略卡    0x 10
+
+class Faction(Enum):
+    NEUTRAL = 1
+    MONSTER = 2
+    NILFGAARD = 4
+    NORTHERN_REALMS = 8
+    SCOIATAEL = 16
+    SKELLIGE = 32
+    SVNDICATE = 64

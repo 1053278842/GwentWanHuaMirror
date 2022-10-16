@@ -122,12 +122,11 @@ def composite_deck_info(in_path,info_dict):
     name      =   info_dict["Name"]
     cardType  =   info_dict["Type"]
     rarity    =   info_dict["Rarity"]
-    location  =   info_dict["Location"]
     currPower =   info_dict["CurrPower"]
     factionId =   info_dict["FactionId"]
     abilityCardTemplateId = info_dict["Id"]
     # 如果是Leader卡
-    if location == hex(Location.LEADER.value):
+    if CardType(cardType) == CardType.LEADER:
         return composite_leader_card(provision,name,factionId,abilityCardTemplateId)
     ##############################################################################################################################
    
@@ -332,6 +331,12 @@ def get_img_hidden_effect(path,effect_factor = 0.7):
     img = Image.open(path)
     img = img.point(lambda p:p * effect_factor)
     return img
+
+def getDarkCardPreviewImgTk(size,color):
+    img = Image.new("RGBA", size,color)
+    imgTk =ImageTk.PhotoImage(img)
+    return imgTk
+
 def get_img(path):
     return Image.open(path)
 

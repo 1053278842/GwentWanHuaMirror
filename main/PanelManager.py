@@ -5,7 +5,6 @@ import bean.global_var as global_var
 import PanelGUI
 import pymem
 import services.CardService as cs
-import services.GwentService as service
 from GwentGUI import GwentGUI
 from LoadingAnimGUI import AnimatedGif
 

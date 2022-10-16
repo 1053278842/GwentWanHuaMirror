@@ -8,6 +8,43 @@ from tools.decorators import get_time_consume
 from tools.FileTool import *
 
 
+def addStratagemCard(lackOfCards,origCards,playerId):
+    stratagemCardData = {}
+    for key,value in origCards.items():
+        if value["Type"] == CardType.STRATAGEM.value and int(value["PlayId"],16) == playerId:
+            stratagemCardData["key"] = key
+            stratagemCardData["value"] = value
+    if len(stratagemCardData.keys()) > 0:
+        result = {}
+        count = 0
+        for key,value in lackOfCards.items():
+            if count == 1:
+                result[stratagemCardData["key"]] = stratagemCardData["value"]
+            result[key] = value
+            count += 1
+        return result
+    return lackOfCards
+            
+
+def getAddCard(newInsIds,origInsIds):
+    # 刚刚减少的对象 在A里不在B里的对象
+    # temp
+    # for key,value in newInsIds.items():
+
+    result_insIds = []
+    for i in origInsIds:
+        if i not in newInsIds:
+            result_insIds.append(i)
+    return result_insIds
+
+def getRemoveCard(newInsIds,origInsIds):
+    # 增加的对象     在B里不在A的对象
+    result_insIds = []
+    for i in newInsIds:
+        if i not in origInsIds:
+            result_insIds.append(i)
+    return result_insIds
+
 def getCurrBattleInfo():
     battleInfo = BattleInfo()
     battleInfo.currPlayerId = cardDao.getCurrPlayerId(pm,gi)
@@ -43,6 +80,10 @@ def getDeckInfo(playerId):
     totalCardNums = count
     return {"totalCardNums": totalCardNums, "isDefensive": isDefensive,"leaderIndex":leaderIndex}
 
+def getPlayerCarriedCarInsIds(playerId):
+    ids = cardDao.getCardInsIdsWhenDeckInstance(pm,gi,playerId)
+    return ids
+
 def get_all_cardTemplates():
     
     cardsAdd = cardDao.getAllCardsByGI(gi)
@@ -58,26 +99,43 @@ def get_all_cardTemplates():
 
 def sort_cardTemplate_by_provision(cts):
     #按照provision,id降序排序卡组
-    for i in range(len(cts)-1):
-        for j in range(len(cts) - i - 1):
-            if cts[j]["Provision"] < cts[j + 1]["Provision"]:
-                cts[j],cts[j+1] = cts[j+1],cts[j]
-            elif cts[j]["Provision"] == cts[j + 1]["Provision"]:
-                if cts[j]["Id"] > cts[j + 1]["Id"]:
-                    cts[j],cts[j+1] = cts[j+1],cts[j]
+    temp_sort_list = sorted(cts.items(),key=lambda x: (-x[1]["Provision"],x[1]["Id"]))
+    result = {}
+    for i in temp_sort_list:
+        result[i[0]] = i[1]
+    return result
 
 def sort_cardTemplate_by_index(cts):
     #按照index升序排序卡组
-    for i in range(len(cts)-1):
-        for j in range(len(cts) - i - 1):
-            if cts[j]["Index"] > cts[j + 1]["Index"]:
-                cts[j],cts[j+1] = cts[j+1],cts[j]
+    temp_sort_list = sorted(cts.items(),key = lambda x:(int(x[1]["Index"],16)))
+    result = {}
+    for i in temp_sort_list:
+        result[i[0]] = i[1]
+    return result 
 
 def remove_card_by_playerId(cardDeckInfo,cts):
     results = []
     for ct in cts:
         if ct["CardId"] <= cardDeckInfo.maxCardNums and ct["CardId"] >= cardDeckInfo.minCardNums:
             results.append(ct)
+    return results
+
+# 此函数过滤会导致间谍、位移卡不能很好的记录
+# 会记录到衍生卡
+def removeOtherPlayerCardContainDerivation(cardDeckInfo,cts):
+    results = {}
+    for key,value in cts.items():
+        if value["PlayId"] == hex(cardDeckInfo.playerId):
+            results[key] = value
+    return results
+
+# 此函数过滤会导致衍生卡不能被记录
+# 会记录到原始的卡组
+def removeOtherPlayerCardNoDerivative(cardDeckInfo,cts):
+    results = {}
+    for key,value in cts.items():
+        if value["InstanceId"] <= cardDeckInfo.maxCardNums and value["InstanceId"] >= cardDeckInfo.minCardNums:
+            results[key] = value
     return results
 
 def filter_cardTemplate_by_location(location,cts):
@@ -87,6 +145,37 @@ def filter_cardTemplate_by_location(location,cts):
         if ct["Location"] == location.value:
             results.append(ct)
     return results
+
+# 我方指定场地、手卡等地的卡，包含衍生卡
+def filterCardsByDeckCondition(cts,deckCondition):
+    # # 对象化的数据源
+    # cts = get_all_cardTemplates()
+    # 去除AI的卡组
+    cts = removeOtherPlayerCardContainDerivation(deckCondition,cts)
+    if deckCondition.isSortByIndex:
+        #按照index升序排序卡组
+        cts = sort_cardTemplate_by_index(cts)
+    else:
+        #按照provision,id降序排序卡组
+        cts = sort_cardTemplate_by_provision(cts)
+    # filter 条件过滤
+    cts = filterCardsTypeAndLocation(deckCondition,cts)
+    return cts
+
+# 不含衍生物和未知卡牌的未排序过的原始牌库中的卡
+def filterCardsIntoCarriedCards(cts,deckCondition):
+    cts = removeOtherPlayerCardNoDerivative(deckCondition,cts)
+    # filter 条件过滤
+    cts = filterCardsTypeAndLocation(deckCondition,cts,isContainHeaderCard=True)
+    # 去掉未知卡
+    cts = filterUnknownCard(cts)
+    return cts
+
+def getMemoryCards():
+    cts = get_all_cardTemplates()
+    # 封装为返回类型
+    result_dict = pack_cardTemplate(cts)
+    return result_dict
 
 def get_my_all_cards(cardDeckInfo):
     # 对象化的数据源
@@ -104,6 +193,13 @@ def get_my_all_cards(cardDeckInfo):
     result_dict = pack_cardTemplate(cts)
     return result_dict
 
+def filterUnknownCard(cts):
+    results = {}
+    for key,value in cts.items():
+        if value["Id"] != 0:
+            results[key] = value
+    return results
+
 def filterCards(cardDeckInfo,cts):
     results = []
     for ct in cts:
@@ -116,10 +212,25 @@ def filterCards(cardDeckInfo,cts):
                 results.append(ct)
     return results
 
+def filterCardsTypeAndLocation(cardDeckInfo,cts,isContainHeaderCard=False):
+    results = {}
+    for key,value in cts.items():
+        if isContainHeaderCard:
+            if value["Type"] == CardType.LEADER.value or value["Type"] == CardType.STRATAGEM.value:
+                results[key] = value
+                continue
+        if value["Rarity"] == cardDeckInfo.rarity.value or cardDeckInfo.rarity == Rarity.ALL:
+            if value["Type"] == cardDeckInfo.cardType.value or cardDeckInfo.cardType == CardType.ALL:
+                if isContainHeaderCard:
+                    results[key] = value
+                    continue
+                if int(value["Location"],16) == cardDeckInfo.location.value or int(value["Location"],16) == cardDeckInfo.secLocation.value:
+                    results[key] = value
+    pass
+    return results
+
 # 将ct对象集封装为dict格式的对象,主键为card实例化的id
-# TODO cardDict的获取是IO密集型，需要改为全局变量
 def pack_cardTemplate(cts):
-    
     # 装载结果
     count = 0 
     result_dict = {}
@@ -150,8 +261,6 @@ def pack_cardTemplate(cts):
 
         result_dict[key]=temp_dict
     return result_dict
-
-
 
 # 获取程式模块基址
 def get_baseAddress():

@@ -3,7 +3,6 @@ import tkinter as tk
 import tkinter.font as tkFont
 from tkinter import ALL, EventType, PhotoImage, ttk
 
-import services.GwentService as service
 import tools.FileTool as ft
 from enums.GwentEnum import *
 from PIL import Image, ImageFont, ImageTk

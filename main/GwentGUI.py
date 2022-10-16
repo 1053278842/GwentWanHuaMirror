@@ -1,4 +1,3 @@
-import services.GwentService as service
 import win32api
 import win32con
 import win32gui
@@ -27,20 +26,12 @@ class GwentGUI:
             self.root.geometry('{0}x{1}+400+0'.format(self.root.WIN_WIDTH,self.root.WIN_HEIGHT))
         self.root.wm_attributes('-topmost',1)
         root.overrideredirect(1)
-        
-        self.root.DECK_IMG_SCALE_FACTOR = 0.6
-        self.root.DECK_IMG_SCALE_COMPENSATE_FACTOR = 1.214
-        print("倍率：",self.root.DECK_IMG_SCALE_FACTOR*self.root.DECK_IMG_SCALE_COMPENSATE_FACTOR)
 
         self.root.TOP_HEIGHT = 0
         self.root.MID_HEIGHT = 0
         self.root.BOTTOM_HEIGHT = 0
 
-
         self.create_page(isEnemy)
-
-
-
 
     def create_page(self,isEnemy):
         responseManager = ResponseManager(isEnemy)
@@ -112,7 +103,3 @@ class GwentGUI:
     def exit(self,event):
         self.root.destroy()
         # restart()
-    
-
- 
-

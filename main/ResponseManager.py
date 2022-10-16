@@ -91,22 +91,26 @@ class ResponseManager(object):
         e_isDefensive = temp_dict["isDefensive"]  
         e_leaderIndex = temp_dict["leaderIndex"]
 
-        print("leaderIndex",m_leaderIndex,e_leaderIndex)
         # 范围
-        if m_leaderIndex > e_leaderIndex:
-            self.maxCardNums = m_playerCardNums + e_playerCardNums
-            self.minCardNums = m_leaderIndex
-        else:
-            self.maxCardNums = e_leaderIndex - 1
-            self.minCardNums = 1
+        insIds = cs.getPlayerCarriedCarInsIds(self.playerId)
+        self.maxCardNums = max(insIds)
+        self.minCardNums = min(insIds) -1
+
+        # if m_leaderIndex > e_leaderIndex:
+        #     self.maxCardNums = m_playerCardNums + e_playerCardNums
+        #     self.minCardNums = m_leaderIndex
+        # else:
+        #     self.maxCardNums = e_leaderIndex - 1
+        #     self.minCardNums = m_leaderIndex
         
         for cdi in self.CARD_DECK_INFO:
             cdi.maxCardNums = self.maxCardNums
             cdi.minCardNums = self.minCardNums
 
         m_MaxCardNums = m_playerCardNums
-
-        self.allCardNums = m_playerCardNums+e_playerCardNums
+        print("leaderIndex",m_leaderIndex,e_leaderIndex)
+        print("【{0}】 | ".format(playerId),"CardMinIndex:",self.minCardNums,"CardMaxIndex:",self.maxCardNums)
+        # self.allCardNums = m_playerCardNums+e_playerCardNums
 
 
 ########################################################################
@@ -118,7 +122,7 @@ class ResponseManager(object):
         self.getCurrBattleInfo()
         self.setPlayerId()
         self.setDeckInfo(self.playerId)
-        self.cardList.show_data_frame()
+        self.cardList.updateData()
 
     # 更新status
     def updateStatusBoard(self,total,unit,provision):

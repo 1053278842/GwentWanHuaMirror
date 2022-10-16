@@ -16,7 +16,7 @@ def initCtData(pm,ctAdd,cardAdd):
     result["Provision"]  = read_memory_bytes(pm,ctAdd+0x5c,0x4)
     result["Type"]       = read_memory_bytes(pm,ctAdd+0x49,0x3)
     result["LinkedTemplateId"] = hex(read_memory_bytes(pm,ctAdd+0x90,0x4))
-    result["LinkedTemplateOrder"] = hex(read_multi_bytes(pm,app+0x58,[0x10,0x30,0x20],0x8))
+    result["LinkedTemplateOrder"] = 0
 
 
     result["PlayId"]     = read_memory_bytes(pm,cardAdd+0x5c,0x4)
@@ -109,8 +109,8 @@ def pack_cardTemplate(cts):
     return result_dict
 
 def printList(list):
-    print(list["InstanceId"],list["PlayId"],list["Name"],list["Location"],list["Index"],list["Address"],list["Id"],list["FromPlayerId"])
-    # print("\t",list["FromPlayerId"],list["LastActivePosition"],list["PlayedFrom"])
+    print(list["InstanceId"],list["PlayId"],list["Name"],list["Location"],list["Index"],list["Address"],list["Id"],list["FromPlayerId"],list["Type"])
+    # print("\t",list["LastActivePosition"],list["PlayedFrom"])
 
 def cardListToString(cardListAdd,tipsName):
     listStructAdd = read_int64(pm,cardListAdd+0x10,[])
@@ -155,13 +155,29 @@ if __name__ == "__main__":
         cardTemplate = cardDao.getCardTemplateByCard(cardAdd)
         ct_dict = initCtData(pm,cardTemplate,cardAdd)
         cts.append(ct_dict)
-    sort_cardTemplate_by_provision(cts)
+    #按照provision,id降序排序卡组
+    for i in range(len(cts)-1):
+        for j in range(len(cts) - i - 1):
+            if cts[j]["Provision"] < cts[j + 1]["Provision"]:
+                cts[j],cts[j+1] = cts[j+1],cts[j]
+            elif cts[j]["Provision"] == cts[j + 1]["Provision"]:
+                if cts[j]["Id"] > cts[j + 1]["Id"]:
+                    cts[j],cts[j+1] = cts[j+1],cts[j]
+
+    for i in range(len(cts)-1):
+        for j in range(len(cts) - i - 1):
+            if cts[j]["Location"] < cts[j + 1]["Location"]:
+                cts[j],cts[j+1] = cts[j+1],cts[j]
+            elif cts[j]["Location"] == cts[j + 1]["Location"]:
+                if cts[j]["Index"] > cts[j + 1]["Index"]:
+                    cts[j],cts[j+1] = cts[j+1],cts[j]
     result_dict = pack_cardTemplate(cts)
     p1_d =[]
     p2_d =[]
     for key in result_dict:
         # if int(result_dict[key]["PlayId"],16) == 1:
-        if result_dict[key]["FromPlayerId"] == 1:
+        # print(result_dict[key]["FromPlayerId"])
+        if int(result_dict[key]["FromPlayerId"][-1:]) == 1:
             p1_d.append(result_dict[key])
         else:
             p2_d.append(result_dict[key])
@@ -201,7 +217,22 @@ if __name__ == "__main__":
             else:
                 print(cardTemplate)
 
-    sort_cardTemplate_by_provision(cts)
+
+    for i in range(len(cts)-1):
+        for j in range(len(cts) - i - 1):
+            if cts[j]["Provision"] < cts[j + 1]["Provision"]:
+                cts[j],cts[j+1] = cts[j+1],cts[j]
+            elif cts[j]["Provision"] == cts[j + 1]["Provision"]:
+                if cts[j]["Id"] > cts[j + 1]["Id"]:
+                    cts[j],cts[j+1] = cts[j+1],cts[j]
+    
+    for i in range(len(cts)-1):
+        for j in range(len(cts) - i - 1):
+            if cts[j]["Location"] < cts[j + 1]["Location"]:
+                cts[j],cts[j+1] = cts[j+1],cts[j]
+            elif cts[j]["Location"] == cts[j + 1]["Location"]:
+                if cts[j]["Index"] > cts[j + 1]["Index"]:
+                    cts[j],cts[j+1] = cts[j+1],cts[j]
     result_dict = pack_cardTemplate(cts)
     for key in result_dict:
         printList(result_dict[key])

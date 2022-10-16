@@ -146,3 +146,20 @@ class CardDao():
         cm = read_int64(self.pm,gi+0x20,[0x60,0x18,0x20])
         return cm
 
+    # 获取卡组初始化时玩家所携带的卡组卡牌insId
+    # @return: insId 数组
+    def getCardInsIdsWhenDeckInstance(self,pm,gi,playerId):
+        playerOffset = 0x20
+        if playerId == 1:
+            playerOffset = 0x20
+        elif playerId == 2:
+            playerOffset = 0x28
+        
+        pmAdd = read_int64(pm,gi+0x20,[0x60,0x18,playerOffset,0x28,0x50,0x10])
+        nums = read_int64(pm,pmAdd+0x18,[])
+        result = []
+        for i in range(0,nums):
+            insId = read_memory_bytes(pm,pmAdd+0x20+i*0x2,2)
+            result.append(insId)
+        return result
+
