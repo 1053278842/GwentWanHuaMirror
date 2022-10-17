@@ -45,6 +45,7 @@ class card_preview_list_board(tk.Frame):
         self.MODULE_PAGE_MIN = 0
         self.MODULE_PAGE_NORMAL = 0
         self.modulePage = self.MODULE_PAGE_NORMAL
+        self.isShowRelationDeck = False
         # 显示类型
         self.CARD_DECK_INFO = self.root.responseManager.DEFAULT_CARD_DECK_INFO
 
@@ -144,7 +145,7 @@ class card_preview_list_board(tk.Frame):
         self.carriedCards = cService.addStratagemCard(self.carriedCards,self.curr_memo_cards,self.root.responseManager.playerId)
         self.onceExistInCarriedCards = self.carriedCards
 
-        if self.CARD_DECK_INFO.dataModule == 0:
+        if self.CARD_DECK_INFO.dataModule == 0 and not self.isShowRelationDeck :
             self.currDeckData = {}
             self.cardsSource = self.battleCards
             for key,value in self.cardsSource.items():
@@ -153,7 +154,7 @@ class card_preview_list_board(tk.Frame):
                 temp_dict["ctId"] = value["Id"]
                 temp_dict["isNotExist"] = False
                 self.currDeckData[key] = temp_dict
-        if self.CARD_DECK_INFO.dataModule == 1:
+        if self.CARD_DECK_INFO.dataModule == 1 and not self.isShowRelationDeck :
             self.currDeckData = {}
             self.cardsSource = self.carriedCards
             for key,value in self.cardsSource.items():
@@ -173,7 +174,7 @@ class card_preview_list_board(tk.Frame):
             value["imageId"] = self.insIdMapImageId[key_insId]
         # UI
         self.updateCardUI(self.currDeckData)
-        self.updateCardExistEffectUI(self.currDeckData)
+        # self.updateCardExistEffectUI(self.currDeckData)
         self.setDeckStatus(self.currDeckData)
         self.after(400,self.updateData)
 
@@ -213,11 +214,18 @@ class card_preview_list_board(tk.Frame):
             self.can_bg.moveto(value["imageId"],x=self.canvas_padding[0],y=self.canvas_padding[1]+self.canvas_row_padding*count+yOffset)
             count += 1
             # 排除衍生物没有cardType
-            cardInfo = self.curr_memo_cards[key]
-            if CardType(cardInfo["Type"]) == CardType.LEADER:
-                yOffset += 50
-            elif CardType(cardInfo["Type"]) == CardType.STRATAGEM:
-                yOffset += 7
+            try:
+                cardInfo = self.curr_memo_cards[key]
+                if CardType(cardInfo["Type"]) == CardType.LEADER:
+                    yOffset += 50
+                elif CardType(cardInfo["Type"]) == CardType.STRATAGEM:
+                    yOffset += 7
+            except KeyError:
+                cardInfo = global_var.get_value("AllCardDict")[str(value["ctId"])]
+                if CardType(cardInfo["cardType"]) == CardType.LEADER:
+                    yOffset += 50
+                elif CardType(cardInfo["cardType"]) == CardType.STRATAGEM:
+                    yOffset += 7
     
     # 改为池创建
     def updateCardExistEffectUI(self,deckData):
@@ -307,11 +315,7 @@ class card_preview_list_board(tk.Frame):
             yOffset = 4
         total = 0
         cards = self.currDeckData
-        # cards = self.curr_memo_cards
-        for key,value in cards.items():
-            location = self.curr_memo_cards[key]["Location"]
-            if location == hex(self.CARD_DECK_INFO.location.value) or location == hex(self.CARD_DECK_INFO.secLocation.value) or self.CARD_DECK_INFO.dataModule ==1:
-                total += 1
+        total = len(self.currDeckData.keys())
         maxNum = int(self.can_size[1]/self.canvas_row_padding)
         if event.delta > 0 :
             # M-up
@@ -338,6 +342,7 @@ class card_preview_list_board(tk.Frame):
             self.can_bg.delete(img_id)
 
     def resetType(self,CardDeckInfo):
+        self.isShowRelationDeck = False
         self.CARD_DECK_INFO = CardDeckInfo
         self.orig_rows_infos.clear()
         self.curr_memo_cards.clear()
@@ -351,7 +356,8 @@ class card_preview_list_board(tk.Frame):
 # ----------------------------------------------------------------
 # 相关:【推荐卡组】
     def setArrowModule(self,direct):
-        self.CARD_DECK_INFO.dataModule = 3
+        self.isShowRelationDeck = True
+        # self.CARD_DECK_INFO.dataModule = 3
         if direct < 0:
             #left
             self.modulePage -= 1 if self.modulePage < self.MODULE_PAGE_MAX else 0
@@ -385,25 +391,24 @@ class card_preview_list_board(tk.Frame):
         
         temp_sort_list = sorted(filterFactionDeck,key=lambda x: (-x["repeatRate"]))
 
-        count = 0
+        count = 2000
         showData = {}
-        for ctId in temp_sort_list[0]["sortedCtIds"]:
+        mostRelevantDeck = temp_sort_list[0]["sortedCtIds"]
+        allCardMap = global_var.get_value("AllCardDict")
+        mostRelevantDeck_Sort = sorted(mostRelevantDeck,key=lambda x: (-allCardMap[str(x)]["provision"],x))
+        for ctId in mostRelevantDeck_Sort:
             count += 1
             key = count
             showData[key] = {"ctId":ctId,"name":global_var.get_value("AllCardDict")[str(ctId)]["name"], "isNotExist":False}
         self.currDeckData = showData
         pass
+        # 1、Stratagem卡不能正常显示到合适位置
+        # 2、捏造的insId 不在curr_memo_cards中，关于curr_memo_cards的引用会报错
     
 
     
     def setShowRelateDeck(self):
-        # BUG 不做分离的话，如果没有进入卡组模式，会缺少deck_module的数据...
-        # TODO 卡组数据函数分离
-        # 获取卡组数据
-        # 分析卡组数据，提交数据
-        # 获取数据库返回的数据 cts
-        # 根据整理好的cts显示卡牌
-        # 更新状态和临时数据存储
+
         playerDeckCtIds = []
         leaderCard = 0
         stratagemCard = 0

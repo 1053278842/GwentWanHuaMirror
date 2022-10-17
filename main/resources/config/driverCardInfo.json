@@ -1,0 +1,1342 @@
+{
+    "112403": {
+        "name": "话篓子：伙伴",
+        "description": "会说一百个词，其中八十个是脏话，剩下的是脏话的语气词",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n使单排所有单位获得 {Boost} 点增益。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "112404": {
+        "name": "话篓子：捣蛋鬼",
+        "description": "尔坦的鹦鹉拥有一项超凡能力：能逼疯所有与它相处的人，包括卓尔坦本人",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n对单排所有单位造成 {Damage} 点伤害。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "122402": {
+        "name": "家事妖精",
+        "description": "吾为汝取名蒂雅，收汝为吾女。",
+        "tip": "每个己方回合结束时，使战力最低的友军单位获得 {Boost} 点增益。\\n<keyword=order>指令：</keyword>转变为 1 只“异婴”。",
+        "factionId": 8,
+        "rarity": 4,
+        "provision": 8,
+        "cardType": 4,
+        "power": 5
+    },
+    "132304": {
+        "name": "雄蛛",
+        "description": "陋的外表即是警告，叫你“离远点”",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 2,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 1
+    },
+    "132313": {
+        "name": "蝙魔",
+        "description": "我？我管它什么长鸟毛的蝙魔，充其量就是只长得大点的蝙蝠！",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 2,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 3
+    },
+    "132315": {
+        "name": "鹰身女妖",
+        "description": "身女妖有很多种，每种都有窃盗癖",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 2,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 6
+    },
+    "162401": {
+        "name": "魔像守卫",
+        "description": "拳阻挡刀剑，逻辑战胜谎言",
+        "tip": "<keyword=doomed>佚亡</keyword>",
+        "factionId": 4,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 3
+    },
+    "162402": {
+        "name": "牛尸",
+        "description": "那是只鸟？还是头狮鹫？不对！那是……",
+        "tip": "<keyword=doomed>佚亡</keyword>、<keyword=disloyal>不忠</keyword>。己方回合结束时，使相邻单位<keyword=poison>中毒</keyword>，随后摧毁自身。",
+        "factionId": 4,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 1
+    },
+    "200320": {
+        "name": "羊角魔",
+        "description": "牛防卫队的一员。永远忠诚",
+        "tip": "无特殊能力。",
+        "factionId": 1,
+        "rarity": 1,
+        "provision": 6,
+        "cardType": 4,
+        "power": 10
+    },
+    "201574": {
+        "name": "哈罗德的伙伴",
+        "description": "高个子的是威尔玛。他右边的是威尔弗雷德。结巴的那个是威尔海姆。",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=deathwish>遗愿：</keyword>对 1 个随机敌军单位造成 {Damage} 点伤害。",
+        "factionId": 32,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 1
+    },
+    "201576": {
+        "name": "牛",
+        "description": "鲍克兰，什么东西都比其它地方的要棒：酒更甜美，牛儿更肥，而姑娘们则更加动人",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 1,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 1
+    },
+    "201709": {
+        "name": "均衡",
+        "description": "这把剑上刻的是什么？诅咒吗？”“不，是脏话。",
+        "tip": "对战力为奇数的所有单位造成 {Damage} 点伤害。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 8,
+        "cardType": 2,
+        "power": 0
+    },
+    "201710": {
+        "name": "分裂",
+        "description": "这把剑上刻的是什么？诅咒吗？”“不，是脏话。",
+        "tip": "对战力为偶数的所有单位造成 {Damage} 点伤害。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 8,
+        "cardType": 2,
+        "power": 0
+    },
+    "201725": {
+        "name": "店店：法师",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "派“店店”去班·阿德学院，见见那里的小伙子们。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 13,
+        "cardType": 2,
+        "power": 0
+    },
+    "201726": {
+        "name": "店店：法师",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>将双方手牌中最右侧的牌转变为 1 张随机“特殊”牌。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 4
+    },
+    "201727": {
+        "name": "店店：法师",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>将 1 个随机单位移至另一方同排。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 4
+    },
+    "201728": {
+        "name": "店店：法师",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>在全场每一排各<keyword=spawn>生成</keyword>1个随机“整排效果”，持续 {counter} 回合。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 4
+    },
+    "201729": {
+        "name": "店店：法师",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>对战场上所有其他单位造成共计 {Damage} 点伤害，由它们随机分摊。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 4
+    },
+    "201730": {
+        "name": "店店：法师",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>在双方半场随机一排各<keyword=spawn>生成</keyword>并<keyword=summon>召唤</keyword> 1 个随机单位。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 4
+    },
+    "201731": {
+        "name": "店店：猎人",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "派“店店”去多尔·布雷坦纳的森林。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 13,
+        "cardType": 2,
+        "power": 0
+    },
+    "201732": {
+        "name": "店店：猎人",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>从己方牌组随机打出 1 张牌。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 6
+    },
+    "201733": {
+        "name": "店店：猎人",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>对 {MaxTargets} 个随机敌军单位造成 {Damage} 点伤害。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 6
+    },
+    "201734": {
+        "name": "店店：猎人",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>摧毁 1 个敌军神器。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 6
+    },
+    "201735": {
+        "name": "店店：猎人",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>随机摧毁 1 个敌军单位。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 6
+    },
+    "201736": {
+        "name": "店店：猎人",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>在对方单排<keyword=spawn>生成</keyword> 1 个随机“整排效果”，持续 {counter} 回合。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 6
+    },
+    "201737": {
+        "name": "店店：骑士",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "派“店店”去帝国宫廷军事学院。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 13,
+        "cardType": 2,
+        "power": 0
+    },
+    "201738": {
+        "name": "店店：骑士",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 10
+    },
+    "201739": {
+        "name": "店店：骑士",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword><keyword=lock>锁定</keyword> 1 个单位。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 10
+    },
+    "201740": {
+        "name": "店店：骑士",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>使手牌中的 1 个随机单位获得 {Boost} 点增益。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 10
+    },
+    "201741": {
+        "name": "店店：骑士",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>获得<keyword=resilient>坚韧</keyword>。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 10
+    },
+    "201742": {
+        "name": "店店：骑士",
+        "description": "他巨魔都觉得他是个异类，毕竟在巨魔们看来，谁会喜欢彩色纸片胜过喜欢石头呢",
+        "tip": "<keyword=deploy>部署：</keyword>使 1 个友军单位获得 {Boost} 点增益。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 10
+    },
+    "202093": {
+        "name": "丹德里恩：正义使者",
+        "description": "丹德里恩，你愤世嫉俗、游戏花丛又谎话连篇——却也是我最好的朋友。",
+        "tip": "无特殊能力。"
+    },
+    "202094": {
+        "name": "货车护卫队",
+        "description": "再朝货车走一步，我就一箭在你脑袋上穿个洞！",
+        "tip": "无特殊能力。"
+    },
+    "202095": {
+        "name": "车队向导",
+        "description": "我向梅里泰莉女神起誓，这附近确实有条路的……",
+        "tip": "无特殊能力。"
+    },
+    "202096": {
+        "name": "利维亚的杰洛特",
+        "description": "如果要付出这种代价方能拯救世界，那就让世界毁灭算了。",
+        "tip": "无特殊能力。"
+    },
+    "202097": {
+        "name": "孽鬼",
+        "description": "果忽略它们会攻击人类的事实，这些小家伙其实挺可爱的",
+        "tip": "无特殊能力。"
+    },
+    "202104": {
+        "name": "畏惧者：破土而出  ",
+        "description": "我到底做了什么？”法师被自己的创造物吓得大叫起来",
+        "tip": "<keyword=immune>免疫</keyword>。",
+        "factionId": 2,
+        "rarity": 4,
+        "provision": 9,
+        "cardType": 4,
+        "power": 12
+    },
+    "202114": {
+        "name": "雏凤",
+        "description": "先有鸡还是先有蛋？和凤凰相比，这个问题根本不值一提",
+        "tip": "<keyword=doomed>佚亡</keyword>，<keyword=zeal>狂热</keyword>。\\n<keyword=order>指令：</keyword>变为“凤凰”。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 8,
+        "power": 0
+    },
+    "202124": {
+        "name": "蟹蜘蛛巨兽",
+        "description": "起来像螃蟹和蜘蛛的杂交……只是体型硕大无比",
+        "tip": "无特殊能力。"
+    },
+    "202125": {
+        "name": "蟹蜘蛛雄蛛",
+        "description": "陋的外表即是警告，叫你“离远点”",
+        "tip": "无特殊能力。"
+    },
+    "202126": {
+        "name": "雇佣兵护卫",
+        "description": "货车里装的是什么？关我屁事？",
+        "tip": "无特殊能力。"
+    },
+    "202127": {
+        "name": "脱逃的步兵",
+        "description": "左、右、左、右……为什么不能偶尔混着喊呢？！",
+        "tip": "无特殊能力。"
+    },
+    "202128": {
+        "name": "脱逃的弓手",
+        "description": "该死的弓弦！我的手指头都磨出泡了！",
+        "tip": "无特殊能力。"
+    },
+    "202129": {
+        "name": "长矛",
+        "description": "用带尖的那头捅就是了。",
+        "tip": "无特殊能力。"
+    },
+    "202130": {
+        "name": "燕子药水",
+        "description": "种药水能加速伤口的结痂和痊愈，而它之所以叫做“燕子”，因为雨燕是春天与希望的象征",
+        "tip": "使 1 个单位获得 {Boost} 点增益。"
+    },
+    "202131": {
+        "name": "长矛",
+        "description": "用带尖的那头捅就是了。",
+        "tip": "<keyword=order>指令：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。"
+    },
+    "202132": {
+        "name": "杰洛特：伊格尼法印",
+        "description": "魔人晃晃手指就能点灯，或把敌人烧成灰",
+        "tip": "<keyword=deploy>部署：</keyword>摧毁敌军所有战力最高的单位。"
+    },
+    "202133": {
+        "name": "丹德里恩：乐于助人",
+        "description": "我很乐于助人，但我要是死了就帮不了你了。",
+        "tip": "<keyword=zeal>狂热</keyword>。\\n<keyword=order>指令：</keyword>使所有友军单位获得 {Power} 点增益。"
+    },
+    "202134": {
+        "name": "蟹蜘蛛女王",
+        "description": "的孩子们完美继承了她的美貌",
+        "tip": "对 {MaxTargets} 个敌军单位造成 {Damage} 点伤害。"
+    },
+    "202135": {
+        "name": "松鼠党弓箭手",
+        "description": "精灵的视力拔群、准头精确。站那儿，我露一手给你看看。",
+        "tip": "无特殊能力。"
+    },
+    "202136": {
+        "name": "精灵战舞者",
+        "description": "你说那个女精灵在大家打得不可开交时跳起舞来了？你疯了吗，下士？！",
+        "tip": "无特殊能力。"
+    },
+    "202137": {
+        "name": "突击队领袖",
+        "description": "森林是我们的家园，也是你的葬身之地。",
+        "tip": "<keyword=order>指令：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。\\n<keyword=cooldown>冷却：</keyword>{Cooldown}。"
+    },
+    "202138": {
+        "name": "蟹蜘蛛幼虫",
+        "description": "时候，“年轻即是美”不过是大自然的谎言罢了",
+        "tip": "无特殊能力。"
+    },
+    "202139": {
+        "name": "车队首领",
+        "description": "这个精灵是我的，再说一次，是我的！",
+        "tip": "<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益。\\n<keyword=cooldown>冷却：</keyword>{Cooldown}。"
+    },
+    "202142": {
+        "name": "孽鬼战士",
+        "description": "各位小心，这座桥下有孽鬼出没。",
+        "tip": "无特殊能力。"
+    },
+    "202143": {
+        "name": "食尸鬼",
+        "description": "人类面临自己无法理解之物时，常说“世界不应该是这样”；通常这只是因为他们的无知，可是有时人们这么说并没有错",
+        "tip": "无特殊能力。"
+    },
+    "202144": {
+        "name": "小雾妖",
+        "description": "雾悄然弥漫时，小雾妖便会出没，来享用它们的受害者",
+        "tip": "无特殊能力。"
+    },
+    "202145": {
+        "name": "远古小雾妖",
+        "description": "类心中潜藏着许多原始的恐惧。对迷雾的恐惧更是根深蒂固…",
+        "tip": "无特殊能力。"
+    },
+    "202146": {
+        "name": "鹿首魔",
+        "description": "首魔长得有点像鹿，一只又大又邪恶的鹿",
+        "tip": "无特殊能力。"
+    },
+    "202147": {
+        "name": "追踪者",
+        "description": "那儿！在树木之间！",
+        "tip": "<keyword=order>指令：</keyword>对 1 个单位造成 {Damage} 点伤害。"
+    },
+    "202157": {
+        "name": "私枭治疗者",
+        "description": "帮你包扎，没问题——只要你有钱。",
+        "tip": "<keyword=deploy>部署</keyword>（<keyword=melee>近战</keyword>）：使 1 个友军单位获得 {Boost} 点增益。\\n<keyword=deploy>部署</keyword>（<keyword=ranged>远程</keyword>）：<keyword=heal>治愈</keyword> 1 个友军单位。"
+    },
+    "202158": {
+        "name": "私枭后援者",
+        "description": "矮人和精灵在我眼里都一样，给钱就行。",
+        "tip": "<keyword=deploy>部署：</keyword>使 1 个友军单位获得 {Boost} 点增益。"
+    },
+    "202159": {
+        "name": "精灵剑术大师",
+        "description": "斗如同舞蹈，千万不能让你的对手领舞",
+        "tip": "<keyword=order>指令：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。\\n<keyword=cooldown>冷却：</keyword>{Cooldown2}。\\n若将其摧毁，则<keyword=cooldown>冷却</keyword> -{Cooldown1}。"
+    },
+    "202160": {
+        "name": "腐食魔",
+        "description": "没见到它们的踪影，恶臭就先远远地传过来了",
+        "tip": "无特殊能力。"
+    },
+    "202162": {
+        "name": "车队首领",
+        "description": "不管是死是活，这个精灵都是我的。都给我记住了！",
+        "tip": "无特殊能力。"
+    },
+    "202163": {
+        "name": "精灵利剑",
+        "description": "灵的利剑轻盈，却能造成重伤",
+        "tip": "对 1 个非“精灵”单位造成 {Damage} 点伤害。"
+    },
+    "202164": {
+        "name": "精灵哨卫",
+        "description": "在我的警戒之下，绝不容敌人奇袭我们。",
+        "tip": "<keyword=deploy>部署：</keyword>对 1 个敌军单位造成伤害，数值等同于该单位与自身之间的战场排数量。"
+    },
+    "202165": {
+        "name": "精灵猎手",
+        "description": "不管捕猎人类还是花鹿，方法都是：一箭正中眉心。",
+        "tip": "<keyword=deploy>部署：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。若它存活，则使自身获得 {Boost} 点增益。"
+    },
+    "202166": {
+        "name": "精灵恶棍",
+        "description": "你觉得自己运气不错？再想想，dh'oine！",
+        "tip": "无特殊能力。"
+    },
+    "202167": {
+        "name": "残暴的逃兵",
+        "description": "很多人当逃兵是出于恐惧，我纯粹是因为无聊了。",
+        "tip": "无特殊能力。"
+    },
+    "202168": {
+        "name": "女术士雇佣兵",
+        "description": "我现有的能耐就能赚金子，还学什么点铁成金呢？",
+        "tip": "<keyword=deploy>部署：</keyword>使 1 个单位获得 {Boost} 点增益。"
+    },
+    "202169": {
+        "name": "雇佣兵战士",
+        "description": "事实证明，背信弃义和背后偷袭我都很擅长。",
+        "tip": "<keyword=deploy>部署</keyword>（<keyword=melee>近战</keyword>）：自身获得 {Boost} 点增益。"
+    },
+    "202170": {
+        "name": "军鼓手",
+        "description": "终于！我可以想敲什么就敲什么，想多大声就多大声！",
+        "tip": "每 5 回合，在回合开始时，使相邻单位获得 {Boost} 点增益。"
+    },
+    "202171": {
+        "name": "诅咒之刃",
+        "description": "戴者战无不胜，背叛者死无全尸",
+        "tip": "<keyword=order>指令：</keyword>使 1 个单位获得 {Boost} 点增益和<keyword=doomed>佚亡</keyword>，随后摧毁自身。"
+    },
+    "202172": {
+        "name": "老兵",
+        "description": "军队里什么最烂，不是军饷就是军粮。",
+        "tip": "无特殊能力。"
+    },
+    "202173": {
+        "name": "货车护卫队",
+        "description": "再朝货车走一步，我就一箭在你脑袋上穿个洞！",
+        "tip": "无特殊能力。"
+    },
+    "202174": {
+        "name": "车队向导",
+        "description": "我向梅里泰莉女神起誓，这附近确实有条路的……",
+        "tip": "无特殊能力。"
+    },
+    "202175": {
+        "name": "雇佣兵护卫",
+        "description": "货车里装的是什么？关我屁事？",
+        "tip": "<keyword=deploy>部署</keyword>（<keyword=melee>近战</keyword>）：使自身获得 {Boost2} 点增益。\\n<keyword=deploy>部署</keyword>（<keyword=ranged>远程</keyword>）：使同排所有其他单位获得 {Boost} 点增益。"
+    },
+    "202176": {
+        "name": "蔽日浓雾",
+        "description": "秀指挥官的福音……拙劣指挥官的噩梦",
+        "tip": "施加一个整排效果：\\n{Counter} 个对方回合内，在回合开始时，对同排上战力最高的单位造成 {Damage} 点伤害。"
+    },
+    "202177": {
+        "name": "松鼠党骑兵",
+        "description": "们说精灵了解马匹胜过了解人类。确实没说错",
+        "tip": "<keyword=deploy>部署：</keyword>对 1 个单位造成 {Damage} 点伤害。"
+    },
+    "202178": {
+        "name": "丹德里恩：忠诚挚友",
+        "description": "置朋友于危难而不顾？绝不可能！",
+        "tip": "小局结束时返回牌组。"
+    },
+    "202179": {
+        "name": "战术优势",
+        "description": "记住，先生们！先下手为强！",
+        "tip": "<keyword=immune>免疫</keyword>，<keyword=doomed>佚亡</keyword>。\\n<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益，随后<keyword=banish>放逐</keyword>自身。"
+    },
+    "202180": {
+        "name": "诡异的迷雾",
+        "description": "我对天发誓！刚刚还艳阳高照呢！",
+        "tip": "每个己方回合开始时，对同排战力最高的单位造成 {Damage} 点伤害。"
+    },
+    "202181": {
+        "name": "尖啸女海妖",
+        "description": "别紧张，伙计！这种时候，女海妖从来不会攻击……啊啊啊啊啊啊——",
+        "tip": "<keyword=doomed>佚亡</keyword>",
+        "factionId": 32,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 2
+    },
+    "202184": {
+        "name": "精灵暗箭手",
+        "description": "步两步见人来，三步四步把身藏，五步六步走得快，七步八步见阎王",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 16,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 3
+    },
+    "202289": {
+        "name": "异变巨熊",
+        "description": "告诉你吧，咱们怕熊，熊更害怕咱们。当然了，我说的是普通的熊。",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 32,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 6
+    },
+    "202290": {
+        "name": "无情的母熊",
+        "description": "性巨熊可谓是陆地上最庞大的野兽。但若论最为凶猛，无物可抵一头护崽的母熊…",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n每个己方回合，在回合结束时，对对方“母熊”造成 {Damage} 点<keyword=damage>伤害</keyword>。\\n在回合开始时，若己方并未控制“母熊”，且没有放弃跟牌，则<keyword=spawn>生成</keyword>并<keyword=summon>召唤</keyword>它至近战排。\\n<keyword=deathwish>遗愿：</keyword>对方抽 1 张牌。\\n该单位无法被<keyword=lock>锁定</keyword>、移动，或赋予<keyword=immune>免疫</keyword>状态。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 5
+    },
+    "202292": {
+        "name": "斯瓦勃洛勇士",
+        "description": "你以为惹恼巨熊好玩吗？！",
+        "tip": "<keyword=order>指令：</keyword>摧毁 1 个友军单位，随后<keyword=heal>治愈</keyword>自身。",
+        "factionId": 32,
+        "rarity": 4,
+        "provision": 7,
+        "cardType": 4,
+        "power": 12
+    },
+    "202293": {
+        "name": "树人螳螂：出击",
+        "description": "别动！只要不动他就看不到咱们。",
+        "tip": "无特殊能力。",
+        "factionId": 16,
+        "rarity": 4,
+        "provision": 6,
+        "cardType": 4,
+        "power": 6
+    },
+    "202394": {
+        "name": "上缴献金",
+        "description": "希望交钱能解决所有问题。",
+        "tip": "支付特定数量的<keyword=coin>金币</keyword>将触发此能力。",
+        "factionId": 64,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "202395": {
+        "name": "扣留献金",
+        "description": "虽然你告诫过我……但我已经把钱花光了。",
+        "tip": "拒绝支付特定数量的<keyword=coin>金币</keyword>将触发此能力。",
+        "factionId": 64,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "202477": {
+        "name": "喧闹的矮人",
+        "description": "呸！什么玩意儿！这不是啤酒，是尿！",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 16,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 2
+    },
+    "202562": {
+        "name": "圣甲虫",
+        "description": "瑟瑞卡尼亚被视为复活的象征。但是要想重生，你得先…",
+        "tip": "<keyword=defender>卫士</keyword>、<keyword=doomed>佚亡</keyword>。",
+        "factionId": 64,
+        "rarity": 22,
+        "provision": 0,
+        "cardType": 4,
+        "power": 1
+    },
+    "202563": {
+        "name": "萨沃拉的畏惧者",
+        "description": "魔人以为火蜥蜴帮无法攻破凯尔·莫罕的城墙。他们错了",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 64,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 12
+    },
+    "202566": {
+        "name": "瓶中迪精",
+        "description": "我曾经住在一个瓶子里，但我更喜欢欧菲尔的灯笼，住着更舒服。",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 5
+    },
+    "202567": {
+        "name": "老鼠",
+        "description": "我叫她小小鼠疫，很可爱，是不是？",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 2,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 1
+    },
+    "202568": {
+        "name": "乌鸦",
+        "description": "置身鸦群，你也必须鸦鸦做声。",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 32,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 2
+    },
+    "202569": {
+        "name": "沙漠宝藏",
+        "description": "比起埋宝，我肯定更喜欢挖宝。",
+        "tip": "<keyword=doomed>佚亡</keyword>、<keyword=zeal>狂热</keyword>。\\n<keyword=order>指令：</keyword><keyword=spawn>生成</keyword>并随机打出 1 个任意阵营的传奇单位。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 8,
+        "power": 0
+    },
+    "202570": {
+        "name": "约尔妖灵",
+        "description": "gnore",
+        "tip": "Ignore.",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "202571": {
+        "name": "卡兰瑟女王",
+        "description": "gnore",
+        "tip": "Ignore.",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 0
+    },
+    "202604": {
+        "name": "入侵者奥贝伦",
+        "description": "不服从者，一律驱逐！",
+        "tip": "<keyword=deploy>部署：</keyword><keyword=create>创造</keyword>并随机打出 1 张铜色“狂猎”单位牌。\\n<keyword=devotion>赤诚：</keyword>小局开始时，若位于手牌或牌组，发生历变。",
+        "factionId": 2,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 6
+    },
+    "202605": {
+        "name": "征服者奥贝伦",
+        "description": "活了六百五十多年后，没什么能给我惊喜。",
+        "tip": "<keyword=veil>遮蔽</keyword>、<keyword=deploy>部署：</keyword><keyword=spawn>生成</keyword>并打出 1 张己方起始牌组中的铜色“狂猎”单位牌。\\n己方每打出 1 个“狂猎”单位，便使其获得 {Boost} 点增益。",
+        "factionId": 2,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 6
+    },
+    "202616": {
+        "name": "好战者哈罗德",
+        "description": "久的痛苦折磨让他产生了一种无法抑制的渴望，想要把同样的痛苦带给别人",
+        "tip": "<keyword=deploy>部署：</keyword>从己方墓场打出 1 张铜色“战士”牌，使其<keyword=doomed>佚亡</keyword>。\\n<keyword=devotion>赤诚：</keyword>小局开始时，若位于手牌或牌组中，发生历变。",
+        "factionId": 32,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 6
+    },
+    "202617": {
+        "name": "“瘸子”哈罗德",
+        "description": "占领所有岛屿，将老族长的脑袋摆在他面前之前，他不会停下",
+        "tip": "<keyword=veil>遮蔽</keyword>。\\n<keyword=deploy>部署：</keyword>从己方墓场打出 1 个铜色“战士”，使其<keyword=doomed>佚亡</keyword>。\\n己方每打出 1 张“战士”牌，便对 1 个随机敌军单位造成 {Damage} 点伤害，",
+        "factionId": 32,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 6
+    },
+    "202630": {
+        "name": "艾德斯伯格的贾奎斯",
+        "description": "前的视界不仅吓坏了贾奎斯，也让他决定变得更强",
+        "tip": "<keyword=profit>利润</keyword> {Income}。\\n<keyword=tribute>献金</keyword> {Tribute-B.P.BB_Tribute}：<keyword=spawn>生成</keyword> {Counter} 个“烈焰蔷薇步兵”至同排。\\n<keyword=fee>费用</keyword> {cost}：自身获得 {boost} 点增益。\\n<keyword=devotion>赤诚：</keyword>小局开始时，若位于手牌或牌组中，发生历变。",
+        "factionId": 64,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 6
+    },
+    "202631": {
+        "name": "大团长贾奎斯",
+        "description": "如能拯救，何记代价。",
+        "tip": "<keyword=veil>遮蔽</keyword>、<keyword=profit>利润</keyword> {Income}。\\n<keyword=tribute>献金</keyword> {Tribute-B.P.BB_Tribute}：<keyword=spawn>生成</keyword> {Counter} 个“烈焰蔷薇步兵”至同排。\\n<keyword=fee>费用</keyword> {cost}：自身获得 {boost} 点增益。\\n己方每打出 1 张“火誓者”牌，便获得 {Coin} 枚<keyword=coin>金币</keyword>。",
+        "factionId": 64,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 6
+    },
+    "202641": {
+        "name": "烈焰蔷薇骑士团步兵",
+        "description": "都可以加入骑士团——骑士、农夫，甚至是猎魔人",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 64,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 3
+    },
+    "202643": {
+        "name": "流放者维拉克萨斯",
+        "description": "逐的原因很简单，因为他有贝罗恒王永远找不回来的年轻、活力和强壮",
+        "tip": "<keyword=formation>列阵</keyword>。\\n重置 1 个友军“北方领域”单位的<keyword=order>指令</keyword>能力，并使其获得<keyword=zeal>狂热</keyword>。\\n<keyword=devotion>赤诚：</keyword>小局开始时，若位于手牌或牌组，发生历变。",
+        "factionId": 8,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 7
+    },
+    "202644": {
+        "name": "维拉克萨斯国王",
+        "description": "携手复仇，喜悦加倍。",
+        "tip": "<keyword=veil>遮蔽</keyword>、<keyword=formation>列阵</keyword>。\\n<keyword=order>指令：</keyword>重置 1 个友军“北方领域”单位的<keyword=order>指令</keyword>能力，并使其获得<keyword=zeal>狂热</keyword>。\\n己方每打出 1 个“士兵”单位，便使其获得 {Boost} 点增益。",
+        "factionId": 8,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 7
+    },
+    "202654": {
+        "name": "志愿军",
+        "description": "军后，你能得到的最大奖赏莫过于战斗的荣耀。哦，还有金子，这个也不错",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 8,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 2
+    },
+    "202656": {
+        "name": "篡位者 - 将军",
+        "description": "位将军天赋异禀，总能将愚蠢的命令化作教科书般的胜利",
+        "tip": "<keyword=deploy>部署：</keyword><keyword=spawn>生成</keyword> 1 个“特工”至对方每一排，并使其获得<keyword=spying>潜伏</keyword>。\\n<keyword=zeal>狂热</keyword>、<keyword=order>指令：</keyword><keyword=seize>抓捕</keyword>所有<keyword=spying>潜伏</keyword>“特工”。\\n<keyword=devotion>赤诚：</keyword>小局开始时，若位于手牌或牌组，发生历变。",
+        "factionId": 4,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 6
+    },
+    "202657": {
+        "name": "篡位者 - 皇帝",
+        "description": "的选择有两个：宁教我负天下人，或教天下人负我。这其实不难选",
+        "tip": "<keyword=veil>遮蔽</keyword>。\\n<keyword=deploy>部署：</keyword><keyword=spawn>生成</keyword> 1 个“特工”至对方每一排，并使其获得<keyword=spying>潜伏</keyword>。\\n<keyword=zeal>狂热</keyword>、<keyword=order>指令：</keyword><keyword=seize>抓捕</keyword>所有<keyword=spying>潜伏</keyword>“特工”。\\n每有 1 个敌军单位获得<keyword=spying>潜伏</keyword>，则自身获得 {Boost} 点增益。",
+        "factionId": 4,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 5
+    },
+    "202662": {
+        "name": "多尼",
+        "description": "诅咒被解除后，多尼声称自己不知道它的来源，不知道谁该对此负责。当然，他在撒谎",
+        "tip": "<keyword=immune>免疫</keyword>。",
+        "factionId": 4,
+        "rarity": 4,
+        "provision": 7,
+        "cardType": 4,
+        "power": 7
+    },
+    "202669": {
+        "name": "特工",
+        "description": "的不是爬到屋顶上，而是怎么下来但不摔死",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 4,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 3
+    },
+    "202671": {
+        "name": "慈母艾思娜",
+        "description": "王想要保护她最为珍视的东西——布洛克莱昂和它的孩子。然而有时候没人可以救得所有人",
+        "tip": "<keyword=deploy>部署：</keyword><keyword=spawn>生成</keyword> {Counter} 个“年轻的树精”至同排。\\n<keyword=devotion>赤诚：</keyword>小局开始时，若位于手牌或牌组，发生历变。",
+        "factionId": 16,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 6
+    },
+    "202672": {
+        "name": "艾思娜：布洛克莱昂之怒",
+        "description": "缎带河一役硝烟散去，莫丽恩模糊的残躯，就连银眼女王都认不得自己女儿的遗体",
+        "tip": "<keyword=immune>免疫</keyword>。\\n<keyword=symbiosis>共生</keyword> {Symbiosis}。",
+        "factionId": 16,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 10
+    },
+    "202682": {
+        "name": "年轻的树精",
+        "description": "箭，她可以射给你，要苹果？你休想",
+        "tip": "<keyword=doomed>佚亡</keyword>、<keyword=symbiosis>共生</keyword>。",
+        "factionId": 16,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 2
+    },
+    "202683": {
+        "name": "游荡的树人",
+        "description": "我没在闲逛，我是在漫步！看不出来区别吗？",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 16,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 1
+    },
+    "202700": {
+        "name": "自然法则：遮蔽",
+        "description": "你跟我说国王和王子吗？他们是谁？我只知道我认识的人如今已是森森白骨，躺在克拉格安大墓地里，就在森林深处。",
+        "tip": "使 1 个友军单位获得 {Boost} 点增益和<keyword=veil>遮蔽</keyword>。",
+        "factionId": 16,
+        "rarity": 8,
+        "provision": 9,
+        "cardType": 2,
+        "power": 0
+    },
+    "202701": {
+        "name": "自然法则：增益",
+        "description": "你跟我说国王和王子吗？他们是谁？我只知道我认识的人如今已是森森白骨，躺在克拉格安大墓地里，就在森林深处。",
+        "tip": "使 1 个友军单位获得 {Boost} 点增益。",
+        "factionId": 16,
+        "rarity": 8,
+        "provision": 9,
+        "cardType": 2,
+        "power": 0
+    },
+    "202702": {
+        "name": "自然法则：活力",
+        "description": "你跟我说国王和王子吗？他们是谁？我只知道我认识的人如今已是森森白骨，躺在克拉格安大墓地里，就在森林深处。",
+        "tip": "使 1 个友军单位获得 {Boost} 点增益和<keyword=vitality>活力</keyword>（{Vitality}）。",
+        "factionId": 16,
+        "rarity": 8,
+        "provision": 9,
+        "cardType": 2,
+        "power": 0
+    },
+    "202703": {
+        "name": "红骑士：精准",
+        "description": "雪和烈火，是他们为天空和大地涂抹的颜色",
+        "tip": "<keyword=spawn>生成</keyword>“霜”至对方单排，持续 {counter} 回合。",
+        "factionId": 2,
+        "rarity": 22,
+        "provision": 5,
+        "cardType": 2,
+        "power": 0
+    },
+    "202704": {
+        "name": "红骑士：扩散",
+        "description": "雪和烈火，是他们为天空和大地涂抹的颜色",
+        "tip": "<keyword=spawn>生成</keyword>“霜”至对方每一排，持续 {counter} 回合。",
+        "factionId": 2,
+        "rarity": 22,
+        "provision": 5,
+        "cardType": 2,
+        "power": 0
+    },
+    "202705": {
+        "name": "达娜梅碧",
+        "description": "紫千红百花香，窈窕淑女现身姿，世间生灵常相随，草木鸟兽无不从",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=harmony>和谐</keyword>。",
+        "factionId": 16,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 7
+    },
+    "202706": {
+        "name": "林妖",
+        "description": "便全村人都饿肚子，我们也绝不去这片树林打猎",
+        "tip": "<keyword=doomed>佚亡</keyword>",
+        "factionId": 2,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 9
+    },
+    "202707": {
+        "name": "莫尔凡·符里斯",
+        "description": "夏日阳光在阿尔巴河平静的水面上熠熠生辉——我印象中的尼弗迦德就是这样啊。",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=deploy>部署：</keyword>抽至多 {Counter} 张牌，随后将相同数量的牌置于牌组顶端。",
+        "factionId": 4,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 7
+    },
+    "202787": {
+        "name": "猎魔人学徒",
+        "description": "个孩子里……最多能活下来四个",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 1,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 2
+    },
+    "202788": {
+        "name": "红色突变诱发物",
+        "description": "瑰是红",
+        "tip": "对 1 个敌军单位造成 {Damage} 点伤害。",
+        "factionId": 64,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "202789": {
+        "name": "蓝色突变诱发物",
+        "description": "罗兰是蓝",
+        "tip": "使 1 个友军单位<keyword=poison>中毒</keyword>，并获得 {Coins2} 个<keyword=coin>金币</keyword>。",
+        "factionId": 64,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "202790": {
+        "name": "绿色突变诱发物",
+        "description": "这个绿色突变送给你",
+        "tip": "使 1 个友军单位获得 {Boost} 点增益和<keyword=veil>遮蔽</keyword>。",
+        "factionId": 64,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "202872": {
+        "name": "刃齿虎：潜行",
+        "description": "它本是皇家动物园的珍藏，某天一支松鼠党的突击队袭击了展览，释放了这头野兽，并把它和残忍的主人关在了一起。打那以后，它就爱上了那个味道。",
+        "tip": "己方回合开始时，若敌方两排上的敌军单位为当前唯一单位，则对他们造成 {Damage} 点伤害，自身随后转变为“刃齿虎”。",
+        "factionId": 16,
+        "rarity": 8,
+        "provision": 9,
+        "cardType": 8,
+        "power": 0
+    },
+    "202892": {
+        "name": "科德温中士",
+        "description": "冲锋，没用的蠢货！冲锋，不然你就会知道，我比尼弗迦德人更可怕！",
+        "tip": "<keyword=zeal>狂热</keyword>。\\n<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益。\\n<keyword=charge>充能：</keyword>{Charges}。",
+        "factionId": 8,
+        "rarity": 1,
+        "provision": 4,
+        "cardType": 4,
+        "power": 3
+    },
+    "202926": {
+        "name": "辛迪加克朗",
+        "description": "能生钱",
+        "tip": "<keyword=doomed>佚亡</keyword>、<keyword=zeal>狂热</keyword>。\\n<keyword=order>指令：</keyword>获得 {Coin} 枚<keyword=coin>金币</keyword>，随后<keyword=banish>放逐</keyword>自身。",
+        "factionId": 64,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 8,
+        "power": 0
+    },
+    "202941": {
+        "name": "左侧翼杂兵",
+        "description": "看在我是老兵的份上！打赏个一克朗吧？",
+        "tip": "<keyword=doomed>佚亡</keyword>",
+        "factionId": 8,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 1
+    },
+    "202942": {
+        "name": "右侧翼杂兵",
+        "description": "看在我是老兵的份上！打赏个一克朗吧？",
+        "tip": "<keyword=doomed>佚亡</keyword>",
+        "factionId": 8,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 1
+    },
+    "202994": {
+        "name": "格尼阔拉",
+        "description": "旦塑像挂上树梢，哪怕最高尚的人也会被不由自主地吸引到她的领地",
+        "tip": "己方回合结束时，自身转变为“猩红夫人”，战力不变。\\n<keyword=sabbath>夜宴：</keyword>己方回合结束时，改为每有 1 个己方“格尼阔拉的果实”，自身便获得 {boost} 点增益。",
+        "factionId": 2,
+        "rarity": 8,
+        "provision": 11,
+        "cardType": 4,
+        "power": 7
+    },
+    "203021": {
+        "name": "鹿灵：团结",
+        "description": "神守卫——等等，这不对",
+        "tip": "位于己方墓场时，己方每打出 1 张“特殊”牌，倒数 -1。倒数归零时，从己方墓场<keyword=summon>召唤</keyword>自身至己方<keyword=ranged>远程</keyword>排。\\n倒数：{Counter}。",
+        "factionId": 16,
+        "rarity": 4,
+        "provision": 7,
+        "cardType": 4,
+        "power": 3
+    },
+    "203077": {
+        "name": "“无畏者”布朗温",
+        "description": "诅咒者，被流放者，被惹恼的人——都在这身午宴礼裙中",
+        "tip": "<keyword=immune>免疫</keyword>。\\n<keyword=grace>神赐</keyword> {Power}、<keyword=order>指令：</keyword> <keyword=infused>灌注</keyword> 1 个友军单位“{InjectableAbility}”能力。",
+        "factionId": 8,
+        "rarity": 4,
+        "provision": 9,
+        "cardType": 4,
+        "power": 2
+    },
+    "203122": {
+        "name": "禁识之瓶：启封",
+        "description": "调有无数回忆，苦乐交融，意味无穷。后调细密绵长，在时空中交织一起，在奇妙幽恐中达到高潮。在宜人的夏夜里是召魔之书的佳配",
+        "tip": "<keyword=zeal>狂热</keyword>、<keyword=order>指令：</keyword>检视对方的起始牌组。\\n<keyword=cooldown>冷却：</keyword>{Cooldown}",
+        "factionId": 1,
+        "rarity": 4,
+        "provision": 4,
+        "cardType": 8,
+        "power": 0
+    },
+    "203124": {
+        "name": "盒中灵",
+        "description": "次真正永恒的厄运",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 1,
+        "rarity": 4,
+        "provision": 0,
+        "cardType": 4,
+        "power": 13
+    },
+    "203125": {
+        "name": "红骑士：冲锋",
+        "description": "雪和烈火，是他们为天空和大地涂抹的颜色",
+        "tip": "<keyword=spawn>生成</keyword><keyword=frost>霜</keyword>至对方单排，持续 {counter} 回合，随后重新打出 1 个铜色“狂猎”单位。",
+        "factionId": 2,
+        "rarity": 22,
+        "provision": 5,
+        "cardType": 2,
+        "power": 0
+    },
+    "203126": {
+        "name": "比约恩的战船",
+        "description": "气也没能让比约恩搜寻的航行作罢，时间又能奈他何呢",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=order>指令：</keyword>对 1 个敌军单位造成 {Damage} 点伤害，随后<keyword=infused>灌注</keyword>他“{InjectableAbility}”能力。\\n<keyword=charge>充能：</keyword>{Charge}",
+        "factionId": 32,
+        "rarity": 8,
+        "provision": 14,
+        "cardType": 4,
+        "power": 5
+    },
+    "203127": {
+        "name": "湖之守卫：黎明",
+        "description": "犹如向日葵一般，只为拥抱白昼炽光而",
+        "tip": "<keyword=doomed>佚亡</keyword>。",
+        "factionId": 16,
+        "rarity": 8,
+        "provision": 14,
+        "cardType": 4,
+        "power": 1
+    },
+    "203153": {
+        "name": "青蛙",
+        "description": "要有苍蝇，日子很开心",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n己方回合结束时，触发相邻单位的<keyword=vitality>活力</keyword>。\\n<keyword=order>指令：</keyword>将自身移至所在半场的另一排。",
+        "factionId": 16,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 1
+    },
+    "203167": {
+        "name": "叶奈法的幻象",
+        "description": "表是会骗人的",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n每当该单位受到伤害，摧毁自身。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 4,
+        "power": 4
+    },
+    "203169": {
+        "name": "圣日湖：融合",
+        "description": "此地，万物回归本源，万灵重获新生",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=create>创造</keyword> 1 个主类别不在己方控制下的铜色“松鼠党”单位。",
+        "factionId": 16,
+        "rarity": 8,
+        "provision": 15,
+        "cardType": 2,
+        "power": 0
+    },
+    "203170": {
+        "name": "古德伦·约斯多蒂尔",
+        "description": "管她的父亲许诺将她献给诸神，以保佑他赢得战斗，但古德伦不愿被自己从未许下的誓言所束缚。她在浪花和海风中找到了属于自己的自",
+        "tip": "<keyword=hoard>囤积</keyword> {Hoard-B.P.BB_Hoard}、<keyword=fee>费用</keyword> {Fee}：<keyword=infused>灌注</keyword> 1 个敌军单位“{InjectableAbility}”能力。",
+        "factionId": 64,
+        "rarity": 8,
+        "provision": 14,
+        "cardType": 4,
+        "power": 4
+    },
+    "203179": {
+        "name": "贞洁之祝福",
+        "description": "迷于古代传说的术士们挖开道克人的遗迹，发掘出了这些坠饰。据说它们真正的力量会在日蚀时显现",
+        "tip": "{InjectableAbility}。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "203180": {
+        "name": "节制之祝福",
+        "description": "迷于古代传说的术士们挖开道克人的遗迹，发掘出了这些坠饰。据说它们真正的力量会在日蚀时显现",
+        "tip": "{InjectableAbility}。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "203181": {
+        "name": "慷慨之祝福",
+        "description": "迷于古代传说的术士们挖开道克人的遗迹，发掘出了这些坠饰。据说它们真正的力量会在日蚀时显现",
+        "tip": "{InjectableAbility}。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "203182": {
+        "name": "勤勉之祝福",
+        "description": "迷于古代传说的术士们挖开道克人的遗迹，发掘出了这些坠饰。据说它们真正的力量会在日蚀时显现",
+        "tip": "{InjectableAbility}。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "203183": {
+        "name": "仁慈之祝福",
+        "description": "迷于古代传说的术士们挖开道克人的遗迹，发掘出了这些坠饰。据说它们真正的力量会在日蚀时显现",
+        "tip": "{InjectableAbility}。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "203184": {
+        "name": "忍耐之祝福",
+        "description": "迷于古代传说的术士们挖开道克人的遗迹，发掘出了这些坠饰。据说它们真正的力量会在日蚀时显现",
+        "tip": "{InjectableAbility}。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "203185": {
+        "name": "谦卑之祝福",
+        "description": "迷于古代传说的术士们挖开道克人的遗迹，发掘出了这些坠饰。据说它们真正的力量会在日蚀时显现",
+        "tip": "{InjectableAbility}。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "203187": {
+        "name": "史凯利格野狼",
+        "description": "，这不是幻觉。对，它们看得见你",
+        "tip": "<keyword=doomed>佚亡</keyword>，<keyword=immune>免疫</keyword>。\\n<keyword=deathwish>遗愿：</keyword><keyword=spawn>生成</keyword> 1 张自身的基础同名牌至敌方同排。",
+        "factionId": 32,
+        "rarity": 22,
+        "provision": 0,
+        "cardType": 4,
+        "power": 2
+    },
+    "203188": {
+        "name": "袖中王牌",
+        "description": "星流星亮晶晶，\\n烧过天际千里行",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n对 1 个敌军单位造成 {Damage} 点伤害。",
+        "factionId": 4,
+        "rarity": 8,
+        "provision": 0,
+        "cardType": 2,
+        "power": 0
+    },
+    "203189": {
+        "name": "农民民兵",
+        "description": "瞧，我们是民兵。我们保卫和平。",
+        "tip": "<keyword=deploy>部署：</keyword>使 1 个友军单位获得 {Boost} 点增益。",
+        "factionId": 1,
+        "rarity": 1,
+        "provision": 4,
+        "cardType": 4,
+        "power": 2
+    },
+    "203190": {
+        "name": "石头",
+        "description": "石头朋友！”- 店",
+        "tip": "<keyword=order>指令：</keyword>摧毁 1 张己方卡牌。",
+        "factionId": 1,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 8,
+        "power": 0
+    },
+    "203203": {
+        "name": "大师级矮人符文剑",
+        "description": "石头朋友！”- 店",
+        "tip": "对 1 个敌军单位造成 {Damage} 点伤害，随后从己方手牌打出 1 张铜色牌，之后将“大师级矮人符文剑”移回己方手牌。",
+        "factionId": 1,
+        "rarity": 8,
+        "provision": 11,
+        "cardType": 2,
+        "power": 0
+    }
+}

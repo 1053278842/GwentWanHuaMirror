@@ -95,9 +95,9 @@ if __name__=="__main__":
     result_deckInfos = [int(x) for x in deckIds]
     pool = Pool(5)
     result = pool.map(getDeckInfoByDeckId,result_deckInfos)
-    for di in deckIds:
-        break
-        result_deckInfos.append(getDeckInfoByDeckId(int(di)))
+    # for di in deckIds:
+    #     break
+    #     result_deckInfos.append(getDeckInfoByDeckId(int(di)))
 
     #保存
     fp=open("main/resources/data/decks.json","w",encoding="utf-32")
