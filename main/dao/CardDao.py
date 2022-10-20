@@ -163,3 +163,12 @@ class CardDao():
             result.append(insId)
         return result
 
+
+    def getFactionIdWhenDeckInstance(self,pm,gi,playerId):
+        playerOffset = 0x20
+        if playerId == 2:
+            playerOffset = 0x28
+        return read_multi_bytes(pm,gi+0x20,[0x60,0x18,playerOffset,0x28,0x10],0x4)
+        
+    def getGameStatus(self,pm,gi):
+        return read_multi_bytes(pm,gi+0x20,[0xe8],1)

@@ -48,3 +48,4 @@ class Faction(Enum):
     SCOIATAEL = 16
     SKELLIGE = 32
     SVNDICATE = 64
+

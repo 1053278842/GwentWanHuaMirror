@@ -5,3 +5,5 @@ class BattleInfo(object):
         self.bottomPlayerId = None
         self.topPlayerId = None
         self.localPlayerId = None
+
+        

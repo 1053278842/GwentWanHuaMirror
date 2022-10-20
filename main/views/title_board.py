@@ -33,7 +33,6 @@ class title_board(tk.Frame):
     def create_page(self):
         self.can_bg = tk.Canvas(self,bg='#436280',width = self.can_size[0],height = self.can_size[1],highlightthickness=0,highlightcolor="green")
         # 绘制字符
-        # TODO RESIZE 了解字体大小和像素的关系后再定夺
         font = tkFont.Font(family='微软雅黑', size=self.fontSize, weight=tkFont.BOLD)
         self.t_all_deck_bg = self.can_bg.create_text(self.can_size[0]/2,self.can_size[1]/2,
         text=self.root.responseManager.DEFAULT_CARD_DECK_INFO.titleName,font=font,fill=self.c_default,anchor="center")
@@ -49,6 +48,18 @@ class title_board(tk.Frame):
     def updateText(self,card_deck_info):
         text = card_deck_info.titleName
         self.can_bg.itemconfig(self.t_all_deck_bg,text=text)
+
+    def setTitle(self,text):
+        self.can_bg.itemconfig(self.t_all_deck_bg,text=text)
+
+    def disableArrows(self):
+        self.can_bg.itemconfig(self.left_arrow,State="disabled")
+        self.can_bg.itemconfig(self.right_arrow,State="disabled")
+    
+    def ableArrows(self):
+        self.can_bg.itemconfig(self.left_arrow,State="normal")
+        self.can_bg.itemconfig(self.right_arrow,State="normal")
+
 
     def click_arrow(self,event):
         if event.x < self.root.WIN_WIDTH / 2:

@@ -65,6 +65,25 @@ def read_Type_Name(pm,address):
             print("Read_Type_Name函数超过{}次,请检查地址是否合法!本次操作已经正长返回".format(count))
             return result_name
 
+def read_String(pm,address):
+    count = read_memory_bytes(pm,address+0x10,4)*2
+    asciiHeadAdd = address+0x14
+    result_name = ""
+    for i in range(0,count):
+        temp_ascii = read_memory_bytes(pm,asciiHeadAdd+i*0x1,0x1)
+        result_name+=chr(temp_ascii)
+    return result_name
+    count = 0
+    while True:
+        temp_add = read_memory_bytes(pm,asciiHeadAdd+count,0x1)
+        if temp_add == 0:
+            return result_name
+        result_name+=chr(temp_add)
+        count += 1
+        if count >= 99:
+            print("Read_Type_Name函数超过{}次,请检查地址是否合法!本次操作已经正长返回".format(count))
+            return result_name
+
 def restart_program():
     python = sys.executable
     os.execl(python, python, * sys.argv)

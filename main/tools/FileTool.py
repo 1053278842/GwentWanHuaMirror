@@ -244,7 +244,6 @@ def composite_leader_card(provision,name,factionId,abilityCardTemplateId):
     draw.multiline_text((temp_x,temp_y),str(name),(240,240,240),font=font,anchor="ls",spacing=108)
     
     layer_bg = layer_bg.convert('RGB')
-    # layer_bg.save("2.jpg")
     return layer_bg
 
 # 返回一个数组图片  
@@ -252,16 +251,22 @@ def get_num_img(size,color,name):
 
     layer_bg = Image.new('RGBA', (size[0], size[1]), (34, 34, 34, 0))
     draw = ImageDraw.Draw(layer_bg)
-    # font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",26)
-    # draw.text((size[0]/2,size[1]),str(name),(40,40,40,50),font=font,anchor="mb",align="center")
-    # font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",25)
-    # draw.text((size[0]/2,size[1]),str(name),(20,20,20),font=font,anchor="mb",align="center")
     font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",24)
     draw.text((size[0]/2,size[1]),str(name),color,font=font,anchor="mb",align="center")
 
     layer_bg = layer_bg.convert('RGB')
     return layer_bg
 
+def getTextImg(size,color,name,fontSize):
+    fontHeightPx = int(fontSize*1.333333)
+    # layer_bg = Image.new('RGBA', (size, fontHeightPx), (180, 140, 120, 0))
+    layer_bg = Image.new('RGBA', (size, fontHeightPx), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(layer_bg)
+    font = ImageFont.truetype(r"main/resources/fonts/YSHaoShenTi-2.ttf",fontSize)
+    draw.text((0,fontHeightPx),str(name),color,font=font,anchor="ld",align="left")
+
+    layer_bg = layer_bg.convert('RGBA')
+    return ImageTk.PhotoImage(layer_bg)
 
 # 根据卡牌参数返回deck预览缩略图，并调整大小
 def get_deck_preview_img(info_dict,scale_factor):

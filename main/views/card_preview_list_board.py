@@ -1,3 +1,4 @@
+import datetime
 import tkinter as tk
 import tkinter.font as tkFont
 from tkinter import ALL, EventType, PhotoImage, ttk
@@ -21,8 +22,7 @@ class card_preview_list_board(tk.Frame):
         self.CARD_IMG_EFFECT_SIZE = (291,38)
 
         # label list padding
-        # TODO RESIZE 20和高度关联
-        self.canvas_padding = [int(self.root.WIN_WIDTH*0.07),20]
+        self.canvas_padding = [int(self.root.WIN_WIDTH*0.07),round(self.root.WIN_WIDTH*20/338)]
         
         # img scale  指定宽度/图片宽度 400
         self.cardImgWidth = self.root.WIN_WIDTH-self.canvas_padding[0]*2
@@ -30,6 +30,7 @@ class card_preview_list_board(tk.Frame):
         self.imgEffectScale = (self.cardImgWidth) / self.CARD_IMG_EFFECT_SIZE[0]
         self.cardEffectHeight = round(self.CARD_IMG_EFFECT_SIZE[1] * self.imgEffectScale)
         self.darkCardEffectColor = (14, 10, 6, 180)
+        self.excessCardEffectColor = (32, 0, 6, 180)
         # row_padding  图片高（50）+图片自身的一定比率 * 自适应压缩比率
         self.canvas_row_padding = round((self.CARD_IMG_SIZE[1]*1.08)*self.imgScale)
         # 存储当前行信息
@@ -46,6 +47,8 @@ class card_preview_list_board(tk.Frame):
         self.MODULE_PAGE_NORMAL = 0
         self.modulePage = self.MODULE_PAGE_NORMAL
         self.isShowRelationDeck = False
+        # 当前预测卡组
+        self.forecastDeck = {}
         # 显示类型
         self.CARD_DECK_INFO = self.root.responseManager.DEFAULT_CARD_DECK_INFO
 
@@ -125,6 +128,31 @@ class card_preview_list_board(tk.Frame):
                 self.curr_memo_cards[key]["Name"] = cardUIData["name"]
                 self.curr_memo_cards[key]["BasePower"]  = cardUIData["power"] 
 
+    def setBattleCardsModuleDataToUI(self,cardsSource):
+        currDeckData = {}
+        for key,value in cardsSource.items():
+            temp_dict = {}
+            # temp_dict["insId"] = key
+            temp_dict["ctId"] = value["Id"]
+            temp_dict["isNotExist"] = False
+            currDeckData[key] = temp_dict
+        return currDeckData
+
+    def setCarriedCardModuleDataToUI(self,cardsSource):
+        currDeckData = {}
+        for key,value in cardsSource.items():
+            temp_dict = {}
+            temp_dict["ctId"] = value["Id"]
+            temp_dict["isNotExist"] = self.isPlayedCard(key)
+            currDeckData[key] = temp_dict
+        return currDeckData
+
+    def isPlayedCard(self,key):
+        location = self.curr_memo_cards[key]["Location"] 
+        if location != hex(Location.DECK.value) and location != hex(Location.HAND.value) and location != hex(Location.LEADER.value):
+            return True
+        return False
+
     def updateData(self):
         # print("日")
         origCardsInfo = {} 
@@ -145,28 +173,35 @@ class card_preview_list_board(tk.Frame):
         self.carriedCards = cService.addStratagemCard(self.carriedCards,self.curr_memo_cards,self.root.responseManager.playerId)
         self.onceExistInCarriedCards = self.carriedCards
 
-        if self.CARD_DECK_INFO.dataModule == 0 and not self.isShowRelationDeck :
-            self.currDeckData = {}
-            self.cardsSource = self.battleCards
-            for key,value in self.cardsSource.items():
-                temp_dict = {}
-                # temp_dict["insId"] = key
-                temp_dict["ctId"] = value["Id"]
-                temp_dict["isNotExist"] = False
-                self.currDeckData[key] = temp_dict
-        if self.CARD_DECK_INFO.dataModule == 1 and not self.isShowRelationDeck :
-            self.currDeckData = {}
-            self.cardsSource = self.carriedCards
-            for key,value in self.cardsSource.items():
-                temp_dict = {}
-                location = self.curr_memo_cards[key]["Location"] 
-                temp_dict["ctId"] = value["Id"]
-                temp_dict["isNotExist"] = False
-                if location != hex(Location.DECK.value) and location != hex(Location.HAND.value) and location != hex(Location.LEADER.value):
-                    temp_dict["isNotExist"] = True
-                self.currDeckData[key] = temp_dict
-
-        
+        if not self.isShowRelationDeck:
+            if self.CARD_DECK_INFO.dataModule == 0 :
+                self.currDeckData = self.setBattleCardsModuleDataToUI(self.battleCards)
+            if self.CARD_DECK_INFO.dataModule == 1 :
+                self.currDeckData = self.setCarriedCardModuleDataToUI(self.carriedCards)
+        else:
+            ######
+            # 可以分辨多余
+            currDeckData = {}
+            for key,value in self.forecastDeck["sortedCards"].items():
+                excess = True
+                for carried_key,carried_value in self.carriedCards.items():
+                    if "temp_mapped" not in carried_value.keys():
+                        carried_value['temp_mapped'] = False
+                    if carried_value["Id"] == value["ctId"] :
+                        excess = False
+                        if not carried_value['temp_mapped'] and self.isPlayedCard(carried_key):
+                            value["isNotExist"] = True
+                            carried_value['temp_mapped'] = True
+                            break
+                if excess:
+                    value["excess"] = True
+                    # value["isNotExist"] = True
+                else:
+                    value["excess"] = False
+            # return currDeckData
+            
+            self.currDeckData = self.forecastDeck["sortedCards"]
+            #######
         # 初始化图片，以及建立映射源
         self.initImgPool(self.currDeckData,self.imgScale)
         # 映射imageId到更新数据
@@ -174,7 +209,7 @@ class card_preview_list_board(tk.Frame):
             value["imageId"] = self.insIdMapImageId[key_insId]
         # UI
         self.updateCardUI(self.currDeckData)
-        # self.updateCardExistEffectUI(self.currDeckData)
+        self.updateCardExistEffectUI(self.currDeckData)
         self.setDeckStatus(self.currDeckData)
         self.after(400,self.updateData)
 
@@ -185,19 +220,104 @@ class card_preview_list_board(tk.Frame):
         provision = 0
         cards = currDeckData
         for key,value in cards.items():
-            currCardBaseData = self.curr_memo_cards[key]
+            if value["ctId"] == 0:
+                continue
+            currCardBaseData = global_var.get_value("AllCardDict")[str(value["ctId"])]
             if value["isNotExist"]:
                 continue
-            temp_prov = currCardBaseData["Provision"]
-            if CardType(currCardBaseData["Type"]) != CardType.LEADER:
+            temp_prov = currCardBaseData["provision"]
+            if CardType(currCardBaseData["cardType"]) != CardType.LEADER:
                 provision += temp_prov
-                if CardType(currCardBaseData["Type"]) != CardType.STRATAGEM:
+                if CardType(currCardBaseData["cardType"]) != CardType.STRATAGEM:
                     total += 1
-            cardType = currCardBaseData["Type"]
+            cardType = currCardBaseData["cardType"]
             if cardType == CardType.UNIT.value :
                 unit += 1
         self.root.responseManager.updateStatusBoard(total,unit,provision)
         
+
+    def createDeckTips(self):
+        line_marginX = round(self.canvas_padding[0] + self.canvas_padding[0]/3)
+        line_padY = round(self.root.WIN_WIDTH*0.0147928)
+        nextCoordsY = 0
+        fontSize_deckName = round(self.root.WIN_WIDTH*0.053)    #18
+        fontSize_Author = round(self.root.WIN_WIDTH*0.038)      #13
+        fontSize_RepeatRate = round(self.root.WIN_WIDTH*0.038)
+        ################################################################   
+        nextCoordsY += self.canvas_padding[1]
+        width =  self.root.WIN_WIDTH - line_marginX*2
+        # height = self.canvas_padding[1]+74*self.cardImgWidth/1053+(fontSize_deckName)*1.3+line_padY+(fontSize_Author)*1.3+(fontSize_RepeatRate)*1.3-74*self.cardImgWidth/1053
+        height = round(self.root.WIN_WIDTH*0.24319)
+
+        if len(self.can_bg.find_withtag("TipsUI")) == 0:
+            self.deckProfile = ft.get_imgTk_xy(r"main/resources/images/deck_preview/bg-mon-dark2.png",width,height)
+            # self.deckProfile = ft.get_imgTk_xy(r"main/resources/images/deck_preview/LeaderFactionBg/64.png",width,height)
+            self.deckProfileBg = self.can_bg.create_image(line_marginX,nextCoordsY + 74*self.cardImgWidth/1053/2, 
+                anchor='nw' , image = self.deckProfile,tags="TipsUI")
+            line_marginX += self.canvas_padding[0]/1.8
+            ################################################################    
+            # separator
+            self.separator_top = ft.get_img_resized(r"main/resources/images/deck_preview/separator_1.png",self.cardImgWidth/1053)
+            self.sep_top = self.can_bg.create_image(self.canvas_padding[0],nextCoordsY, 
+                anchor='nw' , image = self.separator_top,tags="TipsUI")
+            
+            nextCoordsY += 74*self.cardImgWidth/1053
+            deckName = self.forecastDeck["deckName"]
+            self.temp_deckNameUIText = ft.getTextImg(self.cardImgWidth,(230,187,84),deckName,fontSize_deckName)
+            self.textDeckName = self.can_bg.create_image(line_marginX,nextCoordsY,
+            anchor="nw",tags=("TipsUI"),image=self.temp_deckNameUIText)
+            ################################################################
+            nextCoordsY += (fontSize_deckName)*1.3+line_padY
+            deckAuthor = self.forecastDeck["deckAuthor"]
+            differenceDays = self.forecastDeck["differenceDays"]
+            deckAuthor = "作  者:  " + deckAuthor + "   {0}天前创建".format(differenceDays) 
+            #image
+            self.authorPrefixImg = ft.get_imgTk_xy(r"main/resources/images/deck_preview/AuthorPrefix.png",self.root.WIN_WIDTH*0.05,self.root.WIN_WIDTH*0.05)
+            self.authorPrefix = self.can_bg.create_image(line_marginX,nextCoordsY+round((fontSize_Author)*1.3/2), 
+                anchor='w' , image = self.authorPrefixImg,tags="TipsUI")
+            self.temp_deckAuthorUIText = ft.getTextImg(round(self.cardImgWidth*0.91),(217, 216, 203),deckAuthor,fontSize_Author)
+            self.textAuthorName = self.can_bg.create_image(line_marginX+self.cardImgWidth,nextCoordsY,
+            anchor="ne",tags="TipsUI",image=self.temp_deckAuthorUIText)
+            ################################################################################################
+            nextCoordsY += (fontSize_Author)*1.3+line_padY/2
+            content = self.forecastDeck["repeatRate"]
+            content = "准确率:  {0}% ".format(round(content*100,1)) 
+            #image
+            self.authorPrefixImg_Red = ft.get_imgTk_xy(r"main/resources/images/deck_preview/AuthorPrefix_Red.png",self.root.WIN_WIDTH*0.05,self.root.WIN_WIDTH*0.05)
+            self.authorPrefix_red = self.can_bg.create_image(line_marginX,nextCoordsY+fontSize_RepeatRate*1.3/2, 
+                anchor='w' , image = self.authorPrefixImg_Red,tags="TipsUI")
+            
+            self.temp_deckRepeatRateUIText = ft.getTextImg(round(self.cardImgWidth*0.91),(217, 216, 203),content,fontSize_Author)
+            self.textRepeatRateText = self.can_bg.create_image(line_marginX+self.cardImgWidth,nextCoordsY,
+            anchor="ne",tags="TipsUI",image=self.temp_deckRepeatRateUIText)
+            # separator
+            nextCoordsY += (fontSize_RepeatRate)*1.3
+            self.separator_bottom = ft.get_img_resized(r"main/resources/images/deck_preview/separator_1.png",self.cardImgWidth/1053)
+            self.sep_bottom = self.can_bg.create_image(self.canvas_padding[0],nextCoordsY,anchor='nw' , image = self.separator_bottom,tags="TipsUI")
+        else:
+            self.can_bg.moveto(self.deckProfileBg,x=round(line_marginX),y=round(nextCoordsY + 74*self.cardImgWidth/1053/2))
+            line_marginX += round(self.canvas_padding[0]/1.8)
+            ################################################################    
+            # separator
+            self.can_bg.moveto(self.sep_top,x=self.canvas_padding[0],y=nextCoordsY)
+            
+            nextCoordsY += round(74*self.cardImgWidth/1053)
+            self.can_bg.moveto(self.textDeckName,x=line_marginX,y=nextCoordsY)
+            ################################################################
+            nextCoordsY += round((fontSize_deckName)*1.3+line_padY)
+            #image
+            self.can_bg.moveto(self.authorPrefix ,x=line_marginX,y=nextCoordsY)
+            self.can_bg.moveto(self.textAuthorName,x=round(line_marginX+self.root.WIN_WIDTH*0.075),y=nextCoordsY)
+            ################################################################################################
+            nextCoordsY += round((fontSize_Author)*1.3+line_padY/2)
+            #image
+            self.can_bg.moveto(self.authorPrefix_red,x=line_marginX,y=nextCoordsY)
+            self.can_bg.moveto(self.textRepeatRateText,x=round(line_marginX+self.root.WIN_WIDTH*0.075),y=nextCoordsY)
+            # separator
+            nextCoordsY += round((fontSize_RepeatRate)*1.3)
+            self.can_bg.moveto(self.sep_bottom,x=self.canvas_padding[0],y=nextCoordsY)
+        return round(height*1.2)
+        # return round(height+74*self.cardImgWidth/1053)
 
     def updateCardUI(self,deckData):
         uiCards = self.can_bg.find_withtag("UICard")
@@ -205,6 +325,11 @@ class card_preview_list_board(tk.Frame):
             self.can_bg.itemconfig(imageId, state = "hidden")
         count  = 0
         yOffset = 0
+
+        if self.isShowRelationDeck:
+            self.yOffset = self.createDeckTips()
+            yOffset += self.yOffset
+            
         for key,value in deckData.items():
             iId = key
             self.can_bg.itemconfig(value["imageId"], state = "normal")
@@ -214,31 +339,42 @@ class card_preview_list_board(tk.Frame):
             self.can_bg.moveto(value["imageId"],x=self.canvas_padding[0],y=self.canvas_padding[1]+self.canvas_row_padding*count+yOffset)
             count += 1
             # 排除衍生物没有cardType
-            try:
-                cardInfo = self.curr_memo_cards[key]
-                if CardType(cardInfo["Type"]) == CardType.LEADER:
-                    yOffset += 50
-                elif CardType(cardInfo["Type"]) == CardType.STRATAGEM:
-                    yOffset += 7
-            except KeyError:
-                cardInfo = global_var.get_value("AllCardDict")[str(value["ctId"])]
-                if CardType(cardInfo["cardType"]) == CardType.LEADER:
-                    yOffset += 50
-                elif CardType(cardInfo["cardType"]) == CardType.STRATAGEM:
-                    yOffset += 7
+            if value["ctId"] == 0:
+                continue
+            cardInfo = global_var.get_value("AllCardDict")[str(value["ctId"])]
+            if CardType(cardInfo["cardType"]) == CardType.LEADER:
+                yOffset += round(self.root.WIN_WIDTH*0.1479289) #50
+            elif CardType(cardInfo["cardType"]) == CardType.STRATAGEM:
+                yOffset += round(self.root.WIN_WIDTH**0.0207)  #7
     
-    # 改为池创建
+    def hiddenAllEffectUI(self):
+        effectUIs = self.can_bg.find_withtag("EffectUI")
+        for effectUI in effectUIs:
+            self.can_bg.itemconfig(effectUI, state = "hidden")
+    
+    def clearTipsUI(self):
+        for imgId in self.can_bg.find_withtag("TipsUI"):
+            self.can_bg.delete(imgId)
+
     def updateCardExistEffectUI(self,deckData):
+        self.hiddenAllEffectUI()
         count  = 0
         yOffset = 0
+
+        if self.isShowRelationDeck:
+            yOffset += self.yOffset
+
         for key,value in deckData.items():
             iId = key
             if len(self.can_bg.find_withtag(str(iId)+"hiddenCard")) == 0:
-                imgTk = ft.getDarkCardPreviewImgTk((self.cardImgWidth,self.cardEffectHeight),self.darkCardEffectColor)
+                color = self.darkCardEffectColor
+                # if self.isShowRelationDeck and value["excess"]:
+                #     color = self.excessCardEffectColor
+                imgTk = ft.getDarkCardPreviewImgTk((self.cardImgWidth,self.cardEffectHeight),color)
                 self.panel = tk.Label(master = self.root)
                 self.panel.temp_img = imgTk
                 self.can_bg.create_image(self.canvas_padding[0],self.canvas_padding[1]+self.canvas_row_padding*count+yOffset,
-                anchor='nw',image=self.panel.temp_img, tags = (str(key)+"hiddenCard"),state="hidden")
+                anchor='nw',image=self.panel.temp_img, tags = (str(key)+"hiddenCard","EffectUI"),state="hidden")
 
             temp_list = self.can_bg.find_withtag(str(key)+"hiddenCard")
             if value["isNotExist"]:
@@ -246,11 +382,14 @@ class card_preview_list_board(tk.Frame):
             else:
                 self.can_bg.itemconfig(temp_list[0], state = "hidden")
 
-            cardInfo = self.curr_memo_cards[key]
-            if CardType(cardInfo["Type"]) == CardType.LEADER:
-                yOffset += 50
-            elif CardType(cardInfo["Type"]) == CardType.STRATAGEM:
-                yOffset += 7
+            # 排除衍生物没有cardType
+            if value["ctId"] == 0:
+                continue
+            cardInfo = global_var.get_value("AllCardDict")[str(value["ctId"])]
+            if CardType(cardInfo["cardType"]) == CardType.LEADER:
+                yOffset += round(self.root.WIN_WIDTH*0.1479289) #50
+            elif CardType(cardInfo["cardType"]) == CardType.STRATAGEM:
+                yOffset += round(self.root.WIN_WIDTH**0.0207)  #7
             count+=1
 
     def initImgPool(self,data,scale_factor):
@@ -262,18 +401,11 @@ class card_preview_list_board(tk.Frame):
                 cardData = {}
                 cardData["Name"] = cardUIData["name"]
                 cardData["Id"] = int(s_ctId)
-                try:
-                    cardData["Provision"] = cardUIData["provision"]
-                    cardData["Type"] = cardUIData["cardType"]
-                    cardData["Rarity"] = cardUIData["rarity"]
-                    cardData["CurrPower"] = cardUIData["power"]
-                    cardData["FactionId"] = cardUIData["factionId"]
-                except KeyError:
-                    cardData["Provision"] = self.curr_memo_cards[int(s_insId)]["Provision"]
-                    cardData["Type"] = self.curr_memo_cards[int(s_insId)]["Type"]
-                    cardData["Rarity"] = self.curr_memo_cards[int(s_insId)]["Rarity"]
-                    cardData["CurrPower"] = self.curr_memo_cards[int(s_insId)]["BasePower"]
-                    cardData["FactionId"] = self.curr_memo_cards[int(s_insId)]["FactionId"]
+                cardData["Provision"] = cardUIData["provision"]
+                cardData["Type"] = cardUIData["cardType"]
+                cardData["Rarity"] = cardUIData["rarity"]
+                cardData["CurrPower"] = cardUIData["power"]
+                cardData["FactionId"] = cardUIData["factionId"]
             else:
                 cardData = {}
                 cardData["Name"] = "未知"
@@ -309,13 +441,16 @@ class card_preview_list_board(tk.Frame):
                         self.discoveryMap[int(s_insId)] = cardData
 
     def ScrollEvent(self,event):
+        
         MOVE_DELTA = 32
         yOffset = 0
         if self.CARD_DECK_INFO.dataModule == 1:
-            yOffset = 4
+            yOffset += 4
+        if self.isShowRelationDeck:
+            yOffset += 4
         total = 0
         cards = self.currDeckData
-        total = len(self.currDeckData.keys())
+        total = len(self.currDeckData.keys())+3
         maxNum = int(self.can_size[1]/self.canvas_row_padding)
         if event.delta > 0 :
             # M-up
@@ -356,6 +491,7 @@ class card_preview_list_board(tk.Frame):
 # ----------------------------------------------------------------
 # 相关:【推荐卡组】
     def setArrowModule(self,direct):
+        self.clearTipsUI()
         self.isShowRelationDeck = True
         # self.CARD_DECK_INFO.dataModule = 3
         if direct < 0:
@@ -367,13 +503,13 @@ class card_preview_list_board(tk.Frame):
         # 获取卡组数据
         self.currDeck = self.carriedCards
         leaderCtId = cService.getLeaderCardCtId(self.currDeck)
-        stratagemCtId = cService.getStratagemCardCtId(self.currDeck)
         # 卡组CtIds
         currDeckCtIds = []
         for key,value in self.carriedCards.items():
             currDeckCtIds.append(value["Id"])
         # TODO：改为内存 "BattleDeck"
-        factionId = cService.getFactionId(leaderCtId)
+        factionId = cService.getFactionId(self.root.responseManager.playerId)
+        print(factionId)
         filterFactionDeck = []
         for deckInfo in global_var.get_value("decks"):
             if deckInfo["factionId"] == factionId:
@@ -388,38 +524,51 @@ class card_preview_list_board(tk.Frame):
                     count += 1
             repeatRate = round(count / len(currDeckCtIds),5)
             deckInfo["repeatRate"] = repeatRate
-        
-        temp_sort_list = sorted(filterFactionDeck,key=lambda x: (-x["repeatRate"]))
+        # 做一次数据清洗，重复率相同时看最早的时间.非最早时间的清除该数据。
+        # 这一步或者交由数据库存储操作
+        temp_sort_list = sorted(filterFactionDeck,key=lambda x: (-x["repeatRate"],x["time"]))
 
+        selectedDeckIndex = 0
         count = 2000
+        index = 0 # 只用来记录确立移动stratagem的位置
         showData = {}
-        mostRelevantDeck = temp_sort_list[0]["sortedCtIds"]
+        mostRelevantDeck = temp_sort_list[selectedDeckIndex]["sortedCtIds"]
         allCardMap = global_var.get_value("AllCardDict")
         mostRelevantDeck_Sort = sorted(mostRelevantDeck,key=lambda x: (-allCardMap[str(x)]["provision"],x))
         for ctId in mostRelevantDeck_Sort:
             count += 1
-            key = count
-            showData[key] = {"ctId":ctId,"name":global_var.get_value("AllCardDict")[str(ctId)]["name"], "isNotExist":False}
-        self.currDeckData = showData
-        pass
-        # 1、Stratagem卡不能正常显示到合适位置
-        # 2、捏造的insId 不在curr_memo_cards中，关于curr_memo_cards的引用会报错
-    
+            index += 1
+            # 将stratagem卡移到位置二
+            if index == 2:
+                for temp_ctId in reversed(mostRelevantDeck_Sort):
+                    if CardType(global_var.get_value("AllCardDict")[str(temp_ctId)]["cardType"]) == CardType.STRATAGEM:
+                        showData[count] = {"ctId":temp_ctId,"name":global_var.get_value("AllCardDict")[str(temp_ctId)]["name"], "isNotExist":False}
+                        count += 1
+                        break
+            if CardType(global_var.get_value("AllCardDict")[str(ctId)]["cardType"]) == CardType.STRATAGEM:
+                continue
+            # 正常存储
+            showData[count] = {"ctId":ctId,"name":global_var.get_value("AllCardDict")[str(ctId)]["name"], "isNotExist":False}
 
-    
-    def setShowRelateDeck(self):
+        self.forecastDeck["sortedCards"] = showData
+        deckTimeFormat = self.transStrTimeToStamp(temp_sort_list[selectedDeckIndex]['time'],"%Y-%m-%dT%H:%M:%S+0000")
+        nowTimeFormat = datetime.datetime.now()
+        differenceDays = (nowTimeFormat-deckTimeFormat).days
+        self.forecastDeck["differenceDays"] = differenceDays
+        self.forecastDeck["deckName"] = self.shortenText(temp_sort_list[selectedDeckIndex]['deckName'],26)
+        self.forecastDeck["deckAuthor"] = self.shortenText(temp_sort_list[selectedDeckIndex]['deckAuthor'],14)
+        self.forecastDeck["repeatRate"] = temp_sort_list[selectedDeckIndex]['repeatRate']
 
-        playerDeckCtIds = []
-        leaderCard = 0
-        stratagemCard = 0
-        allCardDict = global_var.get_value("AllCardDict")
-        decks = global_var.get_value("decks")
-        leaderCardDict = global_var.get_value("LeaderCardDict")
-        for key,value in self.deck_module_all_deck.items():
-            if value["type"] == CardType.LEADER.value:
-                print(leaderCardDict[value["templateId"]]["factionId"])
-            if value["type"] == CardType.STRATAGEM.value:
-                pass
-            playerDeckCtIds.append(value["templateId"])
+        self.currDeckData = self.forecastDeck["sortedCards"]
+
+    def shortenText(self,text,length):
+        if len(text) >= length:
+            return text[:length-3] + "..."
+        else :
+            return text
+
+    def transStrTimeToStamp(self,time,format):
+        # if format == "yyyy-MM-dd HH:mm:ss":
+        return datetime.datetime.strptime(time,format)
 ####################################################################################################################
 ####################################################################################################################

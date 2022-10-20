@@ -140,3 +140,6 @@ class ResponseManager(object):
         #     widget.destroy()
         self.cardList.setArrowModule(direct)
         # self.cardList.setShowRelateDeck(direct)
+    
+    def setTileText(self,text):
+        self.title.setTitle(text)

@@ -3,10 +3,19 @@ import dao.CardDao as cd
 import pymem
 import tools.MemoryTool as mt
 from bean.BattleInfo import BattleInfo
+from enums.ERequestAction import *
+from enums.GameEnum import *
+from enums.GwentEnum import *
 from tools.decorators import *
 from tools.decorators import get_time_consume
 from tools.FileTool import *
 
+
+def getGameStatus():
+    return EGameStatus(cardDao.getGameStatus(pm,gi))
+
+def getFactionId(playerId):
+    return cardDao.getFactionIdWhenDeckInstance(pm,gi,playerId)
 
 def getLeaderCardCtId(data):
     for key,value in data.items():
@@ -20,8 +29,8 @@ def getStratagemCardCtId(data):
             return value["Id"]
     return 0
 
-def getFactionId(leaderCtId):
-    return global_var.get_value("AllCardDict")[str(leaderCtId)]["factionId"]
+# def getFactionId(leaderCtId):
+#     return global_var.get_value("AllCardDict")[str(leaderCtId)]["factionId"]
 
 def addStratagemCard(lackOfCards,origCards,playerId):
     stratagemCardData = {}
@@ -309,9 +318,6 @@ def isExistGameInstance():
     typeName = cardDao.getAddTypeName(giAdd,2)
     if("GameInstance" in typeName):
         return True
-    # except Exception as e:
-    #     return e
-        return False
     return False
 
 if __name__ =='__main__':

@@ -198,6 +198,15 @@ if __name__ == '__main__':
 
     root.mainloop()
 
+def closeOurButton():
+    gl_panel_root = global_var.get_value("panel_root")
+    ourCBVar = int(gl_panel_root.ourPlayerCBVar.get())
+    oppCBVar = int(gl_panel_root.opponentPlayerCBVar.get())
+    if ourCBVar == 1:
+        global_var.set_value("isActive",False)
+        gl_panel_root.ourPlayerCBVar.set(0)
+        # toggleOurCardPanel()
+
 def restartCardListPanel():
     isActive = global_var.get_value("isActive")
     if isActive:
