@@ -34,7 +34,7 @@ class card_preview_list_board(tk.Frame):
         # row_padding  图片高（50）+图片自身的一定比率 * 自适应压缩比率
         self.canvas_row_padding = round((self.CARD_IMG_SIZE[1]*1.08)*self.imgScale)
         # 存储当前行信息
-        self.orig_rows_infos = []
+        self.currDeckData={}
         # 存储发现的卡牌，映射信息
         self.discoveryMap = {}
         # 为牌组模式服务,只进不出的数据,解决基于内存的牌组数据源可能会因为对方现冥、回响等因素导致牌组减少、不全的问题
@@ -156,6 +156,14 @@ class card_preview_list_board(tk.Frame):
             return True
         return False
 
+    def setAddedCardData(self,previousData,currData):
+        self.anim_list_insId = []
+        for dataKey in currData:
+            if dataKey not in list(previousData.keys()):
+                self.anim_list_insId.append(dataKey)
+        self.currDeckData = currData
+
+
     def updateData(self):
         # print("日")
         origCardsInfo = {} 
@@ -178,9 +186,16 @@ class card_preview_list_board(tk.Frame):
 
         if not self.isShowRelationDeck:
             if self.CARD_DECK_INFO.dataModule == 0 :
-                self.currDeckData = self.setBattleCardsModuleDataToUI(self.battleCards)
+                previousData = self.currDeckData
+                currData = self.setBattleCardsModuleDataToUI(self.battleCards)
+                self.currDeckData = currData
+                self.setAddedCardData(previousData,currData)
             if self.CARD_DECK_INFO.dataModule == 1 :
-                self.currDeckData = self.setCarriedCardModuleDataToUI(self.carriedCards)
+                previousData = self.currDeckData
+                currData = self.setCarriedCardModuleDataToUI(self.carriedCards)
+                self.currDeckData = currData
+                self.setAddedCardData(previousData,currData)
+
         else:
             ######
             # 可以分辨多余
@@ -211,6 +226,8 @@ class card_preview_list_board(tk.Frame):
         for key_insId,value in self.currDeckData.items():
             value["imageId"] = self.insIdMapImageId[key_insId]
         # UI
+        for insId in self.anim_list_insId:
+            self.anim_img_tips(insId, TipsType.WHITE)
         self.updateCardUI(self.currDeckData)
         self.updateCardExistEffectUI(self.currDeckData)
         self.setDeckStatus(self.currDeckData)
@@ -226,7 +243,7 @@ class card_preview_list_board(tk.Frame):
             if value["ctId"] == 0:
                 continue
             currCardBaseData = global_var.get_value("AllCardDict")[str(value["ctId"])]
-            if value["isNotExist"]:
+            if value["isNotExist"] and (not self.CARD_DECK_INFO.isEnemy or self.isShowRelationDeck):
                 continue
             temp_prov = currCardBaseData["provision"]
             if CardType(currCardBaseData["cardType"]) != CardType.LEADER:
@@ -340,6 +357,12 @@ class card_preview_list_board(tk.Frame):
                 row = self.can_bg.find_withtag(str(iId)+"hiddenCard")[0]
                 self.can_bg.moveto(row,x=self.canvas_padding[0],y=self.canvas_padding[1]+self.canvas_row_padding*count+yOffset)
             self.can_bg.moveto(value["imageId"],x=self.canvas_padding[0],y=self.canvas_padding[1]+self.canvas_row_padding*count+yOffset)
+            # tipsEffect
+            if len(self.can_bg.find_withtag(str(iId)+"effect_tips")) > 0:
+                row = self.can_bg.find_withtag(str(iId)+"effect_tips")[0]
+                self.can_bg.itemconfig(row,state="normal")
+                self.can_bg.moveto(row,x=self.canvas_padding[0],y=self.canvas_padding[1]+self.canvas_row_padding*count+yOffset)
+                
             count += 1
             # 排除衍生物没有cardType
             if value["ctId"] == 0:
@@ -349,6 +372,35 @@ class card_preview_list_board(tk.Frame):
                 yOffset += round(self.root.WIN_WIDTH*0.1479289) #50
             elif CardType(cardInfo["cardType"]) == CardType.STRATAGEM:
                 yOffset += round(self.root.WIN_WIDTH**0.0207)  #7
+    
+    def anim_img_tips(self,insId,tipsType,anim_time=2500):
+        # leader不做效果，应为要特殊适配大小
+        cardInfo = global_var.get_value("AllCardDict")[str(self.currDeckData[insId]["ctId"])]
+        if CardType(cardInfo["cardType"]) == CardType.LEADER:
+            return 0
+        count = 0
+        try:
+            count = list(self.currDeckData.keys()).index(insId)
+        except Exception:
+            return 0
+        if tipsType == TipsType.ADD:
+            path = r"main/resources/images/deck_preview/BLUE_FRAME.png"
+        elif tipsType == TipsType.REMOVE:
+            path = r"main/resources/images/deck_preview/PURPLE_FRAME.png"
+        elif tipsType == TipsType.MOVE:
+            path = r"main/resources/images/deck_preview/BLUE_FRAME.png"
+        elif tipsType == TipsType.WHITE:
+            path = r"main/resources/images/deck_preview/WHITE_FRAME.png"
+       
+        imgTk = ft.get_img_resized(path,self.imgEffectScale)
+        self.panel = tk.Label(master = self.root)
+        self.panel.temp_img = imgTk
+        row_id = self.can_bg.create_image(0,0,image=self.panel.temp_img,
+            tags = (str(insId)+"effect_tips","effect_tips"),state = "hidden")
+        self.root.after(anim_time,self.anim_img_tips_hidden,row_id)
+        
+    def anim_img_tips_hidden(self,img_id):
+        self.can_bg.delete(img_id)
     
     def hiddenAllEffectUI(self):
         effectUIs = self.can_bg.find_withtag("EffectUI")
@@ -483,7 +535,6 @@ class card_preview_list_board(tk.Frame):
         self.isShowRelationDeck = False
         self.CARD_DECK_INFO = CardDeckInfo
         self.root.responseManager.setTileText(CardDeckInfo.titleName)
-        self.orig_rows_infos.clear()
         self.curr_memo_cards.clear()
         self.clear_deck_img()
 
@@ -557,6 +608,7 @@ class card_preview_list_board(tk.Frame):
         self.currDeckData = self.forecastDeck["sortedCards"]
 
     # 相关:【推荐卡组】
+    # 点击事件的入口函数
     def setArrowModule(self,direct):
         self.clearTipsUI()
         self.isShowRelationDeck = True
@@ -580,7 +632,6 @@ class card_preview_list_board(tk.Frame):
             self.canvas_padding[1] = 0
         else:
             self.root.responseManager.title.ableArrows()
-        print(self.modulePage)
         self.setShowPage(self.modulePage)
 
     def setDefaultPage(self):
