@@ -14,6 +14,7 @@ from views.title_board import title_board
 class GwentGUI:
 
     def __init__(self,root,coords,isEnemy=False):
+        print("Gwent已创建,isEnemy:",isEnemy)
         self.root = root
         # 338*1000 最好比率
         self.root.WIN_WIDTH = coords[0]

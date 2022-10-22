@@ -123,6 +123,8 @@ class ResponseManager(object):
         self.setPlayerId()
         self.setDeckInfo(self.playerId)
         self.cardList.updateData()
+        # 初始化箭头显示
+        self.cardList.setDefaultPage()
 
     # 更新status
     def updateStatusBoard(self,total,unit,provision):
@@ -130,6 +132,7 @@ class ResponseManager(object):
     
     # 根据card_deck_info 对象，更新当前筛选条件
     def resetShowListCondition(self,card_deck_info):
+        self.cardList.setDefaultPage()
         self.cardList.resetType(card_deck_info)
         self.title.updateText(card_deck_info)
         self.status.update_data(0,0,0)
@@ -143,3 +146,4 @@ class ResponseManager(object):
     
     def setTileText(self,text):
         self.title.setTitle(text)
+

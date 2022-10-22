@@ -25,6 +25,7 @@ def toggleOurCardPanel():
     elif status_var == 0:
         # 关闭我方记牌器
         root.panelManager.closeOurPanel()
+        global_var.get_value("panel_root").ourCbTextVar.set("开 启")
 
 def toggleOpponentCardPanel():
     root = global_var.get_value('panel_root')
@@ -38,6 +39,7 @@ def toggleOpponentCardPanel():
     elif status_var == 0:
         # 关闭我方记牌器
         root.panelManager.closeOpponentPanel()
+        global_var.get_value("panel_root").oppCbTextVar.set("开 启")
 
 def tips_no_gwent():
     root = global_var.get_value('panel_root')
@@ -198,33 +200,5 @@ if __name__ == '__main__':
 
     root.mainloop()
 
-def closeOurButton():
-    gl_panel_root = global_var.get_value("panel_root")
-    ourCBVar = int(gl_panel_root.ourPlayerCBVar.get())
-    oppCBVar = int(gl_panel_root.opponentPlayerCBVar.get())
-    if ourCBVar == 1:
-        global_var.set_value("isActive",False)
-        gl_panel_root.ourPlayerCBVar.set(0)
-        # toggleOurCardPanel()
-
-def restartCardListPanel():
-    isActive = global_var.get_value("isActive")
-    if isActive:
-        gl_panel_root = global_var.get_value("panel_root")
-        ourCBVar = int(gl_panel_root.ourPlayerCBVar.get())
-        oppCBVar = int(gl_panel_root.opponentPlayerCBVar.get())
-        if ourCBVar == 1:
-            global_var.set_value("isActive",False)
-            gl_panel_root.ourPlayerCBVar.set(0)
-            toggleOurCardPanel()
-            gl_panel_root.ourPlayerCBVar.set(1)
-            toggleOurCardPanel()
-        
-        if oppCBVar == 1:
-            global_var.set_value("isActive",False)
-            gl_panel_root.opponentPlayerCBVar.set(0)
-            toggleOpponentCardPanel()
-            gl_panel_root.opponentPlayerCBVar.set(1)
-            toggleOpponentCardPanel()
 
 

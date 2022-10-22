@@ -172,3 +172,47 @@ class CardDao():
         
     def getGameStatus(self,pm,gi):
         return read_multi_bytes(pm,gi+0x20,[0xe8],1)
+    
+    def getGIisInitialized(self,pm,gi):
+        return read_multi_bytes(pm,gi+0x20,[0xe9],1)
+    
+    def getBattleInfo(self,pm,gi):
+        result = {}
+        # Game
+        result["GameStatus"] = read_multi_bytes(pm,gi+0x20,[0xe8],1)
+        result["GameMode"] = read_memory_bytes(pm,gi+0x38,1)
+        result["GameId"] = read_multi_bytes(pm,gi+0x28,[0x48],8)
+        result["BattleType"] = read_multi_bytes(pm,gi+0x28,[0x58],1)
+        # roundInfos
+        roundInfosAdd = read_multi_bytes(pm,gi+0x20,[0x68,0x18],0x8)
+        result["roundInfos"] = []
+        for i in range(0,3):
+            temp_dict={}
+            left_score = read_multi_bytes(pm,roundInfosAdd+0x20+i*0x8,[0x18,0x20],0x4)
+            right_score = read_multi_bytes(pm,roundInfosAdd+0x20+i*0x8,[0x18,0x24],0x4)
+            temp_dict["index"] = read_multi_bytes(pm,roundInfosAdd+0x20+i*0x8,[0x10],0x4)
+            temp_dict["left_score"] = left_score
+            temp_dict["right_score"] = right_score
+            temp_dict["starting_playerId"] = read_multi_bytes(pm,roundInfosAdd+0x20+i*0x8,[0x20],0x1)
+            temp_dict["winner_playId"] =read_multi_bytes(pm,roundInfosAdd+0x20+i*0x8,[0x21],0x1)
+            temp_dict["turn_index"] = read_multi_bytes(pm,roundInfosAdd+0x20+i*0x8,[0x24],0x4)
+            result["roundInfos"].append(temp_dict)
+        # GameResult
+        result["curr_round_index"] = read_multi_bytes(pm,gi+0x20,[0x68,0x20],0x4)
+        result["winner_playId"] = read_multi_bytes(pm,gi+0x20,[0x68,0x24],0x1) # 3 为平局
+        result["end_game_reason"] = read_multi_bytes(pm,gi+0x20,[0x68,0x25],0x1)
+        # players
+        result["players"] = []
+        for i in range(0,2):
+            temp_dict={}
+            nameAdd = read_multi_bytes(pm,gi+0x20,[0x60,0x18,0x20+i*0x8,0x60,0x10],0x8)
+            temp_dict["player_name"] = read_String(pm,nameAdd)
+            temp_dict["service_id"] = read_int64(pm,gi+0x20,[0x60,0x18,0x20+i*0x8,0x60,0x18])
+            temp_dict["paragon_level"] = read_multi_bytes(pm,gi+0x20,[0x60,0x18,0x20+i*0x8,0x60,0x34],0x4)
+            temp_dict["MMR"] = read_multi_bytes(pm,gi+0x20,[0x60,0x18,0x20+i*0x8,0x60,0x38],0x4)
+            temp_dict["rank"] = read_multi_bytes(pm,gi+0x20,[0x60,0x18,0x20+i*0x8,0x60,0x3c],0x4)
+            temp_dict["leader_id"] = read_multi_bytes(pm,gi+0x20,[0x60,0x18,0x20+i*0x8,0x28,0x14],0x4)
+            temp_dict["stratagem_id"] = read_multi_bytes(pm,gi+0x20,[0x60,0x18,0x20+i*0x8,0x28,0x1c],0x4)
+            temp_dict["faction_id"] = read_multi_bytes(pm,gi+0x20,[0x60,0x18,0x20+i*0x8,0x28,0x10],0x4)
+            result["players"].append(temp_dict)
+        return result

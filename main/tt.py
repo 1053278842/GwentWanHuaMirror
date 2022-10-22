@@ -50,6 +50,7 @@ if __name__ == "__main__":
     # print("#######################################")
     print("GI:",hex(gi))
     print("GameStatus:",EGameStatus(read_multi_bytes(pm,gi+0x20,[0xe8],1)))
+    print("isInitialized:",read_multi_bytes(pm,gi+0x20,[0xe9],1))
     print("################################")
     roundInfosAdd = read_multi_bytes(pm,gi+0x20,[0x68,0x18],0x8)
     print("RoundInfo[]:",hex(read_multi_bytes(pm,gi+0x20,[0x68,0x18],0x8)))

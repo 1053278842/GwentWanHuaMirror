@@ -15,7 +15,7 @@ def read_int64(pm, base, offsets):
         return value
     except Exception as e:
         # print("[Warning]",e)
-        mainGui.restartCardListPanel()
+        # mainGui.restartCardListPanel()
         return e
 
 # 没有偏移,如果传入则不会进入指针
@@ -28,7 +28,7 @@ def read_memory_bytes(pm,base,count):
         return int(result,16)
     except Exception as e:
         # print("[Warning]",e)
-        mainGui.restartCardListPanel()
+        # mainGui.restartCardListPanel()
         return e
 
 def read_multi_bytes(pm, base, offsets,count):
@@ -45,7 +45,7 @@ def read_multi_bytes(pm, base, offsets,count):
         # return value
     except Exception as e:
         # print("[Warning]",e)
-        mainGui.restartCardListPanel()
+        # mainGui.restartCardListPanel()
         return e
 
 # 获取到对象的类型名
@@ -73,16 +73,7 @@ def read_String(pm,address):
         temp_ascii = read_memory_bytes(pm,asciiHeadAdd+i*0x1,0x1)
         result_name+=chr(temp_ascii)
     return result_name
-    count = 0
-    while True:
-        temp_add = read_memory_bytes(pm,asciiHeadAdd+count,0x1)
-        if temp_add == 0:
-            return result_name
-        result_name+=chr(temp_add)
-        count += 1
-        if count >= 99:
-            print("Read_Type_Name函数超过{}次,请检查地址是否合法!本次操作已经正长返回".format(count))
-            return result_name
+
 
 def restart_program():
     python = sys.executable

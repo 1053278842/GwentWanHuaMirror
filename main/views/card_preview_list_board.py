@@ -42,13 +42,16 @@ class card_preview_list_board(tk.Frame):
         self.insIdMapImageId = {}
         self.onceExistInCarriedCards = {}
         # module
-        self.MODULE_PAGE_MAX = 2
+        self.MODULE_PAGE_MAX = 3
         self.MODULE_PAGE_MIN = 0
         self.MODULE_PAGE_NORMAL = 0
         self.modulePage = self.MODULE_PAGE_NORMAL
         self.isShowRelationDeck = False
+        # self.root.responseManager.title.disableArrows()
+        # self.root.responseManager.title.showOneArrow(True)
         # 当前预测卡组
         self.forecastDeck = {}
+        self.forecastDeck["sortedCards"] = {}
         # 显示类型
         self.CARD_DECK_INFO = self.root.responseManager.DEFAULT_CARD_DECK_INFO
 
@@ -479,6 +482,7 @@ class card_preview_list_board(tk.Frame):
     def resetType(self,CardDeckInfo):
         self.isShowRelationDeck = False
         self.CARD_DECK_INFO = CardDeckInfo
+        self.root.responseManager.setTileText(CardDeckInfo.titleName)
         self.orig_rows_infos.clear()
         self.curr_memo_cards.clear()
         self.clear_deck_img()
@@ -489,50 +493,41 @@ class card_preview_list_board(tk.Frame):
     def setCardDeckInfo(self,CardDeckInfo):
         self.CARD_DECK_INFO = CardDeckInfo
 # ----------------------------------------------------------------
-# 相关:【推荐卡组】
-    def setArrowModule(self,direct):
-        self.clearTipsUI()
-        self.isShowRelationDeck = True
-        # self.CARD_DECK_INFO.dataModule = 3
-        if direct < 0:
-            #left
-            self.modulePage -= 1 if self.modulePage < self.MODULE_PAGE_MAX else 0
-        else:
-            # right
-            self.modulePage += 1 if self.modulePage < self.MODULE_PAGE_MAX else 0
-        # 获取卡组数据
-        self.currDeck = self.carriedCards
-        leaderCtId = cService.getLeaderCardCtId(self.currDeck)
-        # 卡组CtIds
+    def getRelevantDeck(self,index):
+        # 预测卡组源的CtIds列表
         currDeckCtIds = []
         for key,value in self.carriedCards.items():
             currDeckCtIds.append(value["Id"])
-        # TODO：改为内存 "BattleDeck"
+        # 根据factionId初步过滤卡组数据库
         factionId = cService.getFactionId(self.root.responseManager.playerId)
-        print(factionId)
-        filterFactionDeck = []
-        for deckInfo in global_var.get_value("decks"):
-            if deckInfo["factionId"] == factionId:
-                filterFactionDeck.append(deckInfo)
+        filterFactionDeck = cService.getDeckByFactionId(factionId,global_var.get_value("decks"))
+        temp_sort_list = cService.getSortedDeckByRepeated(currDeckCtIds,filterFactionDeck)
+        maxIndex = len(temp_sort_list)-1
+        if index > maxIndex:
+            index = maxIndex
+        if maxIndex < 0:
+            # TODO 未找到需要卡组
+            pass
+        return temp_sort_list[index]
+            
 
-        
-        for deckInfo in filterFactionDeck:
-            deckCards = list(deckInfo["sortedCtIds"])
-            count = 0
-            for ctId in currDeckCtIds:
-                if ctId in deckCards:
-                    count += 1
-            repeatRate = round(count / len(currDeckCtIds),5)
-            deckInfo["repeatRate"] = repeatRate
-        # 做一次数据清洗，重复率相同时看最早的时间.非最早时间的清除该数据。
-        # 这一步或者交由数据库存储操作
-        temp_sort_list = sorted(filterFactionDeck,key=lambda x: (-x["repeatRate"],x["time"]))
+    def setShowPage(self,pageIndex):
+        if pageIndex == self.MODULE_PAGE_NORMAL:
+            self.setDefaultPage()
+        else:
+            # 根据pageIndex设置数据
+            self.clearTipsUI()
+            self.isShowRelationDeck = True
+            
+            relevantDeck = self.getRelevantDeck(pageIndex - 1)
+            self.setForecastDeck(relevantDeck)
+            self.root.responseManager.setTileText("相 似 卡 组 - {0}".format(pageIndex))
 
-        selectedDeckIndex = 0
+    def setForecastDeck(self,relevantDeck):
         count = 2000
         index = 0 # 只用来记录确立移动stratagem的位置
         showData = {}
-        mostRelevantDeck = temp_sort_list[selectedDeckIndex]["sortedCtIds"]
+        mostRelevantDeck = relevantDeck["sortedCtIds"]
         allCardMap = global_var.get_value("AllCardDict")
         mostRelevantDeck_Sort = sorted(mostRelevantDeck,key=lambda x: (-allCardMap[str(x)]["provision"],x))
         for ctId in mostRelevantDeck_Sort:
@@ -551,15 +546,51 @@ class card_preview_list_board(tk.Frame):
             showData[count] = {"ctId":ctId,"name":global_var.get_value("AllCardDict")[str(ctId)]["name"], "isNotExist":False}
 
         self.forecastDeck["sortedCards"] = showData
-        deckTimeFormat = self.transStrTimeToStamp(temp_sort_list[selectedDeckIndex]['time'],"%Y-%m-%dT%H:%M:%S+0000")
+        deckTimeFormat = self.transStrTimeToStamp(relevantDeck['time'],"%Y-%m-%dT%H:%M:%S+0000")
         nowTimeFormat = datetime.datetime.now()
         differenceDays = (nowTimeFormat-deckTimeFormat).days
         self.forecastDeck["differenceDays"] = differenceDays
-        self.forecastDeck["deckName"] = self.shortenText(temp_sort_list[selectedDeckIndex]['deckName'],26)
-        self.forecastDeck["deckAuthor"] = self.shortenText(temp_sort_list[selectedDeckIndex]['deckAuthor'],14)
-        self.forecastDeck["repeatRate"] = temp_sort_list[selectedDeckIndex]['repeatRate']
+        self.forecastDeck["deckName"] = self.shortenText(relevantDeck['deckName'],26)
+        self.forecastDeck["deckAuthor"] = self.shortenText(relevantDeck['deckAuthor'],14)
+        self.forecastDeck["repeatRate"] = relevantDeck['repeatRate']
 
         self.currDeckData = self.forecastDeck["sortedCards"]
+
+    # 相关:【推荐卡组】
+    def setArrowModule(self,direct):
+        self.clearTipsUI()
+        self.isShowRelationDeck = True
+        # self.CARD_DECK_INFO.dataModule = 3
+        if direct < 0:
+            #left
+            self.modulePage -= 1 if self.modulePage > self.MODULE_PAGE_MIN else 0
+        elif direct > 0:
+            # right
+            self.modulePage += 1 if self.modulePage < self.MODULE_PAGE_MAX else 0
+
+        if self.modulePage >= self.MODULE_PAGE_MAX:
+            self.modulePage = self.MODULE_PAGE_MAX
+            self.root.responseManager.title.disableArrows()
+            self.root.responseManager.title.showOneArrow(True)
+            self.canvas_padding[1] = 0
+        elif self.modulePage <= self.MODULE_PAGE_MIN:
+            self.modulePage = self.MODULE_PAGE_MIN
+            self.root.responseManager.title.disableArrows()
+            self.root.responseManager.title.showOneArrow(False)
+            self.canvas_padding[1] = 0
+        else:
+            self.root.responseManager.title.ableArrows()
+        print(self.modulePage)
+        self.setShowPage(self.modulePage)
+
+    def setDefaultPage(self):
+        self.clearTipsUI()
+        self.isShowRelationDeck = False
+        self.resetType(self.CARD_DECK_INFO)
+        self.modulePage = self.MODULE_PAGE_NORMAL
+        self.root.responseManager.title.disableArrows()
+        self.root.responseManager.title.showOneArrow(False)
+
 
     def shortenText(self,text,length):
         if len(text) >= length:

@@ -11,6 +11,35 @@ from tools.decorators import get_time_consume
 from tools.FileTool import *
 
 
+def getSortedDeckByRepeated(currDeckCtIds,filterFactionDeck):
+     # 对返回的数据进行重复率排序
+    for deckInfo in filterFactionDeck:
+        deckCards = list(deckInfo["sortedCtIds"])
+        count = 0
+        for ctId in currDeckCtIds:
+            if ctId in deckCards:
+                count += 1
+        repeatRate = round(count / len(currDeckCtIds),5)
+        deckInfo["repeatRate"] = repeatRate
+    # 做一次数据清洗，重复率相同时看最早的时间.非最早时间的清除该数据。
+    # 这一步或者交由数据库存储操作
+    temp_sort_list = sorted(filterFactionDeck,key=lambda x: (-x["repeatRate"],x["time"]))
+    return temp_sort_list
+
+def getDeckByFactionId(factionId,allDecks):
+    filterFactionDeck = []
+    for deckInfo in allDecks:
+        if deckInfo["factionId"] == factionId:
+            filterFactionDeck.append(deckInfo)
+    return filterFactionDeck
+
+
+def getBattleInfo():
+    return cardDao.getBattleInfo(pm,gi)
+
+def getGIisInitialized():
+    return cardDao.getGIisInitialized(pm,gi)
+
 def getGameStatus():
     return EGameStatus(cardDao.getGameStatus(pm,gi))
 
@@ -310,15 +339,29 @@ def main():
     global_var.set_value("decks",getDeckDataJsonDict())
     # cardDict =  global_var.get_value("LeaderCardDict")
 
+def refreshGI():
+    global gi
+    gi = cardDao.getGameInstance()
+    
 # 该语句会有三种情况
 # True/False/报错
 def isExistGameInstance():
     # try:
-    giAdd = cardDao.getGameInstance()
-    typeName = cardDao.getAddTypeName(giAdd,2)
-    if("GameInstance" in typeName):
-        return True
-    return False
+    #     giAdd = cardDao.getGameInstance()
+    #     typeName = cardDao.getAddTypeName(giAdd,2)
+    #     if("GameInstance" in typeName):
+    #         return True
+    #     return False
+    # except:
+    #     return False
+    try:
+        isInitialized = cardDao.getGIisInitialized(pm,gi)
+        if isInitialized == 1:
+            return True
+        return False
+    except:
+        return False
+
 
 if __name__ =='__main__':
     main()
