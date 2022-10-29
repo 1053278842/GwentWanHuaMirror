@@ -51,6 +51,10 @@ class card_preview_list_board(tk.Frame):
         # self.root.responseManager.title.showOneArrow(True)
         # 当前预测卡组
         self.forecastDeck = {}
+        self.forecastDeck["deckName"] = ""
+        self.forecastDeck["deckAuthor"] = ""
+        self.forecastDeck["differenceDays"] = 0
+        self.forecastDeck["repeatRate"] = 0
         self.forecastDeck["sortedCards"] = {}
         # 显示类型
         self.CARD_DECK_INFO = self.root.responseManager.DEFAULT_CARD_DECK_INFO
@@ -375,9 +379,13 @@ class card_preview_list_board(tk.Frame):
     
     def anim_img_tips(self,insId,tipsType,anim_time=2500):
         # leader不做效果，应为要特殊适配大小
-        cardInfo = global_var.get_value("AllCardDict")[str(self.currDeckData[insId]["ctId"])]
-        if CardType(cardInfo["cardType"]) == CardType.LEADER:
-            return 0
+        try:
+            if insId != 0 and self.currDeckData[insId]["ctId"]!=0:
+                cardInfo = global_var.get_value("AllCardDict")[str(self.currDeckData[insId]["ctId"])]
+                if CardType(cardInfo["cardType"]) == CardType.LEADER:
+                    return 0
+        except KeyError:
+            pass
         count = 0
         try:
             count = list(self.currDeckData.keys()).index(insId)
@@ -553,12 +561,13 @@ class card_preview_list_board(tk.Frame):
         factionId = cService.getFactionId(self.root.responseManager.playerId)
         filterFactionDeck = cService.getDeckByFactionId(factionId,global_var.get_value("decks"))
         temp_sort_list = cService.getSortedDeckByRepeated(currDeckCtIds,filterFactionDeck)
-        maxIndex = len(temp_sort_list)-1
-        if index > maxIndex:
-            index = maxIndex
-        if maxIndex < 0:
-            # TODO 未找到需要卡组
-            pass
+        maxIndex = len(temp_sort_list)-1 
+        if maxIndex > 0:
+            if index > maxIndex:
+                index = maxIndex
+            if maxIndex < 0:
+                # TODO 未找到需要卡组
+                pass
         return temp_sort_list[index]
             
 
@@ -597,7 +606,7 @@ class card_preview_list_board(tk.Frame):
             showData[count] = {"ctId":ctId,"name":global_var.get_value("AllCardDict")[str(ctId)]["name"], "isNotExist":False}
 
         self.forecastDeck["sortedCards"] = showData
-        deckTimeFormat = self.transStrTimeToStamp(relevantDeck['time'],"%Y-%m-%dT%H:%M:%S+0000")
+        deckTimeFormat = self.transStrTimeToStamp(relevantDeck['time'],"%Y-%m-%dT%H:%M:%S.000+00:00")
         nowTimeFormat = datetime.datetime.now()
         differenceDays = (nowTimeFormat-deckTimeFormat).days
         self.forecastDeck["differenceDays"] = differenceDays

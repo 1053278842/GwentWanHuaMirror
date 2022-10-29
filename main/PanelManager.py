@@ -1,7 +1,7 @@
 import tkinter as tk
 
 import bean.global_var as global_var
-import PanelGUI
+import GwentMirror
 import pymem
 import services.CardService as cs
 from enums.GameEnum import *

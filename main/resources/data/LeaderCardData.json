@@ -359,16 +359,6 @@
         "cardType": 1,
         "power": 0
     },
-    "202359": {
-        "name": "火誓狂热者",
-        "description": "我的信仰无人能敌，亦如我的怒火！",
-        "tip": "<keyword=doomed>佚亡</keyword>。",
-        "factionId": 64,
-        "rarity": 8,
-        "provision": 15,
-        "cardType": 1,
-        "power": 0
-    },
     "202373": {
         "name": "头号大奖",
         "description": "是有谁认为一个女人的入局，会让这城市的地下势力变得心软，那可就大错特错了",

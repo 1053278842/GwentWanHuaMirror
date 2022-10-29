@@ -1,6 +1,8 @@
+import bean.global_var as global_var
 import services.CardService as cs
 from bean.CardDeckTypeInfo import CardDeckTypeInfo
 from enums.GwentEnum import *
+from RequestManager import RequestManager
 
 
 class ResponseManager(object):
@@ -10,6 +12,8 @@ class ResponseManager(object):
         self.CARD_DECK_INFO = self.set_card_deck_info(isEnemy)
         self.CARD_DECK_INFO[1].isActive = True
         self.DEFAULT_CARD_DECK_INFO = self.CARD_DECK_INFO[1]
+        # 初始化
+        self.requestManager = RequestManager()
 
     def set_card_deck_info(self,isEnemy):
         result_list = []
@@ -125,6 +129,17 @@ class ResponseManager(object):
         self.cardList.updateData()
         # 初始化箭头显示
         self.cardList.setDefaultPage()
+        # # 初始化decks.json文件
+        # battleInfo = cs.getBattleInfo()
+        # factionId_1 = battleInfo["players"][0]["faction_id"]
+        # factionId_2 = battleInfo["players"][1]["faction_id"]
+        # result = self.requestManager.getDecks(factionId_1)
+        
+        # result2 = self.requestManager.getDecks(factionId_2)
+        # for dict_row in result2:
+        #     result.append(dict_row)
+        # global_var.set_value("decks",result)
+
 
     # 更新status
     def updateStatusBoard(self,total,unit,provision):

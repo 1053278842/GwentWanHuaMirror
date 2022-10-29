@@ -1,5 +1,7 @@
 import binascii
 
+import tools.DataUtils as DU
+import tools.FileTool as FT
 from enums.ERequestAction import *
 from tools.decorators import *
 from tools.MemoryTool import *
@@ -21,7 +23,8 @@ class CardDao():
         # 10.10 32e7390
         # 10.10 热修1 32b53e0
         # 10.10 热修2 32bda60
-        gameInstanceAdd = read_int64(self.pm,self.baseAddress+0x32bda60,[0xb8,0x0,0x38])
+        add = int(FT.getVersion()["address"])
+        gameInstanceAdd = read_int64(self.pm,self.baseAddress+add,[0xb8,0x0,0x38])
         return gameInstanceAdd
     
     def getLocalPlayerId(self,pm,giAdd):
@@ -184,7 +187,7 @@ class CardDao():
         result["GameId"] = read_multi_bytes(pm,gi+0x28,[0x48],8)
         result["BattleType"] = read_multi_bytes(pm,gi+0x28,[0x58],1)
         # roundInfos
-        roundInfosAdd = read_multi_bytes(pm,gi+0x20,[0x68,0x18],0x8)
+        roundInfosAdd = read_multi_bytes(pm,gi+0x20,[0x68,0x18],0x8)    
         result["roundInfos"] = []
         for i in range(0,3):
             temp_dict={}
@@ -214,5 +217,19 @@ class CardDao():
             temp_dict["leader_id"] = read_multi_bytes(pm,gi+0x20,[0x60,0x18,0x20+i*0x8,0x28,0x14],0x4)
             temp_dict["stratagem_id"] = read_multi_bytes(pm,gi+0x20,[0x60,0x18,0x20+i*0x8,0x28,0x1c],0x4)
             temp_dict["faction_id"] = read_multi_bytes(pm,gi+0x20,[0x60,0x18,0x20+i*0x8,0x28,0x10],0x4)
+
+            cardListAdd = read_int64(pm,gi+0x28,[0x28-i*0x8,0x38,0x28,0x10])
+            nums = read_int64(pm,cardListAdd+0x18,[])
+            result_cardIds = []
+            # leader和Stratagem卡还未包含在decks中
+            result_cardIds.append(temp_dict["leader_id"])
+            result_cardIds.append(temp_dict["stratagem_id"])
+            for i in range(0,nums):
+                ctId = read_memory_bytes(pm,cardListAdd+0x20+i*0x8,0x4)
+                if ctId != 0:
+                    result_cardIds.append(ctId)
+            temp_dict["decks"] = result_cardIds
+            temp_dict["deckId"] = DU.transListCtIdToHash(temp_dict["decks"])
+
             result["players"].append(temp_dict)
         return result

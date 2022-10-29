@@ -7,6 +7,14 @@ from enums.GwentEnum import CardType, Location, Rarity
 from PIL import Image, ImageDraw, ImageFile, ImageFont, ImageTk
 
 
+def getGlobalConfig():
+    cardDict = open(r"main/resources/config/global_config.json", "r",encoding="utf-8")
+    return json.loads(cardDict.read())
+
+def getVersion():
+    cardDict = open(r"main/resources/config/version.json", "r",encoding="utf-16")
+    return json.loads(cardDict.read())
+
 def getCardDataJsonDict():
     cardDict = open(r"main/resources/config/card_json.json", "r",encoding="utf-8")
     return json.loads(cardDict.read())
@@ -16,7 +24,7 @@ def getLeaderCardDataJsonDict():
     return json.loads(cardDict.read())
 
 def getDeckDataJsonDict():
-    cardDict = open(r"main/resources/data/decks.json", "r",encoding="utf-8")
+    cardDict = open(r"main/resources/data/decks.json", "r",encoding="utf-16")
     return json.loads(cardDict.read())
 # 图片相关
 # 图片爬取在其他文件

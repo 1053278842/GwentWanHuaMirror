@@ -1,7 +1,7 @@
 import os
 import sys
 
-import PanelGUI as mainGui
+import GwentMirror as mainGui
 import pymem
 
 
@@ -66,11 +66,11 @@ def read_Type_Name(pm,address):
             return result_name
 
 def read_String(pm,address):
-    count = read_memory_bytes(pm,address+0x10,4)*2
+    count = read_memory_bytes(pm,address+0x10,4)
     asciiHeadAdd = address+0x14
     result_name = ""
     for i in range(0,count):
-        temp_ascii = read_memory_bytes(pm,asciiHeadAdd+i*0x1,0x1)
+        temp_ascii = read_memory_bytes(pm,asciiHeadAdd+i*0x2,0x2)
         result_name+=chr(temp_ascii)
     return result_name
 
