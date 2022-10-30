@@ -87,12 +87,22 @@ def init_versionText():
     root.version_orig.set(data['name'])
 
 def updateVersionJson():
-    # data = json.loads(open(r'main/resources/config/version.json', 'r').read())
-    # version_orig_id = data['id']
+    orig_data = FT.getVersion()
+    orig_id = orig_data["id"]
+
+    global_config = FT.getGlobalConfig()
+    try:
+        RM.RequestManager().updateVersion()
+    except Exception:
+        FT.saveVersion(orig_data)
+        messagebox.showerror("错误","服务器请求失败!烦请手动前往官网进行更新:{0}/download".format(global_config["url"]))
+        return
     data = FT.getVersion()
-    orig_id = data["id"]
-    RM.RequestManager().updateVersion()
     new_id = data["id"]
+    if data["canAutoUpdate"] == 0 and orig_id != new_id:
+        FT.saveVersion(orig_data)
+        messagebox.showwarning("警告","最新版本不支持自动更新!烦请手动前往官网进行更新:{0}/download".format(global_config["url"]))
+        return
     root.version_orig.set(data['name'])
     root.version_new.set(data['name'])
     if orig_id != new_id:
@@ -195,14 +205,17 @@ def create_page(root):
     st.pack(fill=BOTH, expand=YES)
 
     # add text
-    st.insert(END, 'BUG提交烦请惠书邮箱:\n1053278842@qq.com')
-    st.insert(END, '\n技术交流:1053278842(QQ)')
-    st.insert(END, '\n')
-    st.insert(END, '\n开发这个的原因:\n')
-    st.insert(END, '本想做一个demo,集成暂时掌握的技术栈。但是不小心越走越远做的似乎臃肿了些。')
-    st.insert(END, '当然笔者也是广大昆友的一员,面对Gwent玩家数量的惨淡也希望贡献自己的一点力量。')
-    st.insert(END, '于是着力于游戏内、外信息获取的方式,从便利性上寻求突破(这里不得不提一嘴LOR,光找卡组就把我劝退了...)。')
-    st.insert(END, '暂时不考虑盈利，开源的话因为代码很烂，等维护好了自然会开源的。')
+    # context = FT.getVersion()["context"]
+    st.insert(END, '<更新日志>\nVersion 0.3.1-bate:\n  编写了更新系统;\n  修复了推荐卡组时导致的意外崩溃问题;\n \
+        \n<写在前面>\n \
+    BUG提交烦请惠书邮箱:\n \
+    1053278842@qq.com\n \
+    技术交流:1053278842(QQ)\n \
+    \n \
+    本想做一个demo,集成暂时掌握的技术栈。但是不小心越走越远做的似乎臃肿了些。当然笔者也是广大昆友的一员,面对Gwent玩家数量的惨淡也希望贡献自己的一点力量。\
+    \n\n \
+    暂时不考虑盈利，代码很烂暂不考虑开源，维护好了便会开源。')
+   
 
     noteBook.add(main_frame,text="启动")
     noteBook.add(main_frame2,text="更新")
@@ -237,6 +250,8 @@ if __name__ == '__main__':
     # 338*1000 最好比率
     
     root.title("Gwent Mirror")
+    # root.iconbitmap('main/resources/images/favicon/Beer.ico')
+    root.iconphoto(True,tk.PhotoImage(file='main/resources/images/favicon/Beer.png'))
     root.geometry('{0}x{1}+0+0'.format(230,280))
     root.resizable(0, 0)
     global_var.set_value("panel_root",root)

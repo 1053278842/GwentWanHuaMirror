@@ -87,4 +87,4 @@ class RequestManager():
             print(json.dump(result,fp=fp,ensure_ascii=False))
         except Exception:
             print("请求VERSION失败!未成功写入version.json")
-            return Exception;
+            raise

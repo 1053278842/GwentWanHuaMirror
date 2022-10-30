@@ -15,6 +15,10 @@ def getVersion():
     cardDict = open(r"main/resources/config/version.json", "r",encoding="utf-16")
     return json.loads(cardDict.read())
 
+def saveVersion(version):
+    fp=open("main/resources/config/version.json","w",encoding="utf-16")
+    json.dump(version,fp=fp,ensure_ascii=False)
+
 def getCardDataJsonDict():
     cardDict = open(r"main/resources/config/card_json.json", "r",encoding="utf-8")
     return json.loads(cardDict.read())
