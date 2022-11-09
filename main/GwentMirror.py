@@ -54,6 +54,9 @@ def tips_no_gwent():
     root.oppCbTextVar.set("开  启")
     messagebox.showinfo("提示","未检测到'Gwent.exe',请检查游戏否与启动!")
 
+def tips_show(header,context):
+    messagebox.showinfo(header,context)
+
 
 def UpdateCoordsJson():
     var_w = root.cardsPanelWidth.get()
@@ -241,6 +244,17 @@ def checkCanUpdateDecks():
         return True
     return False
 
+def hidden():
+    global_var.get_value("panel_root").withdraw()
+
+def show():
+    global_var.get_value("panel_root").deiconify()
+    
+def destroy():
+    sys.exit(0)
+    # global_var.get_value("panel_root").destroy()
+
+
 if __name__ == '__main__':
     # 初始化全局变量文件
     global_var._init()
@@ -255,11 +269,12 @@ if __name__ == '__main__':
     root.geometry('{0}x{1}+0+0'.format(230,280))
     root.resizable(0, 0)
     global_var.set_value("panel_root",root)
+    # 隐藏界面，启动正常后显示，in PanelManager
+    hidden()
     create_page(root)
 
     if checkCanUpdateDecks():
         root.after(10,RM.RequestManager().updateDecks())
-
 
     root.mainloop()
 

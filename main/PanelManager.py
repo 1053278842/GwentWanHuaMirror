@@ -12,6 +12,13 @@ from RequestManager import RequestManager
 
 class PanelManager():
     def __init__(self,root):
+        #检查进程是否启动
+        if not self.checkProgramIsRunning():
+            GwentMirror.tips_show("警告","检测到游戏未启动!")
+            GwentMirror.destroy()
+        else:
+            GwentMirror.show()
+
         cs.main()
         
         self.root = root
@@ -93,7 +100,7 @@ class PanelManager():
             self.ourPanelSearching = True
             self.asyncOurPanel(coords)
         else:
-            PanelGUI.tips_no_gwent()
+            GwentMirror.tips_no_gwent()
 
     def closeOurPanel(self):
         if self.ourPanel != None:
@@ -125,7 +132,7 @@ class PanelManager():
             self.oppPanelSearching = True
             self.asyncOppPanel(coords)
         else:
-            PanelGUI.tips_no_gwent()
+            GwentMirror.tips_no_gwent()
         
     def closeOpponentPanel(self):
         if self.opponentPanel != None:
