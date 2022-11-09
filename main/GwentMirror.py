@@ -10,6 +10,7 @@ import bean.global_var as global_var
 import PanelManager as PM
 import RequestManager as RM
 import tools.FileTool as FT
+from enums.GamePlatform import EGamePlatform
 from ttkbootstrap import Style
 from ttkbootstrap.constants import *
 from ttkbootstrap.dialogs import *
@@ -87,9 +88,20 @@ def init_coords_components():
 
 def init_versionText():
     data = json.loads(open(r'main/resources/config/version.json', 'r',encoding="utf-16").read())
-    root.version_orig.set(data['name'])
+    try:
+        root.version_orig.set(data['name'])
+    except KeyError:
+        print("name不存在!")
 
-def updateVersionJson():
+def updateVersionSteam():
+    updateVersionJson(EGamePlatform.STEAM)
+
+def updateVersionGOG():
+    updateVersionJson(EGamePlatform.GOG)
+    
+def updateVersionJson(EGP):
+    # 1:Steam
+    # 2:GOG
     orig_data = FT.getVersion()
     orig_id = orig_data["id"]
 
@@ -108,6 +120,8 @@ def updateVersionJson():
         return
     root.version_orig.set(data['name'])
     root.version_new.set(data['name'])
+    # 根据按钮，重设不同平台版本的基址
+    FT.resetVersionPlatformAddress(EGP)
     if orig_id != new_id:
         messagebox.showinfo("提示","更新完毕!")
     else:
@@ -192,7 +206,10 @@ def create_page(root):
 
     frame = Frame(frame_2)
     frame.pack(side="top",pady=8,padx=5,fill="x",expand=1)
-    Button(frame,command=updateVersionJson,text="点击检查并更新最新版本!",bootstyle=("warning")).pack(side="left",fill="x",expand=1)
+    Button(frame,command=updateVersionSteam,text="检查&更新&切换最新版本!(Steam)",bootstyle=("warning")).pack(side="left",fill="x",expand=1)
+    frame = Frame(frame_2)
+    frame.pack(side="top",pady=0,padx=5,fill="x",expand=1)
+    Button(frame,command=updateVersionGOG,text="检查&更新&切换最新版本!(GOG)",bootstyle=("light")).pack(side="left",fill="x",expand=1)
 
     frame = Frame(frame_2)
     frame.pack(side="top",pady=60,padx=5,fill="x",expand=1)  
@@ -209,11 +226,14 @@ def create_page(root):
 
     # add text
     # context = FT.getVersion()["context"]
-    st.insert(END, '<更新日志>\nVersion 0.3.1-bate:\n  编写了更新系统;\n  修复了推荐卡组时导致的意外崩溃问题;\n \
+    st.insert(END, 
+        '<更新日志>\n \
+        Version 0.3.2-bate:\n  兼容了GOG,但需要点击gog检查按钮;\n  修改了该窗口的初始化位置;\n \
+        Version 0.3.1-bate:\n  编写了更新系统;\n  修复了推荐卡组时导致的意外崩溃问题;\n \
         \n<写在前面>\n \
     BUG提交烦请惠书邮箱:\n \
     1053278842@qq.com\n \
-    技术交流:1053278842(QQ)\n \
+    内测交流群:129120844(QQ)\n \
     \n \
     本想做一个demo,集成暂时掌握的技术栈。但是不小心越走越远做的似乎臃肿了些。当然笔者也是广大昆友的一员,面对Gwent玩家数量的惨淡也希望贡献自己的一点力量。\
     \n\n \
@@ -266,7 +286,11 @@ if __name__ == '__main__':
     root.title("Gwent Mirror")
     # root.iconbitmap('main/resources/images/favicon/Beer.ico')
     root.iconphoto(True,tk.PhotoImage(file='main/resources/images/favicon/Beer.png'))
-    root.geometry('{0}x{1}+0+0'.format(230,280))
+    panel_width = 230
+    panel_height = 280
+    panel_x = int((root.winfo_screenwidth() - panel_width) / 2)
+    panel_y = int((root.winfo_screenheight() - panel_height) / 2)
+    root.geometry('{0}x{1}+{2}+{3}'.format(panel_width,panel_height,panel_x,panel_y))
     root.resizable(0, 0)
     global_var.set_value("panel_root",root)
     # 隐藏界面，启动正常后显示，in PanelManager

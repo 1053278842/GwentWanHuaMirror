@@ -84,7 +84,7 @@ class RequestManager():
         try:
             result = self.getVersion()
             fp=open("main/resources/config/version.json","w",encoding="utf-16")
-            print(json.dump(result,fp=fp,ensure_ascii=False))
+            json.dump(result,fp=fp,ensure_ascii=False)
         except Exception:
             print("请求VERSION失败!未成功写入version.json")
             raise

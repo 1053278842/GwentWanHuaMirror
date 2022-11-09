@@ -24,7 +24,9 @@ class GwentGUI:
         if isEnemy:
             self.root.WIN_WIDTH = coords[0]
             self.root.WIN_HEIGHT = coords[1]
-            self.root.geometry('{0}x{1}+400+0'.format(self.root.WIN_WIDTH,self.root.WIN_HEIGHT))
+            x = int((self.root.winfo_screenwidth() - self.root.WIN_WIDTH ))
+            y = 0
+            self.root.geometry('{0}x{1}+{2}+{3}'.format(self.root.WIN_WIDTH,self.root.WIN_HEIGHT,x,y))
         self.root.wm_attributes('-topmost',1)
         root.overrideredirect(1)
 

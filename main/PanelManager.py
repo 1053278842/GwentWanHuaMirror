@@ -165,12 +165,12 @@ class PanelManager():
                 oppButtonPressed = int(global_var.get_value("panel_root").opponentPlayerCBVar.get())
                 if ourButtonPressed == 1:
                     if not self.ourPanelSearching:
-                        PanelGUI.toggleOurCardPanel()
+                        GwentMirror.toggleOurCardPanel()
                 else:
                     global_var.get_value("panel_root").ourCbTextVar.set("开 启")
                 if oppButtonPressed == 1:
                     if not self.oppPanelSearching:
-                        PanelGUI.toggleOpponentCardPanel()
+                        GwentMirror.toggleOpponentCardPanel()
                 else:
                     global_var.get_value("panel_root").oppCbTextVar.set("开 启")
         self.root.after(1000,self.checkGameRunningLoop)

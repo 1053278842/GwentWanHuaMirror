@@ -25,6 +25,7 @@ class CardDao():
         # 10.10 热修2 32bda60
         add = int(FT.getVersion()["address"])
         gameInstanceAdd = read_int64(self.pm,self.baseAddress+add,[0xb8,0x0,0x38])
+        # hh= hex(gameInstanceAdd))
         return gameInstanceAdd
     
     def getLocalPlayerId(self,pm,giAdd):

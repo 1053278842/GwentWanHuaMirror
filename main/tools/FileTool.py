@@ -3,9 +3,16 @@ import json
 import os
 
 import pymem
+from enums.GamePlatform import EGamePlatform
 from enums.GwentEnum import CardType, Location, Rarity
 from PIL import Image, ImageDraw, ImageFile, ImageFont, ImageTk
 
+
+def resetVersionPlatformAddress(EGP):
+    if EGP == EGamePlatform.GOG:
+        data = getVersion() 
+        data['address'] = data['addressGOG']
+        saveVersion(data)
 
 def getGlobalConfig():
     cardDict = open(r"main/resources/config/global_config.json", "r",encoding="utf-8")

@@ -72,10 +72,13 @@ class card_preview_list_board(tk.Frame):
         self.can_bg.pack()
         # 绑定事件
         self.can_bg.bind('<MouseWheel>',self.ScrollEvent)
-        
+        self.can_bg.bind('<Return>', self.on_key) # 按下回车
         # self.root.bind('<Key>', self.updateData)
 
         # self.show_data_frame()
+
+    def on_key(self, key):
+        print(key)
 
     def fillDiscoveredCardOfBottomPlayerViewingAction(self):
         # 捕获用户操作想吃什么？
