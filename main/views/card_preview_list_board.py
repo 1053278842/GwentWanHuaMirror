@@ -72,13 +72,15 @@ class card_preview_list_board(tk.Frame):
         self.can_bg.pack()
         # 绑定事件
         self.can_bg.bind('<MouseWheel>',self.ScrollEvent)
-        self.can_bg.bind('<Return>', self.on_key) # 按下回车
+        # self.root.bind('<Return>', self.on_key) # 按下回车
         # self.root.bind('<Key>', self.updateData)
 
         # self.show_data_frame()
 
     def on_key(self, key):
         print(key)
+        self.setShowPage(self.modulePage)
+
 
     def fillDiscoveredCardOfBottomPlayerViewingAction(self):
         # 捕获用户操作想吃什么？
@@ -420,6 +422,7 @@ class card_preview_list_board(tk.Frame):
     
     def clearTipsUI(self):
         for imgId in self.can_bg.find_withtag("TipsUI"):
+            # self.can_bg.itemconfig(imgId, state = "hidden")
             self.can_bg.delete(imgId)
 
     def updateCardExistEffectUI(self,deckData):
