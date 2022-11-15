@@ -9,11 +9,12 @@ import tools.FileTool as ft
 from enums.GwentEnum import *
 from PIL import Image, ImageFont, ImageTk
 from tools.decorators import *
+from views.list_board.DeckTips import *
 
 
 ## 图片列表卡组
 class card_preview_list_board(tk.Frame):
-
+    
     def __init__(self, root):
         super().__init__(master = root)
         self.root = root
@@ -72,15 +73,14 @@ class card_preview_list_board(tk.Frame):
         self.can_bg.pack()
         # 绑定事件
         self.can_bg.bind('<MouseWheel>',self.ScrollEvent)
-        # self.root.bind('<Return>', self.on_key) # 按下回车
+        # self.root.bind('<Enter>', self.resetCurrDeckData) # 按下回车
         # self.root.bind('<Key>', self.updateData)
+        self.resetCurrDeckData()
 
-        # self.show_data_frame()
-
-    def on_key(self, key):
-        print(key)
-        self.setShowPage(self.modulePage)
-
+    def resetCurrDeckData(self):
+        if self.modulePage != self.MODULE_PAGE_NORMAL:
+            self.setShowPage(self.modulePage)
+        self.root.after(5000,self.resetCurrDeckData)
 
     def fillDiscoveredCardOfBottomPlayerViewingAction(self):
         # 捕获用户操作想吃什么？
@@ -185,13 +185,13 @@ class card_preview_list_board(tk.Frame):
         self.battleCards = cService.filterCardsByDeckCondition(self.curr_memo_cards,self.CARD_DECK_INFO)
 
         self.carriedCards = {}
-        self.carriedCards.update(self.onceExistInCarriedCards)
         self.carriedCards.update(self.curr_memo_cards)
+        self.carriedCards.update(self.onceExistInCarriedCards)
         self.carriedCards = cService.filterCardsIntoCarriedCards(self.carriedCards,self.CARD_DECK_INFO)
         # 映射曾经存在于carriedCards中的卡牌数据
         self.carriedCards = cService.sort_cardTemplate_by_provision(self.carriedCards)
         self.carriedCards = cService.addStratagemCard(self.carriedCards,self.curr_memo_cards,self.root.responseManager.playerId)
-        self.onceExistInCarriedCards = self.carriedCards
+        self.onceExistInCarriedCards.update(self.carriedCards)
 
         if not self.isShowRelationDeck:
             if self.CARD_DECK_INFO.dataModule == 0 :
@@ -264,8 +264,77 @@ class card_preview_list_board(tk.Frame):
                 unit += 1
         self.root.responseManager.updateStatusBoard(total,unit,provision)
         
+    def createDeckTipsPro(self):
+        line_marginX = round(self.canvas_padding[0] + self.canvas_padding[0]/3)
+        line_padY = round(self.root.WIN_WIDTH*0.0147928)
+        nextCoordsY = 0
+        fontSize_deckName = round(self.root.WIN_WIDTH*0.053)    #18
+        # TODO 耦合
+        fontSize_Author = round(self.root.WIN_WIDTH*0.038)      #13
+        fontSize_RepeatRate = round(self.root.WIN_WIDTH*0.038)
+        ################################################################   
+        nextCoordsY += self.canvas_padding[1]
+        width =  self.root.WIN_WIDTH - line_marginX*2
+        # height = self.canvas_padding[1]+74*self.cardImgWidth/1053+(fontSize_deckName)*1.3+line_padY+(fontSize_Author)*1.3+(fontSize_RepeatRate)*1.3-74*self.cardImgWidth/1053
+        height = round(self.root.WIN_WIDTH*0.24319)
 
-    def createDeckTips(self):
+        self.deckProfile = ft.get_imgTk_xy(r"main/resources/images/deck_preview/bg-mon-dark2.png",width,height)
+        # self.deckProfile = ft.get_imgTk_xy(r"main/resources/images/deck_preview/LeaderFactionBg/64.png",width,height)
+        self.deckProfileBg = self.can_bg.create_image(line_marginX,nextCoordsY + 74*self.cardImgWidth/1053/2, 
+            anchor='nw' , image = self.deckProfile,tags="TipsUI")
+        line_marginX += self.canvas_padding[0]/1.8
+        ################################################################    
+        # separator
+        self.separator_top = ft.get_img_resized(r"main/resources/images/deck_preview/separator_1.png",self.cardImgWidth/1053)
+        self.sep_top = self.can_bg.create_image(self.canvas_padding[0],nextCoordsY, 
+            anchor='nw' , image = self.separator_top,tags="TipsUI")
+        
+        nextCoordsY += 74*self.cardImgWidth/1053
+        deckName = self.forecastDeck["deckName"]
+        self.temp_deckNameUIText = ft.getTextImg(self.cardImgWidth,(230,187,84),deckName,fontSize_deckName)
+        self.textDeckName = self.can_bg.create_image(line_marginX,nextCoordsY,
+        anchor="nw",tags=("TipsUI"),image=self.temp_deckNameUIText)
+        ################################################################
+        nextCoordsY += (fontSize_deckName)*1.3+line_padY
+        deckAuthor = self.forecastDeck["deckAuthor"]
+        differenceDays = self.forecastDeck["differenceDays"]
+        deckAuthor = "作  者:  " + deckAuthor + "   {0}天前创建".format(differenceDays) 
+        #image
+        self.authorPrefixImg = ft.get_imgTk_xy(r"main/resources/images/deck_preview/AuthorPrefix.png",self.root.WIN_WIDTH*0.05,self.root.WIN_WIDTH*0.05)
+        self.authorPrefix = self.can_bg.create_image(line_marginX,nextCoordsY+round((fontSize_Author)*1.3/2), 
+            anchor='w' , image = self.authorPrefixImg,tags="TipsUI")
+        self.temp_deckAuthorUIText = ft.getTextImg(round(self.cardImgWidth*0.91),(217, 216, 203),deckAuthor,fontSize_Author)
+        self.textAuthorName = self.can_bg.create_image(line_marginX+self.cardImgWidth,nextCoordsY,
+        anchor="ne",tags="TipsUI",image=self.temp_deckAuthorUIText)
+        ################################################################################################
+        nextCoordsY += (fontSize_Author)*1.3+line_padY/2
+        content = self.forecastDeck["repeatRate"]
+        content = "准确率:  {0}% ".format(round(content*100,1)) 
+        #image
+        self.authorPrefixImg_Red = ft.get_imgTk_xy(r"main/resources/images/deck_preview/AuthorPrefix_Red.png",self.root.WIN_WIDTH*0.05,self.root.WIN_WIDTH*0.05)
+        self.authorPrefix_red = self.can_bg.create_image(line_marginX,nextCoordsY+fontSize_RepeatRate*1.3/2, 
+            anchor='w' , image = self.authorPrefixImg_Red,tags="TipsUI")
+        
+        self.temp_deckRepeatRateUIText = ft.getTextImg(round(self.cardImgWidth*0.91),(217, 216, 203),content,fontSize_Author)
+        self.textRepeatRateText = self.can_bg.create_image(line_marginX+self.cardImgWidth,nextCoordsY,
+        anchor="ne",tags="TipsUI",image=self.temp_deckRepeatRateUIText)
+        # self.tt = self.can_bg.create_text(self.can_size[0]/2,self.can_size[1]/2,text = content)
+        # separator
+        nextCoordsY += (fontSize_RepeatRate)*1.3
+        self.separator_bottom = ft.get_img_resized(r"main/resources/images/deck_preview/separator_1.png",self.cardImgWidth/1053)
+        self.sep_bottom = self.can_bg.create_image(self.canvas_padding[0],nextCoordsY,anchor='nw' , image = self.separator_bottom,tags="TipsUI")
+        
+    def resetRepeatRateUiText(self,num):
+        print("更新！")
+        try:
+            content = "准确率:  {0}% ".format(round(num*100,1)) 
+            fontSize_Author = round(self.root.WIN_WIDTH*0.038)
+            self.temp_deckRepeatRateUIText = ft.getTextImg(round(self.cardImgWidth*0.91),(217, 216, 203),content,fontSize_Author)
+            self.can_bg.itemconfig(self.textRepeatRateText,image = self.temp_deckRepeatRateUIText )
+        except Exception:
+            pass
+        
+    def updateShowDeckTips(self):
         line_marginX = round(self.canvas_padding[0] + self.canvas_padding[0]/3)
         line_padY = round(self.root.WIN_WIDTH*0.0147928)
         nextCoordsY = 0
@@ -279,50 +348,7 @@ class card_preview_list_board(tk.Frame):
         height = round(self.root.WIN_WIDTH*0.24319)
 
         if len(self.can_bg.find_withtag("TipsUI")) == 0:
-            self.deckProfile = ft.get_imgTk_xy(r"main/resources/images/deck_preview/bg-mon-dark2.png",width,height)
-            # self.deckProfile = ft.get_imgTk_xy(r"main/resources/images/deck_preview/LeaderFactionBg/64.png",width,height)
-            self.deckProfileBg = self.can_bg.create_image(line_marginX,nextCoordsY + 74*self.cardImgWidth/1053/2, 
-                anchor='nw' , image = self.deckProfile,tags="TipsUI")
-            line_marginX += self.canvas_padding[0]/1.8
-            ################################################################    
-            # separator
-            self.separator_top = ft.get_img_resized(r"main/resources/images/deck_preview/separator_1.png",self.cardImgWidth/1053)
-            self.sep_top = self.can_bg.create_image(self.canvas_padding[0],nextCoordsY, 
-                anchor='nw' , image = self.separator_top,tags="TipsUI")
-            
-            nextCoordsY += 74*self.cardImgWidth/1053
-            deckName = self.forecastDeck["deckName"]
-            self.temp_deckNameUIText = ft.getTextImg(self.cardImgWidth,(230,187,84),deckName,fontSize_deckName)
-            self.textDeckName = self.can_bg.create_image(line_marginX,nextCoordsY,
-            anchor="nw",tags=("TipsUI"),image=self.temp_deckNameUIText)
-            ################################################################
-            nextCoordsY += (fontSize_deckName)*1.3+line_padY
-            deckAuthor = self.forecastDeck["deckAuthor"]
-            differenceDays = self.forecastDeck["differenceDays"]
-            deckAuthor = "作  者:  " + deckAuthor + "   {0}天前创建".format(differenceDays) 
-            #image
-            self.authorPrefixImg = ft.get_imgTk_xy(r"main/resources/images/deck_preview/AuthorPrefix.png",self.root.WIN_WIDTH*0.05,self.root.WIN_WIDTH*0.05)
-            self.authorPrefix = self.can_bg.create_image(line_marginX,nextCoordsY+round((fontSize_Author)*1.3/2), 
-                anchor='w' , image = self.authorPrefixImg,tags="TipsUI")
-            self.temp_deckAuthorUIText = ft.getTextImg(round(self.cardImgWidth*0.91),(217, 216, 203),deckAuthor,fontSize_Author)
-            self.textAuthorName = self.can_bg.create_image(line_marginX+self.cardImgWidth,nextCoordsY,
-            anchor="ne",tags="TipsUI",image=self.temp_deckAuthorUIText)
-            ################################################################################################
-            nextCoordsY += (fontSize_Author)*1.3+line_padY/2
-            content = self.forecastDeck["repeatRate"]
-            content = "准确率:  {0}% ".format(round(content*100,1)) 
-            #image
-            self.authorPrefixImg_Red = ft.get_imgTk_xy(r"main/resources/images/deck_preview/AuthorPrefix_Red.png",self.root.WIN_WIDTH*0.05,self.root.WIN_WIDTH*0.05)
-            self.authorPrefix_red = self.can_bg.create_image(line_marginX,nextCoordsY+fontSize_RepeatRate*1.3/2, 
-                anchor='w' , image = self.authorPrefixImg_Red,tags="TipsUI")
-            
-            self.temp_deckRepeatRateUIText = ft.getTextImg(round(self.cardImgWidth*0.91),(217, 216, 203),content,fontSize_Author)
-            self.textRepeatRateText = self.can_bg.create_image(line_marginX+self.cardImgWidth,nextCoordsY,
-            anchor="ne",tags="TipsUI",image=self.temp_deckRepeatRateUIText)
-            # separator
-            nextCoordsY += (fontSize_RepeatRate)*1.3
-            self.separator_bottom = ft.get_img_resized(r"main/resources/images/deck_preview/separator_1.png",self.cardImgWidth/1053)
-            self.sep_bottom = self.can_bg.create_image(self.canvas_padding[0],nextCoordsY,anchor='nw' , image = self.separator_bottom,tags="TipsUI")
+            self.createDeckTipsPro()
         else:
             self.can_bg.moveto(self.deckProfileBg,x=round(line_marginX),y=round(nextCoordsY + 74*self.cardImgWidth/1053/2))
             line_marginX += round(self.canvas_padding[0]/1.8)
@@ -342,6 +368,7 @@ class card_preview_list_board(tk.Frame):
             #image
             self.can_bg.moveto(self.authorPrefix_red,x=line_marginX,y=nextCoordsY)
             self.can_bg.moveto(self.textRepeatRateText,x=round(line_marginX+self.root.WIN_WIDTH*0.075),y=nextCoordsY)
+            # self.can_bg.itemconfig(self.temp_deckRepeatRateUIText, state = "hidden")
             # separator
             nextCoordsY += round((fontSize_RepeatRate)*1.3)
             self.can_bg.moveto(self.sep_bottom,x=self.canvas_padding[0],y=nextCoordsY)
@@ -356,7 +383,7 @@ class card_preview_list_board(tk.Frame):
         yOffset = 0
 
         if self.isShowRelationDeck:
-            self.yOffset = self.createDeckTips()
+            self.yOffset = self.updateShowDeckTips()
             yOffset += self.yOffset
             
         for key,value in deckData.items():
@@ -422,8 +449,12 @@ class card_preview_list_board(tk.Frame):
     
     def clearTipsUI(self):
         for imgId in self.can_bg.find_withtag("TipsUI"):
-            # self.can_bg.itemconfig(imgId, state = "hidden")
-            self.can_bg.delete(imgId)
+            self.can_bg.itemconfig(imgId, state = "hidden")
+
+    def showTipsUI(self):
+        for imgId in self.can_bg.find_withtag("TipsUI"):
+            self.can_bg.itemconfig(imgId, state = "normal")
+            # self.can_bg.delete(imgId)
 
     def updateCardExistEffectUI(self,deckData):
         self.hiddenAllEffectUI()
@@ -582,11 +613,12 @@ class card_preview_list_board(tk.Frame):
             self.setDefaultPage()
         else:
             # 根据pageIndex设置数据
-            self.clearTipsUI()
+            self.showTipsUI()
             self.isShowRelationDeck = True
             
             relevantDeck = self.getRelevantDeck(pageIndex - 1)
             self.setForecastDeck(relevantDeck)
+            self.resetRepeatRateUiText(self.forecastDeck["repeatRate"])
             self.root.responseManager.setTileText("相 似 卡 组 - {0}".format(pageIndex))
 
     def setForecastDeck(self,relevantDeck):

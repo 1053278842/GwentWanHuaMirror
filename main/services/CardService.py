@@ -279,7 +279,6 @@ def filterCardsTypeAndLocation(cardDeckInfo,cts,isContainHeaderCard=False):
                     continue
                 if int(value["Location"],16) == cardDeckInfo.location.value or int(value["Location"],16) == cardDeckInfo.secLocation.value:
                     results[key] = value
-    pass
     return results
 
 # 将ct对象集封装为dict格式的对象,主键为card实例化的id
