@@ -57,6 +57,8 @@ class card_preview_list_board(tk.Frame):
         self.forecastDeck["differenceDays"] = 0
         self.forecastDeck["repeatRate"] = 0
         self.forecastDeck["sortedCards"] = {}
+        # 预测卡组的自动刷新依据：carried的len
+        self.carriedLazyLen = 0
         # 显示类型
         self.CARD_DECK_INFO = self.root.responseManager.DEFAULT_CARD_DECK_INFO
 
@@ -75,12 +77,6 @@ class card_preview_list_board(tk.Frame):
         self.can_bg.bind('<MouseWheel>',self.ScrollEvent)
         # self.root.bind('<Enter>', self.resetCurrDeckData) # 按下回车
         # self.root.bind('<Key>', self.updateData)
-        self.resetCurrDeckData()
-
-    def resetCurrDeckData(self):
-        if self.modulePage != self.MODULE_PAGE_NORMAL:
-            self.setShowPage(self.modulePage)
-        self.root.after(5000,self.resetCurrDeckData)
 
     def fillDiscoveredCardOfBottomPlayerViewingAction(self):
         # 捕获用户操作想吃什么？
@@ -119,7 +115,7 @@ class card_preview_list_board(tk.Frame):
                     for key,value in cardsDict.items():
                         # 过滤到敌方卡牌,规避discoverAction指向创造词条的情况
                         if int(value["PlayId"],16) == self.root.responseManager.battInfo.topPlayerId:
-                            print("检索到卡:",value["Id"],value["Name"])
+                            print("检索到卡:",value["Id"],value["Name"],value["Index"])
                             if deckNums-count >= 0:
                                 temp_key = sortByIndexDict[deckNums-count]
                                 self.discoveryMap[temp_key] = value
@@ -181,9 +177,21 @@ class card_preview_list_board(tk.Frame):
         if self.CARD_DECK_INFO.isEnemy:
             self.fillDiscoveredCardOfBottomPlayerViewingAction()
             self.discoverCardMapCurrDeckData()
-
-        self.battleCards = cService.filterCardsByDeckCondition(self.curr_memo_cards,self.CARD_DECK_INFO)
-
+        # 映射替换replace
+        self.battleCards = {}
+        self.battleCards.update(self.curr_memo_cards)
+        self.battleCards = cService.filterCardsByDeckCondition(self.battleCards,self.CARD_DECK_INFO)
+        for key,value in self.onceExistInCarriedCards.items():
+            if key in  self.battleCards.keys():
+                cardUIData = global_var.get_value("AllCardDict")[str(value["Id"])]
+                self.battleCards[key]["Id"] = value["Id"]
+                self.battleCards[key]["Provision"] = cardUIData["provision"]
+                self.battleCards[key]["Rarity"] = cardUIData["rarity"]
+                self.battleCards[key]["FactionId"] = cardUIData["factionId"]
+                self.battleCards[key]["Type"] = cardUIData["cardType"]
+                self.battleCards[key]["Name"] = cardUIData["name"]
+                self.battleCards[key]["BasePower"]  = cardUIData["power"] 
+        # 映射补充add
         self.carriedCards = {}
         self.carriedCards.update(self.curr_memo_cards)
         self.carriedCards.update(self.onceExistInCarriedCards)
@@ -192,6 +200,12 @@ class card_preview_list_board(tk.Frame):
         self.carriedCards = cService.sort_cardTemplate_by_provision(self.carriedCards)
         self.carriedCards = cService.addStratagemCard(self.carriedCards,self.curr_memo_cards,self.root.responseManager.playerId)
         self.onceExistInCarriedCards.update(self.carriedCards)
+
+        # carriedCards变动时刷新卡组预测
+        if self.modulePage != self.MODULE_PAGE_NORMAL:
+            if self.carriedLazyLen != len(self.carriedCards):
+                self.carriedLazyLen = len(self.carriedCards)
+                self.setShowPage(self.modulePage)
 
         if not self.isShowRelationDeck:
             if self.CARD_DECK_INFO.dataModule == 0 :
@@ -212,13 +226,14 @@ class card_preview_list_board(tk.Frame):
             for key,value in self.forecastDeck["sortedCards"].items():
                 excess = True
                 for carried_key,carried_value in self.carriedCards.items():
-                    if "temp_mapped" not in carried_value.keys():
-                        carried_value['temp_mapped'] = False
                     if carried_value["Id"] == value["ctId"] :
+                        if "temp_existed" not in carried_value.keys():
+                            carried_value['temp_existed'] = False
                         excess = False
-                        if not carried_value['temp_mapped'] and self.isPlayedCard(carried_key):
+                        # value["isNotExist"] = carried_value['temp_existed']
+                        if not carried_value['temp_existed'] and self.isPlayedCard(carried_key):
                             value["isNotExist"] = True
-                            carried_value['temp_mapped'] = True
+                            carried_value['temp_existed'] = True
                             break
                 if excess:
                     value["excess"] = True
@@ -325,10 +340,28 @@ class card_preview_list_board(tk.Frame):
         self.sep_bottom = self.can_bg.create_image(self.canvas_padding[0],nextCoordsY,anchor='nw' , image = self.separator_bottom,tags="TipsUI")
         
     def resetRepeatRateUiText(self,num):
-        print("更新！")
+        print("更新重复率！")
         try:
+            # TODO 耦合
+            fontSize_deckName = round(self.root.WIN_WIDTH*0.053)    #18
+            fontSize_Author = round(self.root.WIN_WIDTH*0.038)      #13
+
+            num = self.forecastDeck["repeatRate"]
+            deckName = self.forecastDeck["deckName"]
+            deckAuthor = self.forecastDeck["deckAuthor"]
+            differenceDays = self.forecastDeck["differenceDays"]
+
+            self.temp_deckNameUIText = ft.getTextImg(self.cardImgWidth,(230,187,84),deckName,fontSize_deckName)
+            self.can_bg.itemconfig(self.textDeckName,image = self.temp_deckNameUIText)
+            ################################################################
+            deckAuthor = "作  者:  " + deckAuthor + "   {0}天前创建".format(differenceDays) 
+            #image
+            self.authorPrefixImg = ft.get_imgTk_xy(r"main/resources/images/deck_preview/AuthorPrefix.png",self.root.WIN_WIDTH*0.05,self.root.WIN_WIDTH*0.05)
+            self.can_bg.itemconfig(self.authorPrefix,image = self.authorPrefixImg)
+            self.temp_deckAuthorUIText = ft.getTextImg(round(self.cardImgWidth*0.91),(217, 216, 203),deckAuthor,fontSize_Author)
+            self.can_bg.itemconfig(self.textAuthorName,image = self.temp_deckAuthorUIText)
+            ################################################################################################
             content = "准确率:  {0}% ".format(round(num*100,1)) 
-            fontSize_Author = round(self.root.WIN_WIDTH*0.038)
             self.temp_deckRepeatRateUIText = ft.getTextImg(round(self.cardImgWidth*0.91),(217, 216, 203),content,fontSize_Author)
             self.can_bg.itemconfig(self.textRepeatRateText,image = self.temp_deckRepeatRateUIText )
         except Exception:
@@ -449,11 +482,17 @@ class card_preview_list_board(tk.Frame):
     
     def clearTipsUI(self):
         for imgId in self.can_bg.find_withtag("TipsUI"):
-            self.can_bg.itemconfig(imgId, state = "hidden")
+            try:
+                self.can_bg.itemconfig(imgId, state = "hidden")
+            except Exception:
+                pass
 
     def showTipsUI(self):
         for imgId in self.can_bg.find_withtag("TipsUI"):
-            self.can_bg.itemconfig(imgId, state = "normal")
+            try:
+                self.can_bg.itemconfig(imgId, state = "normal")
+            except Exception:
+                pass
             # self.can_bg.delete(imgId)
 
     def updateCardExistEffectUI(self,deckData):
@@ -607,12 +646,19 @@ class card_preview_list_board(tk.Frame):
                 pass
         return temp_sort_list[index]
             
+    def clearCarriedCardsStatus(self):
+        for key,value in self.carriedCards.items():
+            try:
+                self.carriedCards[key]["temp_existed"] = False
+            except KeyError:
+                pass
 
     def setShowPage(self,pageIndex):
         if pageIndex == self.MODULE_PAGE_NORMAL:
             self.setDefaultPage()
         else:
             # 根据pageIndex设置数据
+            self.clearCarriedCardsStatus()
             self.showTipsUI()
             self.isShowRelationDeck = True
             
