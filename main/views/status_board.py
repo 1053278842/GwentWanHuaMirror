@@ -79,6 +79,15 @@ class status_board(tk.Frame):
 
 
         self.can_bg.pack()
+
+        self.can_bg.bind('<Enter>',self.hover_bg)
+        self.can_bg.bind('<Leave>',self.leave_bg)
+    
+    def hover_bg(self,event):
+        self.root.responseManager.showHighlightStatusData()
+
+    def leave_bg(self,event):
+        self.root.responseManager.hideHighlightStatusData()
     
     def get_text_img(self,size,color,name):
         img = ft.get_num_img(size,color,name)
@@ -88,18 +97,24 @@ class status_board(tk.Frame):
         imgTk = ImageTk.PhotoImage(out)
         return imgTk
 
-    def update_data(self,total,unit,provision):
+    def update_data(self,total,unit,provision,highlight = False):
+        # 颜色
+        color = ()
+        if highlight:
+            color = (250,208,95)
+        else:
+            color = (213,215,213)
         # 数字
         self.can_bg.delete(self.t_total_id)
-        self.t_total =      self.get_text_img(size=(22,27),color=(213,215,213),name=str(total))
+        self.t_total =      self.get_text_img(size=(22,27),color=color,name=str(total))
         self.t_total_id = self.can_bg.create_image(self.iCoordDict["total"]    +self.offset[0], self.topPad,anchor='w',image=self.t_total)
 
         self.can_bg.delete(self.t_unit_id)
-        self.t_unit =       self.get_text_img(size=(22,27),color=(213,215,213),name=str(unit))
+        self.t_unit =       self.get_text_img(size=(22,27),color=color,name=str(unit))
         self.t_unit_id = self.can_bg.create_image(self.iCoordDict["unit"]     +self.offset[0], self.topPad,anchor='w',image=self.t_unit)
 
         self.can_bg.delete(self.t_provision_id)
-        self.t_provision =  self.get_text_img(size=(33,27),color=(213,215,213),name=str(provision))
+        self.t_provision =  self.get_text_img(size=(33,27),color=color,name=str(provision))
         self.t_provision_id = self.can_bg.create_image(self.iCoordDict["provision"]+self.offset[0], self.topPad,anchor='w',image=self.t_provision)
 
 ####################################################################################################################

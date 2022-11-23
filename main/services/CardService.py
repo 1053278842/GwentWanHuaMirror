@@ -230,22 +230,6 @@ def getMemoryCards():
     result_dict = pack_cardTemplate(cts)
     return result_dict
 
-def get_my_all_cards(cardDeckInfo):
-    # 对象化的数据源
-    cts = get_all_cardTemplates()
-    #按照provision,id降序排序卡组
-    sort_cardTemplate_by_provision(cts)
-    # 去除AI的卡组
-    cts = remove_card_by_playerId(cardDeckInfo,cts)
-    #按照index升序排序卡组
-    if cardDeckInfo.isSortByIndex:
-        sort_cardTemplate_by_index(cts)
-    # filter 条件过滤
-    cts = filterCards(cardDeckInfo,cts)
-    # 封装为返回类型
-    result_dict = pack_cardTemplate(cts)
-    return result_dict
-
 def filterUnknownCard(cts):
     results = {}
     for key,value in cts.items():

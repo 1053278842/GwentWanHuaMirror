@@ -17,6 +17,21 @@ from ttkbootstrap.dialogs import *
 from ttkbootstrap.scrolled import ScrolledText
 
 
+def toggleComparative():
+    global_config = FT.getGlobalConfig()
+    global_config['comparative'] = root.comparativeForecastDeck.get()
+    FT.saveGlobalConfig(global_config)
+
+def toggleSortingRealLibrary():
+    global_config = FT.getGlobalConfig()
+    global_config['sorting'] = root.sortingRealLibrary.get()
+    FT.saveGlobalConfig(global_config)
+
+def toggleAutomaticSubmit():
+    global_config = FT.getGlobalConfig()
+    global_config['automaticSubmit'] = root.automaticSubmitBattleData.get()
+    FT.saveGlobalConfig(global_config)
+
 def toggleOurCardPanel():
     root = global_var.get_value('panel_root')
     status_var = root.ourPlayerCBVar.get()
@@ -36,6 +51,7 @@ def toggleOpponentCardPanel():
     status_var = root.opponentPlayerCBVar.get()
     if status_var == 1:
         # 显示我方记牌器
+
         var_w = int(root.cardsPanelWidth.get())
         var_h = int(root.cardsPanelHeight.get())
         coords = (var_w,var_h)
@@ -110,13 +126,13 @@ def updateVersionJson(EGP):
         RM.RequestManager().updateVersion()
     except Exception:
         FT.saveVersion(orig_data)
-        messagebox.showerror("错误","服务器请求失败!烦请手动前往官网进行更新:{0}/download".format(global_config["url"]))
+        messagebox.showerror("错误","服务器请求失败!烦请重试或者手动前往官网进行更新:{0}".format(global_config["url"]))
         return
     data = FT.getVersion()
     new_id = data["id"]
     if data["canAutoUpdate"] == 0 and orig_id != new_id:
         FT.saveVersion(orig_data)
-        messagebox.showwarning("警告","最新版本不支持自动更新!烦请手动前往官网进行更新:{0}/download".format(global_config["url"]))
+        messagebox.showwarning("警告","最新版本不支持自动更新!烦请手动前往官网进行更新:{0}".format(global_config["url"]))
         return
     root.version_orig.set(data['name'])
     root.version_new.set(data['name'])
@@ -140,6 +156,14 @@ def create_page(root):
     root.oppCbTextVar = tk.StringVar()
     root.ourCbTextVar.set("开  启")
     root.oppCbTextVar.set("开  启")
+    # ----高级设置
+    root.comparativeForecastDeck = tk.BooleanVar()
+    root.sortingRealLibrary = tk.BooleanVar()
+    root.automaticSubmitBattleData = tk.BooleanVar()
+    global_config = FT.getGlobalConfig()
+    root.comparativeForecastDeck.set(global_config['comparative'])
+    root.sortingRealLibrary.set(global_config['sorting'])
+    root.automaticSubmitBattleData.set(global_config['automaticSubmit'])
     # ----输入框(记牌器大小)
     root.cardsPanelWidth = tk.StringVar()
     root.cardsPanelHeight = tk.StringVar()
@@ -206,10 +230,10 @@ def create_page(root):
 
     frame = Frame(frame_2)
     frame.pack(side="top",pady=8,padx=5,fill="x",expand=1)
-    Button(frame,command=updateVersionSteam,text="检查&更新&切换最新版本!(Steam)",bootstyle=("warning")).pack(side="left",fill="x",expand=1)
+    Button(frame,command=updateVersionSteam,text="更新&切换最新版本!(Steam)",bootstyle=("warning")).pack(side="left",fill="x",expand=1)
     frame = Frame(frame_2)
     frame.pack(side="top",pady=0,padx=5,fill="x",expand=1)
-    Button(frame,command=updateVersionGOG,text="检查&更新&切换最新版本!(GOG)",bootstyle=("light")).pack(side="left",fill="x",expand=1)
+    Button(frame,command=updateVersionGOG,text="更新&切换最新版本!(GOG)",bootstyle=("light")).pack(side="left",fill="x",expand=1)
 
     frame = Frame(frame_2)
     frame.pack(side="top",pady=60,padx=5,fill="x",expand=1)  
@@ -238,10 +262,44 @@ def create_page(root):
     本想做一个demo,集成暂时掌握的技术栈。但是不小心越走越远做的似乎臃肿了些。当然笔者也是广大昆友的一员,面对Gwent玩家数量的惨淡也希望贡献自己的一点力量。\
     \n\n \
     暂时不考虑盈利，代码很烂暂不考虑开源，维护好了便会开源。')
-   
+   ######################################################################
+    main_frame4 = Frame(root)
+    main_frame4.pack()
+    frame_2 = Frame(main_frame4)
+    frame_2.pack(side="top",fill="both",expand=1)
+    # p1
+    playerWindowFrame = LabelFrame(frame_2,text="预测模块")
+    frame = Frame(playerWindowFrame)
+    frame.pack(side="top",padx=5,pady=8,fill="x",expand=1)
+    Label(frame,text="差 异 对 比:",font=("黑体",9)).pack(side="left")
+    Checkbutton(frame,variable=root.comparativeForecastDeck,
+        command=toggleComparative,bootstyle=("info")).pack(side="left",fill="both",expand=1)
+    playerWindowFrame.pack(pady=5,fill="both",expand=1)
+    # p2
+    playerWindowFrame = LabelFrame(frame_2,text="记牌模块")
+    frame = Frame(playerWindowFrame)
+    frame.pack(side="top",padx=5,pady=8,fill="x",expand=1)
+    Label(frame,text="真实牌组顺序:",font=("黑体",9)).pack(side="left")
+    Checkbutton(frame,variable=root.sortingRealLibrary,
+        command=toggleSortingRealLibrary,bootstyle=("info")).pack(side="left",fill="both",expand=1)
+    playerWindowFrame.pack(pady=5,fill="both",expand=1)
+    # p3
+    playerWindowFrame = LabelFrame(frame_2,text="其他")
+    frame = Frame(playerWindowFrame)
+    frame.pack(side="top",padx=5,pady=8,fill="x",expand=1)
+    Label(frame,text="共享对局卡组:",font=("黑体",9)).pack(side="left")
+    Checkbutton(frame,variable=root.automaticSubmitBattleData,
+        command=toggleAutomaticSubmit,bootstyle=("info")).pack(side="left",fill="both",expand=1)
+    playerWindowFrame.pack(pady=5,fill="both",expand=1)
+
+   ######################################################################
+
+    frame = Frame(frame_2)
+    frame.pack(side="top",pady=60,padx=5,fill="x",expand=1)  
 
     noteBook.add(main_frame,text="启动")
     noteBook.add(main_frame2,text="更新")
+    noteBook.add(main_frame4,text="高级")
     noteBook.add(main_frame3,text="关于")
     noteBook.pack(padx=10,pady=5,fill="both",expand=1)
 
@@ -299,7 +357,7 @@ if __name__ == '__main__':
 
     if checkCanUpdateDecks():
         root.after(10,RM.RequestManager().updateDecks())
-
+    
     root.mainloop()
 
 

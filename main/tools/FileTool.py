@@ -17,6 +17,9 @@ def resetVersionPlatformAddress(EGP):
 def getGlobalConfig():
     cardDict = open(r"main/resources/config/global_config.json", "r",encoding="utf-8")
     return json.loads(cardDict.read())
+def saveGlobalConfig(data):
+    fp=open("main/resources/config/global_config.json","w",encoding="utf-8")
+    json.dump(data,fp=fp,ensure_ascii=False)
 
 def getVersion():
     cardDict = open(r"main/resources/config/version.json", "r",encoding="utf-16")
@@ -144,9 +147,15 @@ def composite_deck_info(in_path,info_dict):
     currPower =   info_dict["CurrPower"]
     factionId =   info_dict["FactionId"]
     abilityCardTemplateId = info_dict["Id"]
+    excess = info_dict["Excess"]
+    # 只对color起作用
+    if excess:
+        highlightType = info_dict["HighlightType"]
+    else:
+        highlightType = False
     # 如果是Leader卡
     if CardType(cardType) == CardType.LEADER:
-        return composite_leader_card(provision,name,factionId,abilityCardTemplateId)
+        return composite_leader_card(provision,name,factionId,abilityCardTemplateId,excess,highlightType)
     ##############################################################################################################################
    
     layer_core = Image.open(in_path).convert('RGBA')   # 底图背景
@@ -184,11 +193,24 @@ def composite_deck_info(in_path,info_dict):
         layer_start = layer_start.resize((27,30), Image.Resampling.LANCZOS)
    
     
-    final = Image.new("RGBA", layer_frame.size)             # 合成的image
-    final.paste(layer_core, (0,2) , layer_core)
-    final.paste(layer_mask, (0,0) , layer_mask)
-    final.paste(layer_frame,(0,0) ,layer_frame)
-    final.paste(layer_start,(15,14) ,layer_start)
+    final = Image.new("RGBA", layer_frame.size,(34, 34, 34, 0))             # 合成的image
+    xCoords = 0
+    if excess:
+        xOffsetRate = 0.12
+        xCoords = int(layer_frame.size[0] * xOffsetRate)
+    final.paste(layer_core, (xCoords,2) , layer_core)
+    final.paste(layer_mask, (xCoords,0) , layer_mask)
+    final.paste(layer_frame,(xCoords,0) ,layer_frame)
+    final.paste(layer_start,(xCoords+15,14) ,layer_start)
+    if excess:
+        # 前缀图标
+        # 高度為54
+        if highlightType == 1:
+            layer_eye = Image.open(r"main/resources/images/deck_preview/view-eye-1.png").convert('RGBA')    # start
+        else:
+            layer_eye = Image.open(r"main/resources/images/deck_preview/view-eye-2.png").convert('RGBA')    # start
+        layer_eye = layer_eye.resize((50,50), Image.Resampling.LANCZOS)
+        final.paste(layer_eye,(0,2) ,layer_eye)
     
     layer_bg = final.convert('RGBA')
     ####################################################################################################################################
@@ -196,27 +218,34 @@ def composite_deck_info(in_path,info_dict):
     draw = ImageDraw.Draw(layer_bg)
     # Provision
     font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",26)
-    draw.text((55,35),str(provision),(226,167,61),font=font,anchor="mm",align="center")
+    draw.text((xCoords+55,35),str(provision),(226,167,61),font=font,anchor="mm",align="center")
     # Name
     font = ImageFont.truetype(r"main/resources/fonts/JZJDCYJF.ttf",20)
-    draw.text((70,34),str(name),(213,215,213),font=font,anchor="ls",align="left")
+    # 白色
+    color = (213,215,213) 
+    if excess:
+        if highlightType == 1:
+            color = (129,218,116)
+        else:
+            color = (223,92,99)
+    draw.text((xCoords+70,34),str(name),color,font=font,anchor="ls",align="left")
     # Power
     # 单位卡使用银/金【Power】前缀
     if ( rarity == Rarity.LEGENDARY.value or rarity == Rarity.EPIC ) and cardType == CardType.UNIT.value:
         # layer_start = Image.open(r"main/resources/images/deck_preview/deck_preview_star.png").convert('RGBA')    # start
         font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",26)
-        draw.text((25,35),str(currPower),(216,157,51),font=font,anchor="mm",align="center")
+        draw.text((xCoords+25,35),str(currPower),(216,157,51),font=font,anchor="mm",align="center")
     elif cardType == CardType.UNIT.value:
         # layer_start = Image.open(r"main/resources/images/deck_preview/deck_preview_start_bronze.png").convert('RGBA')    # start
         font = ImageFont.truetype(r"main/resources/fonts/NEOESPORT-2.ttf",26)
-        draw.text((25,35),str(currPower),(213,215,213),font=font,anchor="mm",align="center")
+        draw.text((xCoords+25,35),str(currPower),(213,215,213),font=font,anchor="mm",align="center")
 
 
     layer_bg = layer_bg.convert('RGB')
-    # layer_bg.save("2.jpg")
+
     return layer_bg
 
-def composite_leader_card(provision,name,factionId,abilityCardTemplateId):
+def composite_leader_card(provision,name,factionId,abilityCardTemplateId,excess,highlightType):
     # 框架
     layer_frame = Image.open(r"main/resources/images/deck_preview/leader-frame.png").convert('RGBA')
     # 遮罩
@@ -240,13 +269,28 @@ def composite_leader_card(provision,name,factionId,abilityCardTemplateId):
     # layer_core = Image.new('RGBA', layer_frame.size, (0, 0, 0, 0))
     # 合成
     final = Image.new("RGBA", (layer_frame.size[0],layer_prov.size[1]),(34,34,34))
+    xCoords = 0
+    if excess:
+        xOffsetRate = 0.12
+        xCoords = int(layer_frame.size[0] * xOffsetRate)
     yOffset = int(abs(layer_prov.size[1] - layer_frame.size[1])/2)
     prov_xOffset = int(layer_frame.size[0]*0.02)
-    final.paste(layer_core, (0,2+yOffset) , layer_core)
-    final.paste(layer_mask, (0,0+yOffset) , layer_mask)
-    final.paste(layer_frame,(0,0+yOffset) ,layer_frame)
-    final.paste(layer_start,(0,0) ,layer_start)
+    final.paste(layer_core, (xCoords,2+yOffset) , layer_core)
+    final.paste(layer_mask, (xCoords,0+yOffset) , layer_mask)
+    final.paste(layer_frame,(xCoords,0+yOffset) ,layer_frame)
+    final.paste(layer_start,(xCoords,0) ,layer_start)
     final.paste(layer_prov,(layer_frame.size[0]-layer_prov.size[0]-prov_xOffset,0) ,layer_prov)
+    if excess:
+        # 前缀图标
+        # 高度為54
+        if highlightType == 1:
+            layer_eye = Image.open(r"main/resources/images/deck_preview/view-eye-1.png").convert('RGBA')    # start
+        else:
+            layer_eye = Image.open(r"main/resources/images/deck_preview/view-eye-2.png").convert('RGBA')    # start
+        layer_eye = layer_eye.resize((50,50), Image.Resampling.LANCZOS)
+        final.paste(layer_eye,(0,25) ,layer_eye)
+
+
     layer_bg = final.convert('RGBA')
     ####################################################################################################################################
     # layer_bg = Image.open(in_path).convert('RGBA')   # 底图
@@ -258,11 +302,18 @@ def composite_leader_card(provision,name,factionId,abilityCardTemplateId):
     draw.text((temp_x,temp_y),str(provision),(0,0,0),font=font,anchor="mm")
     # Name
     font = ImageFont.truetype(r"main/resources/fonts/YSHaoShenTi-2.ttf",36)
-    temp_x = layer_start.size[0]
+    temp_x = xCoords + layer_start.size[0]
     temp_y = layer_prov.size[1]/2 + yOffset
-    draw.multiline_text((temp_x,temp_y),str(name),(240,240,240),font=font,anchor="ls",spacing=108)
+    color = (240,240,240)
+    if excess:
+        if highlightType == 1:
+            color = (129,218,116)
+        else:
+            color = (233,92,99)
+    draw.multiline_text((temp_x,temp_y),str(name),color,font=font,anchor="ls",spacing=108)
     
     layer_bg = layer_bg.convert('RGB')
+    
     return layer_bg
 
 # 返回一个数组图片  

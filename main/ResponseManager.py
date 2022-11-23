@@ -1,5 +1,6 @@
 import bean.global_var as global_var
 import services.CardService as cs
+import tools.FileTool as FT
 from bean.CardDeckTypeInfo import CardDeckTypeInfo
 from enums.GwentEnum import *
 from RequestManager import RequestManager
@@ -14,12 +15,15 @@ class ResponseManager(object):
         self.DEFAULT_CARD_DECK_INFO = self.CARD_DECK_INFO[1]
         # 初始化
         self.requestManager = RequestManager()
+        # status的强调状态
+        self.highlight = False
 
     def set_card_deck_info(self,isEnemy):
+        sortingRealLibrary = FT.getGlobalConfig()['sorting']
         result_list = []
         if not isEnemy:
             result_list.append(CardDeckTypeInfo("我  ·  卡  组",Location.DECK,isSortByIndex=False,dataModule=1,isMain=True,buttonName="卡组")) 
-            result_list.append(CardDeckTypeInfo("我  ·  牌  库",Location.DECK,buttonName="牌库"))
+            result_list.append(CardDeckTypeInfo("我  ·  牌  库",Location.DECK,isSortByIndex=sortingRealLibrary,buttonName="牌库"))
             result_list.append(CardDeckTypeInfo("我  ·  墓  场",Location.GRAVEYARD,buttonName="墓场"))
             result_list.append(CardDeckTypeInfo("我  ·  放  逐",Location.VOID,buttonName="放逐"))
             # result_list.append(CardDeckTypeInfo("我  的  放  逐  池",Location.VOID,buttonName="卡组"))
@@ -27,7 +31,7 @@ class ResponseManager(object):
             result_list.append(CardDeckTypeInfo("我  ·  战  场  卡",Location.RANGED,buttonName="场地",secLocation=Location.MELEE))
         else:
             result_list.append(CardDeckTypeInfo("敌  ·  卡  组",Location.DECK,isSortByIndex=False,dataModule=1,isMain=True,buttonName="卡组",isEnemy = True)) 
-            result_list.append(CardDeckTypeInfo("敌  ·  牌  库",Location.DECK,buttonName="牌库",isEnemy = True))
+            result_list.append(CardDeckTypeInfo("敌  ·  牌  库",Location.DECK,isSortByIndex=sortingRealLibrary,buttonName="牌库",isEnemy = True))
             result_list.append(CardDeckTypeInfo("敌  ·  墓  场",Location.GRAVEYARD,buttonName="墓场",isEnemy = True))
             result_list.append(CardDeckTypeInfo("敌  ·  放  逐",Location.VOID,buttonName="放逐",isEnemy = True))
             result_list.append(CardDeckTypeInfo("敌  ·  手  卡",Location.HAND,buttonName="手牌",isEnemy = True))
@@ -129,21 +133,10 @@ class ResponseManager(object):
         self.cardList.updateData()
         # 初始化箭头显示
         self.cardList.setDefaultPage()
-        # # 初始化decks.json文件
-        # battleInfo = cs.getBattleInfo()
-        # factionId_1 = battleInfo["players"][0]["faction_id"]
-        # factionId_2 = battleInfo["players"][1]["faction_id"]
-        # result = self.requestManager.getDecks(factionId_1)
-        
-        # result2 = self.requestManager.getDecks(factionId_2)
-        # for dict_row in result2:
-        #     result.append(dict_row)
-        # global_var.set_value("decks",result)
-
 
     # 更新status
-    def updateStatusBoard(self,total,unit,provision):
-        self.status.update_data(total,unit,provision)
+    def updateStatusBoard(self,total,unit,provision,highlight = False):
+        self.status.update_data(total,unit,provision,highlight)
     
     # 根据card_deck_info 对象，更新当前筛选条件
     def resetShowListCondition(self,card_deck_info):
@@ -162,3 +155,12 @@ class ResponseManager(object):
     def setTileText(self,text):
         self.title.setTitle(text)
 
+    def showHighlightStatusData(self):
+        self.highlight = True
+        self.cardList.setDeckStatus()
+    
+    def hideHighlightStatusData(self):
+        self.highlight = False
+        self.cardList.setDeckStatus()
+
+    

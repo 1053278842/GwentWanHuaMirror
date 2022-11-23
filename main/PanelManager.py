@@ -4,6 +4,7 @@ import bean.global_var as global_var
 import GwentMirror
 import pymem
 import services.CardService as cs
+import tools.FileTool as FT
 from enums.GameEnum import *
 from GwentGUI import GwentGUI
 from LoadingAnimGUI import AnimatedGif
@@ -39,9 +40,20 @@ class PanelManager():
         self.checkGwentStatusLoop()
         self.checkGameEndedLoop()
         self.checkGameRunningLoop()
-
+        self.checkVersion()
         #
         global_var.set_value("isActive",False)
+
+    def checkVersion(self):
+        version = FT.getVersion()
+        try:
+            vid = version["id"]
+            resVersion = self.reqManager.getVersion()
+            resVid = resVersion["id"]
+            if vid != resVid:
+                GwentMirror.tips_show("警告","检测到有版本更新!")
+        except Exception:
+            GwentMirror.tips_show("警告","版本更新时遇到未知错误!请检查网络&手动更新!")
 
     # 维护游戏的运行状态
     def checkGwentStatusLoop(self):

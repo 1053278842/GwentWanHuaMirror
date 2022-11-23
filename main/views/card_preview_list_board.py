@@ -30,7 +30,7 @@ class card_preview_list_board(tk.Frame):
         self.imgScale = (self.cardImgWidth) / self.CARD_IMG_SIZE[0]
         self.imgEffectScale = (self.cardImgWidth) / self.CARD_IMG_EFFECT_SIZE[0]
         self.cardEffectHeight = round(self.CARD_IMG_EFFECT_SIZE[1] * self.imgEffectScale)
-        self.darkCardEffectColor = (14, 10, 6, 180)
+        self.darkCardEffectColor = (14, 10, 6, 150)
         self.excessCardEffectColor = (32, 0, 6, 180)
         # row_padding  图片高（50）+图片自身的一定比率 * 自适应压缩比率
         self.canvas_row_padding = round((self.CARD_IMG_SIZE[1]*1.08)*self.imgScale)
@@ -43,7 +43,7 @@ class card_preview_list_board(tk.Frame):
         self.insIdMapImageId = {}
         self.onceExistInCarriedCards = {}
         # module
-        self.MODULE_PAGE_MAX = 3
+        self.MODULE_PAGE_MAX = 5
         self.MODULE_PAGE_MIN = 0
         self.MODULE_PAGE_NORMAL = 0
         self.modulePage = self.MODULE_PAGE_NORMAL
@@ -59,6 +59,10 @@ class card_preview_list_board(tk.Frame):
         self.forecastDeck["sortedCards"] = {}
         # 预测卡组的自动刷新依据：carried的len
         self.carriedLazyLen = 0
+        # 高级设置
+        global_config = ft.getGlobalConfig()
+        self.comparativeForecast = global_config['comparative']
+        self.sortingRealLibrary = global_config['sorting']
         # 显示类型
         self.CARD_DECK_INFO = self.root.responseManager.DEFAULT_CARD_DECK_INFO
 
@@ -74,7 +78,7 @@ class card_preview_list_board(tk.Frame):
         self.can_bg = tk.Canvas(self,bg='#000000',width = self.can_size[0], height = self.can_size[1] ,highlightthickness=0,highlightcolor="green")
         self.can_bg.pack()
         # 绑定事件
-        self.can_bg.bind('<MouseWheel>',self.ScrollEvent)
+        self.root.bind('<MouseWheel>',self.ScrollEvent)
         # self.root.bind('<Enter>', self.resetCurrDeckData) # 按下回车
         # self.root.bind('<Key>', self.updateData)
 
@@ -142,6 +146,7 @@ class card_preview_list_board(tk.Frame):
             temp_dict = {}
             # temp_dict["insId"] = key
             temp_dict["ctId"] = value["Id"]
+            temp_dict["excess"] = False
             temp_dict["isNotExist"] = False
             currDeckData[key] = temp_dict
         return currDeckData
@@ -151,6 +156,7 @@ class card_preview_list_board(tk.Frame):
         for key,value in cardsSource.items():
             temp_dict = {}
             temp_dict["ctId"] = value["Id"]
+            temp_dict["excess"] = False
             temp_dict["isNotExist"] = self.isPlayedCard(key)
             currDeckData[key] = temp_dict
         return currDeckData
@@ -220,30 +226,27 @@ class card_preview_list_board(tk.Frame):
                 self.setAddedCardData(previousData,currData)
 
         else:
-            ######
+           
+            self.currDeckData = {}
+            if self.comparativeForecast:
+                # 两个格式要一样
+                self.currDeckData = self.getComparativeForecast(self.forecastDeck["sortedCards"],self.setCarriedCardModuleDataToUI(self.carriedCards))
+            else:
+                self.currDeckData = self.forecastDeck["sortedCards"]
+            #######
+            self.clearCarriedCardsStatus()
             # 可以分辨多余
-            currDeckData = {}
-            for key,value in self.forecastDeck["sortedCards"].items():
-                excess = True
+            for key,value in self.currDeckData.items():
+                # value['excess'] = False
                 for carried_key,carried_value in self.carriedCards.items():
                     if carried_value["Id"] == value["ctId"] :
                         if "temp_existed" not in carried_value.keys():
                             carried_value['temp_existed'] = False
-                        excess = False
-                        # value["isNotExist"] = carried_value['temp_existed']
                         if not carried_value['temp_existed'] and self.isPlayedCard(carried_key):
                             value["isNotExist"] = True
                             carried_value['temp_existed'] = True
                             break
-                if excess:
-                    value["excess"] = True
-                    # value["isNotExist"] = True
-                else:
-                    value["excess"] = False
             # return currDeckData
-            
-            self.currDeckData = self.forecastDeck["sortedCards"]
-            #######
         # 初始化图片，以及建立映射源
         self.initImgPool(self.currDeckData,self.imgScale)
         # 映射imageId到更新数据
@@ -254,20 +257,97 @@ class card_preview_list_board(tk.Frame):
             self.anim_img_tips(insId, TipsType.WHITE)
         self.updateCardUI(self.currDeckData)
         self.updateCardExistEffectUI(self.currDeckData)
-        self.setDeckStatus(self.currDeckData)
+        self.setDeckStatus()
         self.after(400,self.updateData)
 
+    def getComparativeForecast(self,forecastDeck,carriedDeck):
+        comparativeCardStartIndex = 4000
+        result = {}
+        differenceList = []
+        fdIds = []
+        cdIds = []
+        for key,value in forecastDeck.items():
+            value["excess"] = False
+            value['provision'] = global_var.get_value("AllCardDict")[str(value["ctId"])]['provision']
+            fdIds.append(value["ctId"])
+        for key,value in carriedDeck.items():
+            value["excess"] = True
+            cdIds.append(value["ctId"])
+
+        commons = self.getCommonArray(cdIds,fdIds)
+        ourAddDiffs = self.getDiffArray(cdIds,fdIds)
+        enemyAddDiffs = self.getDiffArray(fdIds,cdIds)
+        count = 0
+        for ctId in ourAddDiffs:
+            cardType = global_var.get_value("AllCardDict")[str(ctId)]['cardType']
+            # name = global_var.get_value("AllCardDict")[str(ctId)]['name']
+            if CardType(cardType) == CardType.STRATAGEM or CardType(cardType) == CardType.LEADER:
+                continue
+            key = comparativeCardStartIndex+count
+            count += 1
+            value = {
+                'ctId': ctId,
+                'provision' : global_var.get_value("AllCardDict")[str(ctId)]['provision'],
+                'isNotExist' : False,
+                'excess': True,
+                'highlightType' : 2
+            }
+            result[key] = value
+        for ctId in enemyAddDiffs:
+            cardType = global_var.get_value("AllCardDict")[str(ctId)]['cardType']
+            excess = True
+            if CardType(cardType) == CardType.STRATAGEM or CardType(cardType) == CardType.LEADER:
+                excess = False
+            key = comparativeCardStartIndex+count
+            count += 1
+            value = {
+                'ctId': ctId,
+                'provision' : global_var.get_value("AllCardDict")[str(ctId)]['provision'],
+                'isNotExist' : False,
+                'excess': excess,
+                'highlightType' : 1
+            }
+            result[key] = value
+        for ctId in commons:
+            key = comparativeCardStartIndex+count
+            count += 1
+            value = {
+                'ctId': ctId,
+                'provision' : global_var.get_value("AllCardDict")[str(ctId)]['provision'],
+                'isNotExist' : False,
+                'excess': False,
+            }
+            result[key] = value
+        # 重新排序
+        temp_sort_list = sorted(result.items(),key = lambda x: (-x[1]["provision"],x[1]["ctId"],-x[0]))
+        # 调整策略卡位置
+        last_data = temp_sort_list[len(temp_sort_list)-1]
+        # 预测模式下，不会出现衍生物
+        if last_data[1]['provision'] == 0:
+            temp_sort_list.remove(last_data)
+            temp_sort_list.insert(1,last_data)
+        result = {}
+        for i in temp_sort_list:
+            result[i[0]] = i[1]
+        return result
+
     # 设置卡组状态组[卡牌总数,单位数量,粮食]
-    def setDeckStatus(self,currDeckData):
+    def setDeckStatus(self):
         total = 0
         unit = 0
         provision = 0
-        cards = currDeckData
+        cards = self.currDeckData
+        highlight = self.root.responseManager.highlight
+
         for key,value in cards.items():
-            if value["ctId"] == 0:
+
+            if value['excess'] == True:
+                if value['highlightType'] != 1:
+                    continue
+            if value["ctId"] == 0 :
                 continue
             currCardBaseData = global_var.get_value("AllCardDict")[str(value["ctId"])]
-            if value["isNotExist"] and (not self.CARD_DECK_INFO.isEnemy or self.isShowRelationDeck):
+            if value["isNotExist"] and (not self.CARD_DECK_INFO.isEnemy or self.isShowRelationDeck) and not highlight:
                 continue
             temp_prov = currCardBaseData["provision"]
             if CardType(currCardBaseData["cardType"]) != CardType.LEADER:
@@ -277,7 +357,7 @@ class card_preview_list_board(tk.Frame):
             cardType = currCardBaseData["cardType"]
             if cardType == CardType.UNIT.value :
                 unit += 1
-        self.root.responseManager.updateStatusBoard(total,unit,provision)
+        self.root.responseManager.updateStatusBoard(total,unit,provision,highlight)
         
     def createDeckTipsPro(self):
         line_marginX = round(self.canvas_padding[0] + self.canvas_padding[0]/3)
@@ -535,6 +615,7 @@ class card_preview_list_board(tk.Frame):
         for key_insId,value in data.items():
             s_insId = str(key_insId)
             s_ctId = str(value["ctId"])
+            
             if int(s_ctId) != 0:
                 cardUIData = global_var.get_value("AllCardDict")[s_ctId]
                 cardData = {}
@@ -554,9 +635,17 @@ class card_preview_list_board(tk.Frame):
                 cardData["Rarity"] = self.curr_memo_cards[int(s_insId)]["Rarity"]
                 cardData["CurrPower"] = self.curr_memo_cards[int(s_insId)]["BasePower"]
                 cardData["FactionId"] = self.curr_memo_cards[int(s_insId)]["FactionId"]
+            try:
+                cardData['Excess'] = value["excess"]
+            except KeyError:
+                cardData['Excess'] = False
+            if cardData['Excess']:
+                cardData['HighlightType'] = value["highlightType"]
+
 
             if len(self.can_bg.find_withtag(s_insId+"InsId")) == 0:
                 # 不存在池中则实例化一个进入池
+                # 多余的卡牌 即被excess标记的卡会有特殊样式
                 imgTk = ft.get_deck_preview_img(cardData,scale_factor)
                 self.panel = tk.Label(master = self.root)
                 self.panel.temp_img = imgTk
@@ -745,5 +834,24 @@ class card_preview_list_board(tk.Frame):
     def transStrTimeToStamp(self,time,format):
         # if format == "yyyy-MM-dd HH:mm:ss":
         return datetime.datetime.strptime(time,format)
+    
+    def getDiffArray(self,source,target):
+        result = []
+        clone_target = target[:]
+        for i in source:
+            if i not in clone_target:
+                result.append(i)
+            else:
+                clone_target.remove(i)
+        return result
+    
+    def getCommonArray(self,source,target):
+        result = []
+        clone_target = target[:]
+        for i in source:
+            if i in clone_target:
+                result.append(i)
+                clone_target.remove(i)
+        return result
 ####################################################################################################################
 ####################################################################################################################

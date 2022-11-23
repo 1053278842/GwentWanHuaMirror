@@ -29,7 +29,6 @@ class RequestManager():
         battleInfo["players"][1]["player_name"]))
         # 暂时不做游戏结束原因 中掉线、超时 等数据的筛选 TODO 需测试
         # 防止意外调用
-
         gameStatus = battleInfo["GameStatus"]
         if EGameStatus(gameStatus) == EGameStatus.RUNNING or EGameStatus(gameStatus) == EGameStatus.UNINIT:
             return
@@ -41,7 +40,12 @@ class RequestManager():
         if EBattleType(battleType) == EBattleType.Friend or EBattleType(battleType) == EBattleType.Arena or \
             EBattleType(battleType) == EBattleType.ArenaV2:
             return
-        
+        # 全局配置限制了是否提交玩家卡组
+        global_config = FT.getGlobalConfig()
+        if not global_config['automaticSubmit']:
+            for i in battleInfo["players"]:
+                i['decks'] = []
+                
         print("这里发送battleInfo,只有该场比赛达成一定条件你才能看到这一句！")
         self.postBattleInfo(battleInfo)
         print(battleInfo)
