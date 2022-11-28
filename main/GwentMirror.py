@@ -17,6 +17,12 @@ from ttkbootstrap.dialogs import *
 from ttkbootstrap.scrolled import ScrolledText
 
 
+def setSortingRealLibraryState(state):
+    root.sortingRealLibrary.set(state)
+    global_config = FT.getGlobalConfig()
+    global_config['sorting'] = root.sortingRealLibrary.get()
+    FT.saveGlobalConfig(global_config)
+
 def toggleComparative():
     global_config = FT.getGlobalConfig()
     global_config['comparative'] = root.comparativeForecastDeck.get()
@@ -111,16 +117,34 @@ def init_versionText():
 
 def updateVersionSteam():
     updateVersionJson(EGamePlatform.STEAM)
+    # 版本切换时会有
+    changeOrderCBState()
 
 def updateVersionGOG():
     updateVersionJson(EGamePlatform.GOG)
+    # 版本切换时会有
+    changeOrderCBState()
+
+def changeOrderCBState():
+    version = FT.getVersion()
+    if 'orderMode' not in version:
+        setSortingRealLibraryState(True)
+        root.orderCB.config(state = NORMAL)
+        return True
+    if version['orderMode'] == 1:
+        setSortingRealLibraryState(True)
+        root.orderCB.config(state = NORMAL)
+    else:
+        setSortingRealLibraryState(False)
+        root.orderCB.config(state = DISABLED)
     
 def updateVersionJson(EGP):
+    # 根据版本数据指定是否限制卡组顺序检视
     # 1:Steam
     # 2:GOG
     orig_data = FT.getVersion()
     orig_id = orig_data["id"]
-
+    
     global_config = FT.getGlobalConfig()
     try:
         RM.RequestManager().updateVersion()
@@ -142,6 +166,7 @@ def updateVersionJson(EGP):
         messagebox.showinfo("提示","更新完毕!")
     else:
         messagebox.showinfo("提示","已经是最新版本!")
+
 
 
 
@@ -251,17 +276,28 @@ def create_page(root):
     # add text
     # context = FT.getVersion()["context"]
     st.insert(END, 
-        '<更新日志>\n \
-        Version 0.3.2-bate:\n  兼容了GOG,但需要点击gog检查按钮;\n  修改了该窗口的初始化位置;\n \
-        Version 0.3.1-bate:\n  编写了更新系统;\n  修复了推荐卡组时导致的意外崩溃问题;\n \
-        \n<写在前面>\n \
-    BUG提交烦请惠书邮箱:\n \
-    1053278842@qq.com\n \
-    内测交流群:129120844(QQ)\n \
-    \n \
-    本想做一个demo,集成暂时掌握的技术栈。但是不小心越走越远做的似乎臃肿了些。当然笔者也是广大昆友的一员,面对Gwent玩家数量的惨淡也希望贡献自己的一点力量。\
-    \n\n \
-    暂时不考虑盈利，代码很烂暂不考虑开源，维护好了便会开源。')
+'<更新日志>\n\
+ - <Version 0.3.4-bate>\n\
+ · 修复了读取不到"回响"卡牌的问题;\n\
+ · 新增了预测卡牌不能自动刷新的问题;\n\
+ · 新增了更新自检&提示;\n\
+ · 新增了预测卡组的对比效果;\n\
+ · 新增了高级选项卡;\n\
+ · 限制了监测剩余卡组顺序的功能;\n\
+\n\
+ - <Version 0.3.2-bate>\n\
+ · 兼容了GOG;\n\
+ · 修改了该窗口的初始化位置;\n\
+\n\
+ - <Version 0.3.1-bate>\n\
+ · 编写了更新系统;\n\
+ · 修复了推荐卡组时导致的意外崩溃问题;\n\
+\n\
+\n<写在前面>\n\
+ · BUG提交烦请惠书邮箱:\n\
+ · 1053278842@qq.com\n\
+ · 内测交流群:129120844(QQ)\n\
+\n ')
    ######################################################################
     main_frame4 = Frame(root)
     main_frame4.pack()
@@ -280,8 +316,9 @@ def create_page(root):
     frame = Frame(playerWindowFrame)
     frame.pack(side="top",padx=5,pady=8,fill="x",expand=1)
     Label(frame,text="真实牌组顺序:",font=("黑体",9)).pack(side="left")
-    Checkbutton(frame,variable=root.sortingRealLibrary,
-        command=toggleSortingRealLibrary,bootstyle=("info")).pack(side="left",fill="both",expand=1)
+    root.orderCB = Checkbutton(frame,variable=root.sortingRealLibrary,
+        command=toggleSortingRealLibrary,bootstyle=("info"))
+    root.orderCB.pack(side="left",fill="both",expand=1)
     playerWindowFrame.pack(pady=5,fill="both",expand=1)
     # p3
     playerWindowFrame = LabelFrame(frame_2,text="其他")
@@ -302,7 +339,6 @@ def create_page(root):
     noteBook.add(main_frame4,text="高级")
     noteBook.add(main_frame3,text="关于")
     noteBook.pack(padx=10,pady=5,fill="both",expand=1)
-
 
 def checkCanUpdateDecks():
     data = FT.getGlobalConfig()
@@ -344,7 +380,7 @@ if __name__ == '__main__':
     root.title("Gwent Mirror")
     # root.iconbitmap('main/resources/images/favicon/Beer.ico')
     root.iconphoto(True,tk.PhotoImage(file='main/resources/images/favicon/Beer.png'))
-    panel_width = 230
+    panel_width = 250
     panel_height = 280
     panel_x = int((root.winfo_screenwidth() - panel_width) / 2)
     panel_y = int((root.winfo_screenheight() - panel_height) / 2)
