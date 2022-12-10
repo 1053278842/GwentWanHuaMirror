@@ -9,10 +9,14 @@ from PIL import Image, ImageDraw, ImageFile, ImageFont, ImageTk
 
 
 def resetVersionPlatformAddress(EGP):
+    data = getVersion() 
     if EGP == EGamePlatform.GOG:
-        data = getVersion() 
         data['address'] = data['addressGOG']
-        saveVersion(data)
+    elif EGP == EGamePlatform.GY:
+        data['address'] = data['addressGY']
+    elif EGP == EGamePlatform.STEAM:
+        data['address'] = data['address']
+    saveVersion(data)
 
 def getGlobalConfig():
     cardDict = open(r"main/resources/config/global_config.json", "r",encoding="utf-8")

@@ -10,8 +10,8 @@ def writeCardDataJsonBaseFile():
     # base = 0x1af888e0028
     # count = 0x42b0c*2
 
-    base = 0x1af888e0008
-    count = 0x44f1f*2
+    base = 0x21b20cd0008
+    count = 0x46a62*2
     value = pm.read_bytes(base,count)
     result=""
     for item in value:
@@ -68,6 +68,6 @@ def main():
 
 if __name__ =='__main__':
     main()
-    # writeCardDataJsonBaseFile()
+    writeCardDataJsonBaseFile()
     CardDataFileToJson()
     # 还需要使用爬虫文件！爬取新卡各种类型的图

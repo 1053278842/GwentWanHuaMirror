@@ -57,6 +57,8 @@ class card_preview_list_board(tk.Frame):
         self.forecastDeck["differenceDays"] = 0
         self.forecastDeck["repeatRate"] = 0
         self.forecastDeck["sortedCards"] = {}
+        # 预测卡组-禁识之瓶启封的映射
+        self.specialMapJSZPQF = {}
         # 预测卡组的自动刷新依据：carried的len
         self.carriedLazyLen = 0
         # 高级设置
@@ -92,7 +94,7 @@ class card_preview_list_board(tk.Frame):
             if statusCode < MAX_STATUS_CODE and statusCode >= MIN_STATUS_CODE:
                 # 获取检视敌方的卡牌list
                 cardsDict = cService.getViewingCards()
-
+            
                 if len(cardsDict.keys()) > 0:
                     ctIds = []
                     sortByIndexDict = {}
@@ -124,7 +126,11 @@ class card_preview_list_board(tk.Frame):
                                 temp_key = sortByIndexDict[deckNums-count]
                                 self.discoveryMap[temp_key] = value
                                 count += 1
-    
+                    # 禁识之瓶 张数》25 and playID = 自己
+                    if len(cardsDict.keys()) >= 25 :
+                        pass
+                        # self.specialMapJSZPQF.update(cardsDict)
+
     def getCIdsForDeckModule(self):
         pass
     
@@ -720,7 +726,13 @@ class card_preview_list_board(tk.Frame):
     def getRelevantDeck(self,index):
         # 预测卡组源的CtIds列表
         currDeckCtIds = []
-        for key,value in self.carriedCards.items():
+        # 映射禁识之瓶:启封
+        self.temp_dict = {}
+        self.temp_dict.update(self.carriedCards)
+        if len(self.specialMapJSZPQF.keys()) > 0:
+            self.temp_dict = {}
+            self.temp_dict.update(self.specialMapJSZPQF)
+        for key,value in self.temp_dict.items():
             currDeckCtIds.append(value["Id"])
         # 根据factionId初步过滤卡组数据库
         factionId = cService.getFactionId(self.root.responseManager.playerId)

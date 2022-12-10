@@ -125,6 +125,11 @@ def updateVersionGOG():
     # 版本切换时会有
     changeOrderCBState()
 
+def updateVersionGY():
+    updateVersionJson(EGamePlatform.GY)
+    # 版本切换时会有
+    changeOrderCBState()
+
 def changeOrderCBState():
     version = FT.getVersion()
     if 'orderMode' not in version:
@@ -254,11 +259,16 @@ def create_page(root):
     Entry(frame,font=("Verdana",8),state="readonly",textvariable=root.version_new).pack(side="left",fill="x",expand=1)
 
     frame = Frame(frame_2)
-    frame.pack(side="top",pady=8,padx=5,fill="x",expand=1)
-    Button(frame,command=updateVersionSteam,text="更新&切换最新版本!(Steam)",bootstyle=("warning")).pack(side="left",fill="x",expand=1)
+    frame.pack(side="top",pady=6,padx=5,fill="x",expand=1)
     frame = Frame(frame_2)
-    frame.pack(side="top",pady=0,padx=5,fill="x",expand=1)
-    Button(frame,command=updateVersionGOG,text="更新&切换最新版本!(GOG)",bootstyle=("light")).pack(side="left",fill="x",expand=1)
+    frame.pack(side="top",pady=2,padx=5,fill="x",expand=1)
+    Button(frame,command=updateVersionSteam,text="更新&设置平台版本!(Steam)",bootstyle=("warning")).pack(side="left",fill="x",expand=1)
+    frame = Frame(frame_2)
+    frame.pack(side="top",pady=2,padx=5,fill="x",expand=1)
+    Button(frame,command=updateVersionGOG,text="更新&设置平台版本!(GOG)",bootstyle=("light")).pack(side="left",fill="x",expand=1)
+    frame = Frame(frame_2)
+    frame.pack(side="top",pady=2,padx=5,fill="x",expand=1)
+    Button(frame,command=updateVersionGY,text="更新&设置平台版本!(盖娅国服)",bootstyle=("info")).pack(side="left",fill="x",expand=1)
 
     frame = Frame(frame_2)
     frame.pack(side="top",pady=60,padx=5,fill="x",expand=1)  
@@ -277,12 +287,17 @@ def create_page(root):
     # context = FT.getVersion()["context"]
     st.insert(END, 
 '<更新日志>\n\
+ - <Version 0.3.9-bate>\n\
+ · 兼容游戏版本10.12;\n\
+ · 现在可以对盖娅国服兼容了;\n\
+\n\
  - <Version 0.3.4-bate>\n\
  · 修复了读取不到"回响"卡牌的问题;\n\
  · 新增了预测卡牌不能自动刷新的问题;\n\
  · 新增了更新自检&提示;\n\
  · 新增了预测卡组的对比效果;\n\
  · 新增了高级选项卡;\n\
+ · 新增了卡组状态栏的hover效果;\n\
  · 限制了监测剩余卡组顺序的功能;\n\
 \n\
  - <Version 0.3.2-bate>\n\
@@ -293,6 +308,8 @@ def create_page(root):
  · 编写了更新系统;\n\
  · 修复了推荐卡组时导致的意外崩溃问题;\n\
 \n\
+-------------------------------------\n\
+-------------------------------------\n\
 \n<写在前面>\n\
  · BUG提交烦请惠书邮箱:\n\
  · 1053278842@qq.com\n\

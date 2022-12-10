@@ -76,6 +76,7 @@ def getDriverCardInfo(ctId):
         result[ctId]["provision"]=provision
         result[ctId]["cardType"]=cardType
         result[ctId]["power"]=power
+    print(result)
     return result
 
 headers={
@@ -92,6 +93,7 @@ if __name__=="__main__":
         if len(value.keys()) < 8:
             deriveCards[key] = value
     driverCardIds = [ int(ctId) for ctId in deriveCards.keys()]
+    print(driverCardIds)
     pool = Pool(4)
     result = {}
     result = pool.map(getDriverCardInfo, driverCardIds)
