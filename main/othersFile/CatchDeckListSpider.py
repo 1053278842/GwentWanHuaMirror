@@ -8,6 +8,10 @@ from multiprocessing import Pool
 
 import requests
 
+os.path.join(os.path.dirname(__file__), '../')
+sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
+from tools import FileTool as FT
+
 
 # [2001501,400153] => hash
 # 卡组转哈希值，无视元素顺序
@@ -121,7 +125,9 @@ def getDeckInfoByDeckId(deckId):
     print(temp_deck_info)
     return temp_deck_info
 
-GwentUrl = "http://110.42.155.172:8081/deck/api"
+global_config = FT.getGlobalConfig()
+GwentUrl = global_config["url"]+"/deck/api"
+# GwentUrl = "http://110.42.155.172:8081/deck/api"
 headers={
     "User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36+\
         (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3766.400 QQBrowser/10.6.4163.400",

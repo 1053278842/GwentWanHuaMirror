@@ -723,6 +723,7 @@ class card_preview_list_board(tk.Frame):
     def setCardDeckInfo(self,CardDeckInfo):
         self.CARD_DECK_INFO = CardDeckInfo
 # ----------------------------------------------------------------
+    # 相关:计算重合率高的卡组-核心函数
     def getRelevantDeck(self,index):
         # 预测卡组源的CtIds列表
         currDeckCtIds = []

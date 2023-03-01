@@ -109,7 +109,7 @@ def pack_cardTemplate(cts):
     return result_dict
 
 def printList(list):
-    print(list["InstanceId"],list["PlayId"],list["Name"],list["Location"],list["Index"],list["Address"],list["Id"],list["FromPlayerId"],list["Type"])
+    print(list["InstanceId"],list["PlayId"],list["Name"],Location(int(list["Location"],16)),list["Index"],list["Address"],list["Id"],list["FromPlayerId"],list["Type"])
     # print("\t",list["LastActivePosition"],list["PlayedFrom"])
 
 def cardListToString(cardListAdd,tipsName):
@@ -168,9 +168,9 @@ if __name__ == "__main__":
         for j in range(len(cts) - i - 1):
             if cts[j]["Location"] < cts[j + 1]["Location"]:
                 cts[j],cts[j+1] = cts[j+1],cts[j]
-            elif cts[j]["Location"] == cts[j + 1]["Location"]:
-                if cts[j]["Index"] > cts[j + 1]["Index"]:
-                    cts[j],cts[j+1] = cts[j+1],cts[j]
+            # elif cts[j]["Location"] == cts[j + 1]["Location"]:
+            #     if cts[j]["Index"] > cts[j + 1]["Index"]:
+            #         cts[j],cts[j+1] = cts[j+1],cts[j]
     result_dict = pack_cardTemplate(cts)
     p1_d =[]
     p2_d =[]

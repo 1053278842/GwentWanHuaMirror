@@ -287,6 +287,9 @@ def create_page(root):
     # context = FT.getVersion()["context"]
     st.insert(END, 
 '<更新日志>\n\
+ - <Version 0.3.95-bate>\n\
+ · 服务器迁移,新官网IP为:http://117.50.175.251;\n\
+\n\
  - <Version 0.3.9-bate>\n\
  · 兼容游戏版本10.12;\n\
  · 现在可以对盖娅国服兼容了;\n\
