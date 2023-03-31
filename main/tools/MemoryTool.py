@@ -6,7 +6,9 @@ import pymem
 
 
 # 偏移寻址
-# offsets为空时，会把base视为指针并进入一次
+# offsets为[]时:    add => [add]
+# offsets有值时:    add => [[add]+offset1]
+# ............      add => [[[add]+offset1]+offset2]
 def read_int64(pm, base, offsets):
     try :
         value = pm.read_longlong(base)
@@ -50,6 +52,12 @@ def read_multi_bytes(pm, base, offsets,count):
 
 # 获取到对象的类型名
 # address 需要转换的对象,ascii的上一级指针地址
+# module:   
+# ->->  &"Assembly-CSharp.dll"
+# ->->
+# ->->  "GameInstance"
+# ->->  "GwentGame"
+# 以上样式的"上一级"!
 # return 函数类型
 def read_Type_Name(pm,address):
     asciiHeadAdd = read_int64(pm,address+0x10,[])
