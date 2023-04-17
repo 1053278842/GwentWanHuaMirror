@@ -13,7 +13,7 @@ from tools import FileTool as ft
 
 def writeCardInfoJson(headers):
     cn_map = ft.getCardDataJsonDict()
-    url="https://www.playgwent.com/en/decks/api/builder/search?&faction=0,1,2,3,4,5,6&limit=3000&offset=0"
+    url="https://www.playgwent.com/en/decks/builder/api/search?&faction=0,1,2,3,4,5,6&limit=100&offset=0"
     response=requests.get(url=url,headers=headers)
     req_json = response.json()
     all_cardInfos_dict = cn_map
@@ -51,8 +51,9 @@ def writeCardInfoJson(headers):
 def getDriverCardInfo(ctId):
     result={}
     result[str(ctId)] = all_cardInfos_dict[str(ctId)]
-    url="https://www.playgwent.com/en/decks/api/builder/search?id="+str(ctId)
+    url="https://www.playgwent.com/en/decks/builder/api/search?id="+str(ctId)
     response=requests.get(url=url,headers=headers)
+    print("t:",response)
     req_json = response.json()
     response.close()
     for cardInfo in req_json:

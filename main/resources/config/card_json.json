@@ -282,20 +282,20 @@
     "112401": {
         "name": "独角兽",
         "description": "说独角兽喜欢幼莲。但如今，幼莲跟独角兽一样稀缺，这理论也就难以证明了",
-        "tip": "<keyword=deploy>部署：</keyword>使 1 个单位获得 {Boost} 点增益。若己方控制“梦魇独角兽”，则效果翻倍。",
+        "tip": "<keyword=deploy>部署：</keyword>使 1 个友军单位获得 {Boost} 点增益。若己方控制“梦魇独角兽”，则改为使其获得 {Boost2} 点增益。\\n若己方手牌中有“梦魇独角兽”，则将其打出，随后抽 1 张牌。",
         "factionId": 1,
         "rarity": 8,
-        "provision": 8,
+        "provision": 9,
         "cardType": 4,
         "power": 4
     },
     "112402": {
         "name": "梦魇独角兽",
         "description": "天呐，那根本不是独角兽！那是……”——著名奇珍收藏家崴尔玛的遗言",
-        "tip": "<keyword=deploy>部署：</keyword>对 1 个单位造成 {Damage} 点伤害。若己方控制“独角兽”，则效果翻倍。",
+        "tip": "<keyword=deploy>部署：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。若己方控制“独角兽”，则改为造成 {Damage2} 点伤害。\\n若己方手牌中有“独角兽”，则将其打出，随后抽 1 张牌。",
         "factionId": 1,
         "rarity": 8,
-        "provision": 8,
+        "provision": 9,
         "cardType": 4,
         "power": 4
     },
@@ -412,10 +412,10 @@
     "113207": {
         "name": "指挥号角",
         "description": "气加一分，听力减三分",
-        "tip": "使 {maxtargets} 个相邻单位获得 {Boost} 点增益。",
+        "tip": "使 {maxtargets} 个相邻单位获得 {Boost} 点增益。若目标为铜色单位，则其每与 1 个金色单位相邻，便额外获得 {Boost2} 点增益。",
         "factionId": 1,
         "rarity": 4,
-        "provision": 8,
+        "provision": 7,
         "cardType": 2,
         "power": 0
     },
@@ -505,7 +505,7 @@
         "tip": "摧毁 1 个人口为 {cost} 的单位。",
         "factionId": 1,
         "rarity": 22,
-        "provision": 5,
+        "provision": 4,
         "cardType": 2,
         "power": 0
     },
@@ -1012,8 +1012,8 @@
     "131101": {
         "name": "坚硬甲壳",
         "description": "留点尊严吧，你的结局已然注定。",
-        "tip": "<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益。若它为“怪兽”阵营单位，便还使其获得<keyword=veil>遮蔽</keyword>。<keyword=charge>充能：</keyword>{Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
-        "factionId": 64,
+        "tip": "<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益。若它为非中立单位，则还会使其获得<keyword=veil>遮蔽</keyword>。<keyword=charge>充能：</keyword>{Charges}\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
+        "factionId": 2,
         "rarity": 8,
         "provision": 15,
         "cardType": 1,
@@ -1053,7 +1053,7 @@
         "name": "自然之力",
         "description": "便全村人都饿肚子，我们也绝不去这片树林打猎",
         "tip": "<keyword=order>指令：</keyword> <keyword=spawn>生成</keyword> 并打出“林妖”。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。",
-        "factionId": 16,
+        "factionId": 2,
         "rarity": 8,
         "provision": 15,
         "cardType": 1,
@@ -1062,7 +1062,7 @@
     "132104": {
         "name": "卡兰希尔",
         "description": "儿偏偏成为逆子",
-        "tip": "<keyword=deploy>部署：</keyword>从己方手牌中<keyword=spawn>生成</keyword> 1 个人口不高于 {provision}，且战力为 {Power} 的“怪兽”单位基础同名牌至此排。",
+        "tip": "<keyword=deploy>部署：</keyword>从己方手牌中<keyword=spawn>生成</keyword> 1 个人口不高于 {provision} 的非中立单位基础同名牌至此排，其战力设为 {Power}。",
         "factionId": 2,
         "rarity": 8,
         "provision": 9,
@@ -1582,7 +1582,7 @@
     "142104": {
         "name": "米尔瓦",
         "description": "每次拉弓射箭，我总想起父亲。他……应该会为我骄傲吧。",
-        "tip": "<keyword=immune>免疫</keyword>。\\n己方每打出 1 个“松鼠党”单位，自身便获得 {Boost} 点增益。",
+        "tip": "<keyword=immune>免疫</keyword>。\\n每有 1 个友军单位移动，便使自身获得 {Boost} 点增益。",
         "factionId": 16,
         "rarity": 8,
         "provision": 7,
@@ -1612,7 +1612,7 @@
     "142107": {
         "name": "伊斯琳妮",
         "description": "因不断预言世界末日而闻名遐迩——那些可不是什么好玩言论",
-        "tip": "<keyword=deploy>部署：</keyword>使己方手牌中 1 个“松鼠党”单位获得 {Boost} 点增益。",
+        "tip": "<keyword=deploy>部署：</keyword>使手牌中的 1 个非中立单位获得 {Boost} 点增益。",
         "factionId": 16,
         "rarity": 8,
         "provision": 10,
@@ -1672,7 +1672,7 @@
     "142205": {
         "name": "维里赫德旅骑兵",
         "description": "我见过的最可怕的场景？卡特利欧纳瘟疫、范格堡被夷为平地，还有维里赫德旅骑兵的冲锋。",
-        "tip": "<keyword=deploy>部署</keyword>（<keyword=melee>近战</keyword>）：将 1 个敌军单位移至其半场的另一排。\\n<keyword=deploy>部署</keyword>（<keyword=ranged>远程</keyword>）：将 1 个友军单位移至其半场的另一排。",
+        "tip": "<keyword=deploy>部署：</keyword>将 1 个单位移至其所在半场的另一排。若为敌军单位，则对其造成 {Damage} 点伤害。若为友军单位，则使其获得 {Boost} 点增益。",
         "factionId": 16,
         "rarity": 1,
         "provision": 4,
@@ -1727,7 +1727,7 @@
         "rarity": 4,
         "provision": 6,
         "cardType": 4,
-        "power": 4
+        "power": 5
     },
     "142211": {
         "name": "爱黎瑞恩",
@@ -1822,7 +1822,7 @@
     "142306": {
         "name": "玛哈坎捍卫者",
         "description": "听好了，我们是天生的战士——拳拳到肉，绝不留情！",
-        "tip": "每个己方回合结束时，若自身带有增益，则获得 {Boost} 点增益。",
+        "tip": "<keyword=inspired>激励：</keyword>己方回合结束时，自身获得 {Boost} 点增益。",
         "factionId": 16,
         "rarity": 1,
         "provision": 4,
@@ -2132,7 +2132,7 @@
     "152210": {
         "name": "恶熊",
         "description": "‘驯服’？哈，小子，史凯利格人也许能训练它们，但那跟驯服完全不同……",
-        "tip": "<keyword=zeal>狂热</keyword>。\\n<keyword=Deploy>部署：</keyword>己方墓场每有 1 张“恶熊”，便获得<keyword=charge>充能</keyword> +{Charges2}。\\n<keyword=order>指令：</keyword>使 1 个敌军单位<keyword=bleeding>重伤</keyword> {bleed} 回合。\\n<keyword=charge>充能：</keyword>{Charges}。",
+        "tip": "<keyword=zeal>狂热</keyword>。\\n<keyword=Deploy>部署：</keyword>己方墓场每有 1 张“恶熊”，便获得<keyword=charge>充能</keyword> +{Charges2}。\\n<keyword=order>指令：</keyword>使 1 个敌军单位<keyword=bleeding>重伤</keyword> {bleed} 回合。\\n<keyword=charge>充能：</keyword>{Charges}",
         "factionId": 32,
         "rarity": 1,
         "provision": 4,
@@ -2142,7 +2142,7 @@
     "152211": {
         "name": "茜格德莉法的仪式",
         "description": "跪在我身边，向圣母低头。",
-        "tip": "从己方墓场<keyword=summon>召唤</keyword> 1 个“史凯利格”单位至己方单排，并使其获得<keyword=doomed>佚亡</keyword>。",
+        "tip": "从己方墓场<keyword=summon>召唤</keyword> 1 个非中立单位至己方单排，并使其获得<keyword=doomed>佚亡</keyword>。",
         "factionId": 32,
         "rarity": 4,
         "provision": 8,
@@ -2152,7 +2152,7 @@
     "152213": {
         "name": "斯凡瑞吉·图尔赛克",
         "description": "帝最开始也认为自己登上皇位是出于偶然",
-        "tip": "<keyword=deploy>部署：</keyword>使自身获得增益，其数值等于本小局最后 1 个进入己方墓场的“史凯利格”单位的基础战力。",
+        "tip": "<keyword=deploy>部署：</keyword>使自身获得增益，其数值等于本小局最后 1 个进入己方墓场的非中立单位的战力。",
         "factionId": 32,
         "rarity": 4,
         "provision": 8,
@@ -2262,7 +2262,7 @@
     "152310": {
         "name": "弗蕾雅的祝福",
         "description": "母弗蕾雅是爱、美与丰饶的女神",
-        "tip": "从己方墓场打出 1 个铜色“史凯利格”单位，并使其获得<keyword=doomed>佚亡</keyword>。",
+        "tip": "从己方墓场打出 1 个铜色非中立单位，并使其获得<keyword=doomed>佚亡</keyword>。",
         "factionId": 32,
         "rarity": 1,
         "provision": 5,
@@ -3172,7 +3172,7 @@
     "200078": {
         "name": "青草试炼",
         "description": "想象有一团黏土。为了塑形，你首先必须把它打湿，不然就会干裂。试炼的第一步就是这样。可以说，它会开放肉体，只有这样，突变诱发物才能将其塑造成猎魔人。",
-        "tip": "将 1 个单位的战力设为 {Power} 点。若它不是“猎魔人” ，则先对其造成 {Damage} 点伤害。",
+        "tip": "将 1 个单位的战力设为 {Power} 点。若它不是“猎魔人” ，则先对其造成 {Damage} 点伤害并<keyword=infused>灌注</keyword>其“猎魔人”类别。",
         "factionId": 1,
         "rarity": 8,
         "provision": 6,
@@ -3332,7 +3332,7 @@
     "200115": {
         "name": "暗袭",
         "description": "行者——帝国宫廷最受欢迎的职业之一，仅次于抄书吏和轻浮的贵妇",
-        "tip": "对 1 个单位造成 {Damage} 点伤害。它每有 1 个相邻单位，则该伤害 -{Damage2}。",
+        "tip": "对 1 个单位造成 {Damage} 点伤害。它每有 1 个相邻非<keyword=spying>潜伏</keyword>单位，则该伤害 -{Damage2}。",
         "factionId": 4,
         "rarity": 22,
         "provision": 5,
@@ -3402,12 +3402,12 @@
     "200144": {
         "name": "图尔赛克家族驯兽师",
         "description": "别碰他。别盯着他的眼睛瞧。事实上……压根就别靠近他。",
-        "tip": "<keyword=deploy>部署：</keyword>使 1 只友军“野兽”单位获得<keyword=vitality>活力</keyword> {Vitality} 回合。\\n<keyword=bonded>会师：</keyword>改为使 1 个友军“野兽”获得 {Boost} 点增益。",
+        "tip": "<keyword=deploy>部署：</keyword>使自身获得等同于友军“野兽”种类数的增益。\\n<keyword=order>指令：</keyword>对自身造成等同于自身增益量的伤害，随后对等量的敌军单位造成 {Damage} 点伤害。",
         "factionId": 32,
         "rarity": 22,
         "provision": 4,
         "cardType": 4,
-        "power": 4
+        "power": 2
     },
     "200145": {
         "name": "迪门家族水手",
@@ -3495,7 +3495,7 @@
         "tip": "<keyword=order>指令：</keyword><keyword=lock>锁定</keyword> 1 个敌军单位，并对其造成 {Damage} 点伤害。<keyword=charge>充能：</keyword>{Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 人口上限。",
         "factionId": 4,
         "rarity": 8,
-        "provision": 15,
+        "provision": 14,
         "cardType": 1,
         "power": 0
     },
@@ -3552,7 +3552,7 @@
     "200168": {
         "name": "灼心狂热",
         "description": "我不需要谋臣和他们的诡计，我相信士兵的利刃。",
-        "tip": "<keyword=order>指令：</keyword>使 1 个“北方领域”友军单位获得 {Boost} 点增益和<keyword=zeal>狂热</keyword>。 <keyword=charge>充能：</keyword>{Charges}。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
+        "tip": "<keyword=order>指令：</keyword>使 1 个友军非中立单位获得 {Boost} 点增益和<keyword=zeal>狂热</keyword>。 <keyword=charge>充能：</keyword>{Charges}\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
         "factionId": 8,
         "rarity": 8,
         "provision": 15,
@@ -4612,7 +4612,7 @@
     "201676": {
         "name": "帕扶科“舅舅”盖尔",
         "description": "蓝山的精灵走私粮食最多的人当属盖尔。他为他们带来了一袋袋芜菁，还有最最珍贵的韭菜，因此被亲切地称作“舅舅”",
-        "tip": "<keyword=order>指令</keyword>（<keyword=ranged>远程</keyword>）：对 1 个单位造成 {Damage} 点伤害。<keyword=cooldown>冷却：</keyword>{Cooldown}。\\n若己方半场只有“松鼠党”单位，则伤害改为 {Damage2} 点。",
+        "tip": "<keyword=order>指令</keyword>（<keyword=ranged>远程</keyword>）：对 1 个单位造成 {Damage} 点伤害。<keyword=cooldown>冷却：</keyword>{Cooldown}。\\n若己方半场只有非中立单位，则伤害改为 {Damage2} 点。",
         "factionId": 16,
         "rarity": 4,
         "provision": 8,
@@ -4672,12 +4672,12 @@
     "201704": {
         "name": "斥候",
         "description": "如果斥候没有回来，我们就掉头。乡下的人说这些树林里全是松鼠。我指的可不是啃松果的那种。",
-        "tip": "<keyword=veil>遮蔽</keyword>。",
+        "tip": "<keyword=deploy>部署：</keyword>将 1 个单位移至其所在半场的另一排。",
         "factionId": 1,
         "rarity": 1,
         "provision": 4,
         "cardType": 4,
-        "power": 5
+        "power": 4
     },
     "201709": {
         "name": "均衡",
@@ -4932,7 +4932,7 @@
     "201772": {
         "name": "杰洛特：猎魔专家",
         "description": "我曾经完成过一份委托。对方要我选择奖赏，我便依照意外律向他索要回报。",
-        "tip": "<keyword=deploy>部署</keyword>（<keyword=melee>近战</keyword>）：对 1 个敌军单位造成 {Damage} 点伤害。若其战力为 {Power} 的倍数，则改为将其摧毁。",
+        "tip": "<keyword=deploy>部署：</keyword>对 {MaxTargets} 个单位造成 {Damage2} 点伤害。若己方控制 1 名其他“猎魔人”，则获得<keyword=zeal>狂热</keyword>。\\n<keyword=order>指令：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。若其战力为 {Damage} 的倍数，则改为将其摧毁。",
         "factionId": 1,
         "rarity": 8,
         "provision": 11,
@@ -4982,7 +4982,7 @@
     "201779": {
         "name": "森林的召唤",
         "description": "布洛克莱昂的意义远高于我的生命。她是一位母亲，关怀着自己的孩子们。我至死都要捍卫她。",
-        "tip": "从牌组打出 1 张“松鼠党”单位牌，使其获得 1 点增益。",
+        "tip": "从牌组打出 1 张非中立单位牌，使其获得 {Boost} 点增益。",
         "factionId": 16,
         "rarity": 8,
         "provision": 9,
@@ -5022,12 +5022,12 @@
     "202044": {
         "name": "“瘸子”戈温",
         "description": "害虫就得严加管教。还要经常抽上几鞭子！",
-        "tip": "<keyword=deploy>部署</keyword>（<keyword=melee>近战</keyword>）：对 1 个敌军单位造成 {Damage} 点伤害，对其所有同名牌造成 {Damage2} 点伤害。",
+        "tip": "己方每打出另外 1 个单位，便对所有与其人口数相同的敌军单位造成 {Damage} 点伤害。",
         "factionId": 1,
         "rarity": 4,
-        "provision": 7,
+        "provision": 9,
         "cardType": 4,
-        "power": 3
+        "power": 5
     },
     "202054": {
         "name": "精灵洋葱汤",
@@ -5087,12 +5087,12 @@
     "202099": {
         "name": "加斯科",
         "description": "你手下的人可就是史帕拉流亡军？你便是人称野狗公爵的那位？",
-        "tip": "<keyword=deploy>部署</keyword>（<keyword=melee>近战</keyword>）：获得增益，在 {Power} - {Power2} 点之间随机选择。",
+        "tip": "若位于手牌、牌组或战场中，本次对局己方每打出 1 个<keyword=bonded>会师</keyword>单位的第 2 张基础同名牌，便使自身获得 {Power} 点增益。",
         "factionId": 1,
         "rarity": 8,
         "provision": 8,
         "cardType": 4,
-        "power": 1
+        "power": 2
     },
     "202100": {
         "name": "维尔姆王子",
@@ -5287,7 +5287,7 @@
     "202119": {
         "name": "鸣镝动怒",
         "description": "我们是来打架的。尼弗迦德人、莱里亚人……都一样。我们只想用战斗来洗刷我们的耻辱。",
-        "tip": "<keyword=order>指令：</keyword> <keyword=spawn>生成</keyword> 并打出“背亲者恩约夫”。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
+        "tip": "<keyword=order>指令：</keyword> <keyword=spawn>生成</keyword> 1 只“尖啸女海妖”至敌方单排，并对其造成 {Damage} 点伤害。\\n<keyword=charge>充能：</keyword>{Charge}\\n当所有<keyword=charge>充能</keyword>耗尽，<keyword=spawn>生成</keyword>并打出“背亲者恩约夫”。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
         "factionId": 32,
         "rarity": 8,
         "provision": 15,
@@ -5297,10 +5297,10 @@
     "202121": {
         "name": "史帕拉流亡军",
         "description": "嗷，嗷，嗷嗷！",
-        "tip": "<keyword=deploy>部署：</keyword>将 1 个单位移至其所在半场的另一排。",
+        "tip": "<keyword=deploy>部署：</keyword>将 1 张金色手牌洗回牌组，随后抽取 1 张铜色牌，并使自身获得 {Power} 点增益。\\n<keyword=bonded>会师：</keyword>改为获得 {Power2} 点增益。",
         "factionId": 1,
         "rarity": 22,
-        "provision": 5,
+        "provision": 4,
         "cardType": 4,
         "power": 4
     },
@@ -5310,7 +5310,7 @@
         "tip": "<keyword=deploy>部署：</keyword>对 1 个敌军单位造成 1 点伤害。\\n若手牌中有“炸弹”牌，则改为造成 3 点伤害。",
         "factionId": 1,
         "rarity": 22,
-        "provision": 5,
+        "provision": 4,
         "cardType": 4,
         "power": 4
     },
@@ -5437,7 +5437,7 @@
     "202148": {
         "name": "军需储备",
         "description": "我的国王喜欢……享受生活。好在沉溺享乐并没有影响他统治王国的能力。",
-        "tip": "<keyword=order>指令：</keyword>在己方单排<keyword=spawn>生成</keyword> 1 个“志愿军”，随后使同排所有“北方领域”单位的<keyword=cooldown>冷却</keyword> -{Cooldown}。\\n<keyword=charge>充能：</keyword>{Charge}\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
+        "tip": "<keyword=order>指令：</keyword>在己方单排<keyword=spawn>生成</keyword> 1 个“志愿军”，随后使同排所有非中立单位的<keyword=cooldown>冷却</keyword> -{Cooldown}。\\n<keyword=charge>充能：</keyword>{Charge}\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
         "factionId": 8,
         "rarity": 8,
         "provision": 15,
@@ -5447,10 +5447,10 @@
     "202149": {
         "name": "安古兰",
         "description": "不管是爬的、蛇行的还是上树的——你叫得出来的我都吃过。至于那些飞的……有一次我啃了一只风筝，因为上面粘了面粉。",
-        "tip": "<keyword=deploy>部署：</keyword><keyword=spawn>生成</keyword>并随机打出对方起始牌组中的 1 张“神器”牌。",
+        "tip": "<keyword=deploy>部署：</keyword><keyword=create>创造</keyword>并打出对方起始牌组中的 1 张“神器”牌。若对方起始牌组中没有“神器”牌，则改为使自身获得 {Boost} 点增益。",
         "factionId": 1,
         "rarity": 8,
-        "provision": 10,
+        "provision": 11,
         "cardType": 4,
         "power": 3
     },
@@ -5662,22 +5662,22 @@
     "202182": {
         "name": "背亲者恩约夫",
         "description": "只有毁灭可以洗刷我的耻辱。",
-        "tip": "<keyword=doomed>佚亡</keyword>。\\n在敌方同排<keyword=spawn>生成</keyword> {MaxTargets} 只“尖啸女海妖”，并对其造成 {Damage} 点伤害。",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=deploy>部署：</keyword>在敌方同排<keyword=spawn>生成</keyword> 1 只“尖啸女海妖”，并对其造成 {Damage} 点伤害。",
         "factionId": 32,
         "rarity": 8,
-        "provision": 15,
-        "cardType": 1,
-        "power": 0
+        "provision": 0,
+        "cardType": 4,
+        "power": 13
     },
     "202183": {
         "name": "格尼阔拉的果实",
         "description": "格尼阔拉有点像吸血鬼，这两种生物同宗同源。只是格尼阔拉并不依赖血液，反而会用自己的血去喂养。",
         "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=thrive>成长</keyword>。",
         "factionId": 2,
-        "rarity": 8,
-        "provision": 15,
-        "cardType": 1,
-        "power": 0
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 4,
+        "power": 1
     },
     "202184": {
         "name": "精灵暗箭手",
@@ -5712,7 +5712,7 @@
     "202187": {
         "name": "四面夹击",
         "description": "们叫她“辛特拉的母狮”。这可不是毫无根据的",
-        "tip": "<keyword=order>指令：</keyword>选择并抽 1 张“北方领域”牌，随后将 1 张手牌洗回牌组，然后<keyword=spawn>生成</keyword> 1 名“志愿军”至<keyword=melee>近战</keyword>排。\\n<keyword=charge>充能：</keyword>{charges}\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
+        "tip": "<keyword=order>指令：</keyword>选择并抽 1 张非中立牌，随后将 1 张手牌洗回牌组，然后<keyword=spawn>生成</keyword> 1 名“志愿军”至<keyword=melee>近战</keyword>排。\\n<keyword=charge>充能：</keyword>{charges}\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
         "factionId": 8,
         "rarity": 8,
         "provision": 15,
@@ -5862,7 +5862,7 @@
     "202202": {
         "name": "桑格烈",
         "description": "格烈独具醇厚的橡木风味，备受行家赞誉，只有女爵陛下才能享用……而她品尝的次数非常、非常频繁",
-        "tip": "使 1 个单位获得 {Boost} 点<keyword=boost>增益</keyword>和<keyword=shield>护盾</keyword>。",
+        "tip": "净化 1 个单位并使其获得 {Boost} 点增益，随后<keyword=infused>灌注</keyword>其“{InjectableAbility}”能力。",
         "factionId": 1,
         "rarity": 4,
         "provision": 6,
@@ -6002,12 +6002,12 @@
     "202217": {
         "name": "快刀手",
         "description": "啊，汩汩作响的声音最好听了。",
-        "tip": "<keyword=deploy>部署：</keyword>使 1 个敌军单位<keyword=bleeding>重伤</keyword> {Bleed} 回合。",
+        "tip": "<keyword=deploy>部署：</keyword>摧毁 1 个战力不高于 {Power} 点的敌军单位。\\n<keyword=bonded>会师：</keyword>改为摧毁 1 个战力不高于 {Power2} 点的敌军单位。",
         "factionId": 1,
         "rarity": 22,
-        "provision": 4,
+        "provision": 5,
         "cardType": 4,
-        "power": 3
+        "power": 5
     },
     "202218": {
         "name": "牛堡学者",
@@ -6132,7 +6132,7 @@
     "202231": {
         "name": "渴血鸟怪",
         "description": "只构成不了什么威胁。要是有一群？那就很要命了",
-        "tip": "<keyword=deploy>部署：</keyword>使 1 个敌军单位<keyword=bleeding>重伤</keyword> {Bleed} 回合。\\n<keyword=bonded>会师：</keyword>改为使 1 个敌军单位<keyword=bleeding>重伤</keyword> {Bleed2} 回合。",
+        "tip": "<keyword=deploy>部署：</keyword>使 1 个敌军单位<keyword=bleeding>重伤</keyword>（{Bleed}）回合。\\n<keyword=bonded>会师：</keyword>改为使 1 个敌军单位<keyword=bleeding>重伤</keyword>，回合数等同于其基础战力。",
         "factionId": 2,
         "rarity": 1,
         "provision": 4,
@@ -6142,7 +6142,7 @@
     "202233": {
         "name": "夜行吸血鬼",
         "description": "管你脚步放得多轻，都逃不过他的耳朵……和利爪",
-        "tip": "<keyword=zeal>狂热</keyword>。\\n<keyword=order>指令</keyword>（<keyword=melee>近战</keyword>）：使 1 个敌军单位<keyword=bleeding>重伤</keyword> {Bleed} 回合。<keyword=cooldown>冷却：</keyword>{Cooldown}。\\n己方每打出 1 张“吸血鬼”牌，则<keyword=cooldown>冷却</keyword> -{Cooldown2}。",
+        "tip": "<keyword=zeal>狂热</keyword>。\\n<keyword=order>指令</keyword>（<keyword=melee>近战</keyword>）：使 1 个敌军单位<keyword=bleeding>重伤</keyword> {Bleed} 回合。<keyword=cooldown>冷却：</keyword>{Cooldown}\\n己方每打出 1 张“吸血鬼”牌，则<keyword=cooldown>冷却</keyword> -{Cooldown2}。",
         "factionId": 2,
         "rarity": 22,
         "provision": 5,
@@ -6312,7 +6312,7 @@
     "202250": {
         "name": "阿德莉亚女王",
         "description": "特拉女王艾达莉亚皱皱眉头就能升起吊桥。要是她挥挥手呢……真不敢想会发生什么",
-        "tip": "<keyword=deploy>部署：</keyword><keyword=spawn>生成</keyword>并打出己方手牌中 1 个铜色“北方领域”单位的 1 张基础同名牌，再使其获得<keyword=shield>护盾</keyword>。",
+        "tip": "<keyword=deploy>部署：</keyword><keyword=spawn>生成</keyword>并打出己方手牌中 1 个铜色非中立单位的 1 张基础同名牌，再使其获得<keyword=shield>护盾</keyword>。",
         "factionId": 8,
         "rarity": 8,
         "provision": 10,
@@ -6497,7 +6497,7 @@
         "rarity": 4,
         "provision": 7,
         "cardType": 4,
-        "power": 5
+        "power": 6
     },
     "202269": {
         "name": "树精的呵护",
@@ -6642,7 +6642,7 @@
     "202283": {
         "name": "腐化的佛兰明妮卡",
         "description": "时，就连德鲁伊也会臣服于斯瓦勃洛的低语…",
-        "tip": "<keyword=deploy>部署：</keyword>己方墓场每有 1 只“野兽”单位，自身便获得 {Boost} 点增益。",
+        "tip": "<keyword=deploy>部署：</keyword>己方墓场每有 1 种“野兽”单位，自身便获得 {Boost} 点增益。",
         "factionId": 32,
         "rarity": 4,
         "provision": 7,
@@ -6832,7 +6832,7 @@
     "202302": {
         "name": "葛拉登",
         "description": "起初我们只要发现黑魔法书就一律烧毁，但现在我们认为，或许先读过再烧毁是比较明智的做法。",
-        "tip": "<keyword=deploy>部署</keyword>（<keyword=melee>近战</keyword>）：摧毁一个带有“<keyword=bounty>赏金</keyword>”的敌军单位。\\n<keyword=tribute>献金</keyword> {Tribute-B.P.BB_Tribute}：自身获得该单位基础战力的增益。",
+        "tip": "<keyword=deploy>部署</keyword>（<keyword=melee>近战</keyword>）：摧毁 1 个带有“<keyword=bounty>赏金</keyword>”的敌军单位。\\n<keyword=tribute>献金</keyword> {Tribute-B.P.BB_Tribute}：自身获得该单位基础战力的增益。",
         "factionId": 64,
         "rarity": 4,
         "provision": 9,
@@ -6842,7 +6842,7 @@
     "202303": {
         "name": "街头赏金",
         "description": "与我们开战就意味着诺维格瑞即将血流成渠。",
-        "tip": "<keyword=order>指令：</keyword>对 1 个敌军单位造成 {damage} 点伤害，并根据溢出伤害的数量获得相等的<keyword=coin>金币</keyword>。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
+        "tip": "<keyword=order>指令：</keyword>对 1 个敌军单位造成 {Damage} 点伤害，并根据溢出伤害的数量获得相等的<keyword=coin>金币</keyword>。\\n每有 1 个带有<keyword=bounty>赏金</keyword>状态的敌军单位被摧毁，该伤害便提高 {Damage2} 点。若<keyword=order>指令</keyword>已被使用，则刷新该能力并将伤害设置为 {Damage3} 点。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
         "factionId": 64,
         "rarity": 8,
         "provision": 16,
@@ -7132,7 +7132,7 @@
     "202333": {
         "name": "波里斯",
         "description": "过万物之灵后，他就不想再吃别的了",
-        "tip": "<keyword=deploy>部署：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。\\n<keyword=deathblow>致死：</keyword>获得 {Coins} 个<keyword=coin>金币</keyword>。",
+        "tip": "无论此牌位于何处，己方回合开始时，自身<keyword=fee>费用</keyword>在 {Coins3} 到 {Coins4} 之间随机变化。\\n<keyword=fee>费用</keyword> {Cost}：将自身移至所在半场的另一排，随后使自身获得等同于<keyword=fee>费用</keyword>的增益。若己方拥有 {Coins} 个<keyword=coin>金币</keyword>，则该排每有 1 个友军单位，便获得 {Coins2} 个<keyword=coin>金币</keyword>。\\n<keyword=cooldown>冷却：</keyword>{Cooldown}",
         "factionId": 64,
         "rarity": 4,
         "provision": 8,
@@ -7742,12 +7742,12 @@
     "202396": {
         "name": "杰洛特：亚克席法印",
         "description": "魔人拉下兜帽，口中念着咒语，用手指捏出亚克席法印",
-        "tip": "<keyword=deploy>部署：</keyword><keyword=purify>净化</keyword> 1 个单位，并重置其战力。",
+        "tip": "<keyword=deploy>部署：</keyword><keyword=seize>抓捕</keyword> 1 个战力不高于同排友军“猎魔人”数量的单位。",
         "factionId": 1,
         "rarity": 8,
-        "provision": 10,
+        "provision": 11,
         "cardType": 4,
-        "power": 5
+        "power": 3
     },
     "202397": {
         "name": "裤裆",
@@ -7792,12 +7792,12 @@
     "202401": {
         "name": "独眼贝蒂",
         "description": "头是差了点，但力道确实没话说",
-        "tip": "<keyword=deploy>部署：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。若其拥有<keyword=armor>护甲</keyword>，则改为对其造成 {Damage2} 点伤害。",
+        "tip": "<keyword=deploy>部署：</keyword>抽至多 {MaxTargets} 张<keyword=bonded>会师</keyword>单位牌，随后将相同数量的牌洗回牌组。\\n<keyword=order>指令：</keyword>重新打出 1 个友军<keyword=bonded>会师</keyword>单位。",
         "factionId": 1,
         "rarity": 4,
-        "provision": 10,
+        "provision": 8,
         "cardType": 4,
-        "power": 4
+        "power": 7
     },
     "202402": {
         "name": "弗洛迪米·伊佛瑞克",
@@ -7812,10 +7812,10 @@
     "202403": {
         "name": "自由军",
         "description": "那是因为我们自由自在！哈哈哈！",
-        "tip": "<keyword=deploy>部署：</keyword>使所有友军“匪徒”获得 {Boost} 点增益。",
+        "tip": "<keyword=order>指令：</keyword>选择 1 个友军<keyword=bonded>会师</keyword>单位，随后从己方牌组打出最顶端的其同名牌。\\n<keyword=cooldown>冷却：</keyword>{Cooldown}",
         "factionId": 1,
         "rarity": 4,
-        "provision": 8,
+        "provision": 10,
         "cardType": 4,
         "power": 6
     },
@@ -7862,27 +7862,27 @@
     "202408": {
         "name": "铁隼飞刀手",
         "description": "寸短，一寸险。刀子轻，扔得远",
-        "tip": "<keyword=deploy>部署：</keyword>使 {MaxTargets} 个随机敌军单位<keyword=bleeding>重伤</keyword> {Bleed} 回合。",
+        "tip": "<keyword=zeal>狂热</keyword>、<keyword=order>指令：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。\\n<keyword=bonded>会师：</keyword>还会使其<keyword=bleeding>重伤</keyword>（{Bleed}）回合。\\n己方每打出 1 个<keyword=bonded>会师</keyword>单位，便刷新<keyword=order>指令</keyword>能力。",
         "factionId": 1,
         "rarity": 22,
-        "provision": 4,
+        "provision": 5,
         "cardType": 4,
-        "power": 2
+        "power": 4
     },
     "202409": {
         "name": "铁隼步兵",
         "description": "就算上战场也可得好好打扮！",
-        "tip": "<keyword=barricade>壁垒：</keyword>己方每回合结束时，自身获得 {Boost} 点增益。",
+        "tip": "回合结束时，若同排没有其他牌，则使自身获得 {Boost} 点增益。\\n<keyword=bonded>会师：</keyword>改为己方回合结束时，使自身获得 {Boost} 点增益。",
         "factionId": 1,
         "rarity": 22,
         "provision": 4,
         "cardType": 4,
-        "power": 4
+        "power": 3
     },
     "202410": {
         "name": "铁隼吟游诗人",
         "description": "我的演奏甚至可以让丧事变喜事。",
-        "tip": "<keyword=deploy>部署：</keyword>使手牌中 1 个单位获得 {Armor} 点<keyword=armor>护甲</keyword>。",
+        "tip": "<keyword=deploy>部署：</keyword><keyword=spawn>生成</keyword> 1 个己方起始牌组中的<keyword=bonded>会师</keyword>单位至同排，其战力设为 {Power} 点并被<keyword=lock>锁定</keyword>。",
         "factionId": 1,
         "rarity": 22,
         "provision": 4,
@@ -7902,12 +7902,12 @@
     "202412": {
         "name": "货车",
         "description": "车夫发誓说他运的是种子。可哪有一路叮当作响的种子？！",
-        "tip": "<keyword=deploy>部署：</keyword>若己方控制 1 名“匪徒”，则获得<keyword=zeal>狂热</keyword>。\\n<keyword=order>指令：</keyword>使 1 名友军单位获得 {Armor} 点<keyword=armor>护甲</keyword>。",
+        "tip": "<keyword=deploy>部署：</keyword><keyword=banish>放逐</keyword>右侧的铜色单位，随后获得<keyword=resilient>坚韧</keyword>。\\n<keyword=order>指令：</keyword>自身转变为被<keyword=banish>放逐</keyword>单位的基础同名牌。\\n<keyword=exposed>破甲：</keyword>：<keyword=purify>净化</keyword>自身。",
         "factionId": 1,
         "rarity": 1,
-        "provision": 4,
+        "provision": 6,
         "cardType": 4,
-        "power": 4
+        "power": 5
     },
     "202413": {
         "name": "防盾",
@@ -7922,22 +7922,22 @@
     "202414": {
         "name": "工兵",
         "description": "不用费劲儿瞄准。交给弹片就行了。",
-        "tip": "<keyword=deploy>部署：</keyword>移除 1 个单位的<keyword=armor>护甲</keyword>。",
+        "tip": "<keyword=deploy>部署：</keyword>从手牌打出 1 张“炸弹”牌，随后抽 1 张牌。\\n<keyword=barricade>壁垒：</keyword>己方每打出 1 张“炸弹”牌，便对 1 个随机敌军单位造成 {Damage} 点伤害。",
         "factionId": 1,
         "rarity": 1,
-        "provision": 5,
+        "provision": 6,
         "cardType": 4,
-        "power": 5
+        "power": 2
     },
     "202415": {
         "name": "车匪",
         "description": "商人？抹了。马匹？卖了。",
-        "tip": "<keyword=deploy>部署：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。若其拥有<keyword=armor>护甲</keyword>，则改为对其造成 {Damage2} 点伤害。",
+        "tip": "己方每打出 1 张已经控制的<keyword=bonded>会师</keyword>单位的同名牌，便从牌组<keyword=summon>召唤</keyword>自身至己方<keyword=melee>近战</keyword>排。\\n<keyword=exposed>破甲：</keyword>将自身移至己方牌组顶端。",
         "factionId": 1,
         "rarity": 1,
-        "provision": 4,
+        "provision": 5,
         "cardType": 4,
-        "power": 4
+        "power": 1
     },
     "202416": {
         "name": "护甲师的工坊",
@@ -8002,7 +8002,7 @@
     "202422": {
         "name": "瑞达尼亚弓箭手",
         "description": "弦作响将会是你最后听到的声音",
-        "tip": "<keyword=zeal>狂热</keyword>。\\n<keyword=order>指令</keyword>（<keyword=ranged>远程</keyword>）: 对 1 个敌军单位造成 {Damage} 点伤害。<keyword=charge>充能：</keyword>{Charges}。\\n<keyword=barricade>壁垒：</keyword>己方每回合结束时，获得<keyword=charge>充能</keyword> +{Charges2}。",
+        "tip": "<keyword=zeal>狂热</keyword>。\\n<keyword=order>指令</keyword>（<keyword=ranged>远程</keyword>）: 对 1 个敌军单位造成 {Damage} 点伤害。<keyword=charge>充能：</keyword>{Charges}\\n<keyword=barricade>壁垒：</keyword>己方每回合结束时，获得<keyword=charge>充能</keyword> +{Charges2}。",
         "factionId": 8,
         "rarity": 1,
         "provision": 5,
@@ -8102,7 +8102,7 @@
     "202435": {
         "name": "齐齐摩女王",
         "description": "多虫类都有一只虫后。这一只特别要命",
-        "tip": "<keyword=thrive>成长</keyword>。\\n每次触发该单位的<keyword=thrive>成长</keyword>效果，便使同排所有友军“类虫生物”获得 {Boost} 点增益。",
+        "tip": "<keyword=thrive>成长</keyword>。\\n每当该单位的<keyword=thrive>成长</keyword>触发，便使同排的“类虫生物”获得 {Boost} 点增益。\\n每当己方打出 1 张“生物”牌，便触发自身的<keyword=thrive>成长</keyword>。",
         "factionId": 2,
         "rarity": 8,
         "provision": 9,
@@ -8127,12 +8127,12 @@
         "rarity": 8,
         "provision": 10,
         "cardType": 4,
-        "power": 13
+        "power": 15
     },
     "202438": {
         "name": "安德莱格女王",
         "description": "德莱格女王的腹腔颜色十分独特且硕大无朋，因此非常好认",
-        "tip": "<keyword=deploy>部署：</keyword><keyword=consume>吞噬</keyword> 1 个友军单位，并使其获得<keyword=armor>护甲</keyword>。\\n<keyword=barricade>壁垒：</keyword>己方每回合结束时，对自身造成 {Damage} 点伤害，随后在同排<keyword=spawn>生成</keyword> 1 只“雄蛛”。",
+        "tip": "<keyword=deploy>部署：</keyword><keyword=consume>吞噬</keyword> 1 个友军单位，并获得等同于其人口数的<keyword=armor>护甲</keyword>。\\n<keyword=barricade>壁垒：</keyword>己方回合结束时，对自身造成 {Damage} 点伤害，随后<keyword=spawn>生成</keyword> 1 只“雄蛛”至同排。",
         "factionId": 2,
         "rarity": 4,
         "provision": 6,
@@ -8142,12 +8142,12 @@
     "202439": {
         "name": "装甲蟹蜘蛛",
         "description": "子能轻易切开半寸厚的铁板",
-        "tip": "<keyword=deploy>部署：</keyword>使 1 个敌军单位<keyword=bleeding>重伤</keyword>，回合数等同于其基础战力。",
+        "tip": "<keyword=deploy>部署：</keyword>若同排存在其他牌，则<keyword=lock>锁定</keyword>自身。\\n<keyword=timer>计时</keyword> {Timer}：若所在排已满，则使自身获得 {Boost} 点增益。",
         "factionId": 2,
         "rarity": 4,
         "provision": 8,
         "cardType": 4,
-        "power": 6
+        "power": 5
     },
     "202440": {
         "name": "安德莱格幼虫",
@@ -8307,7 +8307,7 @@
         "rarity": 8,
         "provision": 10,
         "cardType": 4,
-        "power": 5
+        "power": 6
     },
     "202457": {
         "name": "刀剑盟约",
@@ -8347,7 +8347,7 @@
         "rarity": 4,
         "provision": 7,
         "cardType": 4,
-        "power": 5
+        "power": 4
     },
     "202461": {
         "name": "装甲战舰",
@@ -8802,7 +8802,7 @@
     "202516": {
         "name": "“三目者”艾克索",
         "description": "的话语纵有万般智慧，但终归太过疯狂",
-        "tip": "<keyword=deploy>部署</keyword>（<keyword=melee>近战</keyword>）：<keyword=spawn>生成</keyword> 1 只“乌鸦”至同排。\\n<keyword=deploy>部署</keyword>（<keyword=ranged>远程</keyword>）：每有 1 个友军“野兽”，自身便获得 {Boost} 点增益。",
+        "tip": "<keyword=deploy>部署</keyword>（<keyword=melee>近战</keyword>）：<keyword=spawn>生成</keyword>并打出“乌鸦眼块茎”。\\n<keyword=deploy>部署</keyword>（<keyword=ranged>远程</keyword>）：将相邻的“乌鸦”转变为“信鸦”。",
         "factionId": 32,
         "rarity": 4,
         "provision": 7,
@@ -8812,12 +8812,12 @@
     "202517": {
         "name": "鸦母德鲁伊",
         "description": "贤声称动物愚昧无知——纯属胡说八道",
-        "tip": "<keyword=deploy>部署：</keyword>使相邻“野兽”获得 {Boost} 点增益。",
+        "tip": "<keyword=zeal>狂热</keyword>。<keyword=order>指令：</keyword><keyword=banish>放逐</keyword> 1 只己方“乌鸦”，随后从己方墓场打出 1 张人口数为 {Provision} 的“炼金”牌，并使其获得<keyword=doomed>佚亡</keyword>。",
         "factionId": 32,
         "rarity": 22,
         "provision": 4,
         "cardType": 4,
-        "power": 3
+        "power": 4
     },
     "202518": {
         "name": "鸦母布道者",
@@ -9312,7 +9312,7 @@
     "202573": {
         "name": "偷梁换柱",
         "description": "gnore",
-        "tip": "<keyword=order>指令：</keyword><keyword=lock>锁定</keyword> 1 个敌军单位，随后在己方同排<keyword=spawn>生成</keyword> 1 个他的基础同名牌，并使其获得被<keyword=lock>锁定</keyword>单位同排带有状态的敌军数量的增益。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
+        "tip": "<keyword=order>指令：</keyword><keyword=lock>锁定</keyword> 1 个敌军单位，随后在己方同排<keyword=spawn>生成</keyword> 1 个他的基础同名牌，并使其获得被<keyword=lock>锁定</keyword>单位同排带有状态的敌军数量的增益。\\n己方每在己方半场打出 1 张“望族”牌，若对方半场至少存在 {MaxTargets} 种不同状态，便使其获得 {Boost} 点增益。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
         "factionId": 4,
         "rarity": 8,
         "provision": 15,
@@ -9342,7 +9342,7 @@
     "202576": {
         "name": "荣耀圣焰",
         "description": "gnore",
-        "tip": "<keyword=order>指令：</keyword>将 1 个“史凯利格”单位从己方牌组移至己方墓场，随后对 1 个敌军单位造成该“史凯利格”单位战力值的伤害。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
+        "tip": "<keyword=order>指令：</keyword>将 1 个非中立单位从己方牌组移至己方墓场，随后对 1 个敌军单位造成该单位战力值的伤害。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
         "factionId": 32,
         "rarity": 8,
         "provision": 16,
@@ -9353,9 +9353,9 @@
         "name": "军备宝箱",
         "description": "gnore",
         "tip": "<keyword=order>指令：</keyword>获得 {Coins} 个<keyword=coin>金币</keyword>。\\n在小局开始时，刷新此能力。\\n己方的<keyword=hoard>囤积</keyword>能力需要的<keyword=coin>金币</keyword>减少 {Hoard} 个。\\n\\n该能力可为牌组附加 {Template.Provision} 个人口上限。",
-        "factionId": 8,
+        "factionId": 64,
         "rarity": 8,
-        "provision": 15,
+        "provision": 14,
         "cardType": 1,
         "power": 0
     },
@@ -9842,7 +9842,7 @@
     "202642": {
         "name": "维拉克萨斯王子",
         "description": "母常常会嫉妒孩子的勇气和力量，但孩子们却很少能留心到这一点",
-        "tip": "<keyword=order>指令：</keyword>重置 1 个友军“北方领域”单位的<keyword=order>指令</keyword>能力。\\n小局开始时，若位于手牌或牌组，发生历变。",
+        "tip": "<keyword=order>指令：</keyword>重置 1 个友军非中立单位的<keyword=order>指令</keyword>能力。\\n小局开始时，若位于手牌或牌组，发生历变。",
         "factionId": 8,
         "rarity": 8,
         "provision": 12,
@@ -9852,7 +9852,7 @@
     "202643": {
         "name": "流放者维拉克萨斯",
         "description": "逐的原因很简单，因为他有贝罗恒王永远找不回来的年轻、活力和强壮",
-        "tip": "<keyword=formation>列阵</keyword>。\\n重置 1 个友军“北方领域”单位的<keyword=order>指令</keyword>能力，并使其获得<keyword=zeal>狂热</keyword>。\\n<keyword=devotion>赤诚：</keyword>小局开始时，若位于手牌或牌组，发生历变。",
+        "tip": "<keyword=formation>列阵</keyword>。\\n<keyword=order>指令：</keyword>重置 1 个友军非中立单位的<keyword=order>指令</keyword>能力，并使其获得<keyword=zeal>狂热</keyword>。\\n<keyword=devotion>赤诚：</keyword>小局开始时，若位于手牌或牌组，发生历变。",
         "factionId": 8,
         "rarity": 8,
         "provision": 12,
@@ -9862,7 +9862,7 @@
     "202644": {
         "name": "维拉克萨斯国王",
         "description": "携手复仇，喜悦加倍。",
-        "tip": "<keyword=veil>遮蔽</keyword>、<keyword=formation>列阵</keyword>。\\n<keyword=order>指令：</keyword>重置 1 个友军“北方领域”单位的<keyword=order>指令</keyword>能力，并使其获得<keyword=zeal>狂热</keyword>。\\n己方每打出 1 个“士兵”单位，便使其获得 {Boost} 点增益。",
+        "tip": "<keyword=veil>遮蔽</keyword>、<keyword=formation>列阵</keyword>。\\n<keyword=order>指令：</keyword>重置 1 个友军非中立单位的<keyword=order>指令</keyword>能力，并使其获得<keyword=zeal>狂热</keyword>。\\n己方每打出 1 个“士兵”单位，便使其获得 {Boost} 点增益。",
         "factionId": 8,
         "rarity": 8,
         "provision": 12,
@@ -9872,7 +9872,7 @@
     "202645": {
         "name": "伊尔迪珂",
         "description": "条项链曾是伊尔迪珂送给贝罗恒王的礼物，用来庆祝他们即将举行的婚礼。勒死老国王后，它的使命也完成了",
-        "tip": "<keyword=order>指令：</keyword>使 1 个友军单位获得 {boost} 点增益。\\n己方每打出 1 个“北方领域”单位，便使其获得<keyword=zeal>狂热</keyword>。",
+        "tip": "<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益。\\n己方每打出 1 个非中立单位，便使其获得<keyword=zeal>狂热</keyword>。",
         "factionId": 8,
         "rarity": 8,
         "provision": 9,
@@ -9882,7 +9882,7 @@
     "202646": {
         "name": "水路突袭",
         "description": "这里一艘、那里一艘，王国尽收！",
-        "tip": "<keyword=echo>回响</keyword>。\\n从己方牌组打出 1 个人口不高于 {provision} 点的“北方领域”单位。每低于该人口限制 1 点，便使其获得 {Boost} 点增益。",
+        "tip": "<keyword=echo>回响</keyword>。\\n从己方牌组打出 1 个人口不高于 {provision} 点的非中立单位。每低于该人口限制 1 点，便使其获得 {Boost} 点增益。",
         "factionId": 8,
         "rarity": 8,
         "provision": 14,
@@ -10172,7 +10172,7 @@
     "202676": {
         "name": "邓卡",
         "description": "发箭前从不示警，永远一击致命，就算小孩子也绝不容情",
-        "tip": "<keyword=veil>遮蔽</keyword>。<keyword=zeal>狂热</keyword>。\\n<keyword=order>指令</keyword>（<keyword=melee>近战</keyword>）：对 1 个敌军单位造成 {damage} 点伤害。\\n己方回合结束时，若<keyword=order>指令</keyword>能力尚未使用，则使手牌中 1 个随机“松鼠党”单位获得 {Boost} 点增益。",
+        "tip": "<keyword=veil>遮蔽</keyword>。\\n<keyword=zeal>狂热</keyword>、<keyword=order>指令</keyword>（<keyword=melee>近战</keyword>）：对 1 个敌军单位造成 {Damage} 点伤害。\\n己方回合结束时，若<keyword=order>指令</keyword>能力尚未使用，则使手牌中 1 个随机非中立单位获得 {Boost} 点增益。",
         "factionId": 16,
         "rarity": 4,
         "provision": 7,
@@ -10182,7 +10182,7 @@
     "202677": {
         "name": "生命循环",
         "description": "些想要摧毁布洛克莱昂，想要烧光其中树木，屠戮其中生灵的人，很快都会变成森林的肥料",
-        "tip": "对 1 个敌军单位造成 {damage} 点伤害，随后使手牌中的 1 个随机“松鼠党”单位获得 {boost} 点增益。\\n<keyword=deathblow>致死：</keyword>改为增益手牌中的指定“松鼠党”单位。",
+        "tip": "对 1 个敌军单位造成 {damage} 点伤害，随后使手牌中的 1 个随机非中立单位获得 {boost} 点增益。\\n<keyword=deathblow>致死：</keyword>改为增益手牌中的指定非中立单位。",
         "factionId": 16,
         "rarity": 22,
         "provision": 5,
@@ -10402,12 +10402,12 @@
     "202784": {
         "name": "贝连迦尔",
         "description": "服水生人不再要求用获奖奶牛当祭品，可不是件容易事",
-        "tip": "己方回合结束时，若为所在排唯一的“猎魔人”，则将其摧毁。",
+        "tip": "己方回合开始时，若同排没有其他“猎魔人”，则摧毁自身。",
         "factionId": 1,
         "rarity": 4,
         "provision": 6,
         "cardType": 4,
-        "power": 9
+        "power": 12
     },
     "202785": {
         "name": "雷欧",
@@ -10837,7 +10837,7 @@
         "rarity": 22,
         "provision": 5,
         "cardType": 4,
-        "power": 5
+        "power": 4
     },
     "202828": {
         "name": "狮鹫学派猎魔人游侠",
@@ -10902,10 +10902,10 @@
     "202834": {
         "name": "伊迪尔",
         "description": "谁要当好孩子？” - 伊达",
-        "tip": "<keyword=order>指令</keyword>（<keyword=adrenaline>亢奋</keyword> {Adrenaline-1}）：<keyword=consume>吞噬</keyword>此排上所有衍生物并获得<keyword=immune>免疫</keyword>。\\n己方每<keyword=consume>吞噬</keyword> 1 个或更多单位，便在此排<keyword=spawn>生成</keyword> 1 只“雄蛛”。",
+        "tip": "对方每在其半场打出 1 个单位，便对其造成 {Damage} 点伤害并使<keyword=charge>充能</keyword> +1。\\n<keyword=order>指令：</keyword><keyword=spawn>生成</keyword> 1 只“雄蛛”至同排。\\n<keyword=charge>充能：</keyword>{Charge}",
         "factionId": 2,
         "rarity": 4,
-        "provision": 7,
+        "provision": 9,
         "cardType": 4,
         "power": 7
     },
@@ -11122,7 +11122,7 @@
     "202883": {
         "name": "埃斯特·图尔赛克",
         "description": "斯特来到辛特拉，本想帮助克拉茨·奎特参加帕薇塔公主的选亲宴，结果自己却赢走了王后的芳心",
-        "tip": "<keyword=veteran>老兵</keyword>。\\n<keyword=deploy>部署</keyword>、<keyword=bloodthirst>战狂</keyword> {Bloodthirst}：抽 1 张牌，随后<keyword=discard>丢弃</keyword> 1 张牌。\\n每当你在己方回合<keyword=discard>丢弃</keyword> 1 个“史凯利格”单位，便从墓场将其<keyword=summon>召唤</keyword>至同排。\\n倒数： {Counter}。\\n<keyword=devotion>赤诚：</keyword>当 1 个“史凯利格”单位在己方回合进入己方墓场时，也会将其召唤至同排。",
+        "tip": "<keyword=veteran>老兵</keyword>。\\n<keyword=deploy>部署</keyword>、<keyword=bloodthirst>战狂</keyword> {Bloodthirst}：抽 1 张牌，随后<keyword=discard>丢弃</keyword> 1 张牌。\\n每当你在己方回合<keyword=discard>丢弃</keyword> 1 个非中立单位，便从墓场将其<keyword=summon>召唤</keyword>至同排。\\n倒数： {counter}。\\n<keyword=devotion>赤诚：</keyword>当 1 个非中立单位在己方回合进入己方墓场时，也会将其召唤至同排。",
         "factionId": 32,
         "rarity": 8,
         "provision": 12,
@@ -11447,12 +11447,12 @@
         "rarity": 4,
         "provision": 7,
         "cardType": 4,
-        "power": 4
+        "power": 6
     },
     "202928": {
         "name": "歇斯底里",
         "description": "人用下三滥的手段给水坑下了毒",
-        "tip": "为 1 个敌军单位设置<keyword=bounty>赏金</keyword>，并对其造成 {damage} 点伤害。若其已有<keyword=bounty>赏金</keyword>，则伤害翻倍。",
+        "tip": "为 1 个敌军单位设置<keyword=bounty>赏金</keyword>，并对其造成 {damage} 点伤害。若其已有<keyword=bounty>赏金</keyword>，则改为造成 {Damage2} 点伤害。",
         "factionId": 64,
         "rarity": 22,
         "provision": 4,
@@ -11742,12 +11742,12 @@
     "202999": {
         "name": "伊格内修斯·黑尔",
         "description": "是个好孩子",
-        "tip": "<keyword=deploy>部署：</keyword>对该单位造成等同于其<keyword=tribute>献金</keyword>数的伤害。\\n<keyword=tribute>献金</keyword> {Tribute-B.P.BB_Tribute-B.P.BB_Bounty}：取消其<keyword=deploy>部署</keyword>能力。\\n己方每对 1 个敌军单位设置<keyword=bounty>赏金</keyword>，便使该单位的<keyword=tribute>献金</keyword>数 -1。",
+        "tip": "在对局开始时或被<keyword=spawn>生成</keyword>时，将自身战力设置为 {Power} 点。\\n若位于手牌、牌组或战场中，每有 1 个带有<keyword=bounty>赏金</keyword>状态的敌军单位被摧毁，便<keyword=heal>治疗</keyword>自身，数值等于自身基础战力。",
         "factionId": 64,
         "rarity": 4,
-        "provision": 6,
+        "provision": 9,
         "cardType": 4,
-        "power": 12
+        "power": 18
     },
     "203000": {
         "name": "坦白机",
@@ -11755,7 +11755,7 @@
         "tip": "<keyword=profit>利润</keyword> {Income}。\\n位于己方墓场时，己方每对敌军单位设置 1 次<keyword=bounty>赏金</keyword>，便对该敌军单位造成 {damage} 点伤害。\\n倒数：{Counter}。",
         "factionId": 64,
         "rarity": 22,
-        "provision": 5,
+        "provision": 4,
         "cardType": 2,
         "power": 0
     },
@@ -11767,7 +11767,7 @@
         "rarity": 1,
         "provision": 4,
         "cardType": 4,
-        "power": 1
+        "power": 2
     },
     "203002": {
         "name": "熊化反应",
@@ -11842,7 +11842,7 @@
     "203041": {
         "name": "佛卡夏",
         "description": "女巫和人鱼一样，一生只能有一次真爱，而佛卡夏把她唯一的机会浪费在一个人类身上",
-        "tip": "<keyword=deploy>部署：</keyword>从己方墓场打出 1 个人口数不高于 {provision} 点的“史凯利格”单位，并使其获得<keyword=doomed>佚亡</keyword>。在敌方同排<keyword=spawn>生成</keyword><keyword=rain>雨</keyword>，持续回合等于未使用的人口数。",
+        "tip": "<keyword=deploy>部署：</keyword>从己方墓场打出 1 个人口数不高于 {Provision} 点的非中立单位，并使其获得<keyword=doomed>佚亡</keyword>。随后在敌方同排<keyword=spawn>生成</keyword><keyword=rain>雨</keyword>，持续回合等于未使用的人口数。",
         "factionId": 32,
         "rarity": 8,
         "provision": 14,
@@ -11972,7 +11972,7 @@
     "203054": {
         "name": "女巫夜宴",
         "description": "办夜宴至少需要三名女巫。如果只有两名，她们一定会吵起来",
-        "tip": "从敌方墓场<keyword=summon>召唤</keyword>最多 {Counter} 个战力最高的单位至敌方单排，随后从己方墓场<keyword=summon>召唤</keyword>同样数量战力最高的“怪兽”单位至己方对应排，并使其获得<keyword=doomed>佚亡</keyword>。",
+        "tip": "从敌方墓场<keyword=summon>召唤</keyword>最多 {Counter} 个战力最高的单位至敌方单排，随后从己方墓场<keyword=summon>召唤</keyword>同样数量战力最高的非中立单位至己方对应排，并使其获得<keyword=doomed>佚亡</keyword>。",
         "factionId": 2,
         "rarity": 4,
         "provision": 10,
@@ -12002,7 +12002,7 @@
     "203057": {
         "name": "暴徒",
         "description": "斩杀一切邪恶之物。他是人民的救星，也是个特别乖的好孩子。至少他妈妈是这么跟他说的",
-        "tip": "<keyword=profit>利润</keyword> {B.P.BB_Bounty+profit}。\\n<keyword=deploy>部署：</keyword>自身获得 {B.P.BB_LastBountyClaimed+boost} 点增益。\\n增益值等于上一个被摧毁的、带有<keyword=bounty>赏金</keyword>状态的敌军单位的基础战力。\\n己方每向 1 个敌军单位设置<keyword=bounty>赏金</keyword>，此单位的<keyword=profit>利润</keyword>便 +1。",
+        "tip": "<keyword=profit>利润</keyword> {B.P.BB_Bounty+profit}。\\n<keyword=deploy>部署：</keyword>自身获得 {B.P.BB_HighestBountyClaimed+boost} 点增益。\\n增益值等于本局游戏中己方摧毁的、带有<keyword=bounty>赏金</keyword>状态的敌军单位的最高基础战力。\\n己方每向 1 个敌军单位设置<keyword=bounty>赏金</keyword>，此单位的<keyword=profit>利润</keyword>便 +1。",
         "factionId": 64,
         "rarity": 8,
         "provision": 13,
@@ -12012,7 +12012,7 @@
     "203058": {
         "name": "奥克塔维亚·黑尔",
         "description": "亲不只是孩子的总和",
-        "tip": "<keyword=deploy>部署：</keyword>从牌组中抽至多 {Counter} 个奥克塔维亚的儿子，随后将相同数量的手牌洗回牌组。\\n<keyword=fee>费用</keyword> {Cost}：使 1 个友方“女巫猎人”获得 {Boost} 点增益。",
+        "tip": "<keyword=deploy>部署：</keyword>从牌组中抽至多 {Counter} 个奥克塔维亚的儿子，随后将相同数量的手牌洗回牌组。\\n<keyword=fee>费用</keyword> {Cost}：使 1 个友方“女巫猎人”获得 {Boost} 点增益。若本回合中己方摧毁过 1 个敌军单位，则改为使其获得 {Boost2} 点增益。",
         "factionId": 64,
         "rarity": 4,
         "provision": 6,
@@ -12142,7 +12142,7 @@
     "203071": {
         "name": "圣日湖之秘",
         "description": "此地，万物回归本源，万灵重获新生",
-        "tip": "<keyword=doomed>佚亡</keyword>。\\n剧情：己方每打出 1 个具有<keyword=harmony>和谐</keyword>的单位时推进。\\n序章：<keyword=spawn>生成</keyword>“湖之守卫：黎明”至同排，并根据己方起始牌组中“唯一主要类别”的“松鼠党”单位数量，设置其战力。\\n第一章：每当己方打出 1 个“松鼠党”单位，则其所具有的每个类别便使其获得 {Boost} 点增益。\\n第二章：<keyword=spawn>生成</keyword>并打出“圣日湖：融合”。",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n剧情：己方每打出 1 个具有<keyword=harmony>和谐</keyword>的单位时推进。\\n序章：<keyword=spawn>生成</keyword>“湖之守卫：黎明”至同排，并将己方起始牌组中“唯一主要类别”的非中立单位数量，设置为其战力。\\n第一章：每当己方打出 1 个非中立单位，则其所具有的每个类别便使其获得 {Boost} 点增益。\\n第二章：<keyword=spawn>生成</keyword>并打出“圣日湖：融合”。",
         "factionId": 16,
         "rarity": 8,
         "provision": 14,
@@ -12232,7 +12232,7 @@
     "203080": {
         "name": "庄园的隐秘事",
         "description": "座庄园里，不是你关门，而是门关你",
-        "tip": "<keyword=doomed>佚亡</keyword>。\\n剧情：己方每打出 1 个具有<keyword=thrive>成长</keyword>的单位时推进。\\n序章：<keyword=spawn>生成</keyword> 1 个“受诅咒的少女”至同排，并使其获得 {Boost2} 点增益。\\n第一章：己方每打出 1 个单位，若其不会触发任何己方单位的<keyword=thrive>成长</keyword>，则使被打出的单位先获得 {Boost} 点增益。\\n第二章：从牌组中打出一个战力最高的铜色“怪兽”单位。",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n剧情：己方每打出 1 个具有<keyword=thrive>成长</keyword>的单位时推进。\\n序章：<keyword=spawn>生成</keyword> 1 个“受诅咒的少女”至同排，并使其获得 {Boost2} 点增益。\\n第一章：己方每打出 1 个单位，若其不会触发任何己方单位的<keyword=thrive>成长</keyword>，则使被打出的单位先获得 {Boost} 点增益。\\n第二章：从牌组中打出 1 个战力最高的铜色非中立单位。",
         "factionId": 2,
         "rarity": 8,
         "provision": 14,
@@ -12332,7 +12332,7 @@
     "203090": {
         "name": "萨琪亚：指挥官",
         "description": "我们要打的可不是什么小兵，而是国王！我们要让国王低头认输！身为士兵，还有比这更高的荣誉吗？",
-        "tip": "<keyword=immune>免疫</keyword>。\\n<keyword=deploy>部署：</keyword>若己方起始牌组中有至少 {MaxTargets} 种不同的主要类别，则从牌组随机<keyword=summon>召唤</keyword> 1 个铜色“松鼠党”单位（未存在于己方半场的类别）至同排。\\n<keyword=timer>计时</keyword> {Counter}：重复<keyword=deploy>部署</keyword>能力，并重置<keyword=timer>计时</keyword>。",
+        "tip": "<keyword=immune>免疫</keyword>。\\n<keyword=deploy>部署：</keyword>若己方起始牌组中有至少 {MaxTargets} 种不同的主要类别，则从牌组随机<keyword=summon>召唤</keyword> 1 个铜色非中立单位（未存在于己方半场的类别）至同排。\\n<keyword=timer>计时</keyword> {Counter}：重复<keyword=deploy>部署</keyword>能力，并重置<keyword=timer>计时</keyword>。",
         "factionId": 16,
         "rarity": 8,
         "provision": 13,
@@ -12552,10 +12552,10 @@
     "203112": {
         "name": "魔法罗盘",
         "description": "以帮你找到你需要的东西，或者是你以为自己需要的东西",
-        "tip": "<keyword=echo>回响</keyword>。\\n检视己方牌组顶端的 {MaxTargets} 张牌。打出 1 张，随后将其他牌移至己方墓场。\\n若己方牌组中的牌少于 {MaxTargets} 张，则改为<keyword=spawn>生成</keyword>并打出 1 张不在己方起始牌组中的“史凯利格”阵营传奇卡牌。",
+        "tip": "<keyword=echo>回响</keyword>。\\n检视己方牌组顶端的 {MaxTargets} 张牌。打出 1 张，随后将其他牌移至己方墓场。\\n若己方牌组中的牌少于 {MaxTargets} 张，则改为<keyword=spawn>生成</keyword>并打出 1 张不在起始牌组中的己方阵营传奇卡牌。",
         "factionId": 32,
         "rarity": 4,
-        "provision": 8,
+        "provision": 9,
         "cardType": 2,
         "power": 0
     },
@@ -12612,7 +12612,7 @@
     "203118": {
         "name": "邪灵法典",
         "description": "分书页是人肉制成，其中各种预言、埋葬仪式和复活咒文都是用血写的",
-        "tip": "己方每打出 1 个铜色单位，便从己方墓场<keyword=summon>召唤</keyword> 1 张其同名牌至同排，并使其获得<keyword=doomed>佚亡</keyword>。",
+        "tip": "<keyword=zeal>狂热</keyword>、<keyword=order>指令：</keyword>触发 1 个铜色友军单位的<keyword=deathwish>遗愿</keyword>能力。\\n己方每打出 1 个铜色单位，便从己方墓场<keyword=summon>召唤</keyword> 1 张其同名牌至同排，并使其获得<keyword=doomed>佚亡</keyword>。",
         "factionId": 2,
         "rarity": 4,
         "provision": 8,
@@ -12652,7 +12652,7 @@
     "203122": {
         "name": "禁识之瓶：启封",
         "description": "调有无数回忆，苦乐交融，意味无穷。后调细密绵长，在时空中交织一起，在奇妙幽恐中达到高潮。在宜人的夏夜里是召魔之书的佳配",
-        "tip": "<keyword=zeal>狂热</keyword>、<keyword=order>指令：</keyword>检视对方的起始牌组。\\n<keyword=cooldown>冷却：</keyword>{Cooldown}",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=zeal>狂热</keyword>、<keyword=order>指令：</keyword>检视对方的起始牌组。\\n<keyword=cooldown>冷却：</keyword>{Cooldown}",
         "factionId": 1,
         "rarity": 4,
         "provision": 4,
@@ -12755,7 +12755,7 @@
         "tip": "<keyword=deploy>部署</keyword>（<keyword=melee>近战</keyword>）：从己方牌组<keyword=summon>召唤</keyword> 1 只“野兽”至敌方同排，并<keyword=infused>灌注</keyword>\"{InjectableAbility}\"能力，随后每有 1 个受伤的敌军单位，便对其造成 {Damage} 点伤害，并使自身获得<keyword=immune>免疫</keyword>。",
         "factionId": 32,
         "rarity": 8,
-        "provision": 11,
+        "provision": 12,
         "cardType": 4,
         "power": 12
     },
@@ -12772,10 +12772,10 @@
     "203147": {
         "name": "狂野搭档",
         "description": "果自觉命数已尽，选斧子吧。这里的狼喜欢慢慢享用猎物",
-        "tip": "在敌方同排<keyword=spawn>生成</keyword>“史凯利格野狼”并对其造成 {Damage+B.P.BB_Raid} 点伤害，随后<keyword=create>创造</keyword> 1 张铜色“史凯利格”阵营“战士”牌。\\n<keyword=bloodthirst>战狂</keyword> {Bloodthirst}：改为<keyword=spawn>生成</keyword>并打出任意 1 张铜色“史凯利格”阵营“战士”牌。",
+        "tip": "在敌方同排<keyword=spawn>生成</keyword>“史凯利格野狼”并对其造成 {Damage+B.P.BB_Raid} 点伤害，随后<keyword=create>创造</keyword> 1 张铜色“史凯利格”阵营“战士”牌（不在己方起始牌组中）。\\n<keyword=bloodthirst>战狂</keyword> {Bloodthirst}：改为<keyword=spawn>生成</keyword>并打出任意 1 张铜色“史凯利格”阵营“战士”牌（不在己方起始牌组中）。",
         "factionId": 32,
         "rarity": 22,
-        "provision": 4,
+        "provision": 5,
         "cardType": 2,
         "power": 0
     },
@@ -12955,7 +12955,7 @@
         "tip": "<keyword=profit>利润</keyword> {Profit}。\\n<keyword=seize>抓捕</keyword> 1 个战力不高于 {Power} 点的敌军单位。\\n己方初始牌组每有 1 个<keyword=gang>帮派</keyword>类别，<keyword=profit>利润</keyword>便提高 {Profit2} 点。\\n己方每控制 1 个<keyword=gang>帮派</keyword>类别，利润便降低 {Power2} 点，而抓捕的战力上限便提高 {Power2} 点。",
         "factionId": 64,
         "rarity": 1,
-        "provision": 5,
+        "provision": 6,
         "cardType": 2,
         "power": 0
     },
@@ -13022,72 +13022,37 @@
     "203172": {
         "name": "色欲之诅咒",
         "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
-        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword> 1 个敌军单位的 1 张基础同名牌至己方同排。",
-        "factionId": 1,
-        "rarity": 8,
-        "provision": 15,
-        "cardType": 1,
-        "power": 0
+        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword> 1 个敌军单位的 1 张基础同名牌至己方同排。"
     },
     "203173": {
         "name": "暴食之诅咒",
         "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
-        "tip": "<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益。该增益会随目标的基础战力而增加。",
-        "factionId": 1,
-        "rarity": 8,
-        "provision": 15,
-        "cardType": 1,
-        "power": 0
+        "tip": "<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益。该增益会随目标的基础战力而增加。"
     },
     "203174": {
         "name": "贪婪之诅咒",
         "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
-        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword>己方“战术牌”至己方<keyword=melee>近战</keyword>排，随后<keyword=create>创造</keyword> 1 张“中立战术牌”，<keyword=spawn>生成</keyword>至己方<keyword=ranged>远程</keyword>排。",
-        "factionId": 1,
-        "rarity": 8,
-        "provision": 15,
-        "cardType": 1,
-        "power": 0
+        "tip": "<keyword=order>指令：</keyword><keyword=spawn>生成</keyword>己方“战术牌”至己方<keyword=melee>近战</keyword>排，随后<keyword=create>创造</keyword> 1 张“中立战术牌”，<keyword=spawn>生成</keyword>至己方<keyword=ranged>远程</keyword>排。"
     },
     "203175": {
         "name": "怠惰之诅咒",
         "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
-        "tip": "<keyword=order>指令：</keyword>从手牌中打出 1 张铜色单位牌，随后选择并抽 1 张单位牌。",
-        "factionId": 1,
-        "rarity": 8,
-        "provision": 15,
-        "cardType": 1,
-        "power": 0
+        "tip": "<keyword=order>指令：</keyword>从手牌中打出 1 张铜色单位牌，随后检视己方牌组顶端的 {Maxtargets} 张单位牌，并从中抽 {MaxTargets2} 张。"
     },
     "203176": {
         "name": "嫉妒之诅咒",
         "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
-        "tip": "<keyword=order>指令：</keyword>对所有敌军单位造成 {Damage} 点伤害。",
-        "factionId": 1,
-        "rarity": 8,
-        "provision": 15,
-        "cardType": 1,
-        "power": 0
+        "tip": "<keyword=order>指令：</keyword>对所有敌军单位造成 {Damage} 点伤害。"
     },
     "203177": {
         "name": "愤怒之诅咒",
         "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
-        "tip": "<keyword=order>指令：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。\\n<keyword=deathblow>致死：</keyword>将溢出的伤害施加给相邻单位。",
-        "factionId": 1,
-        "rarity": 8,
-        "provision": 15,
-        "cardType": 1,
-        "power": 0
+        "tip": "<keyword=order>指令：</keyword>对 1 个敌军单位造成 {Damage} 点伤害。\\n<keyword=deathblow>致死：</keyword>将溢出的伤害施加给相邻单位。"
     },
     "203178": {
         "name": "傲慢之诅咒",
         "description": "刺的是，正是埃提巴德依照预言而做出的残忍行径，使得人们无法分辨，恶魔究竟是本就存在，还是诞生于恐惧和迫害之中",
-        "tip": "<keyword=order>指令：</keyword>摧毁 1 个战力不高于 {Power} 点的敌军单位。",
-        "factionId": 1,
-        "rarity": 8,
-        "provision": 15,
-        "cardType": 1,
-        "power": 0
+        "tip": "<keyword=order>指令：</keyword>摧毁 1 个战力不高于 {Power} 点的敌军单位。"
     },
     "203179": {
         "name": "贞洁之祝福",
@@ -13242,7 +13207,7 @@
     "203195": {
         "name": "达娜梅碧：馈赠者",
         "description": "切生灵皆是田野女王的孩子",
-        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=harmony>和谐</keyword>。\\n己方回合结束时，使己方手牌中所有主类别不存在于己方半场的“松鼠党”单位获得 {Boost} 点增益。\\n在赢得 1 小局后，若位于手牌或牌组中，发生历变。",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=harmony>和谐</keyword>。\\n己方回合结束时，使己方手牌中所有主类别不存在于己方半场的非中立单位获得 {Boost} 点增益。\\n在赢得 1 小局后，若位于手牌或牌组中，发生历变。",
         "factionId": 16,
         "rarity": 8,
         "provision": 14,
@@ -13262,10 +13227,10 @@
     "203197": {
         "name": "梅里泰莉",
         "description": "要见过一位司掌生育的女神，就算全都见过了",
-        "tip": "<keyword=deploy>部署：</keyword>使 1 个友军单位获得 {Boost} 点增益。\\n每当此单位回到己方牌组，便依序循环触发以下能力：\\n少女 - 使所有友军单位获得 {Boost2} 点增益。\\n母亲 - 随机<keyword=spawn>生成</keyword> 1 个人口数为 {Provisions} 的“北方领域”单位至己方随机一排。\\n老妇 - 使其它能力的数值提高 {Increase} 点。\\n小局开始时，重新开始循环。",
+        "tip": "<keyword=deploy>部署：</keyword>使 1 个友军单位获得 {Boost} 点增益。\\n每当此单位回到己方卡组，便依序循环触发以下能力：\\n少女 - 使所有友军单位获得 {Boost2} 点增益。\\n母亲 - 随机<keyword=spawn>生成</keyword> 1 个人口数为 {Provisions} 的“北方领域”单位至存在己方单位的随机一排。\\n老妇 - 自身获得 {Boost3} 点增益，随后使其它能力的数值提高 {Increase} 点。",
         "factionId": 8,
         "rarity": 8,
-        "provision": 14,
+        "provision": 13,
         "cardType": 4,
         "power": 3
     },
@@ -13292,10 +13257,10 @@
     "203200": {
         "name": "莉莉丝的预兆",
         "description": "类的憎恨和残忍汇成无边阴影，令天空也窒息。如果你碰巧看到了类似的情景……庆幸吧，这只是预兆而已",
-        "tip": "从己方牌组中<keyword=summon>召唤</keyword> {MaxTargets} 个不具有<keyword=veil>遮蔽</keyword>的“怪兽”单位至己方一排，随后使他们获得<keyword=doomed>佚亡</keyword>和<keyword=rupture>破裂</keyword>。",
+        "tip": "从己方牌组中<keyword=summon>召唤</keyword> {MaxTargets} 个不具有<keyword=veil>遮蔽</keyword>的非中立单位至己方一排，随后使他们获得<keyword=doomed>佚亡</keyword>和<keyword=rupture>破裂</keyword>。",
         "factionId": 2,
         "rarity": 8,
-        "provision": 12,
+        "provision": 11,
         "cardType": 2,
         "power": 0
     },
@@ -13315,7 +13280,7 @@
         "tip": "<keyword=resilient>坚韧</keyword>。\\n<keyword=profit>利润</keyword> {Profit}。\\n己方初始牌组中每有 1 张“罪行”牌，<keyword=profit>利润</keyword>便提高 {Profit2} 点。\\n<keyword=deploy>部署：</keyword><keyword=create>创造</keyword> 1 张铜色“罪行”牌，其人口数不大于自身<keyword=profit>利润</keyword>溢出的<keyword=coin>金币</keyword>数。\\n每当己方获得<keyword=coin>金币</keyword>，便获得等于其溢出值的倒数。\\n己方回合结束时，使倒数降低 {Counter2} 并获得 1 枚<keyword=coin>金币</keyword>。\\n倒数：{Counter}",
         "factionId": 64,
         "rarity": 8,
-        "provision": 12,
+        "provision": 11,
         "cardType": 8,
         "power": 0
     },
@@ -13332,7 +13297,7 @@
     "203204": {
         "name": "托雷斯·恩瑞斯：大祭司",
         "description": "如君王，亦如帝国：浮夸、恃权、一意孤行",
-        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=assimilate>同化</keyword>。\\n<keyword=deploy>部署：</keyword>使 1 个其它友军单位返回手牌，并使其获得<keyword=doomed>佚亡</keyword>，随后打出 1 张牌。",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=assimilate>同化</keyword>。\\n<keyword=deploy>部署：</keyword>将 1 个不在己方初始牌组的非<keyword=doomed>佚亡</keyword>友军单位返回手牌（自身除外），使其获得 {Boost} 点增益和 <keyword=doomed>佚亡</keyword>，随后打出 1 张牌。\\n若无有效目标，则改为<keyword=create>创造</keyword>并打出 1 个对方阵营的铜色单位，并使其获得 {Boost2} 点增益。",
         "factionId": 4,
         "rarity": 8,
         "provision": 14,
@@ -13342,7 +13307,7 @@
     "203205": {
         "name": "提尔：小史凯利格岛之主",
         "description": "的剑，经地底之焰锤炼而成，堪为天神所用，能以闪电之势劈开大地。然而，这般神器只有他才能驾驭",
-        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=deploy>部署：</keyword>将 1 个铜色“史凯利格”单位从己方墓场移至己方手牌，随后<keyword=discard>丢弃</keyword> 1 张牌。\\n每个己方回合中，第一次有铜色单位离开己方墓场时，使其获得等同于其基础战力值的增益。",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=deploy>部署：</keyword>将 1 个铜色非中立单位从己方墓场移至己方手牌，随后<keyword=discard>丢弃</keyword> 1 张牌。\\n每个己方回合中，首次有铜色单位离开己方墓场时，使其获得等同于其基础战力值的增益。",
         "factionId": 32,
         "rarity": 8,
         "provision": 14,
@@ -13352,7 +13317,7 @@
     "203206": {
         "name": "达娜梅碧：抚育者",
         "description": "切生灵皆是田野女王的孩子",
-        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=harmony>和谐</keyword>。\\n<keyword=deploy>部署：</keyword>使己方控制的每种“松鼠党”主类别中战力最低的单位获得 {Boost} 点增益。\\n己方每打出 1 个主类别不同于己方其它单位的“松鼠党”单位时，便使其获得 {Boost2} 点增益。",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=harmony>和谐</keyword>。\\n<keyword=deploy>部署：</keyword>使己方控制的每种非中立主类别中战力最低的单位获得 {Boost} 点增益。\\n己方每打出 1 个主类别有别于己方其它单位的非中立单位时，便使其获得 {Boost2} 点增益。",
         "factionId": 16,
         "rarity": 8,
         "provision": 14,
@@ -13389,6 +13354,241 @@
         "cardType": 4,
         "power": 5
     },
+    "203210": {
+        "name": "绑架",
+        "description": "点，慢点，再低点…好了。那东西吃了队长的头盔，咱们得想办法拿回来",
+        "tip": "<keyword=echo>回响</keyword>。\\n从对方牌组中打出 1 个不在对方起始牌组的单位，其人口不高于 {MaxTarget} 点。每低于该人口限制 1 点，便使其获得 {Boost} 点增益。",
+        "factionId": 4,
+        "rarity": 8,
+        "provision": 9,
+        "cardType": 2,
+        "power": 0
+    },
+    "203211": {
+        "name": "巴卡拉的桑铎",
+        "description": "位居公爵的叔叔剥夺了一大片土地后，桑铎开始从头建立自己的公爵领。他从帝国军事情报处的底层着手，那是最适合傻子和疯子的肮脏勾当",
+        "tip": "<keyword=deploy>部署：</keyword>从己方牌组将 1 张牌洗入对方牌组。\\n<keyword=order>指令：</keyword>在对方牌组底部<keyword=spawn>生成</keyword> 1 只“雄蛛”，并将其战力设为双方牌组剩余卡牌数量差值。\\n每当 1 张牌进入或离开对方牌组，便使自身获得 {Boost} 点增益。",
+        "factionId": 4,
+        "rarity": 4,
+        "provision": 10,
+        "cardType": 4,
+        "power": 5
+    },
+    "203212": {
+        "name": "投污者",
+        "description": "坏物资只是顺带罢了，主要目的是让他们认为盟友的食物都已遭到污染，迫使他们二选一：要么投降，要么饿死",
+        "tip": "<keyword=deploy>部署：</keyword><keyword=banish>放逐</keyword> 1 个战力不高于 3 点的敌军单位。若它为“衍生物”，则在对方牌组底部<keyword=spawn>生成</keyword> 1 张该单位的基础同名牌。",
+        "factionId": 4,
+        "rarity": 22,
+        "provision": 5,
+        "cardType": 4,
+        "power": 5
+    },
+    "203213": {
+        "name": "毒理学家",
+        "description": "评为学院中最不可能长命的炼金师，此言不虚",
+        "tip": "<keyword=deploy>部署：</keyword><keyword=infused>灌注</keyword> 1 个敌军单位“{InjectableAbility}”能力。若它为“衍生物”，则在对方牌组底部<keyword=spawn>生成</keyword> 1 张该单位的同名牌。",
+        "factionId": 4,
+        "rarity": 1,
+        "provision": 4,
+        "cardType": 4,
+        "power": 4
+    },
+    "203214": {
+        "name": "克拉肯",
+        "description": "怪脱缰，犹如覆水难收",
+        "tip": "<keyword=disloyal>不忠</keyword>。\\n<keyword=deploy>部署：</keyword>将 {MaxTargets} 个敌军单位移至同排，对他们造成 {Damage} 点伤害，并在同排<keyword=spawn>生成</keyword><keyword=storm>风暴</keyword>，持续 {Counter} 回合。\\n<keyword=deathwish>遗愿：</keyword><keyword=summon>召唤</keyword>自身至对方同排，并使自身获得等同于友军“野兽”种类数的增益。"
+    },
+    "203215": {
+        "name": "凯尔派",
+        "description": "恶灵！是跳舞的水草！不，你们这群没长眼的蠢货，这显然是一匹马",
+        "tip": "<keyword=deploy>部署：</keyword>在对方单排<keyword=spawn>生成</keyword><keyword=rain>雨</keyword>，持续 {Counter} 回合。己方起始牌组中，每有 {MaxTargets} 张“野兽”牌，持续回合数便增加 {Counter2}。\\n每当<keyword=rain>雨</keyword>或<keyword=storm>风暴</keyword>对 1 个敌军单位造成伤害，便随机使 1 个不带增益的友军“野兽”获得 {Boost} 点增益。",
+        "factionId": 32,
+        "rarity": 4,
+        "provision": 9,
+        "cardType": 4,
+        "power": 4
+    },
+    "203216": {
+        "name": "海巨蟒",
+        "description": "区一条大鳗鱼，还要雇个猎龙人？哈！内陆人就只会胡说八道",
+        "tip": "<keyword=deploy>部署：</keyword>使自身获得 {0+B.P.BB_RainStormThisRound} 点增益，并对 1 个敌军单位造成 3 点伤害。\\n本小局中，每当<keyword=rain>雨</keyword>或<keyword=storm>风暴</keyword>在对方回合触发，该增益便提高 {Boost} 点。",
+        "factionId": 32,
+        "rarity": 22,
+        "provision": 5,
+        "cardType": 4,
+        "power": 1
+    },
+    "203217": {
+        "name": "鮟鱇鱼",
+        "description": "好，它只会出现在你最深、最黑暗的噩梦之中",
+        "tip": "己方回合结束时，若对方半场两排均有<keyword=rain>雨</keyword>或<keyword=storm>风暴</keyword>，则从己方牌组<keyword=summon>召唤</keyword>自身至己方<keyword=ranged>远程</keyword>排。\\n己方回合结束时，若对方半场没有<keyword=rain>雨</keyword>或<keyword=storm>风暴</keyword>，将自身移至己方牌组底部。",
+        "factionId": 32,
+        "rarity": 1,
+        "provision": 5,
+        "cardType": 4,
+        "power": 3
+    },
+    "203218": {
+        "name": "特利安尼·科伦",
+        "description": "了几个月确保万无一失，结果没一个听指挥的…让我妈知道了肯定要笑我",
+        "tip": "<keyword=deploy>部署：</keyword>将 1 个人口不高于 {Provisions} 点的友军单位洗回己方牌组，随后打出己方牌组最顶端的 1 张<keyword=deploy>部署</keyword>“精灵”牌。\\n<keyword=order>指令：</keyword><keyword=spawn>生成</keyword>并打出“备用计划”。若此单位已“就绪”，则改为<keyword=infused>灌注</keyword>自身“{InjectableAbility}”能力。",
+        "factionId": 16,
+        "rarity": 8,
+        "provision": 13,
+        "cardType": 4,
+        "power": 8
+    },
+    "203219": {
+        "name": "窃夺",
+        "description": "划很简单：跟上回一样，但要做得更好",
+        "tip": "<keyword=echo>回响</keyword>。\\n在己方单排<keyword=spawn>生成</keyword> {MaxTargets} 件“货物”。",
+        "factionId": 16,
+        "rarity": 4,
+        "provision": 11,
+        "cardType": 2,
+        "power": 0
+    },
+    "203220": {
+        "name": "备用计划",
+        "description": "是街上没抢成，就在林子里动真格",
+        "tip": "对对方打出的最后一个单位造成 {Damage} 点伤害，随后<keyword=create>创造</keyword> 1 张不存在于己方起始牌组中的铜色<keyword=deploy>部署</keyword>“精灵”牌。",
+        "factionId": 16,
+        "rarity": 22,
+        "provision": 5,
+        "cardType": 2,
+        "power": 0
+    },
+    "203221": {
+        "name": "诈骗师",
+        "description": "年混迹在人类中，松鼠党发现了一些他们的弱点。比如，显然有些人类听不懂反话",
+        "tip": "<keyword=deploy>部署：</keyword>将最后打出的敌军单位移至另一排，并<keyword=infused>灌注</keyword>其“{InjectableAbility}”能力。",
+        "factionId": 16,
+        "rarity": 1,
+        "provision": 4,
+        "cardType": 4,
+        "power": 4
+    },
+    "203222": {
+        "name": "迪杰斯特拉",
+        "description": "军…陛下",
+        "tip": "<keyword=order>指令：</keyword>从己方牌组中打出 1 个带有增益的单位。\\n位于牌组中时，每当此单位从其他能力中获得增益，自身便获得等量增益。",
+        "factionId": 8,
+        "rarity": 8,
+        "provision": 12,
+        "cardType": 4,
+        "power": 4
+    },
+    "203223": {
+        "name": "卓肯波",
+        "description": "，并不是去度假，但你要是喜欢听人唱歌的话，倒是有不少",
+        "tip": "<keyword=resilient>坚韧</keyword>。\\n<keyword=deploy>部署：</keyword>从己方牌组中<keyword=summon>召唤</keyword> 1 个单位至同排，将其<keyword=lock>锁定</keyword>并移除其所带增益。\\n<keyword=order>指令：</keyword>使 1 个友军单位获得 {Boost} 点增益。该增益随移除的增益量而增加。",
+        "factionId": 8,
+        "rarity": 4,
+        "provision": 9,
+        "cardType": 8,
+        "power": 0
+    },
+    "203224": {
+        "name": "瑞达尼亚情报处",
+        "description": "们说贵族能闻出混在他们中间的平民。不过，只要别吝惜美酒香水，一两次交谈绰绰有余。说不定，还能一举博得他们的信任",
+        "tip": "<keyword=zeal>狂热</keyword>、<keyword=order>指令：</keyword><keyword=purify>净化</keyword> 1 个友军单位。\\n若己方未控制“瑞达尼亚情报处”，每当友军单位获得状态，便从己方牌组<keyword=summon>召唤</keyword>自身至同排。",
+        "factionId": 8,
+        "rarity": 22,
+        "provision": 6,
+        "cardType": 4,
+        "power": 1
+    },
+    "203225": {
+        "name": "瑞达尼亚密探",
+        "description": "联八届单人捉迷藏大赛冠军",
+        "tip": "<keyword=veil>遮蔽</keyword>。\\n<keyword=order>指令：</keyword>使己方牌组中 1 个单位获得 {Boost} 点增益。\\n<keyword=cooldown>冷却：</keyword>{Cooldown}",
+        "factionId": 8,
+        "rarity": 1,
+        "provision": 4,
+        "cardType": 4,
+        "power": 4
+    },
+    "203226": {
+        "name": "虫群思维",
+        "description": "千种无意识的恐惧，凶暴而又饥饿，整齐划一地朝你涌来",
+        "tip": "选择 {MaxTargets} 个不同的铜色齐齐摩单位。\\n位于己方墓场中时，每回合己方首次在战场生成 1 只“雄蛛”后，依序将其转变为所选的齐齐摩单位。",
+        "factionId": 2,
+        "rarity": 8,
+        "provision": 10,
+        "cardType": 2,
+        "power": 0
+    },
+    "203227": {
+        "name": "酸液喷射",
+        "description": "是只有人才会喷药剂杀虫",
+        "tip": "<keyword=infused>灌注</keyword> 1 个敌军单位“{InjectableAbility}”能力。",
+        "factionId": 2,
+        "rarity": 4,
+        "provision": 8,
+        "cardType": 2,
+        "power": 0
+    },
+    "203228": {
+        "name": "齐齐摩追猎者",
+        "description": "起来，它在追你",
+        "tip": "<keyword=veil>遮蔽</keyword>。\\n<keyword=zeal>狂热</keyword>、<keyword=order>指令</keyword>（<keyword=predator>掠食</keyword>）：对 1 个敌军单位造成 {Damage} 点伤害，或<keyword=consume>吞噬</keyword> 1 只友军“雄蛛”。\\n<keyword=charge>充能：</keyword>{Charge}\\n每当己方<keyword=spawn>生成</keyword> 1 只或更多“类虫生物”，便使<keyword=charge>充能</keyword> +1。",
+        "factionId": 2,
+        "rarity": 22,
+        "provision": 5,
+        "cardType": 4,
+        "power": 3
+    },
+    "203229": {
+        "name": "齐齐摩幼虫",
+        "description": "般来说，蛋的颜色越鲜艳，人就越没有食欲",
+        "tip": "<keyword=order>指令：</keyword>移除自身 {Boost} 点增益，随后<keyword=spawn>生成</keyword> 1 只“雄蛛”至同排。\\n<keyword=cooldown>冷却：</keyword>{Cooldown}\\n己方每打出 1 张“生物”牌，便使自身获得 {Boost2} 点增益。",
+        "factionId": 2,
+        "rarity": 1,
+        "provision": 4,
+        "cardType": 4,
+        "power": 4
+    },
+    "203230": {
+        "name": "卡西米尔·巴席",
+        "description": "了爱，他愿意做任何事，但烟花爆竹还是免了",
+        "tip": "<keyword=veil>遮蔽</keyword>。\\n<keyword=deploy>部署：</keyword>花掉所有<keyword=coin>金币</keyword>，随后使自身获得等量增益。\\n每回合中，当己方拥有的<keyword=coin>金币</keyword>数首次达到 {Coins} 时，在同排<keyword=spawn>生成</keyword>“爆炸物”。",
+        "factionId": 64,
+        "rarity": 8,
+        "provision": 11,
+        "cardType": 4,
+        "power": 6
+    },
+    "203231": {
+        "name": "伊芙林·加洛",
+        "description": "个筋斗，拿脚举弩，蒙上双眼，射穿天上飞的鸽子，一瞬之间，没有办不到的事",
+        "tip": "己方回合结束时，若己方拥有 {Coins2} 个<keyword=coin>金币</keyword>，获得 {Coins} 个<keyword=coin>金币</keyword>。",
+        "factionId": 64,
+        "rarity": 4,
+        "provision": 7,
+        "cardType": 4,
+        "power": 5
+    },
+    "203232": {
+        "name": "芝麻开门",
+        "description": "撬什么锁？保证快到你反应不过来",
+        "tip": "<keyword=profit>利润</keyword> {Profit}。\\n位于己方墓场中时，每当己方拥有的<keyword=coin>金币</keyword>数到达 {Coins}，便使倒数 -1。\\n倒数为 {Counter2} 时，获得 {Coins2} 个<keyword=coin>金币</keyword>。\\n倒数：{Counter}",
+        "factionId": 64,
+        "rarity": 22,
+        "provision": 5,
+        "cardType": 2,
+        "power": 0
+    },
+    "203233": {
+        "name": "牛堡守卫",
+        "description": "静的人才能笑到最后…除非大势已去",
+        "tip": "<keyword=fee>费用</keyword> {Fee}：使相邻单位获得 {Boost} 点增益。若<keyword=coin>金币</keyword>数因此降至 {Coins}，则改为使相邻单位获得 {Boost2} 点增益。\\n<keyword=cooldown>冷却：</keyword>{Cooldown}",
+        "factionId": 64,
+        "rarity": 1,
+        "provision": 4,
+        "cardType": 4,
+        "power": 4
+    },
     "203234": {
         "name": "深渊的呼唤",
         "description": "世长眠者未必永恒逝去，在奇妙的时代死神亦将消逝",
@@ -13396,6 +13596,26 @@
         "factionId": 2,
         "rarity": 8,
         "provision": 14,
+        "cardType": 8,
+        "power": 0
+    },
+    "203237": {
+        "name": "货物",
+        "description": "英尺，七英尺，整整八英尺的箱子",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=order>指令：</keyword>选择 1 个不具有<keyword=veil>遮蔽</keyword>、未“就绪”的非中立“士兵”、“密探”或“匪徒”，触发其<keyword=deploy>部署</keyword>能力，随后<keyword=infused>灌注</keyword>其“就绪”类别并<keyword=banish>放逐</keyword>自身。\\n无法选择本回合打出的单位作为目标。",
+        "factionId": 16,
+        "rarity": 1,
+        "provision": 0,
+        "cardType": 8,
+        "power": 0
+    },
+    "203238": {
+        "name": "爆炸物",
+        "description": "跑，该死的蠢货——那不是什么胡萝卜",
+        "tip": "<keyword=doomed>佚亡</keyword>。\\n<keyword=fee>费用</keyword> {Fee}：对 1 个敌军单位造成 {Damage} 点伤害，随后摧毁自身。\\n己方回合结束时，使<keyword=fee>费用</keyword> -{Fee2}。若<keyword=fee>费用</keyword>已变为 {Fee3}，则改为摧毁自身。",
+        "factionId": 64,
+        "rarity": 1,
+        "provision": 0,
         "cardType": 8,
         "power": 0
     }
