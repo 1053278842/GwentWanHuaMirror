@@ -1,5 +1,3 @@
 # 忽略資源占用多的
 .gitignore
-main\resources\images\Card_Img_Small\
-main\resources\images\GwentImg_preview\
-main\resources\images\GwentImg原图\
+
