@@ -19,7 +19,7 @@ def process():
     
     # 1.打开浏览器，输入网址
     
-    cardDict = open("main/resources/config/card_json.json", "r",encoding="utf-8")
+    cardDict = open("main/resources/config/card_json.json", "r",encoding="utf-16")
     card_list = json.loads(cardDict.read())
     
     chrome_options = webdriver.ChromeOptions()

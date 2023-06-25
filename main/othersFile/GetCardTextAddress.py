@@ -11,8 +11,9 @@ from tools.MemoryTool import *
 
 # 本脚本用于获取游戏的GameInstance组件的偏移地址
 # ps:前置条件-游戏在battle界面
+# 1c8是中文偏移
 def getGameInstanceValue(pm,base,add):
-    gameInstanceAdd = read_int64(pm,base+add,[0xb8,0x0,0x38,0x0])
+    gameInstanceAdd = read_int64(pm,base+add,[0xb8,0x0,0x138,0x1c8,0x0])
     return gameInstanceAdd
 
 class StoppableThread(threading.Thread):
@@ -33,7 +34,7 @@ def search_range(start_add, end_add, pm, base_address, check_name, result_lock, 
         try:
             gi_value = getGameInstanceValue(pm, base_address, i)
             type_name = read_Type_Name(pm, gi_value)
-            print(type_name)
+            print(pm,type_name)
         except Exception:
             continue
         if type_name == check_name:
@@ -49,10 +50,10 @@ if __name__=='__main__':
         pm.process_handle,"GameAssembly.dll"
     ).lpBaseOfDll
 
-
-    start_add = 58362808
+    # 58371448
+    start_add = 58371448
     end_add = start_add+5000000
-    check_name = 'GameInstance'
+    check_name = 'String'
 
     num_threads = 12  # 设置线程数
     sub_ranges = [(i, i + (end_add - start_add) // num_threads) for i in range(start_add, end_add, (end_add - start_add) // num_threads)]
