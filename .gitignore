@@ -1,5 +1,1 @@
-# 忽略資源占用多的
-.gitignore
-main\resources\images\Card_Img_Small\
-main\resources\images\GwentImg_preview\
-main\resources\images\GwentImg原图\
+从前有个傻逼，写这个项目重要数据就同步不了了，我想不会是你
