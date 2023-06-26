@@ -13,7 +13,7 @@ from tools.MemoryTool import *
 # ps:前置条件-游戏在battle界面
 # 1c8是中文偏移
 def getGameInstanceValue(pm,base,add):
-    gameInstanceAdd = read_int64(pm,base+add,[0x30,0xf0,0x0])
+    gameInstanceAdd = read_int64(pm,base+add,[0x28,0x160,0x0])
     return gameInstanceAdd
 
 class StoppableThread(threading.Thread):
@@ -34,7 +34,7 @@ def search_range(start_add, end_add, pm, base_address, check_name, result_lock, 
         try:
             gi_value = getGameInstanceValue(pm, base_address, i)
             type_name = read_Type_Name(pm, gi_value)
-            print(pm,type_name)
+            print(pm,type_name,hex(read_int64(pm,base_address+i,[0x28,0x160])))
         except Exception:
             continue
         if type_name == check_name:
@@ -51,7 +51,7 @@ if __name__=='__main__':
     ).lpBaseOfDll
 
     # 62974112
-    start_add = 62974112
+    start_add = 62974440
     end_add = start_add+5000000
     check_name = 'String'
 

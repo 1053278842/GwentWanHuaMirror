@@ -47,7 +47,7 @@ def CardDataFileToJson():
                     data[str(id)] = {'name':name,"description":description,"tip":tip}
                 # print(tip)
             # data2.append([int(i) for i in data_line])    
-    with open("main/resources/config/card_json.json", 'w',encoding='utf16') as write_f:
+    with open("main/resources/config/card_json.json", 'w',encoding='utf8') as write_f:
         write_f.write(json.dumps(data, indent=4, ensure_ascii=False))
 
 
@@ -68,6 +68,6 @@ def main():
 
 if __name__ =='__main__':
     main()
-    writeCardDataJsonBaseFile()
+    # writeCardDataJsonBaseFile()
     CardDataFileToJson()
     # 还需要使用爬虫文件！爬取新卡各种类型的图

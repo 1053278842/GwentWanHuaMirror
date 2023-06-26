@@ -1,54 +1,68 @@
 import binascii
 import json
 import os
+import xml.etree.ElementTree as ET
 
 import pymem
 
 
 # 写入卡片json源文件
 def writeCardDataJsonBaseFile():
-    # base = 0x1af888e0028
-    # count = 0x42b0c*2
 
-    base = 0x28a1db3e014
-    count = 0x16a3e8*2+0x14*2
+    # +0x14 string的偏移
+    base = 0x1FD313BF014    # 第一行+0x14
+    count = 0x16a3e8*2  # 第二行长度*2 
     value = pm.read_bytes(base,count)
     result=""
     for item in value:
         result += str(hex(item))[2:].zfill(2).upper()
 
-    with open('main/resources/config/cardData_utf16.txt', 'wb+') as fp:
+    with open('main/resources/config/cardData_utf16.xml', 'wb+') as fp:
         fp.write(binascii.unhexlify(result).decode('utf-16').encode('utf-16'))
     print("写入成功！")
     return 0
 
 # CardData源文件转化为Json
 def CardDataFileToJson():
-    data = {}
-    with open('main/resources/config/cardData_utf16.txt', 'r', encoding='utf-16') as inFile:
-        # 第二种：每行分开读取
-        count = 0
-        id = ""
-        description = ""
-        name = ""
-        tip = ""
-        for line in inFile:
-            data_line = line.strip("\n")  # 去除首尾换行符，并按空格划分
-            # 只转换cardTemplate开头的
-            if line[:5].isdigit():
-                id = data_line[0:6]
-                rowStatus = line[7:9]
-                if rowStatus == "fl":
-                    description = data_line[14:-1]
-                if rowStatus == "na":
-                    name = data_line[12:]
-                if rowStatus == "to":
-                    tip = data_line[15:]
-                    data[str(id)] = {'name':name,"description":description,"tip":tip}
-                # print(tip)
-            # data2.append([int(i) for i in data_line])    
-    with open("main/resources/config/card_data_json_utf16.json", 'w',encoding='utf16') as write_f:
-        write_f.write(json.dumps(data, indent=4, ensure_ascii=False))
+    tree = ET.parse('main/resources/config/cardData_utf16.xml')
+    root = tree.getroot()
+    with open('main/resources/config/card_json.json', 'r',encoding='utf-8') as f:
+        data = json.load(f)
+
+    driverCardData ={}
+
+    for key, value in data.items():
+        for template in root.findall('Template'):
+            if template.attrib['Id'] == key:
+                for element in template:
+                    value['debugName'] = template.attrib['DebugName']
+                    value['availability'] = template.attrib['Availability']
+                    if element.tag == 'Rarity':
+                        value['rarity'] = element.text
+                    elif element.tag == 'Kind':
+                        value['kind'] = element.text
+                    elif element.tag == 'Type':
+                        value['type'] = element.text
+                    elif element.tag == 'SecondaryFactionId':
+                        value['secondaryFactionId'] = element.text
+                    elif element.tag == 'Tier':
+                        value['tier'] = element.text
+                    elif element.tag == 'Power':
+                        value['power'] = element.text
+                    elif element.tag == 'Provision':
+                        value['provision'] = element.text
+                    elif element.tag == 'InitialTimer':
+                        value['initialTimer'] = element.text
+                    elif element.tag == 'FactionId':
+                        value['factionId'] = element.text
+                    # 衍生卡
+                    if template.attrib['Availability'] == "0":
+                        driverCardData[key] = value
+
+    with open('main/resources/config/card_json.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
+    with open('main/resources/config/driverCard_json.json', 'w', encoding='utf-8') as f:
+        json.dump(driverCardData, f, indent=4, ensure_ascii=False)
 
 
 
@@ -68,6 +82,6 @@ def main():
 
 if __name__ =='__main__':
     main()
-    writeCardDataJsonBaseFile()
+    # writeCardDataJsonBaseFile()
     CardDataFileToJson()
     # 还需要使用爬虫文件！爬取新卡各种类型的图
