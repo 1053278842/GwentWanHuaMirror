@@ -37,6 +37,10 @@ def getCardDataJsonDict():
     cardDict = open(r"main/resources/config/card_json.json", "r",encoding="utf-8")
     return json.loads(cardDict.read())
 
+def getCardDataJsonDict16():
+    cardDict = open(r"main/resources/config/card_json.json", "r",encoding="utf-16")
+    return json.loads(cardDict.read())
+
 def getLeaderCardDataJsonDict():
     cardDict = open(r"main/resources/data/LeaderCardData.json", "r",encoding="utf-8")
     return json.loads(cardDict.read())

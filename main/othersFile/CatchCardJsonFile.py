@@ -10,8 +10,8 @@ def writeCardDataJsonBaseFile():
     # base = 0x1af888e0028
     # count = 0x42b0c*2
 
-    base = 0x21b20cd0008
-    count = 0x46a62*2
+    base = 0x28a14002000
+    count = 0x48cde*2
     value = pm.read_bytes(base,count)
     result=""
     for item in value:

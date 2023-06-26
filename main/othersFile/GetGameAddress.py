@@ -33,6 +33,7 @@ def search_range(start_add, end_add, pm, base_address, check_name, result_lock, 
         try:
             gi_value = getGameInstanceValue(pm, base_address, i)
             type_name = read_Type_Name(pm, gi_value)
+            print(type_name)
         except Exception:
             continue
         if type_name == check_name:
@@ -49,7 +50,7 @@ if __name__=='__main__':
     ).lpBaseOfDll
 
 
-    start_add = 56000000
+    start_add = 58362808
     end_add = start_add+5000000
     check_name = 'GameInstance'
 

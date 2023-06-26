@@ -19,7 +19,7 @@ def process():
     
     # 1.打开浏览器，输入网址
     
-    cardDict = open("main/resources/config/card_json.json", "r",encoding="utf-8")
+    cardDict = open("main/resources/config/card_json.json", "r",encoding="utf-16")
     card_list = json.loads(cardDict.read())
     
     chrome_options = webdriver.ChromeOptions()
@@ -30,7 +30,7 @@ def process():
     # browser.maximize_window() # 浏览器最大化
     # browser.get('https://www.playgwent.com/en/decks/builder/card/details/202140')
     browser.implicitly_wait(30) # 加入隐式等待，防止崩溃
-    start_id_str = "203190"
+    start_id_str = "203210"
     # 202093 - 202097 无图片
     # 202123 sd
 
