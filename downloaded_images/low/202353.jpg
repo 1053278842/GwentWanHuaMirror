@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html lang="cn" >
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <meta name="viewport"           content="width=device-width, initial-scale=1">
+    <meta name="theme-color"        content="#e67e22">
+    <meta name="description"        content="每当“奈瑟尼尔”获得增益，便使 1 名随机敌军单位重伤 2 回合。
+
+Provision: 7
+战力: 5
+">
+    <meta property="og:title"       content="奈瑟尼尔·派斯托迪 - 人类, 火誓者, 传教士"/>
+    <meta property="og:type"        content="website"/>
+    <meta property="og:image"       content="https://gwent.one/image/gwent/assets/card/art/medium/1791.jpg" />
+    <meta property="og:url"         content="https://gwent.one/"/>
+    <meta property="og:site_name"   content="辛迪加 & 北方领域 - 游戏版本 11.6.0 - gwent.one"/>
+    <meta property="og:description" content="每当“奈瑟尼尔”获得增益，便使 1 名随机敌军单位重伤 2 回合。
+
+Provision: 7
+战力: 5
+">
+
+    <link rel="icon" type="image/png" href="https://gwent.one/image/favicon/favicon-16x16.png"          sizes="16x16">
+    <link rel="icon" type="image/png" href="https://gwent.one/image/favicon/favicon-32x32.png"          sizes="32x32">
+    <link rel="icon" type="image/png" href="https://gwent.one/image/favicon/favicon-96x96.png"          sizes="96x96">
+    <link rel="icon" type="image/png" href="https://gwent.one/image/favicon/favicon-512x512.png"        sizes="512x512">
+    <link rel="icon" type="image/png" href="https://gwent.one/image/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="https://gwent.one/image/favicon/android-chrome-512x512.png" sizes="512x512">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://gwent.one/image/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://gwent.one/image/favicon/apple-touch-icon-180x180.png">
+    <link rel="mask-icon" href="https://gwent.one/image/favicon/safari-pinned-tab.svg" color="#dc050d">
+    <link rel="shortcut icon" href="https://gwent.one/image/favicon/favicon.ico">
+
+    <link rel="alternate" href="https://gwent.one/en/card/202353" hreflang="en">
+    <link rel="alternate" href="https://gwent.one/pl/card/202353" hreflang="pl">
+    <link rel="alternate" href="https://gwent.one/de/card/202353" hreflang="de">
+    <link rel="alternate" href="https://gwent.one/ru/card/202353" hreflang="ru">
+    <link rel="alternate" href="https://gwent.one/fr/card/202353" hreflang="fr">
+    <link rel="alternate" href="https://gwent.one/es/card/202353" hreflang="es-es">
+    <link rel="alternate" href="https://gwent.one/mx/card/202353" hreflang="es-mx">
+    <link rel="alternate" href="https://gwent.one/it/card/202353" hreflang="it">
+    <link rel="alternate" href="https://gwent.one/jp/card/202353" hreflang="ja">
+    <link rel="alternate" href="https://gwent.one/pt/card/202353" hreflang="pt-br">
+    <link rel="alternate" href="https://gwent.one/cn/card/202353" hreflang="zh-hans">
+    <link rel="alternate" href="https://gwent.one/kr/card/202353" hreflang="ko">
+    <link rel="canonical" href="https://gwent.one/en/card/202353">
+
+    <script src="/ss/popper.min.js"></script>
+    <!-- bootstrap 4.1.1 -->
+    <script src="/ss/jquery-3.3.1.min.js"></script>
+    <script src="/ss/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/search-v12.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="/ss/rebuild_2021.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/style-20230413.css">
+
+    <title>奈瑟尼尔·派斯托迪 - 人类, 火誓者, 传教士</title>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-xl Syndicate">
+  <a class="navbar-brand fancy" href="https://gwent.one/cn/">The Voice of Gwent</a>
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <i class="material-icons md-24">menu</i>
+  </button>
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a href="https://gwent.one/cn/"        class="nav-link" ><img src="https://gwent.one/image/icon/nav/cardshc.png"> 卡牌</a></li>
+      <li class="nav-item"><a href="https://gwent.one/cn/taunts/" class="nav-link" ><img src="https://gwent.one/image/icon/nav/taunts.png" > 嘲讽</a></li>
+      <li class="nav-item"><a href="https://gwent.one/cn/cards/"  class="nav-link" ><img src="https://gwent.one/image/icon/nav/hc.png"     > Card Database</a></li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"><img src="https://gwent.one/image/icon/nav/ob.png"> 梦境试炼</a>
+        <div class="dropdown-menu p-0">
+          <a class="dropdown-item" href="https://gwent.one/cn/beta/"               ><img src="https://gwent.one/image/icon/nav/cards.png"  > 卡牌</a>
+          <a class="dropdown-item" href="https://gwent.one/cn/beta/taunts/"        ><img src="https://gwent.one/image/icon/nav/taunts.gif" > 嘲讽</a>
+        </div>
+      </li>
+
+
+  </ul>
+  <ul class="navbar-nav ml-auto">
+   <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+     <img style="height:30px" src="https://gwent.one/image/icon/language/s/cn.png">Language
+    </a>
+
+    <div class="dropdown-menu">
+     <a class="dropdown-item" href="/en/card/202353/11.6.0"><img style="height:40px" src="https://gwent.one/image/icon/language/s/en.png">English</a>
+     <a class="dropdown-item" href="/pl/card/202353/11.6.0"><img style="height:40px" src="https://gwent.one/image/icon/language/s/pl.png">Polski</a>
+     <a class="dropdown-item" href="/ru/card/202353/11.6.0"><img style="height:40px" src="https://gwent.one/image/icon/language/s/ru.png">Русский</a>
+     <a class="dropdown-item" href="/de/card/202353/11.6.0"><img style="height:40px" src="https://gwent.one/image/icon/language/s/de.png">Deutsch</a>
+     <a class="dropdown-item" href="/fr/card/202353/11.6.0"><img style="height:40px" src="https://gwent.one/image/icon/language/s/fr.png">Français</a>
+     <a class="dropdown-item" href="/es/card/202353/11.6.0"><img style="height:40px" src="https://gwent.one/image/icon/language/s/es.png">Español</a>
+     <a class="dropdown-item" href="/mx/card/202353/11.6.0"><img style="height:40px" src="https://gwent.one/image/icon/language/s/mx.png">Español (AL)</a>
+     <a class="dropdown-item" href="/it/card/202353/11.6.0"><img style="height:40px" src="https://gwent.one/image/icon/language/s/it.png">Italiano</a>
+     <a class="dropdown-item" href="/jp/card/202353/11.6.0"><img style="height:40px" src="https://gwent.one/image/icon/language/s/jp.png">日本語</a>
+     <a class="dropdown-item" href="/pt/card/202353/11.6.0"><img style="height:40px" src="https://gwent.one/image/icon/language/s/pt.png">Português (BR)</a>
+     <a class="dropdown-item" href="/cn/card/202353/11.6.0"><img style="height:40px" src="https://gwent.one/image/icon/language/s/cn.png">简体中文</a>
+     <a class="dropdown-item" href="/kr/card/202353/11.6.0"><img style="height:40px" src="https://gwent.one/image/icon/language/s/kr.png">한국어</a>
+    </div>
+
+   </li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"><img src="https://gwent.one/image/icon/nav/extras.png"     > Extras</a>
+  <div class="dropdown-menu dropdown-menu-right p-0">
+    <a class="dropdown-item" href="https://gwent.one/cn/cards/changelog/" ><img src="https://gwent.one/image/icon/nav/changelog.png"> Card History</a>
+    <a class="dropdown-item" href="https://gwent.one/cn/rewards/seasonal" ><img src="https://gwent.one/image/icon/nav/seasonal.png" > Seasonal Modes</a>
+    <a class="dropdown-item" href="https://gwent.one/cn/rewards/prestige" ><img src="https://gwent.one/image/icon/nav/prestige.png" > Prestige Rewards</a>
+    <a class="dropdown-item" href="https://gwent.one/cn/quiz/"            ><img src="https://gwent.one/image/icon/nav/quiz.png"     > Quiz</a>
+    <a class="dropdown-item" href="https://gwent.one/cn/random"           ><img src="https://gwent.one/image/icon/nav/random.png"   > Random Cards</a>
+    <a class="dropdown-item" href="https://gwent.one/cn/donate"           ><img src="https://gwent.one/image/icon/nav/heart.png"    > Support</a>
+    <a class="dropdown-item" href="https://gwent.one/cn/about"            ><img src="https://gwent.one/image/icon/nav/about.png"    > About</a>
+  </div>
+</li>
+
+</ul>
+ </div>
+</nav><br>
+<div class="layout-single">
+    <div class="content-wrap">
+
+        
+        <div class="card-wrap card-data" data-res="medium" data-id="202353" data-artid="1791j" data-power="5" data-armor="0" data-provision="7" data-faction="syndicate" data-set="novigrad" data-color="gold" data-type="unit" data-rarity="epic"  data-faction-duo="syndicate_northern_realms">
+
+            <div class="card-info-wrap">
+
+                <div class="card-head">
+
+                    <div class="card-name">奈瑟尼尔·派斯托迪</div>
+                    <div class="card-category">人类, 火誓者, 传教士</div>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="card-body-ability">每当“奈瑟尼尔”获得增益，便使 1 名随机敌军单位<span class="keyword bleeding">重伤</span> 2 回合。<br />
+                    </div>
+
+                                                      
+                                        
+                    <div class="card-seperator-short"></div>
+                    
+                    <div class="card-body-keyword"><span class="keyword">重伤：</span>一种状态，在回合结束时使重伤的单位受到 1 点伤害。提示：重伤的回合可以累积，1 回合重伤效果可以抵消 1 回合活力效果。重伤无视护甲。                    </div>
+                    
+                                        
+                                        
+    <div class="card-audio" onclick="showId('cardAudio')">音频</div>
+    <div id="cardAudio" style="display:none">
+        <ul>
+
+        
+            <li>
+                <a class="card-audio-download" download="奈瑟尼尔·派斯托迪 - SAY.Battlecries_part6.146.mp3" href="https://gwent.one/audio/card/current/cn/SAY.Battlecries_part6.146.mp3"><i class="material-icons">cloud_download</i></a>
+                <audio preload="none" id="play_cn_1" src="https://gwent.one/audio/card/current/cn/SAY.Battlecries_part6.146.mp3"></audio>
+                <a class="audio-play pointer"  onclick="document.getElementById('play_cn_1').play()">&#8227; SAY.Battlecries_part6.146</a>
+            </li>
+        
+        
+            <li>
+                <a class="card-audio-download" download="奈瑟尼尔·派斯托迪 - SAY.Battlecries_part6.147.mp3" href="https://gwent.one/audio/card/current/cn/SAY.Battlecries_part6.147.mp3"><i class="material-icons">cloud_download</i></a>
+                <audio preload="none" id="play_cn_2" src="https://gwent.one/audio/card/current/cn/SAY.Battlecries_part6.147.mp3"></audio>
+                <a class="audio-play pointer"  onclick="document.getElementById('play_cn_2').play()">&#8227; SAY.Battlecries_part6.147</a>
+            </li>
+        
+        
+            <li>
+                <a class="card-audio-download" download="奈瑟尼尔·派斯托迪 - SAY.Battlecries_part6.148.mp3" href="https://gwent.one/audio/card/current/cn/SAY.Battlecries_part6.148.mp3"><i class="material-icons">cloud_download</i></a>
+                <audio preload="none" id="play_cn_3" src="https://gwent.one/audio/card/current/cn/SAY.Battlecries_part6.148.mp3"></audio>
+                <a class="audio-play pointer"  onclick="document.getElementById('play_cn_3').play()">&#8227; SAY.Battlecries_part6.148</a>
+            </li>
+        
+        
+            <li>
+                <a class="card-audio-download" download="奈瑟尼尔·派斯托迪 - SAY.Battlecries_part6.149.mp3" href="https://gwent.one/audio/card/current/cn/SAY.Battlecries_part6.149.mp3"><i class="material-icons">cloud_download</i></a>
+                <audio preload="none" id="play_cn_4" src="https://gwent.one/audio/card/current/cn/SAY.Battlecries_part6.149.mp3"></audio>
+                <a class="audio-play pointer"  onclick="document.getElementById('play_cn_4').play()">&#8227; SAY.Battlecries_part6.149</a>
+            </li>
+        
+        
+            <li>
+                <a class="card-audio-download" download="奈瑟尼尔·派斯托迪 - SAY.Battlecries_part6.150.mp3" href="https://gwent.one/audio/card/current/cn/SAY.Battlecries_part6.150.mp3"><i class="material-icons">cloud_download</i></a>
+                <audio preload="none" id="play_cn_5" src="https://gwent.one/audio/card/current/cn/SAY.Battlecries_part6.150.mp3"></audio>
+                <a class="audio-play pointer"  onclick="document.getElementById('play_cn_5').play()">&#8227; SAY.Battlecries_part6.150</a>
+            </li>
+        
+        
+        </ul>
+        <div class="card-seperator-long"></div>
+
+    </div>
+
+        
+                    <div class="card-body-flavor">诺维格瑞 - 一座没有不可能的城市。例如从职业拷问官变成虔诚的教士。                    </div>
+                                    </div>
+                    
+                <div class="card-footer">
+
+                    <div class="export"><a href="https://gwent.one/cn/export/image/card/202353/11.6.0" rel="nofollow">Export</a></div>
+
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          游戏版本 11.6.0                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                                        <a class="dropdown-item clc_new" href="https://gwent.one/cn/card/202353/3.0.0">2019-06-28 <i class="new"></i> 3.0.0</a>
+                                                  </div>
+                    </div>
+                </div>
+                          
+            </div>
+                          
+            <div class="card-art-wrap ">
+                          
+                <div class="card-image-wrap">
+                          
+                              <div class="card-image-wrap">
+                    <div id="premium" class="card_asset-img"><img src="https://gwent.one/image/gwent/assets/card/art/medium/1791.jpg"></div>
+                    <div class="card_asset-border"></div>
+                                                                            
+                    <div class="card_asset-provision-icon"></div>
+                    <div class="card_asset-provision-bg"><div class="card_asset-provision"></div></div>
+                                      <div class="card_asset-banner"><div class="card_asset-power"></div></div>
+                    <div class="card_asset-rarity"></div>
+                </div>
+                                  
+                  
+                                <div class="card-download">
+                    <div class="card-download-art">
+                      
+                        <div class="card-download-artist"><span onClick="showId('img-download')">插画作者： Grafit Studio</span></div>
+                        <div id="img-download" style="display:none">
+                            <div class="dl">
+                                <div class="dl-link">
+                                    <a download="奈瑟尼尔·派斯托迪 (Grafit Studio).png" href="https://gwent.one/image/gwent/assets/card/art/low/1791.png">.png</a> /
+                                    <a download="奈瑟尼尔·派斯托迪 (Grafit Studio).jpg" href="https://gwent.one/image/gwent/assets/card/art/low/1791.jpg">.jpg</a>
+                                </div>
+                                <div class="dl-desc">
+                                    150 x 215 &#x26F6;
+                                </div>
+                            </div>
+                            <div class="dl">
+                                <div class="dl-link">
+                                    <a download="奈瑟尼尔·派斯托迪 (Grafit Studio).png" href="https://gwent.one/image/gwent/assets/card/art/medium/1791.png">.png</a> /
+                                    <a download="奈瑟尼尔·派斯托迪 (Grafit Studio).jpg" href="https://gwent.one/image/gwent/assets/card/art/medium/1791.jpg">.jpg</a>
+                                </div>
+                                <div class="dl-desc">
+                                    249 x 357 &#x26F6;
+                                </div>
+                            </div>
+                            <div class="dl">
+                                <div class="dl-link">
+                                    <a download="奈瑟尼尔·派斯托迪 (Grafit Studio).png" href="https://gwent.one/image/gwent/assets/card/art/high/1791.png">.png</a> /
+                                    <a download="奈瑟尼尔·派斯托迪 (Grafit Studio).jpg" href="https://gwent.one/image/gwent/assets/card/art/high/1791.jpg">.jpg</a>
+                                </div>
+                                <div class="dl-desc">
+                                    497 x 713 &#x26F6;
+                                </div>
+                            </div>
+                            <div class="dl">
+                                <div class="dl-link">
+                                    <a download="奈瑟尼尔·派斯托迪 (Grafit Studio).png" href="https://gwent.one/image/gwent/assets/card/art/max/1791.png">.png</a> /
+                                    <a download="奈瑟尼尔·派斯托迪 (Grafit Studio).jpg" href="https://gwent.one/image/gwent/assets/card/art/max/1791.jpg">.jpg</a>
+                                </div>
+                                <div class="dl-desc">
+                                    992 x 1424 &#x26F6;
+                                </div>
+                            </div>
+                        </div>
+                  
+                  
+                                                <div class="card-download-premium"><span onclick="premiumVideo();showId('premium-download');">闪卡</span>
+                            <div id="premium-download" style="display:none">
+                                <div class="dl">
+                                    <div class="dl-link">
+                                        <a download="奈瑟尼尔·派斯托迪 (闪卡).webm" href="https://gwent.one/video/card/premium/202353.webm">.webm</a> /
+                                        <a download="奈瑟尼尔·派斯托迪 (闪卡).mp4" href="https://gwent.one/video/card/premium/202353.mp4">.mp4</a>
+                                    </div>
+                                    <div class="dl-desc">
+                                         ~500 x 800 &#x26F6;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        </div>
+
+                    </div>
+                </div>
+                            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function premiumVideo ()
+{
+    var image = document.getElementById("premium");
+    var video = '<video id="premium" poster="https://gwent.one/img/assets/medium/art/1791.jpg" class="premium__video" autoplay="yes" width="249" height="357"><source src="https://gwent.one/video/card/premium/202353.webm" type="video/webm"><source src="https://gwent.one/video/card/premium/202353.mp4" type="video/mp4"></video>';   
+    
+    image.outerHTML = video;
+}
+</script>
+</body>
+</html>
