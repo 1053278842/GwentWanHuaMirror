@@ -13,7 +13,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "112404": {
         "name": "话篓子：捣蛋鬼",
@@ -29,7 +30,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "122402": {
         "name": "家事妖精",
@@ -45,7 +47,8 @@
         "type": "4",
         "power": "5",
         "provision": "8",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "132304": {
         "name": "雄蛛",
@@ -61,7 +64,8 @@
         "type": "4",
         "power": "1",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "132313": {
         "name": "蝙魔",
@@ -77,7 +81,8 @@
         "type": "4",
         "power": "3",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "132315": {
         "name": "鹰身女妖",
@@ -93,7 +98,8 @@
         "type": "4",
         "power": "6",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "162401": {
         "name": "魔像守卫",
@@ -109,7 +115,8 @@
         "type": "4",
         "power": "3",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "162402": {
         "name": "牛尸",
@@ -124,7 +131,8 @@
         "type": "4",
         "power": "1",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "200320": {
         "name": "羊角魔",
@@ -140,7 +148,8 @@
         "type": "4",
         "power": "10",
         "provision": "6",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201574": {
         "name": "哈罗德的伙伴",
@@ -156,7 +165,8 @@
         "type": "4",
         "power": "1",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201576": {
         "name": "牛",
@@ -172,7 +182,8 @@
         "type": "4",
         "power": "1",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201709": {
         "name": "巨蝎煎药：浓缩",
@@ -187,7 +198,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201710": {
         "name": "巨蝎煎药：扩散",
@@ -202,7 +214,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201725": {
         "name": "店店：法师",
@@ -218,7 +231,8 @@
         "type": "2",
         "power": "0",
         "provision": "13",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201726": {
         "name": "店店：法师",
@@ -233,7 +247,8 @@
         "type": "4",
         "power": "4",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201727": {
         "name": "店店：法师",
@@ -248,7 +263,8 @@
         "type": "4",
         "power": "4",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201728": {
         "name": "店店：法师",
@@ -263,7 +279,8 @@
         "type": "4",
         "power": "4",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201729": {
         "name": "店店：法师",
@@ -278,7 +295,8 @@
         "type": "4",
         "power": "4",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201730": {
         "name": "店店：法师",
@@ -293,7 +311,8 @@
         "type": "4",
         "power": "4",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201731": {
         "name": "店店：猎人",
@@ -309,7 +328,8 @@
         "type": "2",
         "power": "0",
         "provision": "13",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201732": {
         "name": "店店：猎人",
@@ -324,7 +344,8 @@
         "type": "4",
         "power": "6",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201733": {
         "name": "店店：猎人",
@@ -339,7 +360,8 @@
         "type": "4",
         "power": "6",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201734": {
         "name": "店店：猎人",
@@ -354,7 +376,8 @@
         "type": "4",
         "power": "6",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201735": {
         "name": "店店：猎人",
@@ -369,7 +392,8 @@
         "type": "4",
         "power": "6",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201736": {
         "name": "店店：猎人",
@@ -384,7 +408,8 @@
         "type": "4",
         "power": "6",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201737": {
         "name": "店店：骑士",
@@ -400,7 +425,8 @@
         "type": "2",
         "power": "0",
         "provision": "13",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201738": {
         "name": "店店：骑士",
@@ -415,7 +441,8 @@
         "type": "4",
         "power": "10",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201739": {
         "name": "店店：骑士",
@@ -430,7 +457,8 @@
         "type": "4",
         "power": "10",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201740": {
         "name": "店店：骑士",
@@ -445,7 +473,8 @@
         "type": "4",
         "power": "10",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201741": {
         "name": "店店：骑士",
@@ -460,7 +489,8 @@
         "type": "4",
         "power": "10",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "201742": {
         "name": "店店：骑士",
@@ -475,7 +505,8 @@
         "type": "4",
         "power": "10",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202104": {
         "name": "畏惧者：破土而出  ",
@@ -491,7 +522,8 @@
         "type": "4",
         "power": "12",
         "provision": "9",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202114": {
         "name": "雏凤",
@@ -507,7 +539,8 @@
         "type": "8",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202140": {
         "name": "战术优势",
@@ -523,7 +556,8 @@
         "type": "16",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202181": {
         "name": "尖啸女海妖",
@@ -539,7 +573,8 @@
         "type": "4",
         "power": "2",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202182": {
         "name": "背亲者恩约夫",
@@ -554,7 +589,8 @@
         "type": "4",
         "power": "13",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202183": {
         "name": "格尼阔拉的果实",
@@ -570,7 +606,8 @@
         "type": "4",
         "power": "1",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202184": {
         "name": "精灵暗箭手",
@@ -585,7 +622,8 @@
         "type": "4",
         "power": "3",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202289": {
         "name": "异变巨熊",
@@ -601,7 +639,8 @@
         "type": "4",
         "power": "6",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202290": {
         "name": "无情的母熊",
@@ -617,7 +656,8 @@
         "type": "4",
         "power": "5",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202292": {
         "name": "斯瓦勃洛勇士",
@@ -633,7 +673,8 @@
         "type": "4",
         "power": "12",
         "provision": "7",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202293": {
         "name": "树人螳螂：出击",
@@ -649,7 +690,8 @@
         "type": "4",
         "power": "6",
         "provision": "6",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202359": {
         "name": "火誓狂热者",
@@ -665,7 +707,8 @@
         "type": "4",
         "power": "2",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202394": {
         "name": "上缴献金",
@@ -681,7 +724,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202395": {
         "name": "扣留献金",
@@ -697,7 +741,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202477": {
         "name": "喧闹的矮人",
@@ -712,7 +757,8 @@
         "type": "4",
         "power": "2",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "1"
     },
     "202562": {
         "name": "圣甲虫",
@@ -728,7 +774,8 @@
         "type": "4",
         "power": "1",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "1"
     },
     "202563": {
         "name": "萨沃拉的畏惧者",
@@ -744,7 +791,8 @@
         "type": "4",
         "power": "12",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "6"
     },
     "202566": {
         "name": "瓶中迪精",
@@ -759,7 +807,8 @@
         "type": "4",
         "power": "5",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202567": {
         "name": "老鼠",
@@ -775,7 +824,8 @@
         "type": "4",
         "power": "1",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202568": {
         "name": "乌鸦",
@@ -791,7 +841,8 @@
         "type": "4",
         "power": "2",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202569": {
         "name": "沙漠宝藏",
@@ -807,7 +858,8 @@
         "type": "8",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202570": {
         "name": "约尔妖灵",
@@ -822,7 +874,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202571": {
         "name": "卡兰瑟女王",
@@ -837,7 +890,8 @@
         "type": "4",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202604": {
         "name": "入侵者奥贝伦",
@@ -852,7 +906,8 @@
         "type": "4",
         "power": "6",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202605": {
         "name": "征服者奥贝伦",
@@ -867,7 +922,8 @@
         "type": "4",
         "power": "6",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202616": {
         "name": "好战者哈罗德",
@@ -882,7 +938,8 @@
         "type": "4",
         "power": "6",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202617": {
         "name": "“瘸子”哈罗德",
@@ -897,7 +954,8 @@
         "type": "4",
         "power": "6",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202630": {
         "name": "艾德斯伯格的贾奎斯",
@@ -912,7 +970,8 @@
         "type": "4",
         "power": "6",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202631": {
         "name": "大团长贾奎斯",
@@ -928,7 +987,8 @@
         "type": "4",
         "power": "6",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202641": {
         "name": "烈焰蔷薇骑士团步兵",
@@ -944,7 +1004,8 @@
         "type": "4",
         "power": "3",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "1"
     },
     "202643": {
         "name": "流放者维拉克萨斯",
@@ -959,7 +1020,8 @@
         "type": "4",
         "power": "7",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202644": {
         "name": "维拉克萨斯国王",
@@ -974,7 +1036,8 @@
         "type": "4",
         "power": "7",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202654": {
         "name": "志愿军",
@@ -990,7 +1053,8 @@
         "type": "4",
         "power": "2",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202656": {
         "name": "篡位者 - 将军",
@@ -1005,7 +1069,8 @@
         "type": "4",
         "power": "6",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202657": {
         "name": "篡位者 - 皇帝",
@@ -1020,7 +1085,8 @@
         "type": "4",
         "power": "5",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202662": {
         "name": "多尼",
@@ -1035,7 +1101,8 @@
         "type": "4",
         "power": "6",
         "provision": "7",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202669": {
         "name": "特工",
@@ -1051,7 +1118,8 @@
         "type": "4",
         "power": "3",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202671": {
         "name": "慈母艾思娜",
@@ -1066,7 +1134,8 @@
         "type": "4",
         "power": "6",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202672": {
         "name": "艾思娜：布洛克莱昂之怒",
@@ -1081,7 +1150,8 @@
         "type": "4",
         "power": "10",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202682": {
         "name": "年轻的树精",
@@ -1097,7 +1167,8 @@
         "type": "4",
         "power": "2",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202683": {
         "name": "游荡的树人",
@@ -1113,7 +1184,8 @@
         "type": "4",
         "power": "1",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202700": {
         "name": "自然法则：遮蔽",
@@ -1129,7 +1201,8 @@
         "type": "2",
         "power": "0",
         "provision": "9",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202701": {
         "name": "自然法则：增益",
@@ -1145,7 +1218,8 @@
         "type": "2",
         "power": "0",
         "provision": "9",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202702": {
         "name": "自然法则：活力",
@@ -1161,7 +1235,8 @@
         "type": "2",
         "power": "0",
         "provision": "9",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202703": {
         "name": "红骑士：精准",
@@ -1176,7 +1251,8 @@
         "type": "2",
         "power": "0",
         "provision": "5",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202704": {
         "name": "红骑士：扩散",
@@ -1192,7 +1268,8 @@
         "type": "2",
         "power": "0",
         "provision": "5",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202705": {
         "name": "达娜梅碧",
@@ -1208,7 +1285,8 @@
         "type": "4",
         "power": "7",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202706": {
         "name": "林妖",
@@ -1224,7 +1302,8 @@
         "type": "4",
         "power": "9",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202707": {
         "name": "莫尔凡·符里斯",
@@ -1240,7 +1319,8 @@
         "type": "4",
         "power": "7",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202787": {
         "name": "猎魔人学徒",
@@ -1256,7 +1336,8 @@
         "type": "4",
         "power": "2",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202788": {
         "name": "红色突变诱发物",
@@ -1272,7 +1353,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202789": {
         "name": "蓝色突变诱发物",
@@ -1288,7 +1370,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202790": {
         "name": "绿色突变诱发物",
@@ -1304,7 +1387,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202872": {
         "name": "刃齿虎：潜行",
@@ -1320,7 +1404,8 @@
         "type": "8",
         "power": "0",
         "provision": "9",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202892": {
         "name": "科德温中士",
@@ -1336,7 +1421,8 @@
         "type": "4",
         "power": "3",
         "provision": "4",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202926": {
         "name": "辛迪加克朗",
@@ -1352,7 +1438,8 @@
         "type": "8",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202941": {
         "name": "左侧翼杂兵",
@@ -1368,7 +1455,8 @@
         "type": "4",
         "power": "1",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202942": {
         "name": "右侧翼杂兵",
@@ -1384,7 +1472,8 @@
         "type": "4",
         "power": "1",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "202994": {
         "name": "格尼阔拉",
@@ -1400,7 +1489,8 @@
         "type": "4",
         "power": "7",
         "provision": "11",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203021": {
         "name": "鹿灵：团结",
@@ -1415,7 +1505,8 @@
         "type": "4",
         "power": "3",
         "provision": "7",
-        "initialTimer": "2"
+        "initialTimer": "2",
+        "armor": "0"
     },
     "203077": {
         "name": "“无畏者”布朗温",
@@ -1430,7 +1521,8 @@
         "type": "4",
         "power": "2",
         "provision": "9",
-        "initialTimer": "1"
+        "initialTimer": "1",
+        "armor": "0"
     },
     "203122": {
         "name": "禁识之瓶：启封",
@@ -1445,7 +1537,8 @@
         "type": "8",
         "power": "0",
         "provision": "4",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203124": {
         "name": "盒中灵",
@@ -1460,7 +1553,8 @@
         "type": "4",
         "power": "13",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203125": {
         "name": "红骑士：冲锋",
@@ -1475,7 +1569,8 @@
         "type": "2",
         "power": "0",
         "provision": "5",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203126": {
         "name": "比约恩的战船",
@@ -1490,7 +1585,8 @@
         "type": "4",
         "power": "5",
         "provision": "14",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203127": {
         "name": "湖之守卫：黎明",
@@ -1505,7 +1601,8 @@
         "type": "4",
         "power": "1",
         "provision": "14",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203153": {
         "name": "青蛙",
@@ -1520,7 +1617,8 @@
         "type": "4",
         "power": "1",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203167": {
         "name": "叶奈法的幻象",
@@ -1535,7 +1633,8 @@
         "type": "4",
         "power": "4",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203169": {
         "name": "圣日湖：融合",
@@ -1550,7 +1649,8 @@
         "type": "2",
         "power": "0",
         "provision": "15",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203170": {
         "name": "古德伦·约斯多蒂尔",
@@ -1565,7 +1665,8 @@
         "type": "4",
         "power": "4",
         "provision": "14",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "1"
     },
     "203172": {
         "name": "色欲之诅咒",
@@ -1580,7 +1681,8 @@
         "type": "1",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203173": {
         "name": "暴食之诅咒",
@@ -1595,7 +1697,8 @@
         "type": "1",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203174": {
         "name": "贪婪之诅咒",
@@ -1610,7 +1713,8 @@
         "type": "1",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203175": {
         "name": "怠惰之诅咒",
@@ -1625,7 +1729,8 @@
         "type": "1",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203176": {
         "name": "嫉妒之诅咒",
@@ -1640,7 +1745,8 @@
         "type": "1",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203177": {
         "name": "愤怒之诅咒",
@@ -1655,7 +1761,8 @@
         "type": "1",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203178": {
         "name": "傲慢之诅咒",
@@ -1670,7 +1777,8 @@
         "type": "1",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203179": {
         "name": "贞洁之祝福",
@@ -1685,7 +1793,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203180": {
         "name": "节制之祝福",
@@ -1700,7 +1809,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203181": {
         "name": "慷慨之祝福",
@@ -1715,7 +1825,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203182": {
         "name": "勤勉之祝福",
@@ -1730,7 +1841,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203183": {
         "name": "仁慈之祝福",
@@ -1745,7 +1857,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203184": {
         "name": "忍耐之祝福",
@@ -1760,7 +1873,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203185": {
         "name": "谦卑之祝福",
@@ -1775,7 +1889,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203187": {
         "name": "史凯利格野狼",
@@ -1790,7 +1905,8 @@
         "type": "4",
         "power": "2",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203188": {
         "name": "袖中王牌",
@@ -1805,7 +1921,8 @@
         "type": "2",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203189": {
         "name": "农民民兵",
@@ -1820,7 +1937,8 @@
         "type": "4",
         "power": "2",
         "provision": "4",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203190": {
         "name": "石头",
@@ -1835,7 +1953,8 @@
         "type": "8",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203203": {
         "name": "大师级矮人符文剑",
@@ -1850,7 +1969,8 @@
         "type": "2",
         "power": "0",
         "provision": "11",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203204": {
         "name": "托雷斯·恩瑞斯：大祭司",
@@ -1865,7 +1985,8 @@
         "type": "4",
         "power": "4",
         "provision": "14",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203205": {
         "name": "提尔：小史凯利格岛之主",
@@ -1880,7 +2001,8 @@
         "type": "4",
         "power": "9",
         "provision": "14",
-        "initialTimer": "1"
+        "initialTimer": "1",
+        "armor": "0"
     },
     "203206": {
         "name": "达娜梅碧：抚育者",
@@ -1895,7 +2017,8 @@
         "type": "4",
         "power": "7",
         "provision": "14",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203207": {
         "name": "梅里泰莉神庙：朝圣",
@@ -1910,7 +2033,8 @@
         "type": "8",
         "power": "0",
         "provision": "12",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203208": {
         "name": "达冈：崛起者",
@@ -1925,7 +2049,8 @@
         "type": "4",
         "power": "8",
         "provision": "14",
-        "initialTimer": "1"
+        "initialTimer": "1",
+        "armor": "0"
     },
     "203209": {
         "name": "圣格列高里：殉教者",
@@ -1940,7 +2065,8 @@
         "type": "4",
         "power": "5",
         "provision": "14",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203234": {
         "name": "深渊的呼唤",
@@ -1955,7 +2081,8 @@
         "type": "8",
         "power": "0",
         "provision": "14",
-        "initialTimer": "0"
+        "initialTimer": "0",
+        "armor": "0"
     },
     "203237": {
         "name": "货物",
@@ -1970,7 +2097,8 @@
         "type": "8",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     },
     "203238": {
         "name": "爆炸物",
@@ -1985,6 +2113,7 @@
         "type": "8",
         "power": "0",
         "provision": "0",
-        "initialTimer": "-1"
+        "initialTimer": "-1",
+        "armor": "0"
     }
 }
