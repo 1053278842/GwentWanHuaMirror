@@ -3,6 +3,7 @@ import json
 import os
 import sys
 import tkinter as tk
+import webbrowser
 from tkinter import messagebox
 from tkinter.ttk import *
 
@@ -16,6 +17,15 @@ from ttkbootstrap.constants import *
 from ttkbootstrap.dialogs import *
 from ttkbootstrap.scrolled import ScrolledText
 
+
+def liulonggood():
+    webbrowser.open("http://117.50.175.251:8081/good")
+def open_official_website():
+    webbrowser.open("https://117.50.175.251/")
+def open_download_link():
+    webbrowser.open("http://117.50.175.251:8081/download")
+def open_deck_website():
+    webbrowser.open("https://117.50.175.251/mirrordeck/")
 
 def setSortingRealLibraryState(state):
     root.sortingRealLibrary.set(state)
@@ -243,6 +253,41 @@ def create_page(root):
     playerWindowFrame.pack(pady=8,fill="both",expand=1)
 
     ######################################################################
+    main_frame5 = Frame(root)
+    main_frame5.pack()
+
+    frame_5 = Frame(main_frame5)
+    frame_5.pack(side="top")
+    playerWindowFrame = LabelFrame(frame_5,text="记牌窗口")
+    # p1
+    frame = Frame(frame_5)
+    frame.pack(side="top",pady=6,padx=5,fill="x",expand=1)
+    frame = Frame(frame_5)
+    frame.pack(side="top",pady=2,padx=5,fill="x",expand=1)
+    Label(frame,text="官网主页:",font=("黑体",9)).pack(side="left")
+    Button(frame,command=open_official_website,text="Gwent Mirror",bootstyle=("warning")).pack(side="left",fill="x",expand=1)
+    # p1
+    frame = Frame(frame_5)
+    frame.pack(side="top",pady=6,padx=5,fill="x",expand=1)
+    frame = Frame(frame_5)
+    frame.pack(side="top",pady=2,padx=5,fill="x",expand=1)
+    Label(frame,text="下载地址:",font=("黑体",9)).pack(side="left")
+    Button(frame,command=open_download_link,text="Download",bootstyle=("light")).pack(side="left",fill="x",expand=1)
+    # p1
+    frame = Frame(frame_5)
+    frame.pack(side="top",pady=6,padx=5,fill="x",expand=1)
+    frame = Frame(frame_5)
+    frame.pack(side="top",pady=2,padx=5,fill="x",expand=1)
+    Label(frame,text="卡组全书:",font=("黑体",9)).pack(side="left")
+    Button(frame,command=open_deck_website,text="Mirror Deck",bootstyle=("info")).pack(side="left",fill="x",expand=1)
+    frame = Frame(frame_5)
+    frame.pack(side="top",pady=6,padx=5,fill="x",expand=1)
+    frame = Frame(frame_5)
+    frame.pack(side="top",pady=6,padx=5,fill="x",expand=1)
+    frame = Frame(frame_5)
+    frame.pack(side="top",pady=2,padx=5,fill="x",expand=1)
+    Button(frame,command=liulonggood,text="点赞开发者！",bootstyle=("info")).pack(side="left",fill="x",expand=1)
+    ########################################################################
     main_frame2 = Frame(root)
     main_frame2.pack()
     frame_2 = Frame(main_frame2)
@@ -287,6 +332,14 @@ def create_page(root):
     # context = FT.getVersion()["context"]
     st.insert(END, 
 '<更新日志>\n\
+ - <Version 0.5.1-bate>\n\
+ · 【潮生】版本Steam&GOG自适应更新;\n\
+ · 新增"其他"选项卡以及相关网页跳转;\n\
+ · 新增"卡组全书"Web站点;\n\
+ · 新增"点赞"按钮，为开发者灌注"活力"\n\
+ · 其他功能陆续上线中...\n\
+ · (心里话）说实在刚刚出入社会，花费了不少时间在找工作上，对于游戏和开发很难挤出精力，更多还是回到家躺床上；很抱歉中间断更了一两个版本。但还是希望我能够调整好心态，规划时间好好为我们喜爱的游戏发电~;\n\
+\n\
  - <Version 0.3.95-bate>\n\
  · 服务器迁移,新官网IP为:http://117.50.175.251;\n\
 \n\
@@ -357,7 +410,8 @@ def create_page(root):
     noteBook.add(main_frame,text="启动")
     noteBook.add(main_frame2,text="更新")
     noteBook.add(main_frame4,text="高级")
-    noteBook.add(main_frame3,text="关于")
+    noteBook.add(main_frame3,text="日志")
+    noteBook.add(main_frame5,text="其他")
     noteBook.pack(padx=10,pady=5,fill="both",expand=1)
 
 def checkCanUpdateDecks():

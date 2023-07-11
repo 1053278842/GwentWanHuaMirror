@@ -35,6 +35,7 @@ def search_range(start_add, end_add, pm, base_address, check_name, result_lock, 
             type_name = read_Type_Name(pm, gi_value)
             print(type_name)
         except Exception:
+            print(start_add)
             continue
         if type_name == check_name:
             with result_lock:
@@ -49,8 +50,9 @@ if __name__=='__main__':
         pm.process_handle,"GameAssembly.dll"
     ).lpBaseOfDll
 
-
-    start_add = 58362808
+    # gog 56389248
+    # steam 59309712
+    start_add = 59309712
     end_add = start_add+5000000
     check_name = 'GameInstance'
 
