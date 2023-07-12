@@ -74,7 +74,10 @@ def getDeckInfoByDeckId(deckId):
     headers['User-Agent'] = random.choice(user_agent_list)
     deckId = deckId
     url="https://www.playgwent.com/en/decks/api/guides/"+str(deckId)
-    response=requests.get(url=url,headers=headers,timeout=30)
+    try:
+        response=requests.get(url=url,headers=headers,timeout=30)
+    except:
+        print("ERROR:",deckId)
     # print(response.text)
     req_json = response.json()
     temp_deck_info = {"sortedCtIds":[],}
@@ -122,7 +125,7 @@ def getDeckInfoByDeckId(deckId):
     elif factionName == "syndicate":
         factionId = 64
     temp_deck_info["factionId"] = factionId
-    print(temp_deck_info)
+    print(deckId, temp_deck_info["deckName"])
     return temp_deck_info
 
 global_config = FT.getGlobalConfig()
@@ -145,7 +148,7 @@ if __name__=="__main__":
     result_deckInfos = [int(x) for x in deckIds]
     pool = Pool(5)
     result = pool.map(getDeckInfoByDeckId,result_deckInfos)
-
+    print("开始插入数据库:",len(deckIds))
     requests.post(GwentUrl+"/post",json=result,headers=headers)
 
 
