@@ -3,11 +3,11 @@
 Windows 桌面小工具：以**透明置顶悬浮窗**的形式，实时显示自己和对手的牌库/手牌/墓场，
 对局结束后把整场战报上报给服务端，顺便充当官网卡组库的抓取端。
 
-> 本目录是 [gwent-mirror-all](../README.md) 一体化项目的桌面层。
+> 本目录是 [gwent-mirror-all](https://github.com/1053278842/GwentMirrorAllInOne) 一体化项目的桌面层。
 > 它无法跑进 Linux 容器（要附加 `Gwent.exe` 读内存），所以镜像里只放了服务端与前端；
 > 这里的代码给 Windows 侧用，界面的离线复现在 `gui_demo.py`。
 
-![记牌器悬浮窗](../docs/screenshots/06-desktop-overlay.png)
+![记牌器悬浮窗](docs/screenshots/06-desktop-overlay.png)
 
 ---
 
@@ -107,7 +107,7 @@ python gui_demo.py --target overlay --enemy       # 敌方视角
 
 主控制窗（原始 geometry 250×280，内容比它高，截图时按内容自适应高度）：
 
-![记牌器主窗口](../docs/screenshots/05-desktop-main.png)
+![记牌器主窗口](docs/screenshots/05-desktop-main.png)
 
 ## 5. 上报协议
 
@@ -130,7 +130,7 @@ python gui_demo.py --target overlay --enemy       # 敌方视角
 ```
 
 字段与 `dao/CardDao.py:getBattleInfo()` 一一对应。
-**没有游戏的机器**可以用仓库根目录的 `scripts/simulate_battle.py` 按同样的结构回放对局，
+**没有游戏的机器**可以用仓库根目录的 [`scripts/simulate_battle.py`](https://github.com/1053278842/GwentMirrorAllInOne/blob/main/scripts/simulate_battle.py) 按同样的结构回放对局，
 把「客户端上报 → 后端入库 → 前端可见」这条链路跑通。
 
 另外两个接口：
