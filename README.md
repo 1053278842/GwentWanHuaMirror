@@ -1,156 +1,111 @@
 # GwentWanHuaMirror · 昆特记牌器（桌面端）
 
-Windows 桌面小工具：以**透明置顶悬浮窗**的形式，实时显示自己和对手的牌库/手牌/墓场，
-对局结束后把整场战报上报给服务端，顺便充当官网卡组库的抓取端。
+**对局中把双方牌库实时列在屏幕边上，打完结顺手把战报传上去。**
 
-> 本目录是 [gwent-mirror-all](https://github.com/1053278842/GwentMirrorAllInOne) 一体化项目的桌面层。
-> 它无法跑进 Linux 容器（要附加 `Gwent.exe` 读内存），所以镜像里只放了服务端与前端；
-> 这里的代码给 Windows 侧用，界面的离线复现在 `gui_demo.py`。
+昆特牌没有官方记牌器：对手还剩几张牌、自己牌库还剩什么，全靠记。
+这个 Windows 小工具用透明置顶窗贴出双方的牌库/手牌/墓场，逐张显示卡图、人口与战力；
+对局结束把整场战报 POST 给服务端，成为网站卡组数据的来源之一。
+
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB) ![Windows](https://img.shields.io/badge/Platform-Windows-0078D6) ![tkinter](https://img.shields.io/badge/UI-tkinter%20%2B%20ttkbootstrap-FFD43B)
 
 ![记牌器悬浮窗](docs/screenshots/06-desktop-overlay.png)
 
----
+↑ 我·牌库：标题/页签/统计（22 张、10 单位、14 人口），领袖卡带人口徽章，往下逐张排（新出现的牌白框高亮）。
+主控制窗见 [docs/screenshots](docs/screenshots/05-desktop-main.png)。
 
-## 1. 它是怎么工作的
+## 这是什么
 
-```text
-Gwent.exe ──┐
-            │  pymem 附加进程
-            ▼
-  GameAssembly.dll 基址 + 版本偏移表（resources/config/version.json 的 address）
-            ▼
-      GameInstance ──► Players / Cards / RoundInfos
-            ▼
-   dao/CardDao.py  initCtData()  ──►  {Id, PlayId, Location, Index, Provision, BasePower, ...}
-            ▼
-   services/CardService.py         ──►  按位置/玩家/类型过滤、按人口或索引排序
-            ▼
-   views/* （tkinter Canvas 成帧）  ──►  悬浮窗逐张画卡
-            ▼
-   RequestManager.sendBattleInfo() ──►  POST {server}/battle/api/save
-```
+1. 启动时 `pymem` 附加 `Gwent.exe`，按版本偏移读出 `GameInstance`，拿到双方牌表；
+2. `tkinter` 画一张透明置顶窗，把牌库/手牌/墓场按页签列出来，鼠标可拖动、双击关闭；
+3. 对局结束（`GameStatus == ENDED` 且不是单人/观战/友谊赛）把战报 POST 给服务端。
 
-* **附加进程**：`pymem.Pymem("Gwent.exe")` + `GameAssembly.dll` 基址；
-* **版本偏移**：`version.json` 里是 `address / addressGOG / addressGY` 三个基址偏移，
-  客户端会向 `/version/api/getId` 拉最新版本记录来决定是否切基址；
-* **卡牌数据表**：`resources/config/card_json_local.json`（1427 张卡的名称/人口/战力/类型/势力），
-  `resources/data/decks.json`（3488 副官网卡组，用于「预测卡组/差异对比」），
-  `resources/data/LeaderCardData.json`（领袖）；
-* **卡图**：`resources/images/GwentImg_preview/<cardId>.jpg`（1369 张缩略图），
-  UI 切图在 `resources/images/deck_preview/`，字体在 `resources/fonts/`。
+它跑不进 Linux 容器——必须附加游戏进程。没有游戏时用 `gui_demo.py` 离线看界面。
 
-## 2. 目录
+## 能干什么
 
-```text
-desktop/
-├─ gui_demo.py                  # 离线复现 GUI 并截图（不开游戏也能出图）
-├─ GwentMirror.spec             # PyInstaller 打包脚本（原作者的）
-└─ main/
-   ├─ GwentMirror.py            # 主控制窗：启动/更新/高级/日志/其他 5 个页签
-   ├─ GwentGUI.py               # 对局内悬浮窗：透明、置顶、可拖动、双击关闭
-   ├─ PanelManager.py           # 检测进程、开关我方/敌方面板、对局状态轮询
-   ├─ ResponseManager.py        # 把内存数据分发给 5 个画布
-   ├─ RequestManager.py         # 与服务端通信（getDecks / getId / battle save）
-   ├─ views/
-   │  ├─ bg_img.py              # 背景板（上/中/下三段拼接）
-   │  ├─ title_board.py         # 标题栏（页签名 + 左右箭头）
-   │  ├─ module_board.py        # 6 个页签按钮：卡组/牌库/墓场/放逐/手牌/场地
-   │  ├─ status_board.py        # 统计行：剩余张数 / 单位数 / 总人口
-   │  └─ card_preview_list_board.py  # 卡牌列表（43 KB，整张牌一张一张画）
-   ├─ dao/CardDao.py            # 全部内存偏移都写在这里
-   ├─ services/CardService.py   # 卡牌数据装配与过滤排序
-   ├─ tools/{FileTool,MemoryTool,DataUtils}.py
-   └─ resources/{config,data,fonts,images}/
-```
+- **对手还剩什么牌** —— 敌·牌库/手牌/墓场分页签列出，预测卡组可做差异对比
+- **自己的牌库实时对账** —— 抽到/打出/被弃的牌从列表里消失，墓地单独成页
+- **不挡视野** —— 无边框透明窗，`WS_EX_LAYERED` 抠掉底色，可拖动、双击关闭
+- **打完自动上报** —— 只报有效对局，单人/观战/友谊赛自动跳过；可关「共享卡组」只统计不采集牌表
+- **不开游戏也能出界面** —— `gui_demo.py` 只替换内存读取层，其余全用原版代码
 
-## 3. 在 Windows 上真正跑起来
+## Quick Start
+
+真机（需要游戏正在运行）：
 
 ```bash
-cd desktop/main
+cd main
 pip install pymem pillow ttkbootstrap pywin32
-# 先起服务端（容器或本地后端），把 resources/config/global_config.json 的 url 指过去
-python GwentMirror.py
+python GwentMirror.py        # 先把 resources/config/global_config.json 的 url 指到你的服务端
 ```
 
-前置条件：
-
-1. 游戏在运行（否则 `PanelManager` 直接弹「检测到游戏未启动」并退出）；
-2. `resources/config/version.json` 的 `address` 与当前游戏版本匹配
-   （不匹配就点主窗「更新」页去服务器拉新的版本记录）；
-3. 服务端 URL 在 `global_config.json` 的 `url`，默认是作者的线上库。
-
-## 4. 离线复现界面（不用游戏）
-
-`gui_demo.py` 把「读内存」这层换掉，界面代码和素材保持原样，用于截图/演示：
+没有游戏，只想看界面：
 
 ```bash
-cd desktop
+cd .                          # desktop/ 根目录
 pip install pillow ttkbootstrap pywin32
-python gui_demo.py --target both                  # 主窗 + 悬浮窗
-python gui_demo.py --target overlay --tab 手牌     # 指定页签
-python gui_demo.py --target overlay --enemy       # 敌方视角
+python gui_demo.py --target both      # 主窗 + 悬浮窗各截一张
 ```
 
-替换了哪些东西：
+更多参数（指定页签、敌方视角、输出目录）见 [docs/getting-started.md](docs/getting-started.md)。
 
-| 原始实现 | demo 里的替身 |
+## 用起来是什么样
+
+| 步骤 | 干什么 | 注意 |
+| --- | --- | --- |
+| 1 | 先起服务端（容器或本地后端） | `resources/config/global_config.json` 的 `url` |
+| 2 | 启动游戏，再启动记牌器 | 顺序反了会弹「检测到游戏未启动」 |
+| 3 | 主窗点「我方 / 对方」的开启 | 弹出对应悬浮窗，拖到顺手的位置 |
+| 4 | 打完一局 | 自动上报；单人/观战/友谊赛/竞技场不报 |
+| 5 | 游戏更新后读不到数据 | 点主窗「更新」页拉新版本偏移 |
+
+## 怎么实现的
+
+```mermaid
+flowchart LR
+    P["Gwent.exe"] -->|"pymem 附加"| M["GameInstance 内存"]
+    M -->|"固定偏移"| D["CardDao.getBattleInfo()"]
+    D --> S["CardService 过滤/排序"]
+    S --> V["views/* 五个画布"]
+    V --> W["透明置顶窗"]
+    D -->|"对局结束"| R["RequestManager<br/>POST /battle/api/save"]
+```
+
+- **寻址**：`GameAssembly.dll` 基址 + `version.json` 的 `address` 偏移，一路解引用到 `GameInstance`
+- **装配**：`initCtData()` 把每张牌读成 `{Id, PlayId, Location, Provision, BasePower, …}`，再按位置/玩家过滤
+- **渲染**：背景板、标题栏、页签、状态栏、卡牌列表五个 Canvas 叠成一张窗，牌图逐张贴上去
+
+细节见 [docs/architecture.md](docs/architecture.md)，上报报文见 [docs/api.md](docs/api.md)。
+
+## 部署方式
+
+| 方式 | 命令 | 适用 |
+| --- | --- | --- |
+| 源码运行 | `python main/GwentMirror.py` | 开发/自用 |
+| 打包 exe | `pyinstaller GwentMirror.spec` | 分发给别人 |
+| 离线看界面 | `python gui_demo.py --target both` | 没有游戏/只想截图 |
+
+## 文档
+
+| 文档 | 内容 |
 | --- | --- |
-| `pymem.Pymem("Gwent.exe")` | 注入假 `pymem` 模块，`read_longlong/read_bytes` 返回 0 |
-| `CardService.get_all_cardTemplates()` | 从 `resources/data/decks.json` 取一副素材齐全的卡组，摊平成 `initCtData()` 的字段结构 |
-| 当前玩家 / 双方 id / 牌库实例 id 区间 | 固定值（`getCurrBattleInfo` / `getPlayerCarriedCarInsIds` 等几个函数打桩） |
-| `GwentGUI` 与 `views/*` | **原样调用** |
-| 卡图、UI 切图、字体 | **原文件** |
+| [getting-started](docs/getting-started.md) | 真机前置条件、离线复现、打包 exe |
+| [architecture](docs/architecture.md) | 内存寻址链路、目录、五个画布的职责 |
+| [api](docs/api.md) | 上报报文全字段、另两个同步接口 |
+| [troubleshooting](docs/troubleshooting.md) | 检测不到游戏、更新后读不到、素材缺失 |
 
-截图前会垫一层深色窗口再抓屏，因为悬浮窗本身是
-`overrideredirect + WS_EX_LAYERED（colorkey 0x222222）` 的透明置顶窗口，
-直接抓屏会把桌面/浏览器一起拍进去。
+## 说明
 
-主控制窗（原始 geometry 250×280，内容比它高，截图时按内容自适应高度）：
+- 版权归原作者 [@1053278842](https://github.com/1053278842)；本仓库补了 README、
+  文档与离线复现脚本，未改动业务代码。
+- 截图来自 `gui_demo.py` 的真实渲染（原版界面代码 + 原版素材），不是设计稿。
+- 只支持 Windows；内存偏移与游戏版本强绑定，游戏一更新就要重新校对。
 
-![记牌器主窗口](docs/screenshots/05-desktop-main.png)
+<details>
+<summary>English</summary>
 
-## 5. 上报协议
+Windows overlay tracker for Gwent: reads the game process memory to list both decks
+in a transparent always-on-top window, and uploads the battle report when the match ends.
+Runs only on Windows; `gui_demo.py` reproduces the UI without the game for screenshots.
 
-对局结束（`GameStatus == ENDED`）且不是单人/观战/友谊赛/竞技场时，
-`RequestManager.sendBattleInfo()` 会 POST 到 `{url}/battle/api/save`：
-
-```jsonc
-{
-  "GameStatus": 3, "GameMode": 1, "GameId": 1732..., "BattleType": 2,
-  "roundInfos": [{ "index": 0, "left_score": 12, "right_score": 8,
-                   "starting_playerId": 1, "winner_playId": 1, "turn_index": 11 }, ...],
-  "curr_round_index": 2, "winner_playId": 1, "end_game_reason": 0,
-  "players": [
-    { "player_name": "...", "service_id": 900000000000000001, "paragon_level": 0,
-      "MMR": 9600, "rank": 0, "leader_id": 200087, "stratagem_id": 0, "faction_id": 4,
-      "decks": [200087, 0, 202115, 201779, ...],   // leader + stratagem + 牌表
-      "deckId": 1234567890123456789 }              // hash(frozenset(decks))
-  ]
-}
-```
-
-字段与 `dao/CardDao.py:getBattleInfo()` 一一对应。
-**没有游戏的机器**可以用仓库根目录的 [`scripts/simulate_battle.py`](https://github.com/1053278842/GwentMirrorAllInOne/blob/main/scripts/simulate_battle.py) 按同样的结构回放对局，
-把「客户端上报 → 后端入库 → 前端可见」这条链路跑通。
-
-另外两个接口：
-
-* `GET {url}/deck/api/getDecks` → 本地卡组库（写 `resources/data/decks.json`），用于预测卡组；
-* `POST {url}/version/api/getId` → 版本记录（写 `resources/config/version.json`）。
-
-## 6. 桌面包（可选）
-
-```bash
-cd desktop
-pyinstaller GwentMirror.spec      # 产出 dist/GwentMirror.exe，单文件、无控制台
-```
-
-## 7. 已知限制
-
-* 只支持 Windows（`pymem` / `win32gui` / `win32api` 都是 Windows 专用）；
-* 内存偏移与游戏版本强绑定，游戏一更新就要重新校对（`CardDao.py` 里全是硬编码偏移）；
-* 这个目录只带了界面必需的素材（`deck_preview` 57 张 + `GwentImg_preview` 1369 张），
-  没有 `GwentImg原图`（约 300 MB 高清原画），需要时用
-  `main/othersFile/从gwent获取图片.py` 重新抓；
-* `main/othersFile/` 里是作者抓卡图/卡表/卡组的一次性脚本（含 `chromedriver.exe`），
-  其中 `抓取卡组-官网.py` 已整理成仓库根目录的 `scripts/fetch_decks.py`（去 GUI 依赖、加线程池）。
+</details>
